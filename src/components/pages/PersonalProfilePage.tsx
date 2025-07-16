@@ -565,9 +565,9 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-purple-600/20 rounded-lg border border-purple-500/20">
-                      <div className="text-xl md:text-2xl font-bold text-purple-600">247</div>
-                      <div className="text-xs md:text-sm text-purple-600/80 flex items-center justify-center gap-1">
+                    <div className="text-center p-3 bg-gradient-to-br from-red-500/10 to-red-600/20 rounded-lg border border-red-500/20">
+                      <div className="text-xl md:text-2xl font-bold text-red-600">247</div>
+                      <div className="text-xs md:text-sm text-red-600/80 flex items-center justify-center gap-1">
                         <Eye className="w-3 h-3" />
                         Profile Views
                       </div>
