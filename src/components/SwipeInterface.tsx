@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SwipeCard } from "./SwipeCard";
 import { Button } from "@/components/ui/button";
 import { Heart, X, Star, MessageCircle, User, Play, Filter, Settings } from "lucide-react";
-import investifySymbol from "@/assets/investify-minimal.png";
+import investifySymbol from "@/assets/investify-flame.png";
 import { PageType } from "./MainApp";
 import { ProfileDetailPage } from "./ProfileDetailPage";
 import profile1 from "@/assets/profile1.jpg";
