@@ -158,34 +158,38 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-center gap-4 p-6 bg-background/90 backdrop-blur-md">
+      <div className="flex items-center justify-center gap-6 p-6 bg-background/90 backdrop-blur-md">
         <Button
-          variant="destructive"
+          variant="glass"
           size="lg" 
-          className="px-8 py-4 rounded-2xl bg-red-500/90 text-white border-0 hover:bg-red-600 hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+          className="px-8 py-4 rounded-full bg-red-500/20 backdrop-blur-md border border-red-400/30 text-red-300 hover:bg-red-500/30 hover:border-red-400/50 hover:text-red-100 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden"
           onClick={() => handleButtonAction("pass")}
         >
-          <X className="w-5 h-5 mr-2" />
-          I'm Out
+          <div className="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+          <X className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300 relative z-10" />
+          <span className="font-medium relative z-10">I'm Out</span>
         </Button>
         
         <Button
           variant="premium"
           size="xl"
-          className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-xl transform hover:scale-110 transition-all duration-300"
+          className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-600/30 backdrop-blur-md border border-blue-400/40 text-blue-200 hover:from-blue-500/50 hover:to-purple-600/50 hover:border-blue-400/60 hover:text-white hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transform hover:scale-115 hover:translate-y-[-6px] transition-all duration-300 group relative overflow-hidden"
           onClick={() => handleButtonAction("superlike")}
         >
-          <Star className="w-7 h-7" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 bg-blue-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
+          <Star className="w-7 h-7 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 relative z-10" />
         </Button>
         
         <Button
-          variant="cta"
+          variant="glass"
           size="lg"
-          className="px-8 py-4 rounded-2xl bg-emerald-500/90 text-white border-0 hover:bg-emerald-600 hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+          className="px-8 py-4 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 text-emerald-300 hover:bg-emerald-500/30 hover:border-emerald-400/50 hover:text-emerald-100 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden"
           onClick={() => handleButtonAction("like")}
         >
-          <Heart className="w-5 h-5 mr-2" />
-          I'm In
+          <div className="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+          <Heart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+          <span className="font-medium relative z-10">I'm In</span>
         </Button>
       </div>
     </div>

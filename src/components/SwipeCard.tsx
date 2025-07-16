@@ -110,37 +110,52 @@ export function SwipeCard({ profile, onSwipe, style }: SwipeCardProps) {
       {/* Profile Info */}
       <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 text-white">
         <div className="mb-2">
-          <h2 className="text-lg sm:text-2xl font-bold leading-tight">
+          <h2 className="text-lg sm:text-2xl font-bold leading-tight tracking-wide">
             {profile.name}, {profile.age}
           </h2>
-          <p className="text-sm sm:text-lg opacity-90 leading-tight">{profile.title}</p>
-          <p className="text-xs sm:text-sm opacity-75">{profile.company}</p>
+          <p className="text-sm sm:text-lg opacity-90 leading-tight font-medium">{profile.title}</p>
+          <p className="text-xs sm:text-sm opacity-75 font-light">{profile.company}</p>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm opacity-75 mb-2 sm:mb-3">
           <div className="flex items-center gap-1">
             <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="truncate">{profile.location}</span>
+            <span className="truncate font-medium">{profile.location}</span>
           </div>
           <div className="flex items-center gap-1">
             <Briefcase className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="truncate">{profile.industry}</span>
+            <span className="truncate font-medium">{profile.industry}</span>
           </div>
         </div>
 
         {profile.type === "entrepreneur" && profile.fundingStage && (
-          <p className="text-xs sm:text-sm opacity-90 mb-1 sm:mb-2">
-            <span className="font-medium">Funding Stage:</span> {profile.fundingStage}
+          <p className="text-xs sm:text-sm opacity-90 mb-1 sm:mb-2 font-medium">
+            <span className="font-semibold">Funding Stage:</span> {profile.fundingStage}
           </p>
         )}
 
         {profile.type === "investor" && profile.investmentRange && (
-          <p className="text-xs sm:text-sm opacity-90 mb-1 sm:mb-2">
-            <span className="font-medium">Investment Range:</span> {profile.investmentRange}
+          <p className="text-xs sm:text-sm opacity-90 mb-1 sm:mb-2 font-medium">
+            <span className="font-semibold">Investment Range:</span> {profile.investmentRange}
           </p>
         )}
 
-        <p className="text-xs sm:text-sm opacity-90 line-clamp-2 leading-relaxed">{profile.bio}</p>
+        {/* Enhanced Bio with Hover Bubble */}
+        <div className="relative group">
+          <p className="text-xs sm:text-sm opacity-90 line-clamp-2 leading-relaxed font-light cursor-pointer">
+            {profile.bio}
+          </p>
+          
+          {/* Hover Bubble */}
+          <div className="absolute bottom-full left-0 right-0 mb-2 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-20 pointer-events-none">
+            <div className="bg-black/90 backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
+              <p className="text-sm text-white leading-relaxed font-normal">
+                {profile.bio}
+              </p>
+              <div className="absolute top-full left-4 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-black/90"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Swipe Indicators */}
