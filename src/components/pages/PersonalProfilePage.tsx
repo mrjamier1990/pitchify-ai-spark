@@ -279,686 +279,687 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
       <div className="flex-1 overflow-auto">
         <div className="p-4 space-y-6 max-w-4xl mx-auto pb-8">
-        <Tabs defaultValue="profile" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="filters">Filters</TabsTrigger>
-            <TabsTrigger value="subscription">Premium</TabsTrigger>
-            <TabsTrigger value="settings">Settings</TabsTrigger>
-          </TabsList>
+          <Tabs defaultValue="profile" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="profile">Profile</TabsTrigger>
+              <TabsTrigger value="filters">Filters</TabsTrigger>
+              <TabsTrigger value="subscription">Premium</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="profile" className="space-y-6">
-            {/* Profile Stats */}
-            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <div className="text-center p-3 bg-gradient-to-br from-primary/10 to-primary/20 rounded-lg border border-primary/20">
-                    <div className="text-xl md:text-2xl font-bold text-primary">247</div>
-                    <div className="text-xs md:text-sm text-primary/80 flex items-center justify-center gap-1">
-                      <Eye className="w-3 h-3" />
-                      Profile Views
-                    </div>
-                  </div>
-                  <div className="text-center p-3 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-lg border border-emerald-500/20">
-                    <div className="text-xl md:text-2xl font-bold text-emerald-600">89</div>
-                    <div className="text-xs md:text-sm text-emerald-600/80 flex items-center justify-center gap-1">
-                      <Users className="w-3 h-3" />
-                      Connections
-                    </div>
-                  </div>
-                  <div className="text-center p-3 bg-gradient-to-br from-blue-500/10 to-blue-600/20 rounded-lg border border-blue-500/20">
-                    <div className="text-xl md:text-2xl font-bold text-blue-600">156</div>
-                    <div className="text-xs md:text-sm text-blue-600/80 flex items-center justify-center gap-1">
-                      <MessageSquare className="w-3 h-3" />
-                      Messages
-                    </div>
-                  </div>
-                  <div className="text-center p-3 bg-gradient-to-br from-amber-500/10 to-amber-600/20 rounded-lg border border-amber-500/20">
-                    <div className="text-xl md:text-2xl font-bold text-amber-600">23</div>
-                    <div className="text-xs md:text-sm text-amber-600/80 flex items-center justify-center gap-1">
-                      <Star className="w-3 h-3" />
-                      SuperLikes Left
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            {/* Profile Header */}
-            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardContent className="p-4 md:p-6">
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                  <div className="flex items-start space-x-4 flex-1 min-w-0">
-                    <div className="relative flex-shrink-0">
-                      <Avatar className="w-16 h-16 md:w-20 md:h-20 border-2 border-primary/20">
-                        <AvatarImage src={profile?.profile_image_url || "/placeholder.svg"} alt="Profile" />
-                        <AvatarFallback>
-                          {profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]).join('') : user?.email?.[0].toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <Badge 
-                        variant="secondary" 
-                        className="absolute -bottom-1 -right-1 bg-gradient-to-r from-primary to-accent text-primary-foreground px-2 py-1 text-xs"
-                      >
-                        <Crown className="w-3 h-3 mr-1" />
-                        {profile?.subscription_tier || 'Free'}
-                      </Badge>
-                    </div>
-                    
-                    <div className="flex-1 min-w-0 space-y-2">
-                      <div>
-                        <h2 className="text-xl md:text-2xl font-bold truncate">{profile?.full_name || 'Complete your profile'}</h2>
-                        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                          <span className="capitalize bg-primary/10 px-2 py-1 rounded-full text-primary">
-                            {profile?.role || 'entrepreneur'}
-                          </span>
-                          <span>•</span>
-                          <span className="flex items-center gap-1">
-                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                            </svg>
-                            {profile?.country || 'Location not set'}
-                          </span>
+            <TabsContent value="profile" className="space-y-6">
+              {/* Profile Header */}
+              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+                <CardContent className="p-4 md:p-6">
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div className="flex items-start space-x-4 flex-1 min-w-0">
+                      <div className="relative flex-shrink-0">
+                        <Avatar className="w-16 h-16 md:w-20 md:h-20 border-2 border-primary/20">
+                          <AvatarImage src={profile?.profile_image_url || "/placeholder.svg"} alt="Profile" />
+                          <AvatarFallback>
+                            {profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]).join('') : user?.email?.[0].toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                        <Badge 
+                          variant="secondary" 
+                          className="absolute -bottom-1 -right-1 bg-gradient-to-r from-primary to-accent text-primary-foreground px-2 py-1 text-xs"
+                        >
+                          <Crown className="w-3 h-3 mr-1" />
+                          {profile?.subscription_tier || 'Free'}
+                        </Badge>
+                      </div>
+                      
+                      <div className="flex-1 min-w-0 space-y-2">
+                        <div>
+                          <h2 className="text-xl md:text-2xl font-bold truncate">{profile?.full_name || 'Complete your profile'}</h2>
+                          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                            <span className="capitalize bg-primary/10 px-2 py-1 rounded-full text-primary">
+                              {profile?.role || 'entrepreneur'}
+                            </span>
+                            <span>•</span>
+                            <span className="flex items-center gap-1">
+                              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                              </svg>
+                              {profile?.country || 'Location not set'}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="bg-muted/30 rounded-lg p-3">
+                          <p className="text-sm text-foreground/80 leading-relaxed">
+                            {profile?.bio || 'Add a bio to tell others about yourself and what you\'re looking for. This helps potential matches understand your goals and interests.'}
+                          </p>
                         </div>
                       </div>
-                      <div className="bg-muted/30 rounded-lg p-3">
-                        <p className="text-sm text-foreground/80 leading-relaxed">
-                          {profile?.bio || 'Add a bio to tell others about yourself and what you\'re looking for. This helps potential matches understand your goals and interests.'}
-                        </p>
-                      </div>
                     </div>
+                    
+                    <Button 
+                      size="sm" 
+                      variant={editMode ? "default" : "outline"}
+                      onClick={() => editMode ? handleSaveProfile() : setEditMode(true)}
+                      disabled={loading}
+                      className="flex-shrink-0"
+                    >
+                      {editMode ? (
+                        <>
+                          <Save className="w-4 h-4 mr-2" />
+                          Save Profile
+                        </>
+                      ) : (
+                        <>
+                          <Edit3 className="w-4 h-4 mr-2" />
+                          Edit Profile
+                        </>
+                      )}
+                    </Button>
                   </div>
-                  
-                  <Button 
-                    size="sm" 
-                    variant={editMode ? "default" : "outline"}
-                    onClick={() => editMode ? handleSaveProfile() : setEditMode(true)}
-                    disabled={loading}
-                    className="flex-shrink-0"
-                  >
-                    {editMode ? (
-                      <>
-                        <Save className="w-4 h-4 mr-2" />
-                        Save Profile
-                      </>
-                    ) : (
-                      <>
-                        <Edit3 className="w-4 h-4 mr-2" />
-                        Edit Profile
-                      </>
-                    )}
-                  </Button>
-                </div>
 
-                {editMode && (
-                  <div className="mt-6 space-y-4 pt-6 border-t border-border/50">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="full_name">Full Name</Label>
-                        <Input
-                          id="full_name"
-                          value={formData.full_name}
-                          onChange={(e) => setFormData({...formData, full_name: e.target.value})}
-                          placeholder="Enter your full name"
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="role">Role</Label>
-                        <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value})}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select your role" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="entrepreneur">Entrepreneur</SelectItem>
-                            <SelectItem value="investor">Investor</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="bio">Bio</Label>
-                      <Textarea
-                        id="bio"
-                        value={formData.bio}
-                        onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                        placeholder="Tell others about yourself..."
-                        rows={3}
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="country">Country</Label>
-                        <Select value={formData.country} onValueChange={(value) => setFormData({...formData, country: value})}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select your country" />
-                          </SelectTrigger>
-                          <SelectContent className="max-h-60">
-                            {majorCountries.map((country) => (
-                              <SelectItem key={country} value={country}>{country}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="industry">Industry Focus</Label>
-                        <Select value={formData.industry} onValueChange={(value) => setFormData({...formData, industry: value})}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select your industry" />
-                          </SelectTrigger>
-                          <SelectContent className="max-h-60">
-                            {industryOptions.map((industry) => (
-                              <SelectItem key={industry} value={industry}>{industry}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    {formData.role === 'investor' && (
-                      <div className="space-y-2">
-                        <Label htmlFor="investment_range">Investment Range</Label>
-                        <Input
-                          id="investment_range"
-                          value={formData.investment_range}
-                          onChange={(e) => setFormData({...formData, investment_range: e.target.value})}
-                          placeholder="e.g., $10K - $100K"
-                        />
-                      </div>
-                    )}
-
-                    {formData.role === 'entrepreneur' && (
-                      <div className="space-y-2">
-                        <Label htmlFor="funding_stage">Funding Stage</Label>
-                        <Select value={formData.funding_stage} onValueChange={(value) => setFormData({...formData, funding_stage: value})}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select funding stage" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="pre-seed">Pre-seed</SelectItem>
-                            <SelectItem value="seed">Seed</SelectItem>
-                            <SelectItem value="series-a">Series A</SelectItem>
-                            <SelectItem value="series-b">Series B</SelectItem>
-                            <SelectItem value="series-c">Series C+</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    )}
-
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <Label>Social Media & Calendar</Label>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="outline" className="w-full justify-between">
-                              <span className="flex items-center gap-2">
-                                <Link2 className="w-4 h-4" />
-                                Add Social Media Link
-                              </span>
-                              <ChevronDown className="w-4 h-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent className="w-full bg-background border border-border shadow-lg z-50">
-                            {socialPlatforms.map((platform) => (
-                              <DropdownMenuItem 
-                                key={platform.key}
-                                onClick={() => setEditingSocial(platform.key)}
-                                className="flex items-center gap-3 cursor-pointer hover:bg-muted"
-                              >
-                                <platform.icon className={`w-4 h-4 ${platform.color}`} />
-                                <span>{platform.name}</span>
-                                {formData[platform.key as keyof typeof formData] && (
-                                  <Badge variant="secondary" className="ml-auto">Added</Badge>
-                                )}
-                              </DropdownMenuItem>
-                            ))}
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-
-                      {editingSocial && (
-                        <div className="space-y-2 p-4 bg-muted/30 rounded-lg border border-border animate-fade-in">
-                          <div className="flex items-center justify-between">
-                            <Label className="flex items-center gap-2">
-                              {(() => {
-                                const platform = socialPlatforms.find(p => p.key === editingSocial);
-                                const IconComponent = platform?.icon || Link2;
-                                return (
-                                  <>
-                                    <IconComponent className={`w-4 h-4 ${platform?.color || 'text-muted-foreground'}`} />
-                                    {platform?.name} URL
-                                  </>
-                                );
-                              })()}
-                            </Label>
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              onClick={() => setEditingSocial(null)}
-                              className="text-muted-foreground hover:text-foreground"
-                            >
-                              ✕
-                            </Button>
-                          </div>
+                  {editMode && (
+                    <div className="mt-6 space-y-4 pt-6 border-t border-border/50">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="full_name">Full Name</Label>
                           <Input
-                            value={formData[editingSocial as keyof typeof formData] as string || ''}
-                            onChange={(e) => setFormData({...formData, [editingSocial]: e.target.value})}
-                            placeholder={socialPlatforms.find(p => p.key === editingSocial)?.placeholder}
+                            id="full_name"
+                            value={formData.full_name}
+                            onChange={(e) => setFormData({...formData, full_name: e.target.value})}
+                            placeholder="Enter your full name"
+                          />
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="role">Role</Label>
+                          <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value})}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select your role" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="entrepreneur">Entrepreneur</SelectItem>
+                              <SelectItem value="investor">Investor</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="bio">Bio</Label>
+                        <Textarea
+                          id="bio"
+                          value={formData.bio}
+                          onChange={(e) => setFormData({...formData, bio: e.target.value})}
+                          placeholder="Tell others about yourself..."
+                          rows={3}
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="country">Country</Label>
+                          <Select value={formData.country} onValueChange={(value) => setFormData({...formData, country: value})}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select your country" />
+                            </SelectTrigger>
+                            <SelectContent className="max-h-60">
+                              {majorCountries.map((country) => (
+                                <SelectItem key={country} value={country}>{country}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="industry">Industry Focus</Label>
+                          <Select value={formData.industry} onValueChange={(value) => setFormData({...formData, industry: value})}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select your industry" />
+                            </SelectTrigger>
+                            <SelectContent className="max-h-60">
+                              {industryOptions.map((industry) => (
+                                <SelectItem key={industry} value={industry}>{industry}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      {formData.role === 'investor' && (
+                        <div className="space-y-2">
+                          <Label htmlFor="investment_range">Investment Range</Label>
+                          <Input
+                            id="investment_range"
+                            value={formData.investment_range}
+                            onChange={(e) => setFormData({...formData, investment_range: e.target.value})}
+                            placeholder="e.g., $10K - $100K"
                           />
                         </div>
                       )}
 
-                      {/* Display added social links */}
-                      <div className="space-y-2">
-                        {socialPlatforms
-                          .filter(platform => formData[platform.key as keyof typeof formData])
-                          .map((platform) => (
-                            <div key={platform.key} className="flex items-center justify-between p-2 bg-muted/20 rounded-md">
-                              <div className="flex items-center gap-2">
-                                <platform.icon className={`w-4 h-4 ${platform.color}`} />
-                                <span className="text-sm font-medium">{platform.name}</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <Button 
-                                  variant="ghost" 
-                                  size="sm"
+                      {formData.role === 'entrepreneur' && (
+                        <div className="space-y-2">
+                          <Label htmlFor="funding_stage">Funding Stage</Label>
+                          <Select value={formData.funding_stage} onValueChange={(value) => setFormData({...formData, funding_stage: value})}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select funding stage" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="pre-seed">Pre-seed</SelectItem>
+                              <SelectItem value="seed">Seed</SelectItem>
+                              <SelectItem value="series-a">Series A</SelectItem>
+                              <SelectItem value="series-b">Series B</SelectItem>
+                              <SelectItem value="series-c">Series C+</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
+
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <Label>Social Media & Calendar</Label>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="outline" className="w-full justify-between">
+                                <span className="flex items-center gap-2">
+                                  <Link2 className="w-4 h-4" />
+                                  Add Social Media Link
+                                </span>
+                                <ChevronDown className="w-4 h-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-full bg-background border border-border shadow-lg z-50">
+                              {socialPlatforms.map((platform) => (
+                                <DropdownMenuItem 
+                                  key={platform.key}
                                   onClick={() => setEditingSocial(platform.key)}
-                                  className="text-xs"
+                                  className="flex items-center gap-3 cursor-pointer hover:bg-muted"
                                 >
-                                  Edit
-                                </Button>
-                                <Button 
-                                  variant="ghost" 
-                                  size="sm"
-                                  onClick={() => setFormData({...formData, [platform.key]: ''})}
-                                  className="text-xs text-destructive hover:text-destructive"
-                                >
-                                  Remove
-                                </Button>
-                              </div>
+                                  <platform.icon className={`w-4 h-4 ${platform.color}`} />
+                                  <span>{platform.name}</span>
+                                  {formData[platform.key as keyof typeof formData] && (
+                                    <Badge variant="secondary" className="ml-auto">Added</Badge>
+                                  )}
+                                </DropdownMenuItem>
+                              ))}
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+
+                        {editingSocial && (
+                          <div className="space-y-2 p-4 bg-muted/30 rounded-lg border border-border animate-fade-in">
+                            <div className="flex items-center justify-between">
+                              <Label className="flex items-center gap-2">
+                                {(() => {
+                                  const platform = socialPlatforms.find(p => p.key === editingSocial);
+                                  const IconComponent = platform?.icon || Link2;
+                                  return (
+                                    <>
+                                      <IconComponent className={`w-4 h-4 ${platform?.color || 'text-muted-foreground'}`} />
+                                      {platform?.name} URL
+                                    </>
+                                  );
+                                })()}
+                              </Label>
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => setEditingSocial(null)}
+                                className="text-muted-foreground hover:text-foreground"
+                              >
+                                ✕
+                              </Button>
                             </div>
+                            <Input
+                              value={formData[editingSocial as keyof typeof formData] as string || ''}
+                              onChange={(e) => setFormData({...formData, [editingSocial]: e.target.value})}
+                              placeholder={socialPlatforms.find(p => p.key === editingSocial)?.placeholder}
+                            />
+                          </div>
+                        )}
+
+                        {/* Display added social links */}
+                        <div className="space-y-2">
+                          {socialPlatforms
+                            .filter(platform => formData[platform.key as keyof typeof formData])
+                            .map((platform) => (
+                              <div key={platform.key} className="flex items-center justify-between p-2 bg-muted/20 rounded-md">
+                                <div className="flex items-center gap-2">
+                                  <platform.icon className={`w-4 h-4 ${platform.color}`} />
+                                  <span className="text-sm font-medium">{platform.name}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm"
+                                    onClick={() => setEditingSocial(platform.key)}
+                                    className="text-xs"
+                                  >
+                                    Edit
+                                  </Button>
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm"
+                                    onClick={() => setFormData({...formData, [platform.key]: ''})}
+                                    className="text-xs text-destructive hover:text-destructive"
+                                  >
+                                    Remove
+                                  </Button>
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-2">
+                        <Switch
+                          id="open_to_connect"
+                          checked={formData.open_to_connect}
+                          onCheckedChange={(checked) => setFormData({...formData, open_to_connect: checked})}
+                        />
+                        <Label htmlFor="open_to_connect">Open to new connections</Label>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Profile Stats */}
+              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-purple-600/20 rounded-lg border border-purple-500/20">
+                      <div className="text-xl md:text-2xl font-bold text-purple-600">247</div>
+                      <div className="text-xs md:text-sm text-purple-600/80 flex items-center justify-center gap-1">
+                        <Eye className="w-3 h-3" />
+                        Profile Views
+                      </div>
+                    </div>
+                    <div className="text-center p-3 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-lg border border-emerald-500/20">
+                      <div className="text-xl md:text-2xl font-bold text-emerald-600">89</div>
+                      <div className="text-xs md:text-sm text-emerald-600/80 flex items-center justify-center gap-1">
+                        <Users className="w-3 h-3" />
+                        Connections
+                      </div>
+                    </div>
+                    <div className="text-center p-3 bg-gradient-to-br from-blue-500/10 to-blue-600/20 rounded-lg border border-blue-500/20">
+                      <div className="text-xl md:text-2xl font-bold text-blue-600">156</div>
+                      <div className="text-xs md:text-sm text-blue-600/80 flex items-center justify-center gap-1">
+                        <MessageSquare className="w-3 h-3" />
+                        Messages
+                      </div>
+                    </div>
+                    <div className="text-center p-3 bg-gradient-to-br from-amber-500/10 to-amber-600/20 rounded-lg border border-amber-500/20">
+                      <div className="text-xl md:text-2xl font-bold text-amber-600">23</div>
+                      <div className="text-xs md:text-sm text-amber-600/80 flex items-center justify-center gap-1">
+                        <Star className="w-3 h-3" />
+                        SuperLikes Left
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Videos Section */}
+              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Video className="w-5 h-5 mr-2 text-primary" />
+                    My Videos
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label>About Me Video</Label>
+                      <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-dashed border-border">
+                        <div className="text-center">
+                          <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+                          <p className="text-sm text-muted-foreground">No video uploaded</p>
+                          <Button size="sm" variant="outline" className="mt-2">
+                            <Camera className="w-4 h-4 mr-2" />
+                            Record/Upload
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label>Pitch Video</Label>
+                      <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-dashed border-border">
+                        <div className="text-center">
+                          <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+                          <p className="text-sm text-muted-foreground">No video uploaded</p>
+                          <Button size="sm" variant="outline" className="mt-2">
+                            <Camera className="w-4 h-4 mr-2" />
+                            Record/Upload
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Stats */}
+              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <TrendingUp className="w-5 h-5 mr-2 text-primary" />
+                    Activity Overview
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-primary/20 rounded-lg border border-primary/20">
+                      <div className="text-2xl font-bold text-primary">4.8</div>
+                      <div className="text-sm text-primary/80 flex items-center justify-center gap-1">
+                        <Star className="w-3 h-3" />
+                        Profile Rating
+                      </div>
+                    </div>
+                    <div className="text-center p-4 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-lg border border-emerald-500/20">
+                      <div className="text-2xl font-bold text-emerald-600">73%</div>
+                      <div className="text-sm text-emerald-600/80 flex items-center justify-center gap-1">
+                        <TrendingUp className="w-3 h-3" />
+                        Match Rate
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Profile Completeness</span>
+                      <span className="font-medium">85%</span>
+                    </div>
+                    <Progress value={85} className="h-2" />
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2">
+                    <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto">
+                      <Download className="w-4 h-4" />
+                      Export Data
+                    </Button>
+                    <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto">
+                      <Share2 className="w-4 h-4" />
+                      Share Profile
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="filters" className="space-y-6">
+              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Filter className="w-5 h-5 mr-2 text-primary" />
+                    Match Preferences
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="p-4 bg-muted/30 rounded-lg border border-amber-200 dark:border-amber-800">
+                    <div className="flex items-start space-x-2">
+                      <Shield className="w-5 h-5 text-amber-600 mt-0.5" />
+                      <div>
+                        <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+                          Idea Protection Policy
+                        </p>
+                        <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
+                          For confidentiality protection, {profile?.role === 'investor' 
+                            ? 'investors can only match with entrepreneurs'
+                            : 'entrepreneurs can only match with investors'
+                          }. Same-role matching is permanently disabled to prevent idea theft.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label>You can only match with</Label>
+                      <div className="p-3 bg-muted/50 rounded-lg border">
+                        <p className="text-sm font-medium">
+                          {profile?.role === 'investor' ? 'Entrepreneurs Only' : 'Investors Only'}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          This restriction protects intellectual property and prevents idea theft
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label>Industry Focus</Label>
+                      <Select defaultValue="all">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {industryOptions.map((industry) => (
+                            <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
+                              {industry}
+                            </SelectItem>
                           ))}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center space-x-2">
-                      <Switch
-                        id="open_to_connect"
-                        checked={formData.open_to_connect}
-                        onCheckedChange={(checked) => setFormData({...formData, open_to_connect: checked})}
-                      />
-                      <Label htmlFor="open_to_connect">Open to new connections</Label>
+                          <SelectItem value="all">All Industries</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
-                )}
-              </CardContent>
-            </Card>
 
-            {/* Videos Section */}
-            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Video className="w-5 h-5 mr-2 text-primary" />
-                  My Videos
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label>About Me Video</Label>
-                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-dashed border-border">
-                      <div className="text-center">
-                        <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
-                        <p className="text-sm text-muted-foreground">No video uploaded</p>
-                        <Button size="sm" variant="outline" className="mt-2">
-                          <Camera className="w-4 h-4 mr-2" />
-                          Record/Upload
-                        </Button>
-                      </div>
-                    </div>
+                    <Label>Geographic Preference</Label>
+                    <Select defaultValue="global">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="local">Local (Same Country)</SelectItem>
+                        <SelectItem value="regional">Regional (Same Continent)</SelectItem>
+                        {majorCountries.map((country) => (
+                          <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, '-')}>
+                            {country}
+                          </SelectItem>
+                        ))}
+                        <SelectItem value="global">Global (All Countries)</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                  
-                  <div className="space-y-2">
-                    <Label>Pitch Video</Label>
-                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-dashed border-border">
-                      <div className="text-center">
-                        <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
-                        <p className="text-sm text-muted-foreground">No video uploaded</p>
-                        <Button size="sm" variant="outline" className="mt-2">
-                          <Camera className="w-4 h-4 mr-2" />
-                          Record/Upload
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
 
-            {/* Stats */}
-            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <TrendingUp className="w-5 h-5 mr-2 text-primary" />
-                  Activity Overview
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-primary/20 rounded-lg border border-primary/20">
-                    <div className="text-2xl font-bold text-primary">4.8</div>
-                    <div className="text-sm text-primary/80 flex items-center justify-center gap-1">
-                      <Star className="w-3 h-3" />
-                      Profile Rating
-                    </div>
-                  </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-lg border border-emerald-500/20">
-                    <div className="text-2xl font-bold text-emerald-600">73%</div>
-                    <div className="text-sm text-emerald-600/80 flex items-center justify-center gap-1">
-                      <TrendingUp className="w-3 h-3" />
-                      Match Rate
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Profile Completeness</span>
-                    <span className="font-medium">85%</span>
-                  </div>
-                  <Progress value={85} className="h-2" />
-                </div>
-                
-                <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2">
-                  <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto">
-                    <Download className="w-4 h-4" />
-                    Export Data
-                  </Button>
-                  <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto">
-                    <Share2 className="w-4 h-4" />
-                    Share Profile
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="filters" className="space-y-6">
-            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Filter className="w-5 h-5 mr-2 text-primary" />
-                  Match Preferences
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-4 bg-muted/30 rounded-lg border border-amber-200 dark:border-amber-800">
-                  <div className="flex items-start space-x-2">
-                    <Shield className="w-5 h-5 text-amber-600 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
-                        Idea Protection Policy
-                      </p>
-                      <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
-                        For confidentiality protection, {profile?.role === 'investor' 
-                          ? 'investors can only match with entrepreneurs'
-                          : 'entrepreneurs can only match with investors'
-                        }. Same-role matching is permanently disabled to prevent idea theft.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label>You can only match with</Label>
-                    <div className="p-3 bg-muted/50 rounded-lg border">
-                      <p className="text-sm font-medium">
-                        {profile?.role === 'investor' ? 'Entrepreneurs Only' : 'Investors Only'}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        This restriction protects intellectual property and prevents idea theft
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label>Industry Focus</Label>
+                    <Label>Funding Stage (for Entrepreneurs)</Label>
                     <Select defaultValue="all">
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        {industryOptions.map((industry) => (
-                          <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
-                            {industry}
-                          </SelectItem>
-                        ))}
-                        <SelectItem value="all">All Industries</SelectItem>
+                        <SelectItem value="pre-seed">Pre-seed</SelectItem>
+                        <SelectItem value="seed">Seed</SelectItem>
+                        <SelectItem value="series-a">Series A</SelectItem>
+                        <SelectItem value="series-b">Series B</SelectItem>
+                        <SelectItem value="series-c">Series C+</SelectItem>
+                        <SelectItem value="all">All Stages</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
-                </div>
 
-                <div className="space-y-2">
-                  <Label>Geographic Preference</Label>
-                  <Select defaultValue="global">
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="local">Local (Same Country)</SelectItem>
-                      <SelectItem value="regional">Regional (Same Continent)</SelectItem>
-                      {majorCountries.map((country) => (
-                        <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, '-')}>
-                          {country}
-                        </SelectItem>
-                      ))}
-                      <SelectItem value="global">Global (All Countries)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <div className="space-y-2">
+                    <Label>Investment Range (for Investors)</Label>
+                    <Select defaultValue="all">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="under-10k">Under $10K</SelectItem>
+                        <SelectItem value="10k-50k">$10K - $50K</SelectItem>
+                        <SelectItem value="50k-100k">$50K - $100K</SelectItem>
+                        <SelectItem value="100k-500k">$100K - $500K</SelectItem>
+                        <SelectItem value="500k-1m">$500K - $1M</SelectItem>
+                        <SelectItem value="1m-plus">$1M+</SelectItem>
+                        <SelectItem value="all">All Ranges</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div className="space-y-2">
-                  <Label>Funding Stage (for Entrepreneurs)</Label>
-                  <Select defaultValue="all">
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="pre-seed">Pre-seed</SelectItem>
-                      <SelectItem value="seed">Seed</SelectItem>
-                      <SelectItem value="series-a">Series A</SelectItem>
-                      <SelectItem value="series-b">Series B</SelectItem>
-                      <SelectItem value="series-c">Series C+</SelectItem>
-                      <SelectItem value="all">All Stages</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <Button className="w-full">
+                    Save Filter Preferences
+                  </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-                <div className="space-y-2">
-                  <Label>Investment Range (for Investors)</Label>
-                  <Select defaultValue="all">
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="under-10k">Under $10K</SelectItem>
-                      <SelectItem value="10k-50k">$10K - $50K</SelectItem>
-                      <SelectItem value="50k-100k">$50K - $100K</SelectItem>
-                      <SelectItem value="100k-500k">$100K - $500K</SelectItem>
-                      <SelectItem value="500k-1m">$500K - $1M</SelectItem>
-                      <SelectItem value="1m-plus">$1M+</SelectItem>
-                      <SelectItem value="all">All Ranges</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <Button className="w-full">
-                  Save Filter Preferences
-                </Button>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="subscription" className="space-y-6">
-            {/* Subscription Tiers */}
-            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Crown className="w-5 h-5 mr-2 text-primary" />
-                  Subscription Plans
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {subscriptionTiers.map((tier) => (
-                  <div
-                    key={tier.name}
-                    className={`p-4 rounded-lg border transition-all duration-200 ${
-                      tier.current
-                        ? "border-primary bg-primary/5 ring-1 ring-primary/20"
-                        : "border-border/50 hover:border-border"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="flex items-center space-x-2">
-                          <h3 className="font-semibold">{tier.name}</h3>
-                          {tier.current && (
-                            <Badge variant="default" className="bg-primary text-primary-foreground">
-                              Current Plan
-                            </Badge>
+            <TabsContent value="subscription" className="space-y-6">
+              {/* Subscription Tiers */}
+              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Crown className="w-5 h-5 mr-2 text-primary" />
+                    Subscription Plans
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {subscriptionTiers.map((tier) => (
+                    <div
+                      key={tier.name}
+                      className={`p-4 rounded-lg border transition-all duration-200 ${
+                        tier.current
+                          ? "border-primary bg-primary/5 ring-1 ring-primary/20"
+                          : "border-border/50 hover:border-border"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <h3 className="font-semibold">{tier.name}</h3>
+                            {tier.current && (
+                              <Badge variant="default" className="bg-primary text-primary-foreground">
+                                Current Plan
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-2xl font-bold text-primary mt-1">{tier.price}</p>
+                          <p className="text-sm text-muted-foreground">{tier.superlikes} SuperLikes/month</p>
+                        </div>
+                        
+                        <div className="text-right">
+                          {!tier.current && (
+                            <Button variant="outline" size="sm">
+                              <Zap className="w-4 h-4 mr-2" />
+                              Upgrade
+                            </Button>
                           )}
                         </div>
-                        <p className="text-2xl font-bold text-primary mt-1">{tier.price}</p>
-                        <p className="text-sm text-muted-foreground">{tier.superlikes} SuperLikes/month</p>
                       </div>
                       
-                      <div className="text-right">
-                        {!tier.current && (
-                          <Button variant="outline" size="sm">
-                            <Zap className="w-4 h-4 mr-2" />
-                            Upgrade
-                          </Button>
-                        )}
+                      <div className="mt-3">
+                        <div className="grid grid-cols-1 gap-1">
+                          {tier.features.map((feature, index) => (
+                            <div key={index} className="flex items-center text-sm text-muted-foreground">
+                              <div className="w-1 h-1 bg-primary rounded-full mr-2" />
+                              {feature}
+                            </div>
+                          ))}
+                        </div>
                       </div>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              {/* AI Tools */}
+              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Target className="w-5 h-5 mr-2 text-primary" />
+                    AI-Powered Tools
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                        <MessageSquare className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium">PitchGPT</p>
+                        <p className="text-sm text-muted-foreground">Generate perfect pitch scripts</p>
+                      </div>
+                    </div>
+                    <Badge variant="secondary">Premium</Badge>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                        <Award className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium">AI Pitch Coach</p>
+                        <p className="text-sm text-muted-foreground">Get feedback on your videos</p>
+                      </div>
+                    </div>
+                    <Badge variant="secondary">Premium</Badge>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                        <Zap className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium">Smart Intro Assistant</p>
+                        <p className="text-sm text-muted-foreground">AI-generated conversation starters</p>
+                      </div>
+                    </div>
+                    <Badge variant="secondary">Elite</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="settings" className="space-y-6">
+              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Settings className="w-5 h-5 mr-2 text-primary" />
+                    Account Settings
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Email Notifications</p>
+                        <p className="text-sm text-muted-foreground">Receive match and message notifications</p>
+                      </div>
+                      <Switch defaultChecked />
                     </div>
                     
-                    <div className="mt-3">
-                      <div className="grid grid-cols-1 gap-1">
-                        {tier.features.map((feature, index) => (
-                          <div key={index} className="flex items-center text-sm text-muted-foreground">
-                            <div className="w-1 h-1 bg-primary rounded-full mr-2" />
-                            {feature}
-                          </div>
-                        ))}
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Push Notifications</p>
+                        <p className="text-sm text-muted-foreground">Get notified about new matches</p>
                       </div>
+                      <Switch defaultChecked />
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Profile Visibility</p>
+                        <p className="text-sm text-muted-foreground">Allow others to find your profile</p>
+                      </div>
+                      <Switch defaultChecked />
                     </div>
                   </div>
-                ))}
-              </CardContent>
-            </Card>
 
-            {/* AI Tools */}
-            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Target className="w-5 h-5 mr-2 text-primary" />
-                  AI-Powered Tools
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                      <MessageSquare className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium">PitchGPT</p>
-                      <p className="text-sm text-muted-foreground">Generate perfect pitch scripts</p>
-                    </div>
-                  </div>
-                  <Badge variant="secondary">Premium</Badge>
-                </div>
-                
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                      <Award className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium">AI Pitch Coach</p>
-                      <p className="text-sm text-muted-foreground">Get feedback on your videos</p>
-                    </div>
-                  </div>
-                  <Badge variant="secondary">Premium</Badge>
-                </div>
-                
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                      <Zap className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Smart Intro Assistant</p>
-                      <p className="text-sm text-muted-foreground">AI-generated conversation starters</p>
-                    </div>
-                  </div>
-                  <Badge variant="secondary">Elite</Badge>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                  <Separator />
 
-          <TabsContent value="settings" className="space-y-6">
-            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Settings className="w-5 h-5 mr-2 text-primary" />
-                  Account Settings
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Email Notifications</p>
-                      <p className="text-sm text-muted-foreground">Receive match and message notifications</p>
-                    </div>
-                    <Switch defaultChecked />
+                  <div className="space-y-3">
+                    <h4 className="font-medium">Danger Zone</h4>
+                    <Button variant="destructive" className="w-full">
+                      Delete Account
+                    </Button>
                   </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Push Notifications</p>
-                      <p className="text-sm text-muted-foreground">Get notified about new matches</p>
-                    </div>
-                    <Switch defaultChecked />
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Profile Visibility</p>
-                      <p className="text-sm text-muted-foreground">Allow others to find your profile</p>
-                    </div>
-                    <Switch defaultChecked />
-                  </div>
-                </div>
-
-                <Separator />
-
-                <div className="space-y-3">
-                  <h4 className="font-medium">Danger Zone</h4>
-                  <Button variant="destructive" className="w-full">
-                    Delete Account
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
