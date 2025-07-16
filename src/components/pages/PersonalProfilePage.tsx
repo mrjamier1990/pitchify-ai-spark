@@ -126,6 +126,9 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
     linkedin_url: '',
     calendly_url: '',
     twitter_url: '',
+    instagram_url: '',
+    facebook_url: '',
+    tiktok_url: '',
     open_to_connect: true
   });
 
@@ -142,6 +145,9 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
         linkedin_url: profile.linkedin_url || '',
         calendly_url: profile.calendly_url || '',
         twitter_url: profile.twitter_url || '',
+        instagram_url: profile.instagram_url || '',
+        facebook_url: profile.facebook_url || '',
+        tiktok_url: profile.tiktok_url || '',
         open_to_connect: profile.open_to_connect ?? true
       });
     }
@@ -381,7 +387,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       </div>
                     )}
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="linkedin_url">LinkedIn URL</Label>
                         <Input
@@ -401,7 +407,9 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                           placeholder="https://calendly.com/..."
                         />
                       </div>
-                      
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="twitter_url">Twitter URL</Label>
                         <Input
@@ -409,6 +417,38 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                           value={formData.twitter_url}
                           onChange={(e) => setFormData({...formData, twitter_url: e.target.value})}
                           placeholder="https://twitter.com/..."
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="instagram_url">Instagram URL</Label>
+                        <Input
+                          id="instagram_url"
+                          value={formData.instagram_url}
+                          onChange={(e) => setFormData({...formData, instagram_url: e.target.value})}
+                          placeholder="https://instagram.com/..."
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="facebook_url">Facebook URL</Label>
+                        <Input
+                          id="facebook_url"
+                          value={formData.facebook_url}
+                          onChange={(e) => setFormData({...formData, facebook_url: e.target.value})}
+                          placeholder="https://facebook.com/..."
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="tiktok_url">TikTok URL</Label>
+                        <Input
+                          id="tiktok_url"
+                          value={formData.tiktok_url}
+                          onChange={(e) => setFormData({...formData, tiktok_url: e.target.value})}
+                          placeholder="https://tiktok.com/@..."
                         />
                       </div>
                     </div>
