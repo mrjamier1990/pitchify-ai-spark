@@ -63,22 +63,22 @@ const subscriptionTiers: SubscriptionTier[] = [
   {
     name: "Basic",
     price: "Free",
-    superlikes: 30,
-    features: ["30 SuperLikes per month", "Basic profile", "Secure role-based matching only"],
+    superlikes: 5,
+    features: ["5 SuperLikes per month", "Basic profile", "Secure role-based matching only"],
     current: false,
   },
   {
     name: "Premium",
     price: "$19/month",
-    superlikes: 50,
-    features: ["50 SuperLikes per month", "Profile boost", "Unlimited matches", "See who liked you", "Advanced filters"],
+    superlikes: 30,
+    features: ["30 SuperLikes per month", "Profile boost", "Unlimited matches", "See who liked you", "Advanced filters"],
     current: true,
   },
   {
     name: "Elite",
     price: "$49/month",
-    superlikes: 200,
-    features: ["200 SuperLikes per month", "Priority placement", "Advanced filters", "Pitch coach", "AI-powered tools"],
+    superlikes: 50,
+    features: ["50 SuperLikes per month", "Priority placement", "Advanced filters", "Pitch coach", "AI-powered tools"],
     current: false,
   },
 ];
