@@ -62,7 +62,7 @@ export function SwipeCard({ profile, onSwipe, style }: SwipeCardProps) {
 
   return (
     <div
-      className="absolute inset-4 bg-card rounded-2xl shadow-card overflow-hidden cursor-grab active:cursor-grabbing select-none"
+      className="absolute inset-2 sm:inset-4 bg-card rounded-xl sm:rounded-2xl shadow-card overflow-hidden cursor-grab active:cursor-grabbing select-none"
       style={{
         ...style,
         transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${rotation}deg)`,
@@ -93,8 +93,8 @@ export function SwipeCard({ profile, onSwipe, style }: SwipeCardProps) {
         </div>
 
         {/* Type Badge */}
-        <div className="absolute top-4 left-4">
-          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+        <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
+          <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
             profile.type === "entrepreneur" 
               ? "bg-primary text-primary-foreground"
               : "bg-accent text-accent-foreground"
@@ -104,43 +104,43 @@ export function SwipeCard({ profile, onSwipe, style }: SwipeCardProps) {
         </div>
 
         {/* Gradient Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-black/70 to-transparent" />
       </div>
 
       {/* Profile Info */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+      <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 text-white">
         <div className="mb-2">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-lg sm:text-2xl font-bold leading-tight">
             {profile.name}, {profile.age}
           </h2>
-          <p className="text-lg opacity-90">{profile.title}</p>
-          <p className="text-sm opacity-75">{profile.company}</p>
+          <p className="text-sm sm:text-lg opacity-90 leading-tight">{profile.title}</p>
+          <p className="text-xs sm:text-sm opacity-75">{profile.company}</p>
         </div>
 
-        <div className="flex items-center gap-4 text-sm opacity-75 mb-3">
+        <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm opacity-75 mb-2 sm:mb-3">
           <div className="flex items-center gap-1">
-            <MapPin className="w-4 h-4" />
-            {profile.location}
+            <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="truncate">{profile.location}</span>
           </div>
           <div className="flex items-center gap-1">
-            <Briefcase className="w-4 h-4" />
-            {profile.industry}
+            <Briefcase className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="truncate">{profile.industry}</span>
           </div>
         </div>
 
         {profile.type === "entrepreneur" && profile.fundingStage && (
-          <p className="text-sm opacity-90 mb-2">
+          <p className="text-xs sm:text-sm opacity-90 mb-1 sm:mb-2">
             <span className="font-medium">Funding Stage:</span> {profile.fundingStage}
           </p>
         )}
 
         {profile.type === "investor" && profile.investmentRange && (
-          <p className="text-sm opacity-90 mb-2">
+          <p className="text-xs sm:text-sm opacity-90 mb-1 sm:mb-2">
             <span className="font-medium">Investment Range:</span> {profile.investmentRange}
           </p>
         )}
 
-        <p className="text-sm opacity-90 line-clamp-2">{profile.bio}</p>
+        <p className="text-xs sm:text-sm opacity-90 line-clamp-2 leading-relaxed">{profile.bio}</p>
       </div>
 
       {/* Swipe Indicators */}

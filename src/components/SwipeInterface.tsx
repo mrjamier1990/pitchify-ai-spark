@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SwipeCard } from "./SwipeCard";
 import { Button } from "@/components/ui/button";
-import { Heart, X, Star, MessageCircle, User, Flame } from "lucide-react";
+import { Heart, X, Star, MessageCircle, User, Play } from "lucide-react";
 import profile1 from "@/assets/profile1.jpg";
 import profile2 from "@/assets/profile2.jpg";
 import profile3 from "@/assets/profile3.jpg";
@@ -87,34 +87,44 @@ export function SwipeInterface() {
 
   if (currentIndex >= mockProfiles.length * 2) {
     return (
-      <div className="h-screen bg-background flex items-center justify-center">
+      <div className="h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center">
-          <Flame className="w-16 h-16 text-primary mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-foreground mb-2">You're all caught up!</h2>
-          <p className="text-muted-foreground mb-4">Check back later for more connections</p>
-          <p className="text-lg text-primary font-semibold">{matches} matches today</p>
+          <div className="relative w-20 h-20 mx-auto mb-6">
+            <div className="absolute inset-0 bg-gradient-primary rounded-full opacity-20 animate-pulse"></div>
+            <div className="relative bg-gradient-primary rounded-full w-20 h-20 flex items-center justify-center">
+              <Play className="w-10 h-10 text-primary-foreground ml-1" />
+            </div>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">You're all caught up!</h2>
+          <p className="text-sm sm:text-base text-muted-foreground mb-4">Check back later for more connections</p>
+          <p className="text-base sm:text-lg text-primary font-semibold">{matches} matches today</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen bg-background flex flex-col">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-border">
-        <Button variant="ghost" size="icon">
-          <User className="w-5 h-5" />
+      <header className="flex items-center justify-between p-3 sm:p-4 border-b border-border bg-background/95 backdrop-blur-sm">
+        <Button variant="ghost" size="icon" className="w-9 h-9 sm:w-10 sm:h-10">
+          <User className="w-4 h-4 sm:w-5 sm:h-5" />
         </Button>
         
         <div className="flex items-center gap-2">
-          <Flame className="w-8 h-8 text-primary" />
-          <span className="text-xl font-bold text-foreground">Pitchify</span>
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-primary rounded-lg opacity-20 animate-pulse"></div>
+            <div className="relative bg-gradient-primary rounded-lg w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+              <Play className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground ml-0.5" />
+            </div>
+          </div>
+          <span className="text-lg sm:text-xl font-bold text-foreground">Pitchify</span>
         </div>
         
-        <Button variant="ghost" size="icon">
-          <MessageCircle className="w-5 h-5" />
+        <Button variant="ghost" size="icon" className="relative w-9 h-9 sm:w-10 sm:h-10">
+          <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
           {matches > 0 && (
-            <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-bold">
               {matches}
             </span>
           )}
@@ -144,35 +154,36 @@ export function SwipeInterface() {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-center gap-6 p-6 bg-background/80 backdrop-blur-sm">
+      <div className="flex items-center justify-center gap-3 sm:gap-6 p-4 sm:p-6 bg-background/90 backdrop-blur-md border-t border-border/50">
         <Button
           variant="glass"
           size="lg"
-          className="px-8 py-4 rounded-2xl bg-muted/10 backdrop-blur-md border border-muted/20 text-muted-foreground hover:bg-muted/20 hover:border-muted/40 hover:text-foreground hover:shadow-glow transform hover:scale-105 hover:translate-y-[-3px] transition-all duration-300 group min-w-[120px]"
+          className="flex-1 sm:flex-none px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-destructive/10 backdrop-blur-md border border-destructive/20 text-destructive hover:bg-destructive/20 hover:border-destructive/40 hover:text-destructive-foreground hover:shadow-glow transform hover:scale-105 hover:translate-y-[-3px] transition-all duration-300 group sm:min-w-[120px] max-w-[140px]"
           onClick={() => handleButtonAction("pass")}
         >
-          <X className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300" />
-          <span className="font-medium">I'm Out</span>
+          <X className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 group-hover:rotate-90 transition-transform duration-300" />
+          <span className="font-medium text-sm sm:text-base">I'm Out</span>
         </Button>
         
         <Button
           variant="premium"
           size="xl"
-          className="w-16 h-16 rounded-full bg-gradient-primary text-primary-foreground hover:shadow-3d transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden"
+          className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-primary text-primary-foreground hover:shadow-3d transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden shadow-premium"
           onClick={() => handleButtonAction("superlike")}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-glow/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-          <Star className="w-7 h-7 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-glow/40 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
+          <Star className="w-6 h-6 sm:w-7 sm:h-7 relative z-10 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
         </Button>
         
         <Button
           variant="cta"
           size="lg"
-          className="px-8 py-4 rounded-2xl bg-accent/90 backdrop-blur-md border border-accent/30 text-accent-foreground hover:bg-accent hover:border-accent/50 hover:shadow-3d transform hover:scale-105 hover:translate-y-[-3px] transition-all duration-300 group min-w-[120px]"
+          className="flex-1 sm:flex-none px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-accent/90 backdrop-blur-md border border-accent/30 text-accent-foreground hover:bg-accent hover:border-accent/50 hover:shadow-3d transform hover:scale-105 hover:translate-y-[-3px] transition-all duration-300 group sm:min-w-[120px] max-w-[140px]"
           onClick={() => handleButtonAction("like")}
         >
-          <Heart className="w-5 h-5 mr-2 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300" />
-          <span className="font-medium">I'm In</span>
+          <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 group-hover:scale-110 group-hover:text-red-300 transition-all duration-300" />
+          <span className="font-medium text-sm sm:text-base">I'm In</span>
         </Button>
       </div>
     </div>
