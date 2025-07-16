@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/components/AuthProvider";
@@ -44,7 +45,11 @@ import {
   ExternalLink,
   Award,
   Zap,
-  Target
+  Target,
+  ChevronDown,
+  Instagram,
+  Facebook,
+  Twitter
 } from "lucide-react";
 
 interface PersonalProfilePageProps {
@@ -115,6 +120,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [editingSocial, setEditingSocial] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     full_name: '',
     bio: '',
@@ -182,6 +188,51 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
     }
   };
 
+  const socialPlatforms = [
+    { 
+      key: 'linkedin_url', 
+      name: 'LinkedIn', 
+      icon: Link2, 
+      placeholder: 'https://linkedin.com/in/...',
+      color: 'text-blue-600'
+    },
+    { 
+      key: 'twitter_url', 
+      name: 'Twitter', 
+      icon: Twitter, 
+      placeholder: 'https://twitter.com/...',
+      color: 'text-sky-500'
+    },
+    { 
+      key: 'instagram_url', 
+      name: 'Instagram', 
+      icon: Instagram, 
+      placeholder: 'https://instagram.com/...',
+      color: 'text-pink-500'
+    },
+    { 
+      key: 'facebook_url', 
+      name: 'Facebook', 
+      icon: Facebook, 
+      placeholder: 'https://facebook.com/...',
+      color: 'text-blue-700'
+    },
+    { 
+      key: 'tiktok_url', 
+      name: 'TikTok', 
+      icon: Video, 
+      placeholder: 'https://tiktok.com/@...',
+      color: 'text-black dark:text-white'
+    },
+    { 
+      key: 'calendly_url', 
+      name: 'Calendly', 
+      icon: Calendar, 
+      placeholder: 'https://calendly.com/...',
+      color: 'text-orange-500'
+    }
+  ];
+
   const handleSignOut = async () => {
     await signOut();
   };
@@ -237,6 +288,41 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
           </TabsList>
 
           <TabsContent value="profile" className="space-y-6">
+            {/* Profile Stats */}
+            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <CardContent className="p-6">
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-primary">247</div>
+                    <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
+                      <Eye className="w-3 h-3" />
+                      Profile Views
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-green-500">89</div>
+                    <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
+                      <Users className="w-3 h-3" />
+                      Connections
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-500">156</div>
+                    <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
+                      <MessageSquare className="w-3 h-3" />
+                      Messages
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-amber-500">23</div>
+                    <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
+                      <Star className="w-3 h-3" />
+                      SuperLikes Left
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
             {/* Profile Header */}
             <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
               <CardContent className="p-6">
@@ -387,69 +473,99 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       </div>
                     )}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="linkedin_url">LinkedIn URL</Label>
-                        <Input
-                          id="linkedin_url"
-                          value={formData.linkedin_url}
-                          onChange={(e) => setFormData({...formData, linkedin_url: e.target.value})}
-                          placeholder="https://linkedin.com/in/..."
-                        />
+                        <Label>Social Media & Calendar</Label>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="outline" className="w-full justify-between">
+                              <span className="flex items-center gap-2">
+                                <Link2 className="w-4 h-4" />
+                                Add Social Media Link
+                              </span>
+                              <ChevronDown className="w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="w-full bg-background border border-border shadow-lg z-50">
+                            {socialPlatforms.map((platform) => (
+                              <DropdownMenuItem 
+                                key={platform.key}
+                                onClick={() => setEditingSocial(platform.key)}
+                                className="flex items-center gap-3 cursor-pointer hover:bg-muted"
+                              >
+                                <platform.icon className={`w-4 h-4 ${platform.color}`} />
+                                <span>{platform.name}</span>
+                                {formData[platform.key as keyof typeof formData] && (
+                                  <Badge variant="secondary" className="ml-auto">Added</Badge>
+                                )}
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="calendly_url">Calendly URL</Label>
-                        <Input
-                          id="calendly_url"
-                          value={formData.calendly_url}
-                          onChange={(e) => setFormData({...formData, calendly_url: e.target.value})}
-                          placeholder="https://calendly.com/..."
-                        />
-                      </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="twitter_url">Twitter URL</Label>
-                        <Input
-                          id="twitter_url"
-                          value={formData.twitter_url}
-                          onChange={(e) => setFormData({...formData, twitter_url: e.target.value})}
-                          placeholder="https://twitter.com/..."
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="instagram_url">Instagram URL</Label>
-                        <Input
-                          id="instagram_url"
-                          value={formData.instagram_url}
-                          onChange={(e) => setFormData({...formData, instagram_url: e.target.value})}
-                          placeholder="https://instagram.com/..."
-                        />
-                      </div>
-                    </div>
+                      {editingSocial && (
+                        <div className="space-y-2 p-4 bg-muted/30 rounded-lg border border-border animate-fade-in">
+                          <div className="flex items-center justify-between">
+                            <Label className="flex items-center gap-2">
+                              {(() => {
+                                const platform = socialPlatforms.find(p => p.key === editingSocial);
+                                const IconComponent = platform?.icon || Link2;
+                                return (
+                                  <>
+                                    <IconComponent className={`w-4 h-4 ${platform?.color || 'text-muted-foreground'}`} />
+                                    {platform?.name} URL
+                                  </>
+                                );
+                              })()}
+                            </Label>
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => setEditingSocial(null)}
+                              className="text-muted-foreground hover:text-foreground"
+                            >
+                              ✕
+                            </Button>
+                          </div>
+                          <Input
+                            value={formData[editingSocial as keyof typeof formData] as string || ''}
+                            onChange={(e) => setFormData({...formData, [editingSocial]: e.target.value})}
+                            placeholder={socialPlatforms.find(p => p.key === editingSocial)?.placeholder}
+                          />
+                        </div>
+                      )}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Display added social links */}
                       <div className="space-y-2">
-                        <Label htmlFor="facebook_url">Facebook URL</Label>
-                        <Input
-                          id="facebook_url"
-                          value={formData.facebook_url}
-                          onChange={(e) => setFormData({...formData, facebook_url: e.target.value})}
-                          placeholder="https://facebook.com/..."
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="tiktok_url">TikTok URL</Label>
-                        <Input
-                          id="tiktok_url"
-                          value={formData.tiktok_url}
-                          onChange={(e) => setFormData({...formData, tiktok_url: e.target.value})}
-                          placeholder="https://tiktok.com/@..."
-                        />
+                        {socialPlatforms
+                          .filter(platform => formData[platform.key as keyof typeof formData])
+                          .map((platform) => (
+                            <div key={platform.key} className="flex items-center justify-between p-2 bg-muted/20 rounded-md">
+                              <div className="flex items-center gap-2">
+                                <platform.icon className={`w-4 h-4 ${platform.color}`} />
+                                <span className="text-sm font-medium">{platform.name}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm"
+                                  onClick={() => setEditingSocial(platform.key)}
+                                  className="text-xs"
+                                >
+                                  Edit
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm"
+                                  onClick={() => setFormData({...formData, [platform.key]: ''})}
+                                  className="text-xs text-destructive hover:text-destructive"
+                                >
+                                  Remove
+                                </Button>
+                              </div>
+                            </div>
+                          ))}
                       </div>
                     </div>
 
@@ -512,32 +628,44 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <TrendingUp className="w-5 h-5 mr-2 text-primary" />
-                  Profile Stats
+                  Activity Overview
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">247</div>
-                    <div className="text-sm text-muted-foreground flex items-center justify-center">
-                      <Eye className="w-4 h-4 mr-1" />
-                      Profile Views
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <div className="text-2xl font-bold text-blue-600">4.8</div>
+                    <div className="text-sm text-blue-700 dark:text-blue-300 flex items-center justify-center gap-1">
+                      <Star className="w-3 h-3" />
+                      Profile Rating
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">12</div>
-                    <div className="text-sm text-muted-foreground flex items-center justify-center">
-                      <Users className="w-4 h-4 mr-1" />
-                      Matches
+                  <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg border border-green-200 dark:border-green-800">
+                    <div className="text-2xl font-bold text-green-600">73%</div>
+                    <div className="text-sm text-green-700 dark:text-green-300 flex items-center justify-center gap-1">
+                      <TrendingUp className="w-3 h-3" />
+                      Match Rate
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">85</div>
-                    <div className="text-sm text-muted-foreground flex items-center justify-center">
-                      <Award className="w-4 h-4 mr-1" />
-                      Profile Score
-                    </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Profile Completeness</span>
+                    <span className="font-medium">85%</span>
                   </div>
+                  <Progress value={85} className="h-2" />
+                </div>
+                
+                <div className="flex justify-between items-center pt-2">
+                  <Button variant="outline" size="sm" className="flex items-center gap-2">
+                    <Download className="w-4 h-4" />
+                    Export Data
+                  </Button>
+                  <Button variant="outline" size="sm" className="flex items-center gap-2">
+                    <Share2 className="w-4 h-4" />
+                    Share Profile
+                  </Button>
                 </div>
               </CardContent>
             </Card>
