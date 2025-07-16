@@ -126,7 +126,12 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
       <header className="flex items-center justify-between p-3 sm:p-4 border-b border-border bg-background/95 backdrop-blur-sm">
-        <Button variant="ghost" size="icon" className="w-9 h-9 sm:w-10 sm:h-10">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="w-9 h-9 sm:w-10 sm:h-10"
+          onClick={() => onNavigate?.("profile")}
+        >
           <User className="w-4 h-4 sm:w-5 sm:h-5" />
         </Button>
         
@@ -140,7 +145,12 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
           <span className="text-lg sm:text-xl font-bold text-foreground">Pitchify</span>
         </div>
         
-        <Button variant="ghost" size="icon" className="relative w-9 h-9 sm:w-10 sm:h-10">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="relative w-9 h-9 sm:w-10 sm:h-10"
+          onClick={() => onNavigate?.("messages")}
+        >
           <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
           {matches > 0 && (
             <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-bold">

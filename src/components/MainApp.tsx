@@ -3,6 +3,8 @@ import { SwipeInterface } from "./SwipeInterface";
 import { MatchesPage } from "./pages/MatchesPage";
 import { MessagesPage } from "./pages/MessagesPage";
 import { ProfilePage } from "./pages/ProfilePage";
+import { PersonalProfilePage } from "./pages/PersonalProfilePage";
+import { EnhancedMessagesPage } from "./pages/EnhancedMessagesPage";
 import { FiltersPage } from "./pages/FiltersPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { PitchCoachPage } from "./pages/PitchCoachPage";
@@ -20,9 +22,9 @@ export function MainApp() {
       case "matches":
         return <MatchesPage onNavigate={setCurrentPage} />;
       case "messages":
-        return <MessagesPage onNavigate={setCurrentPage} />;
+        return <EnhancedMessagesPage onNavigate={setCurrentPage} />;
       case "profile":
-        return <ProfilePage onNavigate={setCurrentPage} />;
+        return <PersonalProfilePage onNavigate={setCurrentPage} />;
       case "filters":
         return <FiltersPage onNavigate={setCurrentPage} />;
       case "settings":
