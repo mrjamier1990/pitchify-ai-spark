@@ -7,6 +7,8 @@ interface AuthContextType {
   session: Session | null;
   profile: any | null;
   loading: boolean;
+  needsOnboarding: boolean;
+  setNeedsOnboarding: (value: boolean) => void;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
 }
@@ -18,6 +20,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
+  const [needsOnboarding, setNeedsOnboarding] = useState(false);
 
   const loadProfile = async (userId: string) => {
     try {
@@ -33,6 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       
       setProfile(data);
+      setNeedsOnboarding(!data);
     } catch (error) {
       console.error('Error loading profile:', error);
     }
@@ -71,6 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           }, 0);
         } else {
           setProfile(null);
+          setNeedsOnboarding(false);
         }
         
         setLoading(false);
@@ -106,6 +111,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       session,
       profile,
       loading,
+      needsOnboarding,
+      setNeedsOnboarding,
       signOut,
       refreshProfile
     }}>

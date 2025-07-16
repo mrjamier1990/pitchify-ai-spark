@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { MainApp } from "@/components/MainApp";
 import { AuthPage } from "@/components/pages/AuthPage";
+import { OnboardingFlow } from "@/components/pages/OnboardingFlow";
 
 const Index = () => {
-  const { user, loading } = useAuth();
+  const { user, loading, needsOnboarding, setNeedsOnboarding } = useAuth();
 
   if (loading) {
     return (
@@ -19,6 +20,16 @@ const Index = () => {
 
   if (!user) {
     return <AuthPage />;
+  }
+
+  if (needsOnboarding) {
+    return (
+      <OnboardingFlow
+        onComplete={() => setNeedsOnboarding(false)}
+        userEmail={user.email || ''}
+        userId={user.id}
+      />
+    );
   }
 
   return <MainApp />;
