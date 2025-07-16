@@ -63,24 +63,51 @@ const subscriptionTiers: SubscriptionTier[] = [
   {
     name: "Basic",
     price: "Free",
-    superlikes: 5,
-    features: ["5 SuperLikes per month", "Basic profile", "Limited matches"],
+    superlikes: 30,
+    features: ["30 SuperLikes per month", "Basic profile", "Role-restricted matching only"],
     current: false,
   },
   {
     name: "Premium",
     price: "$19/month",
     superlikes: 50,
-    features: ["50 SuperLikes per month", "Profile boost", "Unlimited matches", "See who liked you"],
+    features: ["50 SuperLikes per month", "Profile boost", "Match with both roles", "Unlimited matches", "See who liked you"],
     current: true,
   },
   {
     name: "Elite",
     price: "$49/month",
     superlikes: 200,
-    features: ["200 SuperLikes per month", "Priority placement", "Advanced filters", "Pitch coach"],
+    features: ["200 SuperLikes per month", "Priority placement", "Advanced filters", "Pitch coach", "Match with both roles"],
     current: false,
   },
+];
+
+const majorCountries = [
+  "United States", "United Kingdom", "Canada", "Germany", "France", "Spain", "Italy", "Netherlands", 
+  "Switzerland", "Sweden", "Norway", "Denmark", "Finland", "Australia", "New Zealand", "Singapore", 
+  "Hong Kong", "Japan", "South Korea", "Israel", "United Arab Emirates", "India", "China", "Brazil", 
+  "Mexico", "Argentina", "Chile", "South Africa", "Ireland", "Belgium", "Austria", "Portugal", 
+  "Luxembourg", "Iceland", "Estonia", "Latvia", "Lithuania", "Poland", "Czech Republic", "Hungary", 
+  "Russia", "Turkey", "Saudi Arabia", "Qatar", "Kuwait", "Bahrain", "Oman", "Jordan", "Egypt", 
+  "Morocco", "Kenya", "Nigeria", "Ghana", "Rwanda", "Botswana", "Mauritius", "Thailand", "Malaysia", 
+  "Indonesia", "Philippines", "Vietnam", "Taiwan", "Pakistan", "Bangladesh", "Sri Lanka", "Nepal"
+];
+
+const industryOptions = [
+  "Technology", "Fintech", "Healthcare", "Biotech", "E-commerce", "SaaS", "Mobile Apps", "AI/ML", 
+  "Blockchain", "Cryptocurrency", "Cybersecurity", "EdTech", "PropTech", "CleanTech", "Energy", 
+  "Renewable Energy", "Transportation", "Logistics", "Supply Chain", "Manufacturing", "Robotics", 
+  "Aerospace", "Defense", "Food & Beverage", "Agriculture", "Fashion", "Beauty", "Sports", "Gaming", 
+  "Entertainment", "Media", "Marketing", "Advertising", "Real Estate", "Construction", "Hospitality", 
+  "Travel", "Tourism", "Retail", "Consumer Goods", "Telecommunications", "Internet of Things", 
+  "Smart Cities", "Sustainability", "Circular Economy", "Social Impact", "Non-profit", "Government", 
+  "Legal Services", "Professional Services", "Consulting", "Human Resources", "Recruitment", 
+  "Financial Services", "Insurance", "Investment", "Venture Capital", "Private Equity", "Banking", 
+  "Accounting", "Tax Services", "Real Estate Investment", "Commodity Trading", "Import/Export", 
+  "International Trade", "B2B Services", "B2C Services", "Marketplace", "Platform", "Hardware", 
+  "Software", "Cloud Computing", "Data Analytics", "Business Intelligence", "Customer Service", 
+  "Sales", "Operations", "Research & Development", "Innovation", "Startup Incubator", "Accelerator"
 ];
 
 export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
@@ -167,9 +194,9 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+    <div className="h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 flex flex-col">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-lg border-b border-border/50">
+      <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-lg border-b border-border/50 flex-shrink-0">
         <div className="flex items-center justify-between p-4">
           <Button 
             variant="ghost" 
@@ -193,7 +220,8 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
         </div>
       </div>
 
-      <div className="p-4 space-y-6 max-w-4xl mx-auto">
+      <div className="flex-1 overflow-auto">
+        <div className="p-4 space-y-6 max-w-4xl mx-auto pb-8">
         <Tabs defaultValue="profile" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="profile">Profile</TabsTrigger>
@@ -296,22 +324,30 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="country">Country</Label>
-                        <Input
-                          id="country"
-                          value={formData.country}
-                          onChange={(e) => setFormData({...formData, country: e.target.value})}
-                          placeholder="Your country"
-                        />
+                        <Select value={formData.country} onValueChange={(value) => setFormData({...formData, country: value})}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select your country" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {majorCountries.map((country) => (
+                              <SelectItem key={country} value={country}>{country}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       
                       <div className="space-y-2">
-                        <Label htmlFor="industry">Industry</Label>
-                        <Input
-                          id="industry"
-                          value={formData.industry}
-                          onChange={(e) => setFormData({...formData, industry: e.target.value})}
-                          placeholder="Your industry"
-                        />
+                        <Label htmlFor="industry">Industry Focus</Label>
+                        <Select value={formData.industry} onValueChange={(value) => setFormData({...formData, industry: value})}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select your industry" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {industryOptions.map((industry) => (
+                              <SelectItem key={industry} value={industry}>{industry}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
 
@@ -476,32 +512,67 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="p-4 bg-muted/30 rounded-lg border border-amber-200 dark:border-amber-800">
+                  <div className="flex items-start space-x-2">
+                    <Shield className="w-5 h-5 text-amber-600 mt-0.5" />
+                    <div>
+                      <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+                        Role-Based Matching Protection
+                      </p>
+                      <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
+                        {profile?.role === 'investor' 
+                          ? 'As an investor, you can only match with entrepreneurs to protect idea confidentiality. Upgrade to Premium to match with both roles.'
+                          : 'As an entrepreneur, you can only match with investors to protect idea confidentiality. Upgrade to Premium to match with both roles.'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label>Looking for</Label>
-                    <Select defaultValue="both">
+                    <Select defaultValue={profile?.role === 'investor' ? 'entrepreneurs' : 'investors'}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="entrepreneurs">Entrepreneurs</SelectItem>
-                        <SelectItem value="investors">Investors</SelectItem>
-                        <SelectItem value="both">Both</SelectItem>
+                        {profile?.subscription_tier === 'free' ? (
+                          <>
+                            {profile?.role === 'investor' ? (
+                              <SelectItem value="entrepreneurs">Entrepreneurs</SelectItem>
+                            ) : (
+                              <SelectItem value="investors">Investors</SelectItem>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <SelectItem value="entrepreneurs">Entrepreneurs</SelectItem>
+                            <SelectItem value="investors">Investors</SelectItem>
+                            <SelectItem value="both">Both</SelectItem>
+                          </>
+                        )}
                       </SelectContent>
                     </Select>
+                    {profile?.subscription_tier === 'free' && (
+                      <p className="text-xs text-muted-foreground">
+                        Upgrade to Premium to match with both roles
+                      </p>
+                    )}
                   </div>
                   
                   <div className="space-y-2">
                     <Label>Industry Focus</Label>
-                    <Select defaultValue="tech">
+                    <Select defaultValue="all">
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="tech">Technology</SelectItem>
-                        <SelectItem value="healthcare">Healthcare</SelectItem>
-                        <SelectItem value="fintech">FinTech</SelectItem>
-                        <SelectItem value="ecommerce">E-commerce</SelectItem>
+                        {industryOptions.map((industry) => (
+                          <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
+                            {industry}
+                          </SelectItem>
+                        ))}
                         <SelectItem value="all">All Industries</SelectItem>
                       </SelectContent>
                     </Select>
@@ -516,8 +587,13 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="local">Local (Same Country)</SelectItem>
-                      <SelectItem value="regional">Regional</SelectItem>
-                      <SelectItem value="global">Global</SelectItem>
+                      <SelectItem value="regional">Regional (Same Continent)</SelectItem>
+                      {majorCountries.map((country) => (
+                        <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, '-')}>
+                          {country}
+                        </SelectItem>
+                      ))}
+                      <SelectItem value="global">Global (All Countries)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -532,8 +608,27 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       <SelectItem value="pre-seed">Pre-seed</SelectItem>
                       <SelectItem value="seed">Seed</SelectItem>
                       <SelectItem value="series-a">Series A</SelectItem>
-                      <SelectItem value="series-b">Series B+</SelectItem>
+                      <SelectItem value="series-b">Series B</SelectItem>
+                      <SelectItem value="series-c">Series C+</SelectItem>
                       <SelectItem value="all">All Stages</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Investment Range (for Investors)</Label>
+                  <Select defaultValue="all">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="under-10k">Under $10K</SelectItem>
+                      <SelectItem value="10k-50k">$10K - $50K</SelectItem>
+                      <SelectItem value="50k-100k">$50K - $100K</SelectItem>
+                      <SelectItem value="100k-500k">$100K - $500K</SelectItem>
+                      <SelectItem value="500k-1m">$500K - $1M</SelectItem>
+                      <SelectItem value="1m-plus">$1M+</SelectItem>
+                      <SelectItem value="all">All Ranges</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -701,6 +796,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             </Card>
           </TabsContent>
         </Tabs>
+        </div>
       </div>
     </div>
   );
