@@ -1,8 +1,51 @@
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { ArrowLeft, Edit3, Video, Plus, Settings, Star, Crown, Zap } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
+import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAuth } from "@/components/AuthProvider";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { PageType } from "../MainApp";
-import profile1 from "@/assets/profile1.jpg";
+import { 
+  Settings, 
+  ArrowLeft,
+  Crown,
+  Edit3,
+  Video,
+  Link2,
+  Download,
+  Users,
+  Eye,
+  TrendingUp,
+  Upload,
+  Plus,
+  Star,
+  Calendar,
+  MessageSquare,
+  Share2,
+  Save,
+  LogOut,
+  User,
+  Shield,
+  Bell,
+  CreditCard,
+  Filter,
+  Camera,
+  Play,
+  ExternalLink,
+  Award,
+  Zap,
+  Target
+} from "lucide-react";
 
 interface PersonalProfilePageProps {
   onNavigate: (page: PageType) => void;
@@ -20,174 +63,644 @@ const subscriptionTiers: SubscriptionTier[] = [
   {
     name: "Basic",
     price: "Free",
-    superlikes: 1,
-    features: ["1 Superlike per day", "Limited matches", "Basic profile"],
-    current: true
+    superlikes: 5,
+    features: ["5 SuperLikes per month", "Basic profile", "Limited matches"],
+    current: false,
   },
   {
-    name: "Premium", 
-    price: "$9.99/mo",
-    superlikes: 5,
-    features: ["5 Superlikes per day", "Unlimited matches", "Enhanced profile", "See who liked you"],
-    current: false
+    name: "Premium",
+    price: "$19/month",
+    superlikes: 50,
+    features: ["50 SuperLikes per month", "Profile boost", "Unlimited matches", "See who liked you"],
+    current: true,
   },
   {
     name: "Elite",
-    price: "$19.99/mo", 
-    superlikes: 15,
-    features: ["15 Superlikes per day", "Priority matching", "Advanced analytics", "Direct messaging", "Verified badge"],
-    current: false
-  }
+    price: "$49/month",
+    superlikes: 200,
+    features: ["200 SuperLikes per month", "Priority placement", "Advanced filters", "Pitch coach"],
+    current: false,
+  },
 ];
 
 export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
-  return (
-    <div className="h-screen bg-background flex flex-col overflow-hidden">
-      {/* Header */}
-      <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-sm">
-        <Button 
-          variant="ghost" 
-          size="icon"
-          className="w-10 h-10 rounded-full"
-          onClick={() => onNavigate("swipe")}
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </Button>
-        <h1 className="text-xl font-bold text-foreground">My Profile</h1>
-        <Button 
-          variant="ghost" 
-          size="icon"
-          className="w-10 h-10 rounded-full"
-          onClick={() => onNavigate("settings")}
-        >
-          <Settings className="w-5 h-5" />
-        </Button>
-      </header>
+  const { user, profile, signOut, refreshProfile } = useAuth();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({
+    full_name: '',
+    bio: '',
+    role: 'entrepreneur',
+    country: '',
+    industry: '',
+    investment_range: '',
+    funding_stage: '',
+    linkedin_url: '',
+    calendly_url: '',
+    twitter_url: '',
+    open_to_connect: true
+  });
 
-      <div className="flex-1 overflow-y-auto">
-        {/* Profile Header */}
-        <div className="relative bg-gradient-to-br from-primary/10 to-accent/10 px-6 py-5">
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <img 
-                src={profile1} 
-                alt="Profile" 
-                className="w-16 h-16 rounded-full object-cover border-3 border-background shadow-lg"
-              />
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center border-2 border-background">
-                <Star className="w-3 h-3 text-primary-foreground fill-current" />
-              </div>
-            </div>
-            <div className="flex-1">
-              <h2 className="text-xl font-bold text-foreground mb-1">Sarah Chen</h2>
-              <p className="text-muted-foreground">CEO & Founder at TechFlow AI</p>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-medium rounded-full">
-                  Basic Member
-                </span>
-                <span className="text-sm text-muted-foreground">1 Superlike left today</span>
-              </div>
-            </div>
-            <Button variant="glass" size="sm">
-              <Edit3 className="w-4 h-4 mr-2" />
-              Edit
-            </Button>
-          </div>
+  useEffect(() => {
+    if (profile) {
+      setFormData({
+        full_name: profile.full_name || '',
+        bio: profile.bio || '',
+        role: profile.role || 'entrepreneur',
+        country: profile.country || '',
+        industry: profile.industry || '',
+        investment_range: profile.investment_range || '',
+        funding_stage: profile.funding_stage || '',
+        linkedin_url: profile.linkedin_url || '',
+        calendly_url: profile.calendly_url || '',
+        twitter_url: profile.twitter_url || '',
+        open_to_connect: profile.open_to_connect ?? true
+      });
+    }
+  }, [profile]);
+
+  const handleSaveProfile = async () => {
+    if (!user) return;
+    
+    setLoading(true);
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update(formData)
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+
+      await refreshProfile();
+      setEditMode(false);
+      toast({
+        title: 'Profile updated',
+        description: 'Your profile has been saved successfully.',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to update profile',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Please sign in to view your profile</h2>
+          <Button onClick={() => onNavigate('swipe')}>
+            Go to Home
+          </Button>
         </div>
+      </div>
+    );
+  }
 
-        <div className="px-6 py-5 space-y-5">
-          {/* Subscription Tiers */}
-          <Card className="p-5 bg-card/50 backdrop-blur-sm border-border/50 shadow-xl rounded-2xl">
-            <h3 className="text-xl font-bold text-foreground mb-5 flex items-center gap-3">
-              <Crown className="w-5 h-5 text-primary" />
-              Upgrade Your Experience
-            </h3>
-            
-            <div className="grid gap-4">
-              {subscriptionTiers.map((tier, index) => (
-                <div 
-                  key={tier.name}
-                  className={`relative p-4 rounded-xl border transition-all duration-300 ${
-                    tier.current 
-                      ? "border-primary bg-primary/5 shadow-lg" 
-                      : "border-border bg-card/30 hover:border-primary/50 hover:bg-primary/5"
-                  }`}
-                >
-                  {tier.current && (
-                    <div className="absolute -top-2 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full">
-                      Current Plan
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-lg border-b border-border/50">
+        <div className="flex items-center justify-between p-4">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => onNavigate("swipe")}
+            className="hover:bg-primary/10"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
+          
+          <h1 className="text-xl font-semibold">Profile</h1>
+          
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={handleSignOut}
+            className="hover:bg-destructive/10 text-destructive"
+          >
+            <LogOut className="w-5 h-5" />
+          </Button>
+        </div>
+      </div>
+
+      <div className="p-4 space-y-6 max-w-4xl mx-auto">
+        <Tabs defaultValue="profile" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="profile">Profile</TabsTrigger>
+            <TabsTrigger value="filters">Filters</TabsTrigger>
+            <TabsTrigger value="subscription">Premium</TabsTrigger>
+            <TabsTrigger value="settings">Settings</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="profile" className="space-y-6">
+            {/* Profile Header */}
+            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start space-x-4">
+                    <div className="relative">
+                      <Avatar className="w-20 h-20 border-2 border-primary/20">
+                        <AvatarImage src={profile?.profile_image_url || "/placeholder.svg"} alt="Profile" />
+                        <AvatarFallback>
+                          {profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]).join('') : user?.email?.[0].toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <Badge 
+                        variant="secondary" 
+                        className="absolute -bottom-1 -right-1 bg-gradient-to-r from-primary to-accent text-primary-foreground px-2 py-1"
+                      >
+                        <Crown className="w-3 h-3 mr-1" />
+                        {profile?.subscription_tier || 'Free'}
+                      </Badge>
                     </div>
-                  )}
-                  
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        index === 0 ? "bg-muted/50" : index === 1 ? "bg-primary/20" : "bg-gradient-to-r from-purple-500/20 to-pink-500/20"
-                      }`}>
-                        {index === 0 ? <Star className="w-5 h-5" /> : 
-                         index === 1 ? <Crown className="w-5 h-5 text-primary" /> : 
-                         <Zap className="w-5 h-5 text-purple-400" />}
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-foreground">{tier.name}</h4>
-                        <p className="text-sm text-muted-foreground">{tier.superlikes} Superlikes/day</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-xl font-bold text-foreground">{tier.price}</p>
-                      {!tier.current && (
-                        <Button 
-                          size="sm" 
-                          variant={index === 2 ? "premium" : "default"}
-                          className="mt-2"
-                        >
-                          Upgrade
-                        </Button>
-                      )}
+                    
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-2xl font-bold">{profile?.full_name || 'Complete your profile'}</h2>
+                      <p className="text-muted-foreground capitalize">
+                        {profile?.role || 'entrepreneur'} • {profile?.country || 'Location not set'}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {profile?.bio || 'Add a bio to tell others about yourself'}
+                      </p>
                     </div>
                   </div>
                   
-                  <div className="space-y-1">
-                    {tier.features.map((feature, idx) => (
-                      <p key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                        {feature}
-                      </p>
-                    ))}
+                  <Button 
+                    size="sm" 
+                    variant={editMode ? "default" : "outline"}
+                    onClick={() => editMode ? handleSaveProfile() : setEditMode(true)}
+                    disabled={loading}
+                  >
+                    {editMode ? (
+                      <>
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Profile
+                      </>
+                    ) : (
+                      <>
+                        <Edit3 className="w-4 h-4 mr-2" />
+                        Edit Profile
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {editMode && (
+                  <div className="mt-6 space-y-4 pt-6 border-t border-border/50">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="full_name">Full Name</Label>
+                        <Input
+                          id="full_name"
+                          value={formData.full_name}
+                          onChange={(e) => setFormData({...formData, full_name: e.target.value})}
+                          placeholder="Enter your full name"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="role">Role</Label>
+                        <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value})}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select your role" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="entrepreneur">Entrepreneur</SelectItem>
+                            <SelectItem value="investor">Investor</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="bio">Bio</Label>
+                      <Textarea
+                        id="bio"
+                        value={formData.bio}
+                        onChange={(e) => setFormData({...formData, bio: e.target.value})}
+                        placeholder="Tell others about yourself..."
+                        rows={3}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="country">Country</Label>
+                        <Input
+                          id="country"
+                          value={formData.country}
+                          onChange={(e) => setFormData({...formData, country: e.target.value})}
+                          placeholder="Your country"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="industry">Industry</Label>
+                        <Input
+                          id="industry"
+                          value={formData.industry}
+                          onChange={(e) => setFormData({...formData, industry: e.target.value})}
+                          placeholder="Your industry"
+                        />
+                      </div>
+                    </div>
+
+                    {formData.role === 'investor' && (
+                      <div className="space-y-2">
+                        <Label htmlFor="investment_range">Investment Range</Label>
+                        <Input
+                          id="investment_range"
+                          value={formData.investment_range}
+                          onChange={(e) => setFormData({...formData, investment_range: e.target.value})}
+                          placeholder="e.g., $10K - $100K"
+                        />
+                      </div>
+                    )}
+
+                    {formData.role === 'entrepreneur' && (
+                      <div className="space-y-2">
+                        <Label htmlFor="funding_stage">Funding Stage</Label>
+                        <Select value={formData.funding_stage} onValueChange={(value) => setFormData({...formData, funding_stage: value})}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select funding stage" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="pre-seed">Pre-seed</SelectItem>
+                            <SelectItem value="seed">Seed</SelectItem>
+                            <SelectItem value="series-a">Series A</SelectItem>
+                            <SelectItem value="series-b">Series B</SelectItem>
+                            <SelectItem value="series-c">Series C+</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="linkedin_url">LinkedIn URL</Label>
+                        <Input
+                          id="linkedin_url"
+                          value={formData.linkedin_url}
+                          onChange={(e) => setFormData({...formData, linkedin_url: e.target.value})}
+                          placeholder="https://linkedin.com/in/..."
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="calendly_url">Calendly URL</Label>
+                        <Input
+                          id="calendly_url"
+                          value={formData.calendly_url}
+                          onChange={(e) => setFormData({...formData, calendly_url: e.target.value})}
+                          placeholder="https://calendly.com/..."
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="twitter_url">Twitter URL</Label>
+                        <Input
+                          id="twitter_url"
+                          value={formData.twitter_url}
+                          onChange={(e) => setFormData({...formData, twitter_url: e.target.value})}
+                          placeholder="https://twitter.com/..."
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <Switch
+                        id="open_to_connect"
+                        checked={formData.open_to_connect}
+                        onCheckedChange={(checked) => setFormData({...formData, open_to_connect: checked})}
+                      />
+                      <Label htmlFor="open_to_connect">Open to new connections</Label>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Videos Section */}
+            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Video className="w-5 h-5 mr-2 text-primary" />
+                  My Videos
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>About Me Video</Label>
+                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-dashed border-border">
+                      <div className="text-center">
+                        <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+                        <p className="text-sm text-muted-foreground">No video uploaded</p>
+                        <Button size="sm" variant="outline" className="mt-2">
+                          <Camera className="w-4 h-4 mr-2" />
+                          Record/Upload
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label>Pitch Video</Label>
+                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-dashed border-border">
+                      <div className="text-center">
+                        <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+                        <p className="text-sm text-muted-foreground">No video uploaded</p>
+                        <Button size="sm" variant="outline" className="mt-2">
+                          <Camera className="w-4 h-4 mr-2" />
+                          Record/Upload
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </Card>
+              </CardContent>
+            </Card>
 
-          {/* Profile Stats */}
-          <div className="grid grid-cols-3 gap-4">
-            <Card className="p-4 text-center bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-              <p className="text-2xl font-bold text-primary">24</p>
-              <p className="text-sm text-muted-foreground">Profile Views</p>
+            {/* Stats */}
+            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <TrendingUp className="w-5 h-5 mr-2 text-primary" />
+                  Profile Stats
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-primary">247</div>
+                    <div className="text-sm text-muted-foreground flex items-center justify-center">
+                      <Eye className="w-4 h-4 mr-1" />
+                      Profile Views
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-primary">12</div>
+                    <div className="text-sm text-muted-foreground flex items-center justify-center">
+                      <Users className="w-4 h-4 mr-1" />
+                      Matches
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-primary">85</div>
+                    <div className="text-sm text-muted-foreground flex items-center justify-center">
+                      <Award className="w-4 h-4 mr-1" />
+                      Profile Score
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
             </Card>
-            <Card className="p-4 text-center bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
-              <p className="text-2xl font-bold text-accent">12</p>
-              <p className="text-sm text-muted-foreground">Matches</p>
-            </Card>
-            <Card className="p-4 text-center bg-gradient-to-br from-purple-500/5 to-purple-500/10 border-purple-500/20">
-              <p className="text-2xl font-bold text-purple-400">8</p>
-              <p className="text-sm text-muted-foreground">Messages</p>
-            </Card>
-          </div>
+          </TabsContent>
 
-          {/* Quick Actions */}
-          <div className="grid grid-cols-2 gap-4">
-            <Button variant="glass" className="h-20 flex-col gap-2">
-              <Video className="w-6 h-6" />
-              <span>Manage Videos</span>
-            </Button>
-            <Button variant="glass" className="h-20 flex-col gap-2">
-              <Plus className="w-6 h-6" />
-              <span>Add Content</span>
-            </Button>
-          </div>
-        </div>
+          <TabsContent value="filters" className="space-y-6">
+            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Filter className="w-5 h-5 mr-2 text-primary" />
+                  Match Preferences
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Looking for</Label>
+                    <Select defaultValue="both">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="entrepreneurs">Entrepreneurs</SelectItem>
+                        <SelectItem value="investors">Investors</SelectItem>
+                        <SelectItem value="both">Both</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label>Industry Focus</Label>
+                    <Select defaultValue="tech">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="tech">Technology</SelectItem>
+                        <SelectItem value="healthcare">Healthcare</SelectItem>
+                        <SelectItem value="fintech">FinTech</SelectItem>
+                        <SelectItem value="ecommerce">E-commerce</SelectItem>
+                        <SelectItem value="all">All Industries</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Geographic Preference</Label>
+                  <Select defaultValue="global">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="local">Local (Same Country)</SelectItem>
+                      <SelectItem value="regional">Regional</SelectItem>
+                      <SelectItem value="global">Global</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Funding Stage (for Entrepreneurs)</Label>
+                  <Select defaultValue="all">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="pre-seed">Pre-seed</SelectItem>
+                      <SelectItem value="seed">Seed</SelectItem>
+                      <SelectItem value="series-a">Series A</SelectItem>
+                      <SelectItem value="series-b">Series B+</SelectItem>
+                      <SelectItem value="all">All Stages</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <Button className="w-full">
+                  Save Filter Preferences
+                </Button>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="subscription" className="space-y-6">
+            {/* Subscription Tiers */}
+            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Crown className="w-5 h-5 mr-2 text-primary" />
+                  Subscription Plans
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {subscriptionTiers.map((tier) => (
+                  <div
+                    key={tier.name}
+                    className={`p-4 rounded-lg border transition-all duration-200 ${
+                      tier.current
+                        ? "border-primary bg-primary/5 ring-1 ring-primary/20"
+                        : "border-border/50 hover:border-border"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <h3 className="font-semibold">{tier.name}</h3>
+                          {tier.current && (
+                            <Badge variant="default" className="bg-primary text-primary-foreground">
+                              Current Plan
+                            </Badge>
+                          )}
+                        </div>
+                        <p className="text-2xl font-bold text-primary mt-1">{tier.price}</p>
+                        <p className="text-sm text-muted-foreground">{tier.superlikes} SuperLikes/month</p>
+                      </div>
+                      
+                      <div className="text-right">
+                        {!tier.current && (
+                          <Button variant="outline" size="sm">
+                            <Zap className="w-4 h-4 mr-2" />
+                            Upgrade
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="mt-3">
+                      <div className="grid grid-cols-1 gap-1">
+                        {tier.features.map((feature, index) => (
+                          <div key={index} className="flex items-center text-sm text-muted-foreground">
+                            <div className="w-1 h-1 bg-primary rounded-full mr-2" />
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* AI Tools */}
+            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Target className="w-5 h-5 mr-2 text-primary" />
+                  AI-Powered Tools
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                      <MessageSquare className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">PitchGPT</p>
+                      <p className="text-sm text-muted-foreground">Generate perfect pitch scripts</p>
+                    </div>
+                  </div>
+                  <Badge variant="secondary">Premium</Badge>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                      <Award className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">AI Pitch Coach</p>
+                      <p className="text-sm text-muted-foreground">Get feedback on your videos</p>
+                    </div>
+                  </div>
+                  <Badge variant="secondary">Premium</Badge>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                      <Zap className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">Smart Intro Assistant</p>
+                      <p className="text-sm text-muted-foreground">AI-generated conversation starters</p>
+                    </div>
+                  </div>
+                  <Badge variant="secondary">Elite</Badge>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="settings" className="space-y-6">
+            <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Settings className="w-5 h-5 mr-2 text-primary" />
+                  Account Settings
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">Email Notifications</p>
+                      <p className="text-sm text-muted-foreground">Receive match and message notifications</p>
+                    </div>
+                    <Switch defaultChecked />
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">Push Notifications</p>
+                      <p className="text-sm text-muted-foreground">Get notified about new matches</p>
+                    </div>
+                    <Switch defaultChecked />
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">Profile Visibility</p>
+                      <p className="text-sm text-muted-foreground">Allow others to find your profile</p>
+                    </div>
+                    <Switch defaultChecked />
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="space-y-3">
+                  <h4 className="font-medium">Danger Zone</h4>
+                  <Button variant="destructive" className="w-full">
+                    Delete Account
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
