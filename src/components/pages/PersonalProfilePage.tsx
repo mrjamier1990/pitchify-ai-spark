@@ -64,21 +64,21 @@ const subscriptionTiers: SubscriptionTier[] = [
     name: "Basic",
     price: "Free",
     superlikes: 30,
-    features: ["30 SuperLikes per month", "Basic profile", "Role-restricted matching only"],
+    features: ["30 SuperLikes per month", "Basic profile", "Secure role-based matching only"],
     current: false,
   },
   {
     name: "Premium",
     price: "$19/month",
     superlikes: 50,
-    features: ["50 SuperLikes per month", "Profile boost", "Match with both roles", "Unlimited matches", "See who liked you"],
+    features: ["50 SuperLikes per month", "Profile boost", "Unlimited matches", "See who liked you", "Advanced filters"],
     current: true,
   },
   {
     name: "Elite",
     price: "$49/month",
     superlikes: 200,
-    features: ["200 SuperLikes per month", "Priority placement", "Advanced filters", "Pitch coach", "Match with both roles"],
+    features: ["200 SuperLikes per month", "Priority placement", "Advanced filters", "Pitch coach", "AI-powered tools"],
     current: false,
   },
 ];
@@ -517,13 +517,13 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     <Shield className="w-5 h-5 text-amber-600 mt-0.5" />
                     <div>
                       <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
-                        Role-Based Matching Protection
+                        Idea Protection Policy
                       </p>
                       <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
-                        {profile?.role === 'investor' 
-                          ? 'As an investor, you can only match with entrepreneurs to protect idea confidentiality. Upgrade to Premium to match with both roles.'
-                          : 'As an entrepreneur, you can only match with investors to protect idea confidentiality. Upgrade to Premium to match with both roles.'
-                        }
+                        For confidentiality protection, {profile?.role === 'investor' 
+                          ? 'investors can only match with entrepreneurs'
+                          : 'entrepreneurs can only match with investors'
+                        }. Same-role matching is permanently disabled to prevent idea theft.
                       </p>
                     </div>
                   </div>
@@ -531,34 +531,15 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label>Looking for</Label>
-                    <Select defaultValue={profile?.role === 'investor' ? 'entrepreneurs' : 'investors'}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {profile?.subscription_tier === 'free' ? (
-                          <>
-                            {profile?.role === 'investor' ? (
-                              <SelectItem value="entrepreneurs">Entrepreneurs</SelectItem>
-                            ) : (
-                              <SelectItem value="investors">Investors</SelectItem>
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            <SelectItem value="entrepreneurs">Entrepreneurs</SelectItem>
-                            <SelectItem value="investors">Investors</SelectItem>
-                            <SelectItem value="both">Both</SelectItem>
-                          </>
-                        )}
-                      </SelectContent>
-                    </Select>
-                    {profile?.subscription_tier === 'free' && (
-                      <p className="text-xs text-muted-foreground">
-                        Upgrade to Premium to match with both roles
+                    <Label>You can only match with</Label>
+                    <div className="p-3 bg-muted/50 rounded-lg border">
+                      <p className="text-sm font-medium">
+                        {profile?.role === 'investor' ? 'Entrepreneurs Only' : 'Investors Only'}
                       </p>
-                    )}
+                      <p className="text-xs text-muted-foreground mt-1">
+                        This restriction protects intellectual property and prevents idea theft
+                      </p>
+                    </div>
                   </div>
                   
                   <div className="space-y-2">
