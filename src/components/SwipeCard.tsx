@@ -76,14 +76,25 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
       onMouseLeave={handleMouseUp}
     >
       {/* Profile Image */}
-      <div className="relative h-2/3 overflow-hidden">
+      <div className="relative h-2/3 overflow-hidden bg-muted/20">
         <video
           src={profile.image}
           autoPlay
           muted
           loop
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain bg-black/50"
           poster={profile.image}
+        />
+        <img
+          src={profile.image}
+          alt={profile.name}
+          className="w-full h-full object-contain bg-black/50"
+          style={{ display: 'none' }}
+          onError={(e) => {
+            e.currentTarget.style.display = 'block';
+            const video = e.currentTarget.previousElementSibling as HTMLVideoElement;
+            if (video) video.style.display = 'none';
+          }}
         />
         
         {/* Video Play Overlay */}
