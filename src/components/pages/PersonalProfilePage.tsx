@@ -291,31 +291,31 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             {/* Profile Stats */}
             <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
               <CardContent className="p-6">
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">247</div>
-                    <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="text-center p-3 bg-gradient-to-br from-primary/10 to-primary/20 rounded-lg border border-primary/20">
+                    <div className="text-xl md:text-2xl font-bold text-primary">247</div>
+                    <div className="text-xs md:text-sm text-primary/80 flex items-center justify-center gap-1">
                       <Eye className="w-3 h-3" />
                       Profile Views
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-500">89</div>
-                    <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
+                  <div className="text-center p-3 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-lg border border-emerald-500/20">
+                    <div className="text-xl md:text-2xl font-bold text-emerald-600">89</div>
+                    <div className="text-xs md:text-sm text-emerald-600/80 flex items-center justify-center gap-1">
                       <Users className="w-3 h-3" />
                       Connections
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-500">156</div>
-                    <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
+                  <div className="text-center p-3 bg-gradient-to-br from-blue-500/10 to-blue-600/20 rounded-lg border border-blue-500/20">
+                    <div className="text-xl md:text-2xl font-bold text-blue-600">156</div>
+                    <div className="text-xs md:text-sm text-blue-600/80 flex items-center justify-center gap-1">
                       <MessageSquare className="w-3 h-3" />
                       Messages
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-amber-500">23</div>
-                    <div className="text-sm text-muted-foreground flex items-center justify-center gap-1">
+                  <div className="text-center p-3 bg-gradient-to-br from-amber-500/10 to-amber-600/20 rounded-lg border border-amber-500/20">
+                    <div className="text-xl md:text-2xl font-bold text-amber-600">23</div>
+                    <div className="text-xs md:text-sm text-amber-600/80 flex items-center justify-center gap-1">
                       <Star className="w-3 h-3" />
                       SuperLikes Left
                     </div>
@@ -325,11 +325,11 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             </Card>
             {/* Profile Header */}
             <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start space-x-4">
-                    <div className="relative">
-                      <Avatar className="w-20 h-20 border-2 border-primary/20">
+              <CardContent className="p-4 md:p-6">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                  <div className="flex items-start space-x-4 flex-1 min-w-0">
+                    <div className="relative flex-shrink-0">
+                      <Avatar className="w-16 h-16 md:w-20 md:h-20 border-2 border-primary/20">
                         <AvatarImage src={profile?.profile_image_url || "/placeholder.svg"} alt="Profile" />
                         <AvatarFallback>
                           {profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]).join('') : user?.email?.[0].toUpperCase()}
@@ -337,21 +337,34 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       </Avatar>
                       <Badge 
                         variant="secondary" 
-                        className="absolute -bottom-1 -right-1 bg-gradient-to-r from-primary to-accent text-primary-foreground px-2 py-1"
+                        className="absolute -bottom-1 -right-1 bg-gradient-to-r from-primary to-accent text-primary-foreground px-2 py-1 text-xs"
                       >
                         <Crown className="w-3 h-3 mr-1" />
                         {profile?.subscription_tier || 'Free'}
                       </Badge>
                     </div>
                     
-                    <div className="flex-1 min-w-0">
-                      <h2 className="text-2xl font-bold">{profile?.full_name || 'Complete your profile'}</h2>
-                      <p className="text-muted-foreground capitalize">
-                        {profile?.role || 'entrepreneur'} • {profile?.country || 'Location not set'}
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {profile?.bio || 'Add a bio to tell others about yourself'}
-                      </p>
+                    <div className="flex-1 min-w-0 space-y-2">
+                      <div>
+                        <h2 className="text-xl md:text-2xl font-bold truncate">{profile?.full_name || 'Complete your profile'}</h2>
+                        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                          <span className="capitalize bg-primary/10 px-2 py-1 rounded-full text-primary">
+                            {profile?.role || 'entrepreneur'}
+                          </span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            {profile?.country || 'Location not set'}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="bg-muted/30 rounded-lg p-3">
+                        <p className="text-sm text-foreground/80 leading-relaxed">
+                          {profile?.bio || 'Add a bio to tell others about yourself and what you\'re looking for. This helps potential matches understand your goals and interests.'}
+                        </p>
+                      </div>
                     </div>
                   </div>
                   
@@ -360,6 +373,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     variant={editMode ? "default" : "outline"}
                     onClick={() => editMode ? handleSaveProfile() : setEditMode(true)}
                     disabled={loading}
+                    className="flex-shrink-0"
                   >
                     {editMode ? (
                       <>
@@ -377,7 +391,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
                 {editMode && (
                   <div className="mt-6 space-y-4 pt-6 border-t border-border/50">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="full_name">Full Name</Label>
                         <Input
@@ -413,14 +427,14 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="country">Country</Label>
                         <Select value={formData.country} onValueChange={(value) => setFormData({...formData, country: value})}>
                           <SelectTrigger>
                             <SelectValue placeholder="Select your country" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="max-h-60">
                             {majorCountries.map((country) => (
                               <SelectItem key={country} value={country}>{country}</SelectItem>
                             ))}
@@ -434,7 +448,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                           <SelectTrigger>
                             <SelectValue placeholder="Select your industry" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="max-h-60">
                             {industryOptions.map((industry) => (
                               <SelectItem key={industry} value={industry}>{industry}</SelectItem>
                             ))}
@@ -632,17 +646,17 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                    <div className="text-2xl font-bold text-blue-600">4.8</div>
-                    <div className="text-sm text-blue-700 dark:text-blue-300 flex items-center justify-center gap-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-primary/20 rounded-lg border border-primary/20">
+                    <div className="text-2xl font-bold text-primary">4.8</div>
+                    <div className="text-sm text-primary/80 flex items-center justify-center gap-1">
                       <Star className="w-3 h-3" />
                       Profile Rating
                     </div>
                   </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg border border-green-200 dark:border-green-800">
-                    <div className="text-2xl font-bold text-green-600">73%</div>
-                    <div className="text-sm text-green-700 dark:text-green-300 flex items-center justify-center gap-1">
+                  <div className="text-center p-4 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-lg border border-emerald-500/20">
+                    <div className="text-2xl font-bold text-emerald-600">73%</div>
+                    <div className="text-sm text-emerald-600/80 flex items-center justify-center gap-1">
                       <TrendingUp className="w-3 h-3" />
                       Match Rate
                     </div>
@@ -657,12 +671,12 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                   <Progress value={85} className="h-2" />
                 </div>
                 
-                <div className="flex justify-between items-center pt-2">
-                  <Button variant="outline" size="sm" className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2">
+                  <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto">
                     <Download className="w-4 h-4" />
                     Export Data
                   </Button>
-                  <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto">
                     <Share2 className="w-4 h-4" />
                     Share Profile
                   </Button>
