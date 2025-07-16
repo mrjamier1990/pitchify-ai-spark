@@ -136,8 +136,8 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         </Button>
         
         <div className="flex items-center gap-3">
-          <img src={investifyLogo} alt="Investify" className="w-9 h-9 rounded-lg" />
-          <span className="text-xl font-bold text-foreground">Investify</span>
+          <img src={investifyLogo} alt="INVESTIFY" className="w-9 h-9 rounded-lg" />
+          <span className="text-xl font-montserrat font-bold text-foreground tracking-wide">INVESTIFY</span>
         </div>
         
         <Button 
