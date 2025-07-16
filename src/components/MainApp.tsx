@@ -37,14 +37,10 @@ export function MainApp() {
   };
 
   return (
-    <div className="h-screen bg-background flex flex-col">
-      <div className="flex-1 overflow-hidden">
+    <div className="h-screen bg-background">
+      <div className="h-full overflow-hidden">
         {renderCurrentPage()}
       </div>
-      <BottomNavigation 
-        currentPage={currentPage} 
-        onNavigate={setCurrentPage} 
-      />
     </div>
   );
 }
