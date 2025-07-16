@@ -49,10 +49,12 @@ export type Database = {
           country: string | null
           created_at: string
           email: string
+          facebook_url: string | null
           full_name: string | null
           funding_stage: string | null
           id: string
           industry: string | null
+          instagram_url: string | null
           investment_range: string | null
           linkedin_url: string | null
           open_to_connect: boolean | null
@@ -60,6 +62,7 @@ export type Database = {
           profile_image_url: string | null
           role: string | null
           subscription_tier: string | null
+          tiktok_url: string | null
           twitter_url: string | null
           updated_at: string
           user_id: string
@@ -71,10 +74,12 @@ export type Database = {
           country?: string | null
           created_at?: string
           email: string
+          facebook_url?: string | null
           full_name?: string | null
           funding_stage?: string | null
           id?: string
           industry?: string | null
+          instagram_url?: string | null
           investment_range?: string | null
           linkedin_url?: string | null
           open_to_connect?: boolean | null
@@ -82,6 +87,7 @@ export type Database = {
           profile_image_url?: string | null
           role?: string | null
           subscription_tier?: string | null
+          tiktok_url?: string | null
           twitter_url?: string | null
           updated_at?: string
           user_id: string
@@ -93,10 +99,12 @@ export type Database = {
           country?: string | null
           created_at?: string
           email?: string
+          facebook_url?: string | null
           full_name?: string | null
           funding_stage?: string | null
           id?: string
           industry?: string | null
+          instagram_url?: string | null
           investment_range?: string | null
           linkedin_url?: string | null
           open_to_connect?: boolean | null
@@ -104,6 +112,7 @@ export type Database = {
           profile_image_url?: string | null
           role?: string | null
           subscription_tier?: string | null
+          tiktok_url?: string | null
           twitter_url?: string | null
           updated_at?: string
           user_id?: string
