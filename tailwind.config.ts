@@ -73,6 +73,7 @@ export default {
 				'premium': 'var(--shadow-premium)',
 				'card': 'var(--shadow-card)',
 				'glow': 'var(--shadow-glow)',
+				'3d': 'var(--shadow-3d)',
 			},
 			transitionTimingFunction: {
 				'smooth': 'var(--transition-smooth)',

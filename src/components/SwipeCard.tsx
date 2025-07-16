@@ -76,10 +76,13 @@ export function SwipeCard({ profile, onSwipe, style }: SwipeCardProps) {
     >
       {/* Profile Image */}
       <div className="relative h-2/3 overflow-hidden">
-        <img
+        <video
           src={profile.image}
-          alt={profile.name}
+          autoPlay
+          muted
+          loop
           className="w-full h-full object-cover"
+          poster={profile.image}
         />
         
         {/* Video Play Overlay */}
@@ -146,14 +149,14 @@ export function SwipeCard({ profile, onSwipe, style }: SwipeCardProps) {
           {dragOffset.x > 50 && (
             <div className="absolute inset-0 flex items-center justify-center bg-green-500/20">
               <div className="bg-green-500 text-white px-4 py-2 rounded-lg font-bold text-xl transform rotate-12">
-                LIKE
+                I'M IN
               </div>
             </div>
           )}
           {dragOffset.x < -50 && (
             <div className="absolute inset-0 flex items-center justify-center bg-red-500/20">
               <div className="bg-red-500 text-white px-4 py-2 rounded-lg font-bold text-xl transform -rotate-12">
-                PASS
+                I'M OUT
               </div>
             </div>
           )}

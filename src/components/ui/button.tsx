@@ -20,10 +20,10 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         
         // Premium Pitchify variants
-        premium: "bg-gradient-primary text-primary-foreground hover:shadow-glow transform hover:scale-105 transition-all duration-300",
-        cta: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-card hover:shadow-premium transition-all duration-300",
-        hero: "bg-gradient-hero text-primary-foreground hover:shadow-glow transform hover:scale-105 transition-all duration-500 font-semibold",
-        glass: "bg-background/20 backdrop-blur-sm border border-primary/20 text-foreground hover:bg-background/30 hover:border-primary/40 transition-all duration-300",
+        premium: "bg-gradient-primary text-primary-foreground hover:shadow-3d transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300",
+        cta: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-card hover:shadow-3d transform hover:scale-105 hover:translate-y-[-2px] transition-all duration-300",
+        hero: "bg-gradient-hero text-primary-foreground hover:shadow-3d transform hover:scale-110 hover:translate-y-[-6px] transition-all duration-500 font-semibold",
+        glass: "bg-background/20 backdrop-blur-sm border border-primary/20 text-foreground hover:bg-background/30 hover:border-primary/40 hover:shadow-glow transform hover:scale-105 hover:translate-y-[-2px] transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -8,40 +8,40 @@ Deep charcoal, elegant ivory, champagne gold accents, and sky blue calls to acti
 
 @layer base {
   :root {
-    /* Core Brand Colors */
-    --background: 43 23% 96%; /* Elegant ivory */
-    --foreground: 210 15% 15%; /* Deep charcoal */
+    /* Core Brand Colors - Dark Elegant Theme */
+    --background: 210 20% 8%; /* Deep elegant black */
+    --foreground: 43 23% 96%; /* Elegant ivory text */
 
-    --card: 43 23% 98%;
-    --card-foreground: 210 15% 15%;
+    --card: 210 18% 12%; /* Dark cards */
+    --card-foreground: 43 23% 96%;
 
-    --popover: 43 23% 98%;
-    --popover-foreground: 210 15% 15%;
+    --popover: 210 18% 12%;
+    --popover-foreground: 43 23% 96%;
 
     /* Primary = Champagne Gold */
-    --primary: 45 65% 62%; /* Champagne gold */
-    --primary-foreground: 43 23% 96%;
-    --primary-glow: 45 80% 72%; /* Lighter champagne */
+    --primary: 45 70% 68%; /* Brighter champagne gold */
+    --primary-foreground: 210 20% 8%;
+    --primary-glow: 45 85% 78%; /* Lighter champagne */
 
-    /* Secondary = Deep Charcoal */
-    --secondary: 210 15% 20%; /* Deep charcoal */
+    /* Secondary = Elegant Purple */
+    --secondary: 270 30% 25%; /* Deep elegant purple */
     --secondary-foreground: 43 23% 96%;
 
-    /* Sky Blue for CTAs */
-    --accent: 195 85% 65%; /* Sky blue */
-    --accent-foreground: 43 23% 96%;
+    /* Electric Blue for CTAs */
+    --accent: 200 90% 70%; /* Electric blue */
+    --accent-foreground: 210 20% 8%;
 
     /* Muted tones */
-    --muted: 210 8% 92%;
-    --muted-foreground: 210 10% 45%;
+    --muted: 210 15% 18%;
+    --muted-foreground: 210 8% 65%;
 
     /* States */
     --destructive: 0 84% 60%;
     --destructive-foreground: 43 23% 96%;
 
-    --border: 210 8% 88%;
-    --input: 210 8% 90%;
-    --ring: 45 65% 62%;
+    --border: 210 15% 22%;
+    --input: 210 15% 18%;
+    --ring: 45 70% 68%;
 
     --radius: 0.75rem;
 
@@ -50,10 +50,11 @@ Deep charcoal, elegant ivory, champagne gold accents, and sky blue calls to acti
     --gradient-hero: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--primary)) 100%);
     --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
 
-    /* Shadows */
-    --shadow-premium: 0 20px 40px -10px hsl(var(--primary) / 0.15);
-    --shadow-card: 0 8px 32px -8px hsl(var(--secondary) / 0.12);
-    --shadow-glow: 0 0 60px hsl(var(--primary) / 0.3);
+    /* Shadows with 3D Effects */
+    --shadow-premium: 0 20px 40px -10px hsl(var(--primary) / 0.25);
+    --shadow-card: 0 8px 32px -8px hsl(var(--secondary) / 0.18);
+    --shadow-glow: 0 0 60px hsl(var(--primary) / 0.4);
+    --shadow-3d: 0 8px 20px -4px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.2);
 
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);

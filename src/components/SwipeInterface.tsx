@@ -146,30 +146,30 @@ export function SwipeInterface() {
       {/* Action Buttons */}
       <div className="flex items-center justify-center gap-4 p-6 bg-background border-t border-border">
         <Button
-          variant="outline"
-          size="icon"
-          className="w-14 h-14 rounded-full border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+          variant="destructive"
+          size="lg"
+          className="px-6 py-3 rounded-full font-semibold transform hover:scale-110 hover:translate-y-[-4px] hover:shadow-3d transition-all duration-300"
           onClick={() => handleButtonAction("pass")}
         >
-          <X className="w-6 h-6" />
+          I'm Out
         </Button>
         
         <Button
-          variant="outline"
+          variant="premium"
           size="icon"
-          className="w-12 h-12 rounded-full border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+          className="w-14 h-14 rounded-full transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300"
           onClick={() => handleButtonAction("superlike")}
         >
-          <Star className="w-5 h-5" />
+          <Star className="w-6 h-6" />
         </Button>
         
         <Button
-          variant="outline"
-          size="icon"
-          className="w-14 h-14 rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+          variant="cta"
+          size="lg"
+          className="px-6 py-3 rounded-full font-semibold transform hover:scale-110 hover:translate-y-[-4px] hover:shadow-3d transition-all duration-300"
           onClick={() => handleButtonAction("like")}
         >
-          <Heart className="w-6 h-6" />
+          I'm In
         </Button>
       </div>
     </div>
