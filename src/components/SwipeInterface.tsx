@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { SwipeCard } from "./SwipeCard";
 import { Button } from "@/components/ui/button";
-import { Heart, X, Star, MessageCircle, User, Play } from "lucide-react";
+import { Heart, X, Star, MessageCircle, User, Play, Filter, Settings } from "lucide-react";
+import premiumLogo from "@/assets/pitchify-logo-premium.png";
+import { PageType } from "./MainApp";
 import profile1 from "@/assets/profile1.jpg";
 import profile2 from "@/assets/profile2.jpg";
 import profile3 from "@/assets/profile3.jpg";
 import profile4 from "@/assets/profile4.jpg";
 
-// Mock profiles data
+interface SwipeInterfaceProps {
+  onNavigate?: (page: PageType) => void;
+}
 const mockProfiles = [
   {
     id: "1",
@@ -63,7 +67,7 @@ const mockProfiles = [
   },
 ];
 
-export function SwipeInterface() {
+export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [matches, setMatches] = useState(0);
 

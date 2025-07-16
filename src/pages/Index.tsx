@@ -1,7 +1,7 @@
-import { SwipeInterface } from "@/components/SwipeInterface";
+import { MainApp } from "@/components/MainApp";
 
 const Index = () => {
-  return <SwipeInterface />;
+  return <MainApp />;
 };
 
 export default Index;
