@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SwipeCard } from "./SwipeCard";
 import { Button } from "@/components/ui/button";
 import { Heart, X, Star, MessageCircle, User, Play, Filter, Settings } from "lucide-react";
-import newLogo from "@/assets/pitchify-logo-new.png";
+import investifyLogo from "@/assets/investify-logo.png";
 import { PageType } from "./MainApp";
 import { ProfileDetailPage } from "./ProfileDetailPage";
 import profile1 from "@/assets/profile1.jpg";
@@ -136,13 +136,8 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         </Button>
         
         <div className="flex items-center gap-3">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-primary rounded-lg opacity-20 animate-pulse"></div>
-            <div className="relative bg-gradient-primary rounded-lg w-9 h-9 flex items-center justify-center">
-              <Play className="w-5 h-5 text-primary-foreground ml-0.5" />
-            </div>
-          </div>
-          <span className="text-xl font-bold text-foreground">Pitchify</span>
+          <img src={investifyLogo} alt="Investify" className="w-9 h-9 rounded-lg" />
+          <span className="text-xl font-bold text-foreground">Investify</span>
         </div>
         
         <Button 
