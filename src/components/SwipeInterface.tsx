@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SwipeCard } from "./SwipeCard";
 import { Button } from "@/components/ui/button";
 import { Heart, X, Star, MessageCircle, User, Play, Filter, Settings } from "lucide-react";
-import premiumLogo from "@/assets/pitchify-logo-premium.png";
+import newLogo from "@/assets/pitchify-logo-new.png";
 import { PageType } from "./MainApp";
 import profile1 from "@/assets/profile1.jpg";
 import profile2 from "@/assets/profile2.jpg";
@@ -158,36 +158,34 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-center gap-3 sm:gap-6 p-4 sm:p-6 bg-background/90 backdrop-blur-md border-t border-border/50">
+      <div className="flex items-center justify-center gap-4 p-6 bg-background/90 backdrop-blur-md">
         <Button
-          variant="glass"
-          size="lg"
-          className="flex-1 sm:flex-none px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-destructive/10 backdrop-blur-md border border-destructive/20 text-destructive hover:bg-destructive/20 hover:border-destructive/40 hover:text-destructive-foreground hover:shadow-glow transform hover:scale-105 hover:translate-y-[-3px] transition-all duration-300 group sm:min-w-[120px] max-w-[140px]"
+          variant="destructive"
+          size="lg" 
+          className="px-8 py-4 rounded-2xl bg-red-500/90 text-white border-0 hover:bg-red-600 hover:shadow-lg transform hover:scale-105 transition-all duration-300"
           onClick={() => handleButtonAction("pass")}
         >
-          <X className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 group-hover:rotate-90 transition-transform duration-300" />
-          <span className="font-medium text-sm sm:text-base">I'm Out</span>
+          <X className="w-5 h-5 mr-2" />
+          I'm Out
         </Button>
         
         <Button
           variant="premium"
           size="xl"
-          className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-primary text-primary-foreground hover:shadow-3d transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden shadow-premium"
+          className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-xl transform hover:scale-110 transition-all duration-300"
           onClick={() => handleButtonAction("superlike")}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-glow/40 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
-          <Star className="w-6 h-6 sm:w-7 sm:h-7 relative z-10 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
+          <Star className="w-7 h-7" />
         </Button>
         
         <Button
           variant="cta"
           size="lg"
-          className="flex-1 sm:flex-none px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-accent/90 backdrop-blur-md border border-accent/30 text-accent-foreground hover:bg-accent hover:border-accent/50 hover:shadow-3d transform hover:scale-105 hover:translate-y-[-3px] transition-all duration-300 group sm:min-w-[120px] max-w-[140px]"
+          className="px-8 py-4 rounded-2xl bg-emerald-500/90 text-white border-0 hover:bg-emerald-600 hover:shadow-lg transform hover:scale-105 transition-all duration-300"
           onClick={() => handleButtonAction("like")}
         >
-          <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 group-hover:scale-110 group-hover:text-red-300 transition-all duration-300" />
-          <span className="font-medium text-sm sm:text-base">I'm In</span>
+          <Heart className="w-5 h-5 mr-2" />
+          I'm In
         </Button>
       </div>
     </div>

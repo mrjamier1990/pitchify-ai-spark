@@ -18,17 +18,17 @@ Deep charcoal backgrounds, champagne gold accents, soft sky blue highlights
     --popover: 210 12% 16%;
     --popover-foreground: 210 5% 95%;
 
-    /* Champagne Gold - Primary Brand Color */
-    --primary: 45 75% 52%; /* Champagne Gold (#D4AF37) */
+    /* Electric Blue - Primary Brand Color */
+    --primary: 210 85% 65%; /* Electric Blue (#3B82F6) */
     --primary-foreground: 210 15% 11%;
-    --primary-glow: 45 85% 65%; /* Lighter champagne for glows */
+    --primary-glow: 210 90% 75%; /* Lighter blue for glows */
 
-    /* Soft Sky Blue - Secondary Accent */
+    /* Deep Purple - Secondary Accent */
     --secondary: 210 12% 18%; /* Darker card variation */
     --secondary-foreground: 210 5% 95%;
 
-    /* Sky Blue for CTAs and highlights */
-    --accent: 195 65% 67%; /* Soft Sky Blue (#72BFE2) */
+    /* Emerald Green for CTAs and highlights */
+    --accent: 160 75% 60%; /* Emerald Green (#10B981) */
     --accent-foreground: 210 15% 11%;
 
     /* Muted tones - Ash Grey variations */
