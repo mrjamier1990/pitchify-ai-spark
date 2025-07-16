@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, X, Star, MessageCircle, User, Play, Filter, Settings } from "lucide-react";
 import newLogo from "@/assets/pitchify-logo-new.png";
 import { PageType } from "./MainApp";
+import { ProfileDetailPage } from "./ProfileDetailPage";
 import profile1 from "@/assets/profile1.jpg";
 import profile2 from "@/assets/profile2.jpg";
 import profile3 from "@/assets/profile3.jpg";
@@ -70,6 +71,7 @@ const mockProfiles = [
 export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [matches, setMatches] = useState(0);
+  const [selectedProfile, setSelectedProfile] = useState<string | null>(null);
 
   const handleSwipe = (direction: "left" | "right" | "up") => {
     if (direction === "right" || direction === "up") {
@@ -88,6 +90,19 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
 
   const currentProfile = mockProfiles[currentIndex % mockProfiles.length];
   const nextProfile = mockProfiles[(currentIndex + 1) % mockProfiles.length];
+
+  // Show detailed profile if selected
+  if (selectedProfile) {
+    const profile = mockProfiles.find(p => p.id === selectedProfile);
+    if (profile) {
+      return (
+        <ProfileDetailPage 
+          profile={profile} 
+          onBack={() => setSelectedProfile(null)} 
+        />
+      );
+    }
+  }
 
   if (currentIndex >= mockProfiles.length * 2) {
     return (
@@ -153,6 +168,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
           key={`current-${currentIndex}`}
           profile={currentProfile}
           onSwipe={handleSwipe}
+          onProfileClick={() => setSelectedProfile(currentProfile.id)}
           style={{ zIndex: 1 }}
         />
       </div>
@@ -162,34 +178,32 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         <Button
           variant="glass"
           size="lg" 
-          className="px-8 py-4 rounded-full bg-red-500/20 backdrop-blur-md border border-red-400/30 text-red-300 hover:bg-red-500/30 hover:border-red-400/50 hover:text-red-100 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden"
+          className="w-16 h-16 rounded-full bg-red-500/20 backdrop-blur-md border border-red-400/30 text-red-300 hover:bg-red-500/30 hover:border-red-400/50 hover:text-red-100 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden"
           onClick={() => handleButtonAction("pass")}
         >
           <div className="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-          <X className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300 relative z-10" />
-          <span className="font-medium relative z-10">I'm Out</span>
+          <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300 relative z-10 stroke-2" />
         </Button>
         
         <Button
           variant="premium"
           size="xl"
-          className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-600/30 backdrop-blur-md border border-blue-400/40 text-blue-200 hover:from-blue-500/50 hover:to-purple-600/50 hover:border-blue-400/60 hover:text-white hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transform hover:scale-115 hover:translate-y-[-6px] transition-all duration-300 group relative overflow-hidden"
+          className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-600/30 backdrop-blur-md border border-blue-400/40 text-blue-200 hover:from-blue-500/50 hover:to-purple-600/50 hover:border-blue-400/60 hover:text-white hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transform hover:scale-115 hover:translate-y-[-6px] transition-all duration-300 group relative overflow-hidden"
           onClick={() => handleButtonAction("superlike")}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div className="absolute inset-0 bg-blue-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
-          <Star className="w-7 h-7 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 relative z-10" />
+          <Star className="w-9 h-9 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 relative z-10 fill-current" />
         </Button>
         
         <Button
           variant="glass"
           size="lg"
-          className="px-8 py-4 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 text-emerald-300 hover:bg-emerald-500/30 hover:border-emerald-400/50 hover:text-emerald-100 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden"
+          className="w-16 h-16 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 text-emerald-300 hover:bg-emerald-500/30 hover:border-emerald-400/50 hover:text-emerald-100 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-300 group relative overflow-hidden"
           onClick={() => handleButtonAction("like")}
         >
           <div className="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-          <Heart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300 relative z-10" />
-          <span className="font-medium relative z-10">I'm In</span>
+          <Heart className="w-8 h-8 group-hover:scale-110 transition-transform duration-300 relative z-10 stroke-2 fill-current" />
         </Button>
       </div>
     </div>

@@ -20,10 +20,11 @@ interface Profile {
 interface SwipeCardProps {
   profile: Profile;
   onSwipe: (direction: "left" | "right" | "up") => void;
+  onProfileClick?: () => void;
   style?: React.CSSProperties;
 }
 
-export function SwipeCard({ profile, onSwipe, style }: SwipeCardProps) {
+export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
@@ -107,8 +108,11 @@ export function SwipeCard({ profile, onSwipe, style }: SwipeCardProps) {
         <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-black/70 to-transparent" />
       </div>
 
-      {/* Profile Info */}
-      <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 text-white">
+      {/* Profile Info - Clickable */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 text-white cursor-pointer"
+        onClick={onProfileClick}
+      >
         <div className="mb-2">
           <h2 className="text-lg sm:text-2xl font-bold leading-tight tracking-wide">
             {profile.name}, {profile.age}
