@@ -44,10 +44,11 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
   return (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-border bg-background/95 backdrop-blur-sm">
+      <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-sm">
         <Button 
           variant="ghost" 
           size="icon"
+          className="w-10 h-10 rounded-full"
           onClick={() => onNavigate("swipe")}
         >
           <ArrowLeft className="w-5 h-5" />
@@ -56,6 +57,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
         <Button 
           variant="ghost" 
           size="icon"
+          className="w-10 h-10 rounded-full"
           onClick={() => onNavigate("settings")}
         >
           <Settings className="w-5 h-5" />
@@ -64,20 +66,20 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
       <div className="flex-1 overflow-y-auto">
         {/* Profile Header */}
-        <div className="relative bg-gradient-to-br from-primary/10 to-accent/10 p-6">
+        <div className="relative bg-gradient-to-br from-primary/10 to-accent/10 px-6 py-5">
           <div className="flex items-center gap-4">
             <div className="relative">
               <img 
                 src={profile1} 
                 alt="Profile" 
-                className="w-20 h-20 rounded-full object-cover border-4 border-background shadow-lg"
+                className="w-16 h-16 rounded-full object-cover border-3 border-background shadow-lg"
               />
-              <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-primary rounded-full flex items-center justify-center border-2 border-background">
-                <Star className="w-4 h-4 text-primary-foreground fill-current" />
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center border-2 border-background">
+                <Star className="w-3 h-3 text-primary-foreground fill-current" />
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="text-2xl font-bold text-foreground mb-1">Sarah Chen</h2>
+              <h2 className="text-xl font-bold text-foreground mb-1">Sarah Chen</h2>
               <p className="text-muted-foreground">CEO & Founder at TechFlow AI</p>
               <div className="flex items-center gap-2 mt-2">
                 <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-medium rounded-full">
@@ -93,11 +95,11 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
           </div>
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="px-6 py-5 space-y-5">
           {/* Subscription Tiers */}
-          <Card className="p-6 bg-card/50 backdrop-blur-sm border-border/50 shadow-xl rounded-2xl">
-            <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-              <Crown className="w-6 h-6 text-primary" />
+          <Card className="p-5 bg-card/50 backdrop-blur-sm border-border/50 shadow-xl rounded-2xl">
+            <h3 className="text-xl font-bold text-foreground mb-5 flex items-center gap-3">
+              <Crown className="w-5 h-5 text-primary" />
               Upgrade Your Experience
             </h3>
             

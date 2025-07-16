@@ -79,10 +79,11 @@ export function EnhancedMessagesPage({ onNavigate }: EnhancedMessagesPageProps) 
     return (
       <div className="h-screen bg-background flex flex-col">
         {/* Chat Header */}
-        <header className="flex items-center justify-between p-4 border-b border-border bg-background/95 backdrop-blur-sm">
-          <Button 
+        <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-sm">
+          <Button
             variant="ghost" 
             size="icon"
+            className="w-10 h-10 rounded-full"
             onClick={() => setSelectedMatch(null)}
           >
             <ArrowLeft className="w-5 h-5" />
@@ -109,7 +110,7 @@ export function EnhancedMessagesPage({ onNavigate }: EnhancedMessagesPageProps) 
             </div>
           </div>
           
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" className="w-10 h-10 rounded-full">
             <MoreHorizontal className="w-5 h-5" />
           </Button>
         </header>
@@ -170,16 +171,17 @@ export function EnhancedMessagesPage({ onNavigate }: EnhancedMessagesPageProps) 
   return (
     <div className="h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-border bg-background/95 backdrop-blur-sm">
-        <Button 
+      <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-sm">
+        <Button
           variant="ghost" 
           size="icon"
+          className="w-10 h-10 rounded-full"
           onClick={() => onNavigate("swipe")}
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <h1 className="text-xl font-bold text-foreground">Messages</h1>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className="w-10 h-10 rounded-full">
           <Search className="w-5 h-5" />
         </Button>
       </header>

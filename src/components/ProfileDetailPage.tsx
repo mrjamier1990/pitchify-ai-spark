@@ -26,10 +26,11 @@ export function ProfileDetailPage({ profile, onBack }: ProfileDetailPageProps) {
   return (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-border bg-background/95 backdrop-blur-sm relative z-10">
+      <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-sm relative z-10">
         <Button 
           variant="ghost" 
           size="icon"
+          className="w-10 h-10 rounded-full"
           onClick={onBack}
         >
           <ArrowLeft className="w-5 h-5" />
@@ -41,11 +42,11 @@ export function ProfileDetailPage({ profile, onBack }: ProfileDetailPageProps) {
       {/* Profile Content */}
       <div className="flex-1 overflow-y-auto">
         {/* Hero Video Section */}
-        <div className="relative h-80 sm:h-96 bg-gradient-to-br from-muted/50 to-muted overflow-hidden rounded-b-3xl">
+        <div className="relative h-72 bg-gradient-to-br from-muted/50 to-muted overflow-hidden">
           <video
             src={profile.image}
             controls
-            className="w-full h-full object-cover rounded-b-3xl"
+            className="w-full h-full object-cover"
             poster={profile.image}
           />
           
@@ -69,23 +70,23 @@ export function ProfileDetailPage({ profile, onBack }: ProfileDetailPageProps) {
         </div>
 
         {/* Profile Info */}
-        <div className="p-6 space-y-8">
+        <div className="px-6 py-5 space-y-6">
           {/* Basic Info */}
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl font-bold text-foreground mb-3 tracking-tight">
+          <div className="text-center space-y-3">
+            <h2 className="text-3xl font-bold text-foreground tracking-tight">
               {profile.name}, {profile.age}
             </h2>
-            <div className="space-y-2">
+            <div className="space-y-1">
               <p className="text-xl font-semibold text-foreground">{profile.title}</p>
               <p className="text-lg text-primary font-medium">{profile.company}</p>
             </div>
             
-            <div className="flex items-center justify-center gap-8 mt-6">
-              <div className="flex items-center gap-2 bg-muted/30 px-4 py-2 rounded-full">
+            <div className="flex items-center justify-center gap-6 mt-4">
+              <div className="flex items-center gap-2 bg-muted/30 px-3 py-2 rounded-full">
                 <MapPin className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">{profile.location}</span>
               </div>
-              <div className="flex items-center gap-2 bg-muted/30 px-4 py-2 rounded-full">
+              <div className="flex items-center gap-2 bg-muted/30 px-3 py-2 rounded-full">
                 <Briefcase className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">{profile.industry}</span>
               </div>
@@ -169,13 +170,13 @@ export function ProfileDetailPage({ profile, onBack }: ProfileDetailPageProps) {
         </div>
 
         {/* Action Buttons */}
-        <div className="sticky bottom-0 p-6 bg-background/95 backdrop-blur-md border-t border-border">
-          <div className="flex gap-4">
-            <Button variant="glass" className="flex-1" size="lg">
+        <div className="sticky bottom-0 px-6 py-4 bg-background/95 backdrop-blur-md border-t border-border">
+          <div className="flex gap-3">
+            <Button variant="glass" className="flex-1 h-12" size="lg">
               <MessageCircle className="w-5 h-5 mr-2" />
               Message
             </Button>
-            <Button variant="premium" className="flex-1" size="lg">
+            <Button variant="premium" className="flex-1 h-12" size="lg">
               <Calendar className="w-5 h-5 mr-2" />
               Schedule Call
             </Button>
