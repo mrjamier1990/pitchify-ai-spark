@@ -184,7 +184,7 @@ export function AuthPage() {
                   </div>
                 </CardContent>
 
-                <CardFooter>
+                <CardFooter className="flex flex-col gap-2">
                   <Button 
                     type="submit" 
                     className="w-full" 
@@ -197,6 +197,16 @@ export function AuthPage() {
                     )}
                     Sign In
                   </Button>
+                  <button
+                    type="button"
+                    className="text-xs font-semibold px-4 py-2 rounded-lg border border-[#FF5A5F] text-[#FF5A5F] bg-transparent transition-all duration-200 ease-in-out hover:bg-[#FF5A5F]/10 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/40 mt-2"
+                    onClick={() => {
+                      // TODO: Implement forgot password logic or navigation
+                      alert('Forgot password functionality coming soon!');
+                    }}
+                  >
+                    Forgot password?
+                  </button>
                 </CardFooter>
               </form>
             </TabsContent>
