@@ -51,21 +51,34 @@ export type Database = {
           email: string
           facebook_url: string | null
           full_name: string | null
+          funding_amount_seeking: string | null
           funding_stage: string | null
           id: string
           industry: string | null
           instagram_url: string | null
           investment_range: string | null
+          investment_status: string | null
+          investor_check_size: string | null
+          investor_type: string | null
+          investor_type_preference: string[] | null
           linkedin_url: string | null
           open_to_connect: boolean | null
+          pitch_deck_url: string | null
           pitch_video_url: string | null
+          preferred_sectors: string[] | null
+          preferred_stages: string[] | null
           profile_image_url: string | null
+          regional_focus: string[] | null
           role: string | null
+          startup_name: string | null
+          startup_website: string | null
           subscription_tier: string | null
           tiktok_url: string | null
           twitter_url: string | null
           updated_at: string
           user_id: string
+          video_pitch_url: string | null
+          why_good_fit: string | null
         }
         Insert: {
           about_video_url?: string | null
@@ -76,21 +89,34 @@ export type Database = {
           email: string
           facebook_url?: string | null
           full_name?: string | null
+          funding_amount_seeking?: string | null
           funding_stage?: string | null
           id?: string
           industry?: string | null
           instagram_url?: string | null
           investment_range?: string | null
+          investment_status?: string | null
+          investor_check_size?: string | null
+          investor_type?: string | null
+          investor_type_preference?: string[] | null
           linkedin_url?: string | null
           open_to_connect?: boolean | null
+          pitch_deck_url?: string | null
           pitch_video_url?: string | null
+          preferred_sectors?: string[] | null
+          preferred_stages?: string[] | null
           profile_image_url?: string | null
+          regional_focus?: string[] | null
           role?: string | null
+          startup_name?: string | null
+          startup_website?: string | null
           subscription_tier?: string | null
           tiktok_url?: string | null
           twitter_url?: string | null
           updated_at?: string
           user_id: string
+          video_pitch_url?: string | null
+          why_good_fit?: string | null
         }
         Update: {
           about_video_url?: string | null
@@ -101,21 +127,34 @@ export type Database = {
           email?: string
           facebook_url?: string | null
           full_name?: string | null
+          funding_amount_seeking?: string | null
           funding_stage?: string | null
           id?: string
           industry?: string | null
           instagram_url?: string | null
           investment_range?: string | null
+          investment_status?: string | null
+          investor_check_size?: string | null
+          investor_type?: string | null
+          investor_type_preference?: string[] | null
           linkedin_url?: string | null
           open_to_connect?: boolean | null
+          pitch_deck_url?: string | null
           pitch_video_url?: string | null
+          preferred_sectors?: string[] | null
+          preferred_stages?: string[] | null
           profile_image_url?: string | null
+          regional_focus?: string[] | null
           role?: string | null
+          startup_name?: string | null
+          startup_website?: string | null
           subscription_tier?: string | null
           tiktok_url?: string | null
           twitter_url?: string | null
           updated_at?: string
           user_id?: string
+          video_pitch_url?: string | null
+          why_good_fit?: string | null
         }
         Relationships: []
       }
