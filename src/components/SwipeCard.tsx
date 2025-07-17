@@ -63,10 +63,10 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
 
   return (
     <div
-      className="absolute inset-2 sm:inset-4 bg-card rounded-xl sm:rounded-2xl shadow-card overflow-hidden cursor-grab active:cursor-grabbing select-none"
+      className="absolute inset-2 sm:inset-4 bg-card rounded-xl sm:rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing select-none border-2 border-primary/20 shadow-[0_0_40px_rgba(0,0,0,0.3),0_8px_32px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(0,0,0,0.4),0_12px_48px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-primary/30 transition-all duration-500 hover:scale-[1.02] backdrop-blur-sm"
       style={{
         ...style,
-        transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${rotation}deg)`,
+        transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${rotation}deg) ${!isDragging && style?.transform?.includes('scale') ? '' : ''}`,
         opacity,
         zIndex: isDragging ? 10 : 1,
       }}
