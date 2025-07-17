@@ -1,16 +1,10 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowRight, ArrowLeft, Check, Star, Crown, Zap, Users, Building2, TrendingUp, Heart, Target, Globe } from 'lucide-react';
+import { ChevronRight, Rocket, DollarSign, Handshake, Link, MapPin, CheckCircle, Zap } from 'lucide-react';
 
 interface OnboardingFlowProps {
   onComplete: () => void;
@@ -18,78 +12,81 @@ interface OnboardingFlowProps {
   userId: string;
 }
 
-type OnboardingStep = 'role' | 'basic-info' | 'entrepreneur-details' | 'investor-details' | 'preferences' | 'premium-tier' | 'complete';
+type OnboardingStep = 
+  | 'welcome'
+  | 'full-name'
+  | 'linkedin'
+  | 'location'
+  | 'role'
+  | 'startup-name'
+  | 'startup-industry'
+  | 'startup-stage'
+  | 'complete';
 
 interface FormData {
-  role: 'entrepreneur' | 'investor' | '';
   fullName: string;
-  bio: string;
+  linkedinProfile: string;
   country: string;
-  industry: string;
-  // Entrepreneur specific
-  fundingStage: string;
-  companySize: string;
-  seekingAmount: string;
-  // Investor specific
-  investmentRange: string;
-  portfolioSize: string;
-  preferredStages: string[];
-  // Preferences
-  preferredIndustries: string[];
-  locationPreference: string;
-  connectionGoals: string[];
-  // Premium
-  subscriptionTier: 'free' | 'premium' | 'pro';
+  role: 'founder' | 'investor' | 'both' | '';
+  startupName: string;
+  startupIndustry: string[];
+  startupStage: string;
 }
 
 const industries = [
-  'Technology', 'Healthcare', 'Finance', 'E-commerce', 'Education', 'Real Estate',
-  'Manufacturing', 'Energy', 'Transportation', 'Food & Beverage', 'Entertainment',
-  'Agriculture', 'Biotech', 'CleanTech', 'Gaming', 'AI/ML', 'Blockchain', 'Other'
+  { label: 'SaaS', icon: '💻' },
+  { label: 'AI/ML', icon: '🤖' },
+  { label: 'FinTech', icon: '💰' },
+  { label: 'HealthTech', icon: '🏥' },
+  { label: 'Web3/Crypto', icon: '⛓️' },
+  { label: 'E-commerce', icon: '🛒' },
+  { label: 'EdTech', icon: '📚' },
+  { label: 'CleanTech', icon: '🌱' },
+  { label: 'Gaming', icon: '🎮' },
+  { label: 'Social', icon: '👥' },
+  { label: 'Travel', icon: '✈️' },
+  { label: 'Food Tech', icon: '🍕' }
 ];
 
-const fundingStages = [
-  'Pre-Seed', 'Seed', 'Series A', 'Series B', 'Series C+', 'Growth Stage', 'Not seeking funding'
-];
-
-const investmentRanges = [
-  '$1K - $10K', '$10K - $50K', '$50K - $100K', '$100K - $500K', 
-  '$500K - $1M', '$1M - $5M', '$5M - $10M', '$10M+'
+const startupStages = [
+  { label: 'Just an Idea', icon: '🧠' },
+  { label: 'MVP / Beta', icon: '🔧' },
+  { label: 'Launched with some traction', icon: '🚀' },
+  { label: 'Generating revenue', icon: '💵' },
+  { label: 'Scaling', icon: '📈' }
 ];
 
 const countries = [
   'United States', 'United Kingdom', 'Canada', 'Germany', 'France', 'Netherlands',
-  'Australia', 'Singapore', 'Israel', 'India', 'Other'
+  'Australia', 'Singapore', 'Israel', 'India', 'UAE', 'Saudi Arabia', 'Other'
 ];
 
 export function OnboardingFlow({ onComplete, userEmail, userId }: OnboardingFlowProps) {
-  const [currentStep, setCurrentStep] = useState<OnboardingStep>('role');
+  const [currentStep, setCurrentStep] = useState<OnboardingStep>('welcome');
   const [formData, setFormData] = useState<FormData>({
-    role: '',
     fullName: '',
-    bio: '',
+    linkedinProfile: '',
     country: '',
-    industry: '',
-    fundingStage: '',
-    companySize: '',
-    seekingAmount: '',
-    investmentRange: '',
-    portfolioSize: '',
-    preferredStages: [],
-    preferredIndustries: [],
-    locationPreference: '',
-    connectionGoals: [],
-    subscriptionTier: 'free'
+    role: '',
+    startupName: '',
+    startupIndustry: [],
+    startupStage: ''
   });
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const steps: OnboardingStep[] = ['role', 'basic-info', 
-    formData.role === 'entrepreneur' ? 'entrepreneur-details' : 'investor-details',
-    'preferences', 'premium-tier', 'complete'];
+  const getSteps = (): OnboardingStep[] => {
+    const universalSteps: OnboardingStep[] = ['welcome', 'full-name', 'linkedin', 'location', 'role'];
+    
+    if (formData.role === 'founder' || formData.role === 'both') {
+      return [...universalSteps, 'startup-name', 'startup-industry', 'startup-stage', 'complete'];
+    }
+    
+    return [...universalSteps, 'complete'];
+  };
 
+  const steps = getSteps();
   const currentStepIndex = steps.indexOf(currentStep);
-  const progress = ((currentStepIndex + 1) / steps.length) * 100;
 
   const nextStep = () => {
     const currentIndex = steps.indexOf(currentStep);
@@ -98,37 +95,35 @@ export function OnboardingFlow({ onComplete, userEmail, userId }: OnboardingFlow
     }
   };
 
-  const prevStep = () => {
-    const currentIndex = steps.indexOf(currentStep);
-    if (currentIndex > 0) {
-      setCurrentStep(steps[currentIndex - 1]);
-    }
-  };
-
   const handleComplete = async () => {
     setLoading(true);
     try {
+      const profileData = {
+        user_id: userId,
+        email: userEmail,
+        full_name: formData.fullName,
+        role: formData.role,
+        country: formData.country,
+        linkedin_url: formData.linkedinProfile,
+        open_to_connect: true
+      };
+
+      if (formData.role === 'founder' || formData.role === 'both') {
+        Object.assign(profileData, {
+          industry: formData.startupIndustry.join(', '),
+          funding_stage: formData.startupStage
+        });
+      }
+
       const { error } = await supabase
         .from('profiles')
-        .upsert({
-          user_id: userId,
-          email: userEmail,
-          full_name: formData.fullName,
-          role: formData.role,
-          bio: formData.bio,
-          country: formData.country,
-          industry: formData.industry,
-          funding_stage: formData.fundingStage,
-          investment_range: formData.investmentRange,
-          subscription_tier: formData.subscriptionTier,
-          open_to_connect: true
-        });
+        .upsert(profileData);
 
       if (error) throw error;
 
       toast({
-        title: 'Profile created successfully!',
-        description: 'Welcome to Pitchify. Let\'s find your perfect matches.',
+        title: '🎉 Welcome to Pitchify!',
+        description: 'Your profile is ready. Let\'s find your perfect matches.',
       });
 
       onComplete();
@@ -143,491 +138,332 @@ export function OnboardingFlow({ onComplete, userEmail, userId }: OnboardingFlow
     }
   };
 
-  const renderRoleSelection = () => (
-    <Card className="border-border/50 backdrop-blur-sm bg-card/95">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl">What best describes you?</CardTitle>
-        <CardDescription>Choose your primary role to get started</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Button
-            variant={formData.role === 'entrepreneur' ? 'default' : 'outline'}
-            className={`h-32 flex flex-col items-center space-y-3 ${
-              formData.role === 'entrepreneur' ? 'bg-primary text-primary-foreground' : ''
-            }`}
-            onClick={() => setFormData({ ...formData, role: 'entrepreneur' })}
-          >
-            <Building2 className="w-8 h-8" />
-            <div className="text-center">
-              <div className="font-semibold">Entrepreneur</div>
-              <div className="text-xs opacity-75">Looking for investors</div>
-            </div>
-          </Button>
-          
-          <Button
-            variant={formData.role === 'investor' ? 'default' : 'outline'}
-            className={`h-32 flex flex-col items-center space-y-3 ${
-              formData.role === 'investor' ? 'bg-primary text-primary-foreground' : ''
-            }`}
-            onClick={() => setFormData({ ...formData, role: 'investor' })}
-          >
-            <TrendingUp className="w-8 h-8" />
-            <div className="text-center">
-              <div className="font-semibold">Investor</div>
-              <div className="text-xs opacity-75">Looking for opportunities</div>
-            </div>
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  const renderBasicInfo = () => (
-    <Card className="border-border/50 backdrop-blur-sm bg-card/95">
-      <CardHeader>
-        <CardTitle>Tell us about yourself</CardTitle>
-        <CardDescription>Basic information to get started</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="fullName">Full Name</Label>
-          <Input
-            id="fullName"
-            placeholder="Enter your full name"
-            value={formData.fullName}
-            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="country">Country</Label>
-          <Select value={formData.country} onValueChange={(value) => setFormData({ ...formData, country: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select your country" />
-            </SelectTrigger>
-            <SelectContent>
-              {countries.map((country) => (
-                <SelectItem key={country} value={country}>
-                  {country}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="industry">Primary Industry</Label>
-          <Select value={formData.industry} onValueChange={(value) => setFormData({ ...formData, industry: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select your industry" />
-            </SelectTrigger>
-            <SelectContent>
-              {industries.map((industry) => (
-                <SelectItem key={industry} value={industry}>
-                  {industry}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="bio">Bio</Label>
-          <Textarea
-            id="bio"
-            placeholder="Tell us a bit about yourself and your goals..."
-            className="min-h-20"
-            value={formData.bio}
-            onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-          />
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  const renderEntrepreneurDetails = () => (
-    <Card className="border-border/50 backdrop-blur-sm bg-card/95">
-      <CardHeader>
-        <CardTitle>Your Startup Journey</CardTitle>
-        <CardDescription>Help investors understand your venture</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="fundingStage">Current Funding Stage</Label>
-          <Select value={formData.fundingStage} onValueChange={(value) => setFormData({ ...formData, fundingStage: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select funding stage" />
-            </SelectTrigger>
-            <SelectContent>
-              {fundingStages.map((stage) => (
-                <SelectItem key={stage} value={stage}>
-                  {stage}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="companySize">Company Size</Label>
-          <Select value={formData.companySize} onValueChange={(value) => setFormData({ ...formData, companySize: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select company size" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1">Just me (Solo founder)</SelectItem>
-              <SelectItem value="2-5">2-5 employees</SelectItem>
-              <SelectItem value="6-10">6-10 employees</SelectItem>
-              <SelectItem value="11-25">11-25 employees</SelectItem>
-              <SelectItem value="26-50">26-50 employees</SelectItem>
-              <SelectItem value="50+">50+ employees</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="seekingAmount">Seeking Investment Amount</Label>
-          <Select value={formData.seekingAmount} onValueChange={(value) => setFormData({ ...formData, seekingAmount: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select amount range" />
-            </SelectTrigger>
-            <SelectContent>
-              {investmentRanges.map((range) => (
-                <SelectItem key={range} value={range}>
-                  {range}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  const renderInvestorDetails = () => (
-    <Card className="border-border/50 backdrop-blur-sm bg-card/95">
-      <CardHeader>
-        <CardTitle>Your Investment Profile</CardTitle>
-        <CardDescription>Help entrepreneurs understand your investment criteria</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="investmentRange">Typical Investment Range</Label>
-          <Select value={formData.investmentRange} onValueChange={(value) => setFormData({ ...formData, investmentRange: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select investment range" />
-            </SelectTrigger>
-            <SelectContent>
-              {investmentRanges.map((range) => (
-                <SelectItem key={range} value={range}>
-                  {range}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="portfolioSize">Portfolio Size</Label>
-          <Select value={formData.portfolioSize} onValueChange={(value) => setFormData({ ...formData, portfolioSize: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select portfolio size" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="0">First-time investor</SelectItem>
-              <SelectItem value="1-5">1-5 investments</SelectItem>
-              <SelectItem value="6-10">6-10 investments</SelectItem>
-              <SelectItem value="11-25">11-25 investments</SelectItem>
-              <SelectItem value="25+">25+ investments</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="space-y-3">
-          <Label>Preferred Funding Stages</Label>
-          <div className="grid grid-cols-2 gap-2">
-            {fundingStages.slice(0, -1).map((stage) => (
-              <label key={stage} className="flex items-center space-x-2 cursor-pointer">
-                <Checkbox
-                  checked={formData.preferredStages.includes(stage)}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setFormData({
-                        ...formData,
-                        preferredStages: [...formData.preferredStages, stage]
-                      });
-                    } else {
-                      setFormData({
-                        ...formData,
-                        preferredStages: formData.preferredStages.filter(s => s !== stage)
-                      });
-                    }
-                  }}
-                />
-                <span className="text-sm">{stage}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  const renderPreferences = () => (
-    <Card className="border-border/50 backdrop-blur-sm bg-card/95">
-      <CardHeader>
-        <CardTitle>Matching Preferences</CardTitle>
-        <CardDescription>Customize your connection experience</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="space-y-3">
-          <Label>Industries of Interest</Label>
-          <div className="grid grid-cols-2 gap-2">
-            {industries.slice(0, 12).map((industry) => (
-              <label key={industry} className="flex items-center space-x-2 cursor-pointer">
-                <Checkbox
-                  checked={formData.preferredIndustries.includes(industry)}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setFormData({
-                        ...formData,
-                        preferredIndustries: [...formData.preferredIndustries, industry]
-                      });
-                    } else {
-                      setFormData({
-                        ...formData,
-                        preferredIndustries: formData.preferredIndustries.filter(i => i !== industry)
-                      });
-                    }
-                  }}
-                />
-                <span className="text-sm">{industry}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <Label>Connection Goals</Label>
-          <div className="space-y-2">
-            {[
-              'Secure funding',
-              'Find investment opportunities',
-              'Strategic partnerships',
-              'Mentorship',
-              'Board positions',
-              'Market expansion',
-              'Networking'
-            ].map((goal) => (
-              <label key={goal} className="flex items-center space-x-2 cursor-pointer">
-                <Checkbox
-                  checked={formData.connectionGoals.includes(goal)}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setFormData({
-                        ...formData,
-                        connectionGoals: [...formData.connectionGoals, goal]
-                      });
-                    } else {
-                      setFormData({
-                        ...formData,
-                        connectionGoals: formData.connectionGoals.filter(g => g !== goal)
-                      });
-                    }
-                  }}
-                />
-                <span className="text-sm">{goal}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  const renderPremiumTiers = () => (
-    <Card className="border-border/50 backdrop-blur-sm bg-card/95">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Choose Your Plan</CardTitle>
-        <CardDescription>Start free and upgrade anytime</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Free Tier */}
-          <div className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
-            formData.subscriptionTier === 'free' ? 'border-primary bg-primary/5' : 'border-border'
-          }`}
-          onClick={() => setFormData({ ...formData, subscriptionTier: 'free' })}>
-            <div className="text-center space-y-3">
-              <Heart className="w-8 h-8 mx-auto text-muted-foreground" />
-              <div className="space-y-1">
-                <h3 className="font-semibold">Free</h3>
-                <p className="text-2xl font-bold">$0<span className="text-sm text-muted-foreground">/month</span></p>
-              </div>
-              <ul className="text-sm space-y-2 text-left">
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />5 matches per day</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Basic messaging</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Profile creation</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Basic filters</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Premium Tier */}
-          <div className={`p-4 rounded-lg border-2 transition-all cursor-pointer relative ${
-            formData.subscriptionTier === 'premium' ? 'border-primary bg-primary/5' : 'border-border'
-          }`}
-          onClick={() => setFormData({ ...formData, subscriptionTier: 'premium' })}>
-            <Badge className="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-primary">
-              Most Popular
-            </Badge>
-            <div className="text-center space-y-3">
-              <Star className="w-8 h-8 mx-auto text-primary" />
-              <div className="space-y-1">
-                <h3 className="font-semibold">Premium</h3>
-                <p className="text-2xl font-bold">$29<span className="text-sm text-muted-foreground">/month</span></p>
-              </div>
-              <ul className="text-sm space-y-2 text-left">
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Unlimited matches</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Advanced messaging</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Priority matching</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Advanced filters</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Video pitches</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Analytics insights</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Pro Tier */}
-          <div className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
-            formData.subscriptionTier === 'pro' ? 'border-primary bg-primary/5' : 'border-border'
-          }`}
-          onClick={() => setFormData({ ...formData, subscriptionTier: 'pro' })}>
-            <div className="text-center space-y-3">
-              <Crown className="w-8 h-8 mx-auto text-yellow-500" />
-              <div className="space-y-1">
-                <h3 className="font-semibold">Pro</h3>
-                <p className="text-2xl font-bold">$99<span className="text-sm text-muted-foreground">/month</span></p>
-              </div>
-              <ul className="text-sm space-y-2 text-left">
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Everything in Premium</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />AI pitch coaching</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Direct introductions</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Deal room access</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Market intelligence</li>
-                <li className="flex items-center"><Check className="w-4 h-4 mr-2 text-green-500" />Concierge support</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  const renderComplete = () => (
-    <Card className="border-border/50 backdrop-blur-sm bg-card/95">
-      <CardHeader className="text-center">
-        <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full mx-auto mb-4 flex items-center justify-center">
-          <Check className="w-8 h-8 text-primary-foreground" />
-        </div>
-        <CardTitle className="text-2xl">You're all set!</CardTitle>
-        <CardDescription>
-          Your profile is ready. Let's start connecting you with the right people.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="text-center space-y-4">
-        <div className="bg-muted/50 rounded-lg p-4">
-          <h4 className="font-semibold mb-2">Profile Summary</h4>
-          <div className="text-sm text-muted-foreground space-y-1">
-            <p><strong>Role:</strong> {formData.role === 'entrepreneur' ? 'Entrepreneur' : 'Investor'}</p>
-            <p><strong>Industry:</strong> {formData.industry}</p>
-            <p><strong>Location:</strong> {formData.country}</p>
-            <p><strong>Plan:</strong> {formData.subscriptionTier === 'free' ? 'Free' : formData.subscriptionTier === 'premium' ? 'Premium' : 'Pro'}</p>
-          </div>
-        </div>
-        
-        <Button 
-          onClick={handleComplete} 
-          className="w-full" 
-          size="lg"
-          disabled={loading}
-        >
-          {loading ? (
-            <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2" />
-          ) : (
-            <Zap className="w-4 h-4 mr-2" />
-          )}
-          Start Matching
-        </Button>
-      </CardContent>
-    </Card>
-  );
-
   const canContinue = () => {
     switch (currentStep) {
+      case 'welcome':
+        return true;
+      case 'full-name':
+        return formData.fullName.trim().length > 0;
+      case 'linkedin':
+        return true; // Optional
+      case 'location':
+        return formData.country.length > 0;
       case 'role':
-        return !!formData.role;
-      case 'basic-info':
-        return !!(formData.fullName && formData.country && formData.industry);
-      case 'entrepreneur-details':
-        return !!(formData.fundingStage && formData.companySize);
-      case 'investor-details':
-        return !!(formData.investmentRange && formData.portfolioSize);
-      case 'preferences':
-        return formData.preferredIndustries.length > 0;
-      case 'premium-tier':
-        return !!formData.subscriptionTier;
+        return formData.role.length > 0;
+      case 'startup-name':
+        return formData.startupName.trim().length > 0;
+      case 'startup-industry':
+        return formData.startupIndustry.length > 0;
+      case 'startup-stage':
+        return formData.startupStage.length > 0;
       default:
         return true;
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
-        {/* Progress Bar */}
-        <div className="mb-6">
-          <div className="flex justify-between text-sm text-muted-foreground mb-2">
-            <span>Step {currentStepIndex + 1} of {steps.length}</span>
-            <span>{Math.round(progress)}% complete</span>
-          </div>
-          <Progress value={progress} className="h-2" />
-        </div>
+  const renderSlide = () => {
+    const slideClass = `
+      min-h-screen bg-gradient-to-br from-[#FF5A5F] via-[#1E1F26] to-[#2B2C34] 
+      flex items-center justify-center p-6 transition-all duration-700 ease-in-out
+      animate-fade-in
+    `;
 
-        {/* Step Content */}
-        <div className="space-y-6">
-          {currentStep === 'role' && renderRoleSelection()}
-          {currentStep === 'basic-info' && renderBasicInfo()}
-          {currentStep === 'entrepreneur-details' && renderEntrepreneurDetails()}
-          {currentStep === 'investor-details' && renderInvestorDetails()}
-          {currentStep === 'preferences' && renderPreferences()}
-          {currentStep === 'premium-tier' && renderPremiumTiers()}
-          {currentStep === 'complete' && renderComplete()}
-
-          {/* Navigation */}
-          {currentStep !== 'complete' && (
-            <div className="flex justify-between">
-              <Button
-                variant="outline"
-                onClick={prevStep}
-                disabled={currentStepIndex === 0}
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
-              </Button>
-              
-              <Button
+    switch (currentStep) {
+      case 'welcome':
+        return (
+          <div className={slideClass}>
+            <div className="text-center text-white max-w-md space-y-8 animate-fade-in">
+              <div className="space-y-4">
+                <h1 className="text-4xl font-bold tracking-tight">Welcome to Pitchify</h1>
+                <p className="text-xl text-white/80">Let's personalize your experience</p>
+              </div>
+              <Button 
                 onClick={nextStep}
-                disabled={!canContinue()}
+                size="lg"
+                className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full"
               >
-                Continue
-                <ArrowRight className="w-4 h-4 ml-2" />
+                Start <ChevronRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
-          )}
+          </div>
+        );
+
+      case 'full-name':
+        return (
+          <div className={slideClass}>
+            <div className="w-full max-w-md text-center space-y-8 animate-fade-in">
+              <h2 className="text-3xl font-bold text-white">What's your full name?</h2>
+              <Input
+                value={formData.fullName}
+                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                placeholder="Enter your full name"
+                className="text-center text-xl py-6 bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                onKeyPress={(e) => e.key === 'Enter' && canContinue() && nextStep()}
+                autoFocus
+              />
+              {canContinue() && (
+                <Button 
+                  onClick={nextStep}
+                  size="lg"
+                  className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full animate-scale-in"
+                >
+                  Continue <ChevronRight className="ml-2 w-5 h-5" />
+                </Button>
+              )}
+            </div>
+          </div>
+        );
+
+      case 'linkedin':
+        return (
+          <div className={slideClass}>
+            <div className="w-full max-w-md text-center space-y-8 animate-fade-in">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold text-white">What's your LinkedIn profile?</h2>
+                <p className="text-white/70">(Optional)</p>
+              </div>
+              <div className="relative">
+                <Input
+                  value={formData.linkedinProfile}
+                  onChange={(e) => setFormData({ ...formData, linkedinProfile: e.target.value })}
+                  placeholder="linkedin.com/in/yourprofile"
+                  className="text-center text-lg py-6 pl-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                  onKeyPress={(e) => e.key === 'Enter' && nextStep()}
+                />
+                <Link className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/60" />
+              </div>
+              <Button 
+                onClick={nextStep}
+                size="lg"
+                className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full"
+              >
+                Continue <ChevronRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+        );
+
+      case 'location':
+        return (
+          <div className={slideClass}>
+            <div className="w-full max-w-md text-center space-y-8 animate-fade-in">
+              <h2 className="text-3xl font-bold text-white">Where are you currently based?</h2>
+              <Select value={formData.country} onValueChange={(value) => setFormData({ ...formData, country: value })}>
+                <SelectTrigger className="text-center text-lg py-6 bg-white/10 border-white/20 text-white">
+                  <div className="flex items-center justify-center gap-2">
+                    <MapPin className="w-5 h-5" />
+                    <SelectValue placeholder="Select your country" />
+                  </div>
+                </SelectTrigger>
+                <SelectContent>
+                  {countries.map((country) => (
+                    <SelectItem key={country} value={country}>
+                      {country}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {canContinue() && (
+                <Button 
+                  onClick={nextStep}
+                  size="lg"
+                  className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full animate-scale-in"
+                >
+                  Continue <ChevronRight className="ml-2 w-5 h-5" />
+                </Button>
+              )}
+            </div>
+          </div>
+        );
+
+      case 'role':
+        return (
+          <div className={slideClass}>
+            <div className="w-full max-w-2xl text-center space-y-8 animate-fade-in">
+              <h2 className="text-3xl font-bold text-white">Which best describes you?</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { value: 'founder', icon: Rocket, label: "I'm a Founder", desc: 'Looking for investors' },
+                  { value: 'investor', icon: DollarSign, label: "I'm an Investor", desc: 'Looking for startups' },
+                  { value: 'both', icon: Handshake, label: "I'm Both", desc: 'Founder & Investor' }
+                ].map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={() => setFormData({ ...formData, role: option.value as any })}
+                    className={`p-6 rounded-2xl border-2 transition-all duration-300 ${
+                      formData.role === option.value
+                        ? 'border-white bg-white/20 scale-105'
+                        : 'border-white/30 bg-white/5 hover:bg-white/10'
+                    }`}
+                  >
+                    <option.icon className="w-8 h-8 text-white mx-auto mb-3" />
+                    <div className="text-white font-semibold text-lg">{option.label}</div>
+                    <div className="text-white/70 text-sm mt-1">{option.desc}</div>
+                  </button>
+                ))}
+              </div>
+              {canContinue() && (
+                <Button 
+                  onClick={nextStep}
+                  size="lg"
+                  className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full animate-scale-in"
+                >
+                  Continue <ChevronRight className="ml-2 w-5 h-5" />
+                </Button>
+              )}
+            </div>
+          </div>
+        );
+
+      case 'startup-name':
+        return (
+          <div className={slideClass}>
+            <div className="w-full max-w-md text-center space-y-8 animate-fade-in">
+              <h2 className="text-3xl font-bold text-white">What's the name of your startup?</h2>
+              <Input
+                value={formData.startupName}
+                onChange={(e) => setFormData({ ...formData, startupName: e.target.value })}
+                placeholder="Enter your startup name"
+                className="text-center text-xl py-6 bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                onKeyPress={(e) => e.key === 'Enter' && canContinue() && nextStep()}
+                autoFocus
+              />
+              {canContinue() && (
+                <Button 
+                  onClick={nextStep}
+                  size="lg"
+                  className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full animate-scale-in"
+                >
+                  Continue <ChevronRight className="ml-2 w-5 h-5" />
+                </Button>
+              )}
+            </div>
+          </div>
+        );
+
+      case 'startup-industry':
+        return (
+          <div className={slideClass}>
+            <div className="w-full max-w-2xl text-center space-y-8 animate-fade-in">
+              <h2 className="text-3xl font-bold text-white">What industry or category best fits your startup?</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {industries.map((industry) => (
+                  <button
+                    key={industry.label}
+                    onClick={() => {
+                      const isSelected = formData.startupIndustry.includes(industry.label);
+                      setFormData({
+                        ...formData,
+                        startupIndustry: isSelected
+                          ? formData.startupIndustry.filter(i => i !== industry.label)
+                          : [...formData.startupIndustry, industry.label]
+                      });
+                    }}
+                    className={`p-4 rounded-xl border-2 transition-all duration-300 ${
+                      formData.startupIndustry.includes(industry.label)
+                        ? 'border-white bg-white/20'
+                        : 'border-white/30 bg-white/5 hover:bg-white/10'
+                    }`}
+                  >
+                    <div className="text-2xl mb-2">{industry.icon}</div>
+                    <div className="text-white font-medium text-sm">{industry.label}</div>
+                  </button>
+                ))}
+              </div>
+              {canContinue() && (
+                <Button 
+                  onClick={nextStep}
+                  size="lg"
+                  className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full animate-scale-in"
+                >
+                  Continue <ChevronRight className="ml-2 w-5 h-5" />
+                </Button>
+              )}
+            </div>
+          </div>
+        );
+
+      case 'startup-stage':
+        return (
+          <div className={slideClass}>
+            <div className="w-full max-w-2xl text-center space-y-8 animate-fade-in">
+              <h2 className="text-3xl font-bold text-white">What stage are you currently at?</h2>
+              <div className="space-y-4">
+                {startupStages.map((stage) => (
+                  <button
+                    key={stage.label}
+                    onClick={() => setFormData({ ...formData, startupStage: stage.label })}
+                    className={`w-full p-4 rounded-xl border-2 transition-all duration-300 flex items-center gap-4 ${
+                      formData.startupStage === stage.label
+                        ? 'border-white bg-white/20'
+                        : 'border-white/30 bg-white/5 hover:bg-white/10'
+                    }`}
+                  >
+                    <div className="text-2xl">{stage.icon}</div>
+                    <div className="text-white font-medium text-left">{stage.label}</div>
+                  </button>
+                ))}
+              </div>
+              {canContinue() && (
+                <Button 
+                  onClick={nextStep}
+                  size="lg"
+                  className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full animate-scale-in"
+                >
+                  Continue <ChevronRight className="ml-2 w-5 h-5" />
+                </Button>
+              )}
+            </div>
+          </div>
+        );
+
+      case 'complete':
+        return (
+          <div className={slideClass}>
+            <div className="text-center text-white max-w-md space-y-8 animate-fade-in">
+              <div className="space-y-6">
+                <CheckCircle className="w-16 h-16 text-white mx-auto" />
+                <h1 className="text-4xl font-bold tracking-tight">🎉 That's it!</h1>
+                <p className="text-xl text-white/80">Your profile is being created!</p>
+                <p className="text-white/70">We're curating the best matches for you.</p>
+              </div>
+              <Button 
+                onClick={handleComplete}
+                disabled={loading}
+                size="lg"
+                className="bg-white text-[#FF5A5F] hover:bg-white/90 font-semibold px-8 py-3 rounded-full"
+              >
+                {loading ? 'Creating Profile...' : 'Launch Pitchify'} <Zap className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+        );
+
+      default:
+        return (
+          <div className={slideClass}>
+            <div className="text-center text-white">
+              <h2 className="text-2xl font-bold">Step not implemented yet</h2>
+              <Button onClick={nextStep} className="mt-4">Continue</Button>
+            </div>
+          </div>
+        );
+    }
+  };
+
+  return (
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Progress indicator */}
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+          <span className="text-white/90 text-sm font-medium">
+            Step {currentStepIndex + 1} of {steps.length}
+          </span>
         </div>
       </div>
+
+      {/* Slide content */}
+      {renderSlide()}
     </div>
   );
 }
