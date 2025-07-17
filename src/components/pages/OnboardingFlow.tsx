@@ -236,13 +236,16 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
 
   const handleComplete = async () => {
     try {
+      // Handle the 'both' role case - default to 'entrepreneur' for database constraint
+      const dbRole = formData.role === 'both' ? 'entrepreneur' : formData.role;
+      
       const profileData = {
         user_id: userId,
         email: userEmail,
         full_name: formData.full_name,
         linkedin_url: formData.linkedin_url || null,
         country: formData.country,
-        role: formData.role,
+        role: dbRole,
         industry: formData.industry || null,
         funding_stage: formData.funding_stage || null,
         bio: formData.bio || null,
