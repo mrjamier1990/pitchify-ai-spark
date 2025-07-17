@@ -739,19 +739,15 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     Match Preferences
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="p-4 bg-muted/30 rounded-lg border border-amber-200 dark:border-amber-800">
+                <CardContent className="space-y-4">                  <div className="p-4 rounded-lg border-coral" style={{ background: 'transparent' }}>
                     <div className="flex items-start space-x-2">
-                      <Shield className="w-5 h-5 text-amber-600 mt-0.5" />
+                      <Shield className="w-5 h-5 text-white mt-0.5" />
                       <div>
-                        <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+                        <p className="text-sm font-medium text-white">
                           Idea Protection Policy
                         </p>
-                        <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
-                          For confidentiality protection, {profile?.role === 'investor' 
-                            ? 'investors can only match with entrepreneurs'
-                            : 'entrepreneurs can only match with investors'
-                          }. Same-role matching is permanently disabled to prevent idea theft.
+                        <p className="text-xs text-white mt-1">
+                          For confidentiality protection, entrepreneurs can only match with investors. Same-role matching is permanently disabled to prevent idea theft.
                         </p>
                       </div>
                     </div>

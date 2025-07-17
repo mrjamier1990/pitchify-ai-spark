@@ -126,7 +126,7 @@ export function AuthPage() {
           </p>
         </div>
 
-        <Card className="border-border/50 backdrop-blur-sm bg-card/95">
+        <Card className="border-border/50 backdrop-blur-sm bg-card/95 coral-glow">
           <Tabs defaultValue="signin" className="w-full">
             <CardHeader className="space-y-1">
               <TabsList className="grid w-full grid-cols-2">

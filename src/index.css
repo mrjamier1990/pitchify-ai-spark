@@ -127,8 +127,22 @@ Deep charcoal backgrounds, champagne gold accents, soft sky blue highlights
   }
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus, textarea:focus, select:focus, .select-trigger:focus {
   outline: none;
-  border-color: #ff5a5f !important;
+  border-color: #72bfe2 !important;
   box-shadow: none !important;
+  --tw-ring-color: transparent !important;
+  --tw-ring-shadow: none !important;
+}
+
+.border-coral {
+  border: 2px solid #FF5A5F !important;
+}
+
+.coral-glow {
+  transition: box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.coral-glow:hover {
+  box-shadow: 0 0 36px 6px #ff7a3d88, 0 6px 20px 0 #1e293b88, 0 2px 12px 0 #ff7a3d44;
+  transform: scale(1.035);
 }
