@@ -115,14 +115,16 @@ export function AuthPage() {
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl mx-auto mb-4 flex items-center justify-center">
+          <div className="w-16 h-16 bg-gradient-to-br from-[#72bfe2] to-[#3B82F6] rounded-2xl mx-auto mb-4 flex items-center justify-center">
             <User className="w-8 h-8 text-primary-foreground" />
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h1
+            className="text-3xl font-bold bg-gradient-to-r from-[#FF5A5F] to-[#FF8E53] bg-clip-text text-transparent drop-shadow-[0_6px_24px_rgba(255,142,83,0.18)] scale-105"
+          >
             Welcome to Pitchify
           </h1>
           <p className="text-muted-foreground mt-2">
-            Connect founders with investors
+            Connecting founders with investors
           </p>
         </div>
 
