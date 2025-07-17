@@ -39,9 +39,16 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
         return;
       }
 
-      toast.success('Account deleted successfully');
-      // Redirect to auth page
-      window.location.href = '/';
+      if (data?.success) {
+        toast.success('Account deleted successfully');
+        // Force logout and redirect to home
+        await supabase.auth.signOut();
+        // Clear local storage to ensure clean state
+        localStorage.clear();
+        window.location.href = '/';
+      } else {
+        toast.error('Failed to delete account. Please try again.');
+      }
       
     } catch (error) {
       console.error('Unexpected error during account deletion:', error);

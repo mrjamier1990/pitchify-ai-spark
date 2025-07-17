@@ -13,10 +13,16 @@ serve(async (req) => {
   }
 
   try {
-    // Create Supabase client
-    const supabase = createClient(
+    // Create Supabase admin client
+    const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
+    );
+
+    // Create regular client to get user
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
     );
 
     // Get user from JWT
@@ -41,20 +47,37 @@ serve(async (req) => {
 
     console.log(`Deleting account for user: ${user.id}`);
 
-    // Call the database function to delete everything
-    const { data, error } = await supabase.rpc('delete_user_completely', {
-      user_id: user.id
-    });
+    // Delete user profile and matches first (these will be deleted by foreign key constraints anyway)
+    const { error: profileError } = await supabaseAdmin
+      .from('profiles')
+      .delete()
+      .eq('user_id', user.id);
 
-    if (error) {
-      console.error('Database deletion error:', error);
+    if (profileError) {
+      console.error('Profile deletion error:', profileError);
+    }
+
+    const { error: matchError } = await supabaseAdmin
+      .from('matches')
+      .delete()
+      .or(`user_id.eq.${user.id},matched_user_id.eq.${user.id}`);
+
+    if (matchError) {
+      console.error('Match deletion error:', matchError);
+    }
+
+    // Delete the user from auth.users using admin API
+    const { error: userDeleteError } = await supabaseAdmin.auth.admin.deleteUser(user.id);
+
+    if (userDeleteError) {
+      console.error('User deletion error:', userDeleteError);
       return new Response(
-        JSON.stringify({ error: 'Failed to delete account', details: error.message }),
+        JSON.stringify({ error: 'Failed to delete user account', details: userDeleteError.message }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    console.log('Account deletion result:', data);
+    console.log('Account deletion completed successfully');
 
     return new Response(
       JSON.stringify({ 
