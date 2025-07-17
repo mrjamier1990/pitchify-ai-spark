@@ -186,7 +186,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
           className="w-14 h-14 rounded-full bg-red-500/20 backdrop-blur-md border border-red-400/30 text-red-300 hover:bg-red-500/30 hover:border-red-400/50 hover:text-red-100 hover:shadow-[0_0_25px_rgba(239,68,68,0.4)] transform hover:scale-105 hover:translate-y-[-2px] transition-all duration-300 group relative overflow-hidden"
           onClick={() => handleButtonAction("pass")}
         >
-          <div className="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+          <div className="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <X className="w-7 h-7 group-hover:rotate-90 transition-transform duration-300 relative z-10 stroke-2" />
         </Button>
         
@@ -207,7 +207,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
           className="w-14 h-14 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 text-emerald-300 hover:bg-emerald-500/30 hover:border-emerald-400/50 hover:text-emerald-100 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)] transform hover:scale-105 hover:translate-y-[-2px] transition-all duration-300 group relative overflow-hidden"
           onClick={() => handleButtonAction("like")}
         >
-          <div className="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+          <div className="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <Heart className="w-7 h-7 group-hover:scale-110 transition-transform duration-300 relative z-10 stroke-2 fill-current" />
         </Button>
       </div>
