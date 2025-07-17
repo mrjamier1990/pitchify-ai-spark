@@ -357,10 +357,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
               placeholder="Enter your full name"
               value={formData.full_name}
               onChange={(e) => setFormData(prev => ({ ...prev, full_name: e.target.value }))}
-              className="text-lg p-6 border-2 border-transparent bg-gradient-to-r from-[#FF5A5F] to-[#FF8E53] bg-clip-border focus:shadow-lg focus:shadow-[#FF5A5F]/30 transition-all duration-300"
-              style={{ 
-                background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5A5F, #FF8E53) border-box'
-              }}
+              className="text-lg p-6 border-2 focus:border-primary transition-colors"
             />
           </div>
         );
