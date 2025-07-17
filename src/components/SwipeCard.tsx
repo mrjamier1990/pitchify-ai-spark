@@ -162,13 +162,16 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
             {profile.bio}
           </p>
           
-          {/* Hover Bubble */}
-          <div className="absolute bottom-full left-0 right-0 mb-2 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-20 pointer-events-none">
-            <div className="bg-black/90 backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
-              <p className="text-sm text-white leading-relaxed font-normal">
+          {/* Premium Hover Bubble */}
+          <div className="absolute bottom-full left-0 right-0 mb-3 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 z-20 pointer-events-none">
+            <div className="bg-gradient-to-br from-card via-background to-card/90 backdrop-blur-xl rounded-2xl p-5 border border-primary/30 shadow-[0_0_50px_rgba(0,0,0,0.5),0_0_100px_hsl(var(--primary)/0.3),inset_0_1px_0_rgba(255,255,255,0.1)] relative mx-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl"></div>
+              <p className="text-sm text-foreground leading-relaxed font-medium relative z-10">
                 {profile.bio}
               </p>
-              <div className="absolute top-full left-4 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-black/90"></div>
+              {/* Premium Triangle Pointer */}
+              <div className="absolute top-full left-6 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-card drop-shadow-lg"></div>
+              <div className="absolute top-full left-7 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[10px] border-l-transparent border-r-transparent border-t-primary/20"></div>
             </div>
           </div>
         </div>
