@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { MainApp } from "@/components/MainApp";
 import { AuthPage } from "@/components/pages/AuthPage";
-import { OnboardingFlow } from "@/components/pages/OnboardingFlow";
+import { PremiumOnboardingFlow } from "@/components/pages/PremiumOnboardingFlow";
 
 const Index = () => {
   const { user, loading, needsOnboarding, setNeedsOnboarding } = useAuth();
@@ -24,7 +24,7 @@ const Index = () => {
 
   if (needsOnboarding) {
     return (
-      <OnboardingFlow
+      <PremiumOnboardingFlow
         onComplete={() => setNeedsOnboarding(false)}
         userEmail={user.email || ''}
         userId={user.id}
