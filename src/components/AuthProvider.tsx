@@ -36,7 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       
       setProfile(data);
-      setNeedsOnboarding(!data);
+      setNeedsOnboarding(!data || !data.onboarding_completed);
     } catch (error) {
       console.error('Error loading profile:', error);
     }

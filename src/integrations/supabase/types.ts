@@ -62,6 +62,7 @@ export type Database = {
           investor_type: string | null
           investor_type_preference: string[] | null
           linkedin_url: string | null
+          onboarding_completed: boolean | null
           open_to_connect: boolean | null
           pitch_deck_url: string | null
           pitch_video_url: string | null
@@ -100,6 +101,7 @@ export type Database = {
           investor_type?: string | null
           investor_type_preference?: string[] | null
           linkedin_url?: string | null
+          onboarding_completed?: boolean | null
           open_to_connect?: boolean | null
           pitch_deck_url?: string | null
           pitch_video_url?: string | null
@@ -138,6 +140,7 @@ export type Database = {
           investor_type?: string | null
           investor_type_preference?: string[] | null
           linkedin_url?: string | null
+          onboarding_completed?: boolean | null
           open_to_connect?: boolean | null
           pitch_deck_url?: string | null
           pitch_video_url?: string | null

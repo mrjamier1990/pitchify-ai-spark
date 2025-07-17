@@ -259,11 +259,12 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         preferred_stages: formData.preferred_stages.length > 0 ? formData.preferred_stages : null,
         regional_focus: formData.regional_focus.length > 0 ? formData.regional_focus : null,
         why_good_fit: formData.why_good_fit || null,
+        onboarding_completed: true,
       };
 
       const { error } = await supabase
         .from('profiles')
-        .insert([profileData]);
+        .upsert([profileData]);
 
       if (error) throw error;
 
