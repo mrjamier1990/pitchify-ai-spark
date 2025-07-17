@@ -277,17 +277,17 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto">
-        <div className="p-4 space-y-6 max-w-4xl mx-auto pb-8">
-          <Tabs defaultValue="profile" className="w-full">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden">
+        <div className="p-4 space-y-6 max-w-4xl mx-auto pb-8 w-full min-w-0">
+          <Tabs defaultValue="profile" className="w-full min-w-0">
             <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="profile">Profile</TabsTrigger>
-              <TabsTrigger value="filters">Filters</TabsTrigger>
-              <TabsTrigger value="subscription">Premium</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
+              <TabsTrigger value="profile" className="truncate px-2 sm:px-4">Profile</TabsTrigger>
+              <TabsTrigger value="filters" className="truncate px-2 sm:px-4">Filters</TabsTrigger>
+              <TabsTrigger value="subscription" className="truncate px-1 sm:px-4">Premium</TabsTrigger>
+              <TabsTrigger value="settings" className="truncate px-2 sm:px-4">Settings</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="profile" className="space-y-6">
+            <TabsContent value="profile" className="space-y-6 w-full min-w-0">
               {/* Profile Header */}
               <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
                 <CardContent className="p-4 md:p-6">
@@ -457,7 +457,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                           <Label>Social Media & Calendar</Label>
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <Button variant="outline" className="w-full justify-between">
+                              <Button variant="outline" className="w-full justify-between min-w-0 max-w-full">
                                 <span className="flex items-center gap-2">
                                   <Link2 className="w-4 h-4" />
                                   Add Social Media Link
@@ -465,7 +465,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                                 <ChevronDown className="w-4 h-4" />
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-full bg-background border border-border shadow-lg z-50">
+                            <DropdownMenuContent className="w-56 bg-background border border-border shadow-lg z-50">
                               {socialPlatforms.map((platform) => (
                                 <DropdownMenuItem 
                                   key={platform.key}
@@ -564,7 +564,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               {/* Profile Stats */}
               <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
                 <CardContent className="p-6">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full overflow-hidden">
                     <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-purple-600/20 rounded-lg border border-purple-500/20">
                       <div className="text-xl md:text-2xl font-bold text-purple-600">247</div>
                       <div className="text-xs md:text-sm text-purple-600/80 flex items-center justify-center gap-1">
@@ -672,7 +672,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     <Progress value={85} className="h-2" />
                   </div>
                   
-                  <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2">
+                  <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2 w-full">
                     <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto">
                       <Download className="w-4 h-4" />
                       Export Data
