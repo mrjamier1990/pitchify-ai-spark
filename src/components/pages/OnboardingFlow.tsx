@@ -267,7 +267,10 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
 
       const { error } = await supabase
         .from('profiles')
-        .upsert([profileData]);
+        .upsert([profileData], { 
+          onConflict: 'user_id',
+          ignoreDuplicates: false 
+        });
 
       if (error) throw error;
 
