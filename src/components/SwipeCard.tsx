@@ -58,6 +58,39 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
     setDragOffset({ x: 0, y: 0 });
   };
 
+  // Touch event handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setStartPos({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    e.preventDefault(); // Prevent scrolling
+    
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - startPos.x;
+    const deltaY = touch.clientY - startPos.y;
+    setDragOffset({ x: deltaX, y: deltaY });
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    
+    const threshold = 100;
+    const { x, y } = dragOffset;
+    
+    if (Math.abs(x) > threshold) {
+      onSwipe(x > 0 ? "right" : "left");
+    } else if (y < -threshold) {
+      onSwipe("up");
+    }
+    
+    setIsDragging(false);
+    setDragOffset({ x: 0, y: 0 });
+  };
+
   const rotation = isDragging ? dragOffset.x * 0.1 : 0;
   const opacity = isDragging ? Math.max(0.7, 1 - Math.abs(dragOffset.x) / 300) : 1;
 
@@ -74,6 +107,9 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Profile Image */}
       <div className="relative h-2/3 overflow-hidden">
