@@ -178,36 +178,33 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         />
       </div>
 
-      {/* Action Buttons */}
+      {/* Enhanced Action Buttons with Smooth Animations */}
       <div className="flex items-center justify-center gap-8 px-6 py-5 bg-background/90 backdrop-blur-md">
         <Button
           variant="glass"
           size="lg" 
-          className="w-14 h-14 rounded-full bg-red-500/20 backdrop-blur-md border border-red-400/30 text-red-300 hover:bg-red-500/30 hover:border-red-400/50 hover:text-red-100 hover:shadow-[0_0_25px_rgba(239,68,68,0.4)] transform hover:scale-105 hover:translate-y-[-2px] transition-all duration-300 group relative overflow-hidden"
+          className="w-14 h-14 rounded-full bg-red-500/20 backdrop-blur-md border border-red-400/30 text-red-300 hover:bg-red-500/30 hover:border-red-400/50 hover:text-red-100 hover:shadow-[0_0_25px_rgba(239,68,68,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-500 group relative overflow-hidden"
           onClick={() => handleButtonAction("pass")}
         >
-          <div className="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <X className="w-7 h-7 group-hover:rotate-90 transition-transform duration-300 relative z-10 stroke-2" />
         </Button>
         
         <Button
           variant="premium"
           size="xl"
-          className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-600/30 backdrop-blur-md border border-blue-400/40 text-blue-200 hover:from-blue-500/50 hover:to-purple-600/50 hover:border-blue-400/60 hover:text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transform hover:scale-110 hover:translate-y-[-3px] transition-all duration-300 group relative overflow-hidden"
+          className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-600/30 backdrop-blur-md border border-blue-400/40 text-blue-200 hover:from-blue-500/50 hover:to-purple-600/50 hover:border-blue-400/60 hover:text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transform hover:scale-125 hover:translate-y-[-6px] transition-all duration-500 group relative overflow-hidden"
           onClick={() => handleButtonAction("superlike")}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <div className="absolute inset-0 bg-blue-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
           <Star className="w-8 h-8 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 relative z-10 fill-current" />
         </Button>
         
         <Button
           variant="glass"
           size="lg"
-          className="w-14 h-14 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 text-emerald-300 hover:bg-emerald-500/30 hover:border-emerald-400/50 hover:text-emerald-100 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)] transform hover:scale-105 hover:translate-y-[-2px] transition-all duration-300 group relative overflow-hidden"
+          className="w-14 h-14 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 text-emerald-300 hover:bg-emerald-500/30 hover:border-emerald-400/50 hover:text-emerald-100 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-500 group relative overflow-hidden"
           onClick={() => handleButtonAction("like")}
         >
-          <div className="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <Heart className="w-7 h-7 group-hover:scale-110 transition-transform duration-300 relative z-10 stroke-2 fill-current" />
         </Button>
       </div>
