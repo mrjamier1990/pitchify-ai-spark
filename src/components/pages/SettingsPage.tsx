@@ -1,14 +1,65 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { ArrowLeft, Bell, Shield, CreditCard, HelpCircle, LogOut, Star } from "lucide-react";
+import { ArrowLeft, Bell, Shield, CreditCard, HelpCircle, LogOut, Star, Trash2 } from "lucide-react";
 import { PageType } from "../MainApp";
+import { useAuth } from "../AuthProvider";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface SettingsPageProps {
   onNavigate: (page: PageType) => void;
 }
 
 export function SettingsPage({ onNavigate }: SettingsPageProps) {
+  const { signOut } = useAuth();
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDeleteAccount = async () => {
+    try {
+      setIsDeleting(true);
+      
+      const { data, error } = await supabase.functions.invoke('delete-account');
+      
+      if (error) {
+        console.error('Delete account error:', error);
+        toast.error('Failed to delete account. Please try again.');
+        return;
+      }
+
+      toast.success('Account deleted successfully');
+      // Redirect to auth page
+      window.location.href = '/';
+      
+    } catch (error) {
+      console.error('Unexpected error during account deletion:', error);
+      toast.error('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      toast.success('Signed out successfully');
+    } catch (error) {
+      console.error('Sign out error:', error);
+      toast.error('Failed to sign out');
+    }
+  };
   return (
     <div className="h-full bg-background flex flex-col">
       {/* Header */}
@@ -105,9 +156,40 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
             <Button variant="ghost" className="w-full justify-start h-12">
               Subscription & Billing
             </Button>
-            <Button variant="ghost" className="w-full justify-start h-12">
-              Delete Account
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" className="w-full justify-start h-12 text-destructive hover:text-destructive">
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Delete Account
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Delete Account Permanently</AlertDialogTitle>
+                  <AlertDialogDescription className="space-y-2">
+                    <p>This action cannot be undone. This will permanently:</p>
+                    <ul className="list-disc list-inside space-y-1 text-sm">
+                      <li>Delete your profile and all personal data</li>
+                      <li>Remove all your matches and conversations</li>
+                      <li>Delete your account from our system</li>
+                    </ul>
+                    <p className="text-destructive font-semibold">
+                      If you sign up again with the same email, you'll start completely fresh.
+                    </p>
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={handleDeleteAccount}
+                    disabled={isDeleting}
+                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                  >
+                    {isDeleting ? 'Deleting...' : 'Delete Forever'}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </Card>
 
@@ -136,7 +218,7 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
 
         {/* Sign Out */}
         <Card className="p-6 bg-card border-border">
-          <Button variant="destructive" className="w-full">
+          <Button variant="destructive" className="w-full" onClick={handleSignOut}>
             <LogOut className="w-4 h-4 mr-2" />
             Sign Out
           </Button>

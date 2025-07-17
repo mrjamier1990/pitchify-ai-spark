@@ -49,8 +49,21 @@ import {
   ChevronDown,
   Instagram,
   Facebook,
-  Twitter
+  Twitter,
+  Trash2
 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 interface PersonalProfilePageProps {
   onNavigate: (page: PageType) => void;
@@ -117,10 +130,11 @@ const industryOptions = [
 
 export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
   const { user, profile, signOut, refreshProfile } = useAuth();
-  const { toast } = useToast();
+  const { toast: useToastHook } = useToast();
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editingSocial, setEditingSocial] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [formData, setFormData] = useState({
     full_name: '',
     bio: '',
@@ -173,12 +187,12 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
       await refreshProfile();
       setEditMode(false);
-      toast({
+      useToastHook({
         title: 'Profile updated',
         description: 'Your profile has been saved successfully.',
       });
     } catch (error: any) {
-      toast({
+      useToastHook({
         title: 'Error',
         description: error.message || 'Failed to update profile',
         variant: 'destructive',
@@ -235,6 +249,30 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
   const handleSignOut = async () => {
     await signOut();
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      setIsDeleting(true);
+      
+      const { data, error } = await supabase.functions.invoke('delete-account');
+      
+      if (error) {
+        console.error('Delete account error:', error);
+        toast.error('Failed to delete account. Please try again.');
+        return;
+      }
+
+      toast.success('Account deleted successfully');
+      // Redirect to auth page
+      window.location.href = '/';
+      
+    } catch (error) {
+      console.error('Unexpected error during account deletion:', error);
+      toast.error('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   if (!user) {
@@ -952,9 +990,40 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
                   <div className="space-y-3">
                     <h4 className="font-medium">Danger Zone</h4>
-                    <Button variant="destructive" className="w-full">
-                      Delete Account
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="destructive" className="w-full">
+                          <Trash2 className="w-4 h-4 mr-2" />
+                          Delete Account
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Delete Account Permanently</AlertDialogTitle>
+                          <AlertDialogDescription className="space-y-2">
+                            <p>This action cannot be undone. This will permanently:</p>
+                            <ul className="list-disc list-inside space-y-1 text-sm">
+                              <li>Delete your profile and all personal data</li>
+                              <li>Remove all your matches and conversations</li>
+                              <li>Delete your account from our system</li>
+                            </ul>
+                            <p className="text-destructive font-semibold">
+                              If you sign up again with the same email, you'll start completely fresh.
+                            </p>
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={handleDeleteAccount}
+                            disabled={isDeleting}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          >
+                            {isDeleting ? 'Deleting...' : 'Delete Forever'}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </CardContent>
               </Card>
