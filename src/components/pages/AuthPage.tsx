@@ -118,11 +118,43 @@ export function AuthPage() {
           <div className="w-16 h-16 bg-gradient-to-br from-[#72bfe2] to-[#3B82F6] rounded-2xl mx-auto mb-4 flex items-center justify-center">
             <User className="w-8 h-8 text-primary-foreground" />
           </div>
-          <h1
-            className="text-3xl font-bold bg-gradient-to-r from-[#FF5A5F] to-[#FF8E53] bg-clip-text text-transparent drop-shadow-[0_6px_24px_rgba(255,142,83,0.18)] scale-105"
-          >
-            Welcome to Pitchify
-          </h1>
+          <div className="relative inline-block mb-2">
+            {/* Soft blue glow behind the text */}
+            <span
+              className="absolute inset-0 text-3xl font-bold select-none pointer-events-none blur-sm opacity-60"
+              style={{
+                color: "#3B82F6",
+                filter: "blur(6px)",
+                zIndex: 0,
+              }}
+              aria-hidden="true"
+            >
+              Welcome to Pitchify
+            </span>
+            {/* Animated shimmer gradient text */}
+            <span
+              className="relative text-3xl font-bold bg-gradient-to-r from-[#72bfe2] to-[#3B82F6] bg-clip-text text-transparent z-10 animate-shimmer"
+              style={{
+                backgroundSize: "200% auto",
+                animation: "shimmer 2.5s linear infinite",
+              }}
+            >
+              Welcome to Pitchify
+            </span>
+            {/* Add shimmer keyframes in your CSS */}
+            <style>
+              {`
+                @keyframes shimmer {
+                  0% {
+                    background-position: 200% center;
+                  }
+                  100% {
+                    background-position: -200% center;
+                  }
+                }
+              `}
+            </style>
+          </div>
           <p className="text-muted-foreground mt-2">
             Connecting founders with investors
           </p>
@@ -199,7 +231,8 @@ export function AuthPage() {
                   </Button>
                   <button
                     type="button"
-                    className="text-xs font-semibold px-4 py-2 rounded-lg border border-[#FF5A5F] text-[#FF5A5F] bg-transparent transition-all duration-200 ease-in-out hover:bg-[#FF5A5F]/10 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/40 mt-2"
+                    className="text-xs font-medium text-white bg-transparent transition-all duration-200 ease-in-out hover:drop-shadow-[0_0_8px_#72bfe2] focus:outline-none"
+                    style={{ alignSelf: 'center', marginTop: '2px' }}
                     onClick={() => {
                       // TODO: Implement forgot password logic or navigation
                       alert('Forgot password functionality coming soon!');
