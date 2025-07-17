@@ -41,7 +41,7 @@ Deep charcoal backgrounds, champagne gold accents, soft sky blue highlights
 
     --border: 210 10% 22%;
     --input: 210 10% 18%;
-    --ring: 45 75% 52%;
+    --ring: 0 100% 67%; /* #ff5a5f in HSL */
 
     --radius: 0.875rem;
 
@@ -105,7 +105,7 @@ Deep charcoal backgrounds, champagne gold accents, soft sky blue highlights
 
     --border: 210 15% 22%;
     --input: 210 15% 18%;
-    --ring: 45 65% 62%;
+    --ring: 0 100% 67%; /* #ff5a5f in HSL for dark mode */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -125,4 +125,10 @@ Deep charcoal backgrounds, champagne gold accents, soft sky blue highlights
   body {
     @apply bg-background text-foreground;
   }
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #ff5a5f !important;
+  box-shadow: none !important;
 }
