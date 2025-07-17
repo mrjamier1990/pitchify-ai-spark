@@ -124,8 +124,8 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
       whileTap={{ scale: 0.98 }}
       transition={{ 
         type: "spring", 
-        stiffness: 300, 
-        damping: 30 
+        stiffness: 600, 
+        damping: 15 
       }}
     >
       {/* Profile Image */}
@@ -277,28 +277,28 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
 
       {/* Swipe Indicators with smooth animations */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center bg-green-500/20 pointer-events-none"
+        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-400/30 to-green-500/30 pointer-events-none backdrop-blur-sm"
         style={{ opacity: likeOpacity }}
       >
         <motion.div 
-          className="bg-green-500 text-white px-6 py-3 rounded-xl font-bold text-xl transform rotate-12 backdrop-blur-md"
-          initial={{ scale: 0.8 }}
+          className="bg-gradient-to-r from-emerald-500 to-green-500 text-white px-8 py-4 rounded-2xl font-black text-2xl transform rotate-12 backdrop-blur-lg shadow-[0_0_40px_rgba(16,185,129,0.6)]"
+          initial={{ scale: 0.7 }}
           animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          transition={{ type: "spring", stiffness: 600, damping: 15 }}
         >
           I'M IN
         </motion.div>
       </motion.div>
 
       <motion.div
-        className="absolute inset-0 flex items-center justify-center bg-red-500/20 pointer-events-none"
+        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-400/30 to-rose-600/30 pointer-events-none backdrop-blur-sm"
         style={{ opacity: passOpacity }}
       >
         <motion.div 
-          className="bg-red-500 text-white px-6 py-3 rounded-xl font-bold text-xl transform -rotate-12 backdrop-blur-md"
-          initial={{ scale: 0.8 }}
+          className="bg-gradient-to-r from-red-500 to-rose-600 text-white px-8 py-4 rounded-2xl font-black text-2xl transform -rotate-12 backdrop-blur-lg shadow-[0_0_40px_rgba(239,68,68,0.6)]"
+          initial={{ scale: 0.7 }}
           animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          transition={{ type: "spring", stiffness: 600, damping: 15 }}
         >
           I'M OUT
         </motion.div>
