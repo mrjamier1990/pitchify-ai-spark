@@ -30,8 +30,8 @@ export function BottomNavigation({ currentPage, onNavigate }: BottomNavigationPr
               size="sm"
               className={`flex flex-col items-center gap-1 px-3 py-2 h-auto rounded-xl transition-all duration-300 ${
                 isActive 
-                  ? "text-primary bg-primary/10 shadow-glow" 
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  ? "text-primary bg-primary/10" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50 hover:shadow-glow"
               }`}
               onClick={() => onNavigate(item.id)}
             >
