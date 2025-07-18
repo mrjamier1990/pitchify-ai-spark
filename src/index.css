@@ -2,130 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Pitchify Design System - Dark Teal Brand Theme
-Dark charcoal backgrounds with signature teal accents
+/* Pitchify Design System - Premium Dark-First Networking App
+Deep charcoal backgrounds, champagne gold accents, soft sky blue highlights
 */
 
 @layer base {
   :root {
-    /* Dark Mode as Default */
-    --background: 222.2 84% 4.9%; /* Dark */
-    --foreground: 210 40% 98%; /* Light */
+    /* Premium Dark Theme - Primary Colors */
+    --background: 210 15% 11%; /* Deep Charcoal (#1C1C1E) */
+    --foreground: 210 5% 95%; /* Soft White (#F1F1F3) */
 
-    --card: 222.2 84% 4.9%; /* Dark */
-    --card-foreground: 210 40% 98%;
+    --card: 210 12% 16%; /* Graphite Black (#2A2A2D) */
+    --card-foreground: 210 5% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 210 12% 16%;
+    --popover-foreground: 210 5% 95%;
 
-    /* Primary */
-    --primary: 210 40% 98%; /* Light in dark mode */
-    --primary-foreground: 222.2 84% 4.9%;
-    --primary-glow: 168 76% 42%;
+    /* Electric Blue - Primary Brand Color */
+    --primary: 210 85% 65%; /* Electric Blue (#3B82F6) */
+    --primary-foreground: 210 15% 11%;
+    --primary-glow: 210 90% 75%; /* Lighter blue for glows */
 
-    /* Secondary */
-    --secondary: 217.2 32.6% 17.5%; /* Dark gray */
-    --secondary-foreground: 210 40% 98%;
+    /* Deep Purple - Secondary Accent */
+    --secondary: 210 12% 18%; /* Darker card variation */
+    --secondary-foreground: 210 5% 95%;
 
-    /* Muted */
-    --muted: 217.2 32.6% 17.5%; /* Dark gray */
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Emerald Green for CTAs and highlights */
+    --accent: 160 75% 60%; /* Emerald Green (#10B981) */
+    --accent-foreground: 210 15% 11%;
 
-    /* Accent - Teal */
-    --accent: 168 76% 42%; /* Teal (#1ABC9C) */
-    --accent-foreground: 210 40% 98%;
+    /* Muted tones - Ash Grey variations */
+    --muted: 210 10% 20%;
+    --muted-foreground: 210 8% 61%; /* Ash Grey (#9B9B9B) */
 
-    /* States */
-    --destructive: 0 84% 60%; /* Red */
-    --destructive-foreground: 210 40% 98%;
+    /* States and utilities */
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 210 5% 95%;
 
-    /* Borders and inputs */
-    --border: 217.2 32.6% 17.5%; /* Dark border */
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%; /* Light ring */
+    --border: 210 10% 22%;
+    --input: 210 10% 18%;
+    --ring: 0 100% 67%; /* #ff5a5f in HSL */
 
-    --radius: 0.5rem;
+    --radius: 0.875rem;
 
-    /* Brand Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(168 76% 42%) 0%, hsl(168 79% 28%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(168 76% 42%) 100%);
+    /* Premium Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--primary)) 100%);
     --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
-    --gradient-toggle: linear-gradient(135deg, hsl(168 76% 42%) 0%, hsl(168 79% 28%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(195 75% 75%) 100%);
 
-    /* Teal Glow Shadows */
-    --shadow-premium: 0 25px 50px -12px rgba(26, 188, 156, 0.3);
-    --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 80px rgba(26, 188, 156, 0.5);
-    --shadow-3d: 0 12px 25px -5px rgba(26, 188, 156, 0.4), 0 0 50px rgba(26, 188, 156, 0.3);
-    --shadow-teal: 0 8px 25px -8px rgba(26, 188, 156, 0.4);
-    --shadow-hover: 0 0 20px rgba(26, 188, 156, 0.8);
+    /* Premium Shadows & Glows */
+    --shadow-premium: 0 25px 50px -12px hsl(var(--primary) / 0.4);
+    --shadow-card: 0 10px 40px -10px hsl(var(--card) / 0.8);
+    --shadow-glow: 0 0 80px hsl(var(--primary) / 0.5);
+    --shadow-3d: 0 12px 25px -5px hsl(var(--primary) / 0.4), 0 0 50px hsl(var(--primary) / 0.3);
+    --shadow-accent: 0 8px 25px -8px hsl(var(--accent) / 0.4);
 
-    /* Brand Animations */
-    --transition-smooth: all 0.2s ease-in-out;
-    --transition-swift: all 0.15s ease-in-out;
+    /* Smooth Premium Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    --transition-swift: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    /* Success/Error States */
-    --success: 142 71% 45%; /* Success Green */
-    --success-foreground: 210 40% 98%;
-
     /* Sidebar tokens */
-    --sidebar-background: 222.2 84% 4.9%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 168 76% 42%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 17.5%;
-    --sidebar-ring: 168 76% 42%;
+    --sidebar-background: 210 12% 16%;
+    --sidebar-foreground: 210 5% 95%;
+    --sidebar-primary: 45 75% 52%;
+    --sidebar-primary-foreground: 210 15% 11%;
+    --sidebar-accent: 210 10% 20%;
+    --sidebar-accent-foreground: 210 5% 95%;
+    --sidebar-border: 210 10% 22%;
+    --sidebar-ring: 45 75% 52%;
   }
 
-  .light {
-    /* Light Mode Colors */
-    --background: 0 0% 100%; /* White */
-    --foreground: 222.2 84% 4.9%; /* Dark gray */
+  .dark {
+    /* Dark theme for Pitchify */
+    --background: 210 20% 8%; /* Deep charcoal background */
+    --foreground: 43 23% 96%; /* Elegant ivory text */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 210 18% 12%;
+    --card-foreground: 43 23% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 18% 12%;
+    --popover-foreground: 43 23% 96%;
 
-    /* Primary */
-    --primary: 222.2 47.4% 11.2%; /* Dark */
-    --primary-foreground: 210 40% 98%; /* Light */
-    --primary-glow: 168 76% 42%; /* Teal for glows */
+    /* Primary remains champagne gold */
+    --primary: 45 65% 62%;
+    --primary-foreground: 210 20% 8%;
+    --primary-glow: 45 80% 72%;
 
-    /* Secondary */
-    --secondary: 210 40% 96.1%; /* Light gray */
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 15% 15%;
+    --secondary-foreground: 43 23% 96%;
 
-    /* Muted */
-    --muted: 210 40% 96.1%; /* Light gray */
-    --muted-foreground: 215.4 16.3% 46.9%; /* Medium gray */
+    /* Sky blue accent */
+    --accent: 195 85% 65%;
+    --accent-foreground: 210 20% 8%;
 
-    /* Accent - Teal */
-    --accent: 168 76% 42%; /* Teal (#1ABC9C) */
-    --accent-foreground: 210 40% 98%;
+    --muted: 210 15% 18%;
+    --muted-foreground: 210 8% 65%;
 
-    /* States */
-    --destructive: 0 84% 60%; /* Red */
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 43 23% 96%;
 
-    /* Borders and inputs */
-    --border: 214.3 31.8% 91.4%; /* Light border */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%; /* Dark ring */
-
-    /* Sidebar tokens for light mode */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222.2 84% 4.9%;
-    --sidebar-primary: 168 76% 42%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 210 40% 96.1%;
-    --sidebar-accent-foreground: 222.2 84% 4.9%;
-    --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 168 76% 42%;
+    --border: 210 15% 22%;
+    --input: 210 15% 18%;
+    --ring: 0 100% 67%; /* #ff5a5f in HSL for dark mode */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -139,119 +127,22 @@ Dark charcoal backgrounds with signature teal accents
   }
 }
 
-/* Import Inter font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap');
-
-/* Brand keyframes and animations */
-@keyframes accordion-down {
-  from {
-    height: 0;
-    opacity: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-    opacity: 1;
-  }
-}
-
-@keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-    opacity: 1;
-  }
-  to {
-    height: 0;
-    opacity: 0;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes ripple-animation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(26, 188, 156, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(26, 188, 156, 0.8), 0 0 30px rgba(26, 188, 156, 0.4);
-  }
-}
-
-/* Input focus styles with teal theme */
 input:focus, textarea:focus, select:focus, .select-trigger:focus {
   outline: none;
-  border-color: hsl(168 76% 42%) !important;
-  box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.3) !important;
+  border-color: #72bfe2 !important;
+  box-shadow: none !important;
   --tw-ring-color: transparent !important;
   --tw-ring-shadow: none !important;
 }
 
-/* Interactive element classes */
-.teal-glow {
-  transition: var(--transition-smooth);
+.border-coral {
+  border: 2px solid #FF5A5F !important;
 }
 
-.teal-glow:hover {
-  box-shadow: var(--shadow-hover);
-  transform: scale(1.03) translateY(-2px);
+.blue-glow {
+  transition: box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.teal-glow:active {
-  transform: scale(0.98);
-}
-
-.ripple-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.ripple-effect::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(26, 188, 156, 0.4);
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease-out, height 0.3s ease-out;
-}
-
-.ripple-effect:active::after {
-  width: 200px;
-  height: 200px;
-}
-
-.card-glow {
-  transition: var(--transition-smooth);
-  border: 1px solid transparent;
-}
-
-.card-glow:hover {
-  border-color: rgba(26, 188, 156, 0.3);
-  box-shadow: var(--shadow-glow);
-}
-
-.pulse-glow {
-  animation: pulse-glow 1.5s infinite;
+.blue-glow:hover {
+  box-shadow: 0 0 80px hsl(var(--primary) / 0.5), 0 8px 32px 0 #1e293b99, 0 2px 24px 0 hsl(var(--primary) / 0.3);
+  transform: scale(1.035);
 }
