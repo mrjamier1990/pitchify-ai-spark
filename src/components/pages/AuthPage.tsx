@@ -98,7 +98,10 @@ export function AuthPage() {
               onMouseLeave={() => { document.getElementById('icons-signin').style.opacity = '0'; }}
               onFocus={() => { document.getElementById('icons-signin').style.opacity = '1'; }}
               onBlur={() => { document.getElementById('icons-signin').style.opacity = '0'; }}
-              onClick={() => setMode('signin')}
+              onClick={() => {
+                setMode('signin');
+                window.location.href = '/';
+              }}
               disabled={!!loadingProvider}
             >
               {loadingProvider === 'google' && <span className="mr-2 animate-spin">🔄</span>}
