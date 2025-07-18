@@ -21,7 +21,7 @@ export function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#232326] via-[#1c1c1e] to-[#101012] relative overflow-hidden" style={{ fontFamily: 'Inter, Nunito, system-ui, sans-serif' }}>
+    <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#232326] via-[#18181a] to-[#101012] relative overflow-hidden" style={{ fontFamily: 'Inter, Nunito, system-ui, sans-serif' }}>
       {/* Subtle travelling star animation background */}
       <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
         {/* Star 1 */}
@@ -50,12 +50,12 @@ export function AuthPage() {
         <div className="mb-6 text-sm font-light text-gray-400 tracking-wide text-center">
           Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
         </div>
-        <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center">
+        <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8">
           <div className="relative w-full flex flex-col items-center">
             {/* Google and Facebook icon pop-ups on hover for Sign In */}
             <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-all duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 z-10" id="icons-signin">
               <div
-                className={`rounded-full bg-white/10 backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center border border-white/10 cursor-pointer transition-opacity duration-200 ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
+                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
                 title="Sign in with Google"
                 tabIndex={0}
                 onClick={() => handleSocialSignIn('google')}
@@ -66,7 +66,7 @@ export function AuthPage() {
                 {/* Google SVG */}
                 <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
                   <g>
-                    <circle cx="11" cy="11" r="11" fill="#fff" />
+                    <circle cx="11" cy="11" r="11" fill="transparent" />
                     <path d="M17.64 11.2c0-.56-.05-1.1-.14-1.6H11v3.04h3.74a3.2 3.2 0 0 1-1.39 2.1v1.74h2.24c1.3-1.2 2.05-2.97 2.05-5.28z" fill="#4285F4" />
                     <path d="M11 18c1.8 0 3.3-.6 4.4-1.64l-2.24-1.74c-.62.42-1.42.68-2.16.68-1.66 0-3.07-1.12-3.58-2.64H5.1v1.8A7 7 0 0 0 11 18z" fill="#34A853" />
                     <path d="M7.42 12.66A4.2 4.2 0 0 1 7.1 11c0-.58.1-1.14.32-1.66V7.54H5.1A7 7 0 0 0 4 11c0 1.1.26 2.14.72 3.06l2.7-1.4z" fill="#FBBC05" />
@@ -75,7 +75,7 @@ export function AuthPage() {
                 </svg>
               </div>
               <div
-                className={`rounded-full bg-white/10 backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center border border-white/10 cursor-pointer transition-opacity duration-200 ${loadingProvider === 'facebook' ? 'opacity-60' : ''}`}
+                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'facebook' ? 'opacity-60' : ''}`}
                 title="Sign in with Facebook"
                 tabIndex={0}
                 onClick={() => handleSocialSignIn('facebook')}
@@ -85,7 +85,7 @@ export function AuthPage() {
               >
                 {/* Facebook SVG */}
                 <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
-                  <circle cx="11" cy="11" r="11" fill="#fff" />
+                  <circle cx="11" cy="11" r="11" fill="transparent" />
                   <path d="M14.5 11H12v5H9.5v-5H8v-2h1.5V7.5A2.5 2.5 0 0 1 12 5h2.5v2H12a.5.5 0 0 0-.5.5V9H14.5v2z" fill="#1877F3" />
                 </svg>
               </div>
@@ -104,61 +104,6 @@ export function AuthPage() {
               {loadingProvider === 'google' && <span className="mr-2 animate-spin">🔄</span>}
               {loadingProvider === 'facebook' && <span className="mr-2 animate-spin">🔄</span>}
               Sign In
-            </button>
-          </div>
-          <div className="relative w-full flex flex-col items-center mt-2">
-            {/* Google and Facebook icon pop-ups on hover for Sign Up */}
-            <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-all duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 z-10" id="icons-signup">
-              <div
-                className={`rounded-full bg-white/10 backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center border border-white/10 cursor-pointer transition-opacity duration-200 ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
-                title="Sign up with Google"
-                tabIndex={0}
-                onClick={() => handleSocialSignIn('google')}
-                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleSocialSignIn('google'); }}
-                aria-disabled={!!loadingProvider}
-                style={{ pointerEvents: loadingProvider ? 'none' : 'auto' }}
-              >
-                {/* Google SVG */}
-                <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
-                  <g>
-                    <circle cx="11" cy="11" r="11" fill="#fff" />
-                    <path d="M17.64 11.2c0-.56-.05-1.1-.14-1.6H11v3.04h3.74a3.2 3.2 0 0 1-1.39 2.1v1.74h2.24c1.3-1.2 2.05-2.97 2.05-5.28z" fill="#4285F4" />
-                    <path d="M11 18c1.8 0 3.3-.6 4.4-1.64l-2.24-1.74c-.62.42-1.42.68-2.16.68-1.66 0-3.07-1.12-3.58-2.64H5.1v1.8A7 7 0 0 0 11 18z" fill="#34A853" />
-                    <path d="M7.42 12.66A4.2 4.2 0 0 1 7.1 11c0-.58.1-1.14.32-1.66V7.54H5.1A7 7 0 0 0 4 11c0 1.1.26 2.14.72 3.06l2.7-1.4z" fill="#FBBC05" />
-                    <path d="M11 6.44c.98 0 1.86.34 2.56 1.02l1.92-1.92C14.3 4.6 12.8 4 11 4A7 7 0 0 0 5.1 7.54l2.7 2.1C7.93 8.56 9.32 7.44 11 7.44z" fill="#EA4335" />
-                  </g>
-                </svg>
-              </div>
-              <div
-                className={`rounded-full bg-white/10 backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center border border-white/10 cursor-pointer transition-opacity duration-200 ${loadingProvider === 'facebook' ? 'opacity-60' : ''}`}
-                title="Sign up with Facebook"
-                tabIndex={0}
-                onClick={() => handleSocialSignIn('facebook')}
-                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleSocialSignIn('facebook'); }}
-                aria-disabled={!!loadingProvider}
-                style={{ pointerEvents: loadingProvider ? 'none' : 'auto' }}
-              >
-                {/* Facebook SVG */}
-                <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
-                  <circle cx="11" cy="11" r="11" fill="#fff" />
-                  <path d="M14.5 11H12v5H9.5v-5H8v-2h1.5V7.5A2.5 2.5 0 0 1 12 5h2.5v2H12a.5.5 0 0 0-.5.5V9H14.5v2z" fill="#1877F3" />
-                </svg>
-              </div>
-            </div>
-            <button
-              type="button"
-              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-              onMouseEnter={() => { document.getElementById('icons-signup').style.opacity = '1'; }}
-              onMouseLeave={() => { document.getElementById('icons-signup').style.opacity = '0'; }}
-              onFocus={() => { document.getElementById('icons-signup').style.opacity = '1'; }}
-              onBlur={() => { document.getElementById('icons-signup').style.opacity = '0'; }}
-              onClick={() => setMode('signup')}
-              disabled={!!loadingProvider}
-            >
-              {loadingProvider === 'google' && <span className="mr-2 animate-spin">🔄</span>}
-              {loadingProvider === 'facebook' && <span className="mr-2 animate-spin">🔄</span>}
-              Sign Up
             </button>
           </div>
         </div>
