@@ -53,6 +53,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Brand Colors
+				'subscriptly-dark': '#1B1B1B',
+				'subscriptly-teal': '#1ABC9C',
+				'subscriptly-gray': '#ECECEC',
+				'subscriptly-light': '#FFFFFF',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

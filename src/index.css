@@ -8,42 +8,43 @@ Dark charcoal backgrounds with signature teal accents
 
 @layer base {
   :root {
-    /* Brand Theme - Primary Colors */
-    --background: 0 0% 11%; /* Dark Charcoal (#1B1B1B) */
-    --foreground: 0 0% 93%; /* Soft Light Gray (#ECECEC) */
+    /* Light Mode Colors */
+    --background: 0 0% 100%; /* White */
+    --foreground: 222.2 84% 4.9%; /* Dark gray */
 
-    --card: 0 0% 13%; /* Card Backgrounds (#222222) */
-    --card-foreground: 0 0% 93%;
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0 0% 13%;
-    --popover-foreground: 0 0% 93%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    /* Teal Green - Primary Brand Color */
-    --primary: 168 76% 42%; /* Teal Green (#1ABC9C) */
-    --primary-foreground: 0 0% 100%; /* White */
-    --primary-glow: 168 79% 28%; /* Darker teal for gradients (#0E7C6C) */
+    /* Primary */
+    --primary: 222.2 47.4% 11.2%; /* Dark */
+    --primary-foreground: 210 40% 98%; /* Light */
+    --primary-glow: 168 76% 42%; /* Teal for glows */
 
-    /* Button Secondary */
-    --secondary: 220 13% 28%; /* Gray-700 (#374151) */
-    --secondary-foreground: 0 0% 93%;
+    /* Secondary */
+    --secondary: 210 40% 96.1%; /* Light gray */
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    /* White Highlights */
-    --accent: 0 0% 100%; /* White (#FFFFFF) */
-    --accent-foreground: 0 0% 11%;
+    /* Muted */
+    --muted: 210 40% 96.1%; /* Light gray */
+    --muted-foreground: 215.4 16.3% 46.9%; /* Medium gray */
 
-    /* Muted tones */
-    --muted: 0 0% 16%; /* Toggle background (#2A2A2A) */
-    --muted-foreground: 220 9% 34%; /* Gray-600 (#4B5563) */
+    /* Accent - Teal */
+    --accent: 168 76% 42%; /* Teal (#1ABC9C) */
+    --accent-foreground: 210 40% 98%;
 
     /* States */
-    --destructive: 0 84% 60%; /* Error Red (#EF4444) */
-    --destructive-foreground: 0 0% 93%;
+    --destructive: 0 84% 60%; /* Red */
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 220 9% 34%; /* Gray-600 (#4B5563) */
-    --input: 0 0% 13%;
-    --ring: 168 76% 42%; /* Teal focus ring */
+    /* Borders and inputs */
+    --border: 214.3 31.8% 91.4%; /* Light border */
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%; /* Dark ring */
 
-    --radius: 0.875rem;
+    --radius: 0.5rem;
 
     /* Brand Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(168 76% 42%) 0%, hsl(168 79% 28%) 100%);
@@ -53,7 +54,7 @@ Dark charcoal backgrounds with signature teal accents
 
     /* Teal Glow Shadows */
     --shadow-premium: 0 25px 50px -12px rgba(26, 188, 156, 0.3);
-    --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+    --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
     --shadow-glow: 0 0 80px rgba(26, 188, 156, 0.5);
     --shadow-3d: 0 12px 25px -5px rgba(26, 188, 156, 0.4), 0 0 50px rgba(26, 188, 156, 0.3);
     --shadow-teal: 0 8px 25px -8px rgba(26, 188, 156, 0.4);
@@ -65,58 +66,65 @@ Dark charcoal backgrounds with signature teal accents
     --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     /* Success/Error States */
-    --success: 142 71% 45%; /* Success Green (#22C55E) */
-    --success-foreground: 0 0% 93%;
+    --success: 142 71% 45%; /* Success Green */
+    --success-foreground: 210 40% 98%;
 
     /* Sidebar tokens */
-    --sidebar-background: 0 0% 13%;
-    --sidebar-foreground: 0 0% 93%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222.2 84% 4.9%;
     --sidebar-primary: 168 76% 42%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 16%;
-    --sidebar-accent-foreground: 0 0% 93%;
-    --sidebar-border: 220 9% 34%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 222.2 84% 4.9%;
+    --sidebar-border: 214.3 31.8% 91.4%;
     --sidebar-ring: 168 76% 42%;
   }
 
   .dark {
-    /* Same as root since this is a dark-first theme */
-    --background: 0 0% 11%;
-    --foreground: 0 0% 93%;
+    /* Dark Mode Colors */
+    --background: 222.2 84% 4.9%; /* Dark */
+    --foreground: 210 40% 98%; /* Light */
 
-    --card: 0 0% 13%;
-    --card-foreground: 0 0% 93%;
+    --card: 222.2 84% 4.9%; /* Dark */
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 13%;
-    --popover-foreground: 0 0% 93%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 168 76% 42%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 168 79% 28%;
+    /* Primary */
+    --primary: 210 40% 98%; /* Light in dark mode */
+    --primary-foreground: 222.2 84% 4.9%;
+    --primary-glow: 168 76% 42%;
 
-    --secondary: 220 13% 28%;
-    --secondary-foreground: 0 0% 93%;
+    /* Secondary */
+    --secondary: 217.2 32.6% 17.5%; /* Dark gray */
+    --secondary-foreground: 210 40% 98%;
 
-    --accent: 0 0% 100%;
-    --accent-foreground: 0 0% 11%;
+    /* Muted */
+    --muted: 217.2 32.6% 17.5%; /* Dark gray */
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --muted: 0 0% 16%;
-    --muted-foreground: 220 9% 34%;
+    /* Accent - Teal */
+    --accent: 168 76% 42%; /* Teal */
+    --accent-foreground: 210 40% 98%;
 
+    /* States */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 93%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 220 9% 34%;
-    --input: 0 0% 13%;
-    --ring: 168 76% 42%;
+    /* Borders and inputs */
+    --border: 217.2 32.6% 17.5%; /* Dark border */
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%; /* Light ring */
 
-    --sidebar-background: 0 0% 13%;
-    --sidebar-foreground: 0 0% 93%;
+    /* Sidebar tokens for dark mode */
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
     --sidebar-primary: 168 76% 42%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 16%;
-    --sidebar-accent-foreground: 0 0% 93%;
-    --sidebar-border: 220 9% 34%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-ring: 168 76% 42%;
   }
 }
