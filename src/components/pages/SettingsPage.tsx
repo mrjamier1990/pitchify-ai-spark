@@ -85,7 +85,7 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
       {/* Settings Content */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
         {/* Premium Status */}
-        <Card className="p-6 bg-gradient-primary border-border">
+        <Card className="p-6 border-border">
           <div className="flex items-center gap-3 mb-4">
             <Star className="w-6 h-6 text-primary-foreground" />
             <h3 className="text-lg font-semibold text-primary-foreground">Pitchify Premium</h3>
@@ -99,7 +99,7 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
         </Card>
 
         {/* Notifications */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 border-border">
           <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <Bell className="w-5 h-5" />
             Notifications
@@ -133,7 +133,7 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
         </Card>
 
         {/* Privacy & Security */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 border-border">
           <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <Shield className="w-5 h-5" />
             Privacy & Security
@@ -153,7 +153,7 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
         </Card>
 
         {/* Account */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 border-border">
           <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <CreditCard className="w-5 h-5" />
             Account
@@ -201,7 +201,7 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
         </Card>
 
         {/* Support */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 border-border">
           <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <HelpCircle className="w-5 h-5" />
             Support
@@ -224,7 +224,7 @@ export function SettingsPage({ onNavigate }: SettingsPageProps) {
         </Card>
 
         {/* Sign Out */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 border-border">
           <Button variant="destructive" className="w-full" onClick={handleSignOut}>
             <LogOut className="w-4 h-4 mr-2" />
             Sign Out

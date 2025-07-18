@@ -334,7 +334,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
             <TabsContent value="profile" className="space-y-6 w-full min-w-0">
               {/* Profile Header */}
-              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm">
                 <CardContent className="p-4 md:p-6">
                   <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div className="flex items-start space-x-4 flex-1 min-w-0">
@@ -607,7 +607,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Profile Stats */}
-              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full overflow-hidden">
                     <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-purple-600/20 rounded-lg border border-purple-500/20">
@@ -643,7 +643,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Videos Section */}
-              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Video className="w-5 h-5 mr-2 text-primary" />
@@ -684,7 +684,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Stats */}
-              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <TrendingUp className="w-5 h-5 mr-2 text-primary" />
@@ -732,7 +732,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             </TabsContent>
 
             <TabsContent value="filters" className="space-y-6">
-              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Filter className="w-5 h-5 mr-2 text-primary" />
@@ -847,7 +847,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
             <TabsContent value="subscription" className="space-y-6">
               {/* Subscription Tiers */}
-              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Crown className="w-5 h-5 mr-2 text-primary" />
@@ -904,7 +904,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* AI Tools */}
-              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Target className="w-5 h-5 mr-2 text-primary" />
@@ -955,7 +955,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-6">
-              <Card className="border-border/50 bg-card/95 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Settings className="w-5 h-5 mr-2 text-primary" />

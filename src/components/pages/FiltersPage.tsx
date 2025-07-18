@@ -69,7 +69,7 @@ export function FiltersPage({ onNavigate }: FiltersPageProps) {
       {/* Filter Content */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
         {/* User Type Filter */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 border-border">
           <h3 className="text-lg font-semibold text-foreground mb-4">Show Me</h3>
           
           <div className="grid grid-cols-1 gap-3">
@@ -91,7 +91,7 @@ export function FiltersPage({ onNavigate }: FiltersPageProps) {
         </Card>
 
         {/* Industry Filter */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 border-border">
           <h3 className="text-lg font-semibold text-foreground mb-4">Industries</h3>
           
           <div className="flex flex-wrap gap-2">
@@ -116,7 +116,7 @@ export function FiltersPage({ onNavigate }: FiltersPageProps) {
         </Card>
 
         {/* Funding Stage Filter */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 border-border">
           <h3 className="text-lg font-semibold text-foreground mb-4">Funding Stage</h3>
           
           <div className="flex flex-wrap gap-2">
@@ -142,7 +142,7 @@ export function FiltersPage({ onNavigate }: FiltersPageProps) {
 
         {/* Active Filters Summary */}
         {(selectedIndustries.length > 0 || selectedStages.length > 0 || userType !== "all") && (
-          <Card className="p-6 bg-gradient-card border-border">
+          <Card className="p-6 border-border">
             <h3 className="text-lg font-semibold text-foreground mb-4">Active Filters</h3>
             
             <div className="space-y-3">

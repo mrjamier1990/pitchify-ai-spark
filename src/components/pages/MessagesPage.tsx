@@ -160,7 +160,7 @@ export function MessagesPage({ onNavigate }: MessagesPageProps) {
             {mockConversations.map((conversation) => (
               <Card
                 key={conversation.id}
-                className="p-4 bg-card border-border hover:bg-card/80 transition-colors duration-300 cursor-pointer"
+                className="p-4 border-border transition-colors duration-300 cursor-pointer"
                 onClick={() => setSelectedConversation(conversation.id)}
               >
                 <div className="flex items-center gap-3">

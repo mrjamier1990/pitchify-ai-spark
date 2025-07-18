@@ -1,332 +1,193 @@
 import { useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useToast } from '@/hooks/use-toast';
-import { Loader2, User, Mail, Lock, ArrowRight } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 export function AuthPage() {
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [error, setError] = useState('');
-  const { toast } = useToast();
+  const [mode, setMode] = useState<'none' | 'signin' | 'signup'>('none');
+  const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-
+  async function handleSocialSignIn(provider: 'google' | 'facebook') {
+    setLoadingProvider(provider);
+    setError(null);
     try {
-      // Clean up existing state
-      Object.keys(localStorage).forEach((key) => {
-        if (key.startsWith('supabase.auth.') || key.includes('sb-')) {
-          localStorage.removeItem(key);
-        }
-      });
-
-      await supabase.auth.signOut({ scope: 'global' });
-      
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) throw error;
-
-      if (data.user) {
-        toast({
-          title: 'Welcome back!',
-          description: 'Successfully signed in.',
-        });
-        window.location.href = '/';
-      }
-    } catch (error: any) {
-      setError(error.message || 'Failed to sign in');
-      toast({
-        title: 'Sign in failed',
-        description: error.message || 'Please check your credentials and try again.',
-        variant: 'destructive',
-      });
+      const { error } = await supabase.auth.signInWithOAuth({ provider });
+      if (error) setError(error.message);
+    } catch (err) {
+      setError('Social sign-in failed.');
     } finally {
-      setLoading(false);
+      setLoadingProvider(null);
     }
-  };
-
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-
-    try {
-      // Clean up existing state
-      Object.keys(localStorage).forEach((key) => {
-        if (key.startsWith('supabase.auth.') || key.includes('sb-')) {
-          localStorage.removeItem(key);
-        }
-      });
-
-      await supabase.auth.signOut({ scope: 'global' });
-      
-      const redirectUrl = `${window.location.origin}/`;
-      
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: redirectUrl,
-          data: {
-            full_name: fullName
-          }
-        }
-      });
-
-      if (error) throw error;
-
-      if (data.user) {
-        toast({
-          title: 'Account created!',
-          description: 'Please check your email to confirm your account.',
-        });
-        
-        // For development, sign in immediately
-        if (data.session) {
-          window.location.href = '/';
-        }
-      }
-    } catch (error: any) {
-      setError(error.message || 'Failed to create account');
-      toast({
-        title: 'Sign up failed',
-        description: error.message || 'Please try again.',
-        variant: 'destructive',
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-[#72bfe2] to-[#3B82F6] rounded-2xl mx-auto mb-4 flex items-center justify-center">
-            <User className="w-8 h-8 text-primary-foreground" />
-          </div>
-          <div className="relative inline-block mb-2">
-            {/* Soft blue glow behind the text */}
-            <span
-              className="absolute inset-0 text-3xl font-bold select-none pointer-events-none blur-sm opacity-60"
-              style={{
-                color: "#3B82F6",
-                filter: "blur(6px)",
-                zIndex: 0,
-              }}
-              aria-hidden="true"
-            >
-              Welcome to Pitchify
-            </span>
-            {/* Animated shimmer gradient text */}
-            <span
-              className="relative text-3xl font-bold bg-gradient-to-r from-[#72bfe2] to-[#3B82F6] bg-clip-text text-transparent z-10 animate-shimmer"
-              style={{
-                backgroundSize: "200% auto",
-                animation: "shimmer 2.5s linear infinite",
-              }}
-            >
-              Welcome to Pitchify
-            </span>
-            {/* Add shimmer keyframes in your CSS */}
-            <style>
-              {`
-                @keyframes shimmer {
-                  0% {
-                    background-position: 200% center;
-                  }
-                  100% {
-                    background-position: -200% center;
-                  }
-                }
-              `}
-            </style>
-          </div>
-          <p className="text-muted-foreground mt-2">
-            Connecting founders with investors
-          </p>
-        </div>
-
-        <Card className="border-border/50 backdrop-blur-sm bg-card/95 blue-glow">
-          <Tabs defaultValue="signin" className="w-full">
-            <CardHeader className="space-y-1">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
-              </TabsList>
-            </CardHeader>
-
-            <TabsContent value="signin">
-              <form onSubmit={handleSignIn}>
-                <CardContent className="space-y-4">
-                  <CardTitle>Sign in to your account</CardTitle>
-                  <CardDescription>
-                    Enter your email and password to access your profile
-                  </CardDescription>
-                  
-                  {error && (
-                    <Alert variant="destructive">
-                      <AlertDescription>{error}</AlertDescription>
-                    </Alert>
-                  )}
-
-                  <div className="space-y-2">
-                    <Label htmlFor="signin-email">Email</Label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signin-email"
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="signin-password">Password</Label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signin-password"
-                        type="password"
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-
-                <CardFooter className="flex flex-col gap-2">
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={loading}
-                  >
-                    {loading ? (
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    ) : (
-                      <ArrowRight className="w-4 h-4 mr-2" />
-                    )}
-                    Sign In
-                  </Button>
-                  <button
-                    type="button"
-                    className="text-xs font-medium text-white bg-transparent transition-all duration-200 ease-in-out hover:drop-shadow-[0_0_8px_#72bfe2] focus:outline-none"
-                    style={{ alignSelf: 'center', marginTop: '2px' }}
-                    onClick={() => {
-                      // TODO: Implement forgot password logic or navigation
-                      alert('Forgot password functionality coming soon!');
-                    }}
-                  >
-                    Forgot password?
-                  </button>
-                </CardFooter>
-              </form>
-            </TabsContent>
-
-            <TabsContent value="signup">
-              <form onSubmit={handleSignUp}>
-                <CardContent className="space-y-4">
-                  <CardTitle>Create your account</CardTitle>
-                  <CardDescription>
-                    Join the network of founders and investors
-                  </CardDescription>
-                  
-                  {error && (
-                    <Alert variant="destructive">
-                      <AlertDescription>{error}</AlertDescription>
-                    </Alert>
-                  )}
-
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-name">Full Name</Label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signup-name"
-                        type="text"
-                        placeholder="Enter your full name"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-email">Email</Label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signup-email"
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-password">Password</Label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signup-password"
-                        type="password"
-                        placeholder="Create a password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="pl-10"
-                        required
-                        minLength={6}
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-
-                <CardFooter>
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={loading}
-                  >
-                    {loading ? (
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    ) : (
-                      <ArrowRight className="w-4 h-4 mr-2" />
-                    )}
-                    Create Account
-                  </Button>
-                </CardFooter>
-              </form>
-            </TabsContent>
-          </Tabs>
-        </Card>
+    <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#232326] via-[#1c1c1e] to-[#101012] relative overflow-hidden" style={{ fontFamily: 'Inter, Nunito, system-ui, sans-serif' }}>
+      {/* Subtle travelling star animation background */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
+        {/* Star 1 */}
+        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-20 blur-[2px]" style={{ width: '18px', height: '18px', left: '10%', top: '20%', animation: 'starTravel1 22s linear infinite' }} />
+        {/* Star 2 */}
+        <span className="absolute block rounded-full bg-white opacity-10 blur-[1.5px]" style={{ width: '10px', height: '10px', left: '70%', top: '30%', animation: 'starTravel2 28s linear infinite' }} />
+        {/* Star 3 */}
+        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-14 blur-[2.5px]" style={{ width: '14px', height: '14px', left: '40%', top: '70%', animation: 'starTravel3 32s linear infinite' }} />
+        {/* Star 4 */}
+        <span className="absolute block rounded-full bg-white opacity-8 blur-[2px]" style={{ width: '8px', height: '8px', left: '80%', top: '60%', animation: 'starTravel4 26s linear infinite' }} />
+        {/* Star 5 */}
+        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-10 blur-[3px]" style={{ width: '22px', height: '22px', left: '55%', top: '10%', animation: 'starTravel5 36s linear infinite' }} />
       </div>
+      {/* Logo and Title centered vertically */}
+      <div className="flex flex-col items-center w-full max-w-lg px-4 justify-center min-h-screen">
+        <div className="flex flex-col items-center group transition-all duration-300">
+          <div className="flex items-center justify-center mb-4">
+            <h1
+              className="text-6xl font-extrabold text-white tracking-tight transition-transform duration-300"
+              style={{ letterSpacing: '-0.02em', willChange: 'transform, color', fontFamily: 'Inter, system-ui, sans-serif' }}
+            >
+              PitchFlic
+            </h1>
+          </div>
+        </div>
+        <div className="mb-6 text-sm font-light text-gray-400 tracking-wide text-center">
+          Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
+        </div>
+        <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center">
+          <div className="relative w-full flex flex-col items-center">
+            {/* Google and Facebook icon pop-ups on hover for Sign In */}
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-all duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 z-10" id="icons-signin">
+              <div
+                className={`rounded-full bg-white/10 backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center border border-white/10 cursor-pointer transition-opacity duration-200 ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
+                title="Sign in with Google"
+                tabIndex={0}
+                onClick={() => handleSocialSignIn('google')}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleSocialSignIn('google'); }}
+                aria-disabled={!!loadingProvider}
+                style={{ pointerEvents: loadingProvider ? 'none' : 'auto' }}
+              >
+                {/* Google SVG */}
+                <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
+                  <g>
+                    <circle cx="11" cy="11" r="11" fill="#fff" />
+                    <path d="M17.64 11.2c0-.56-.05-1.1-.14-1.6H11v3.04h3.74a3.2 3.2 0 0 1-1.39 2.1v1.74h2.24c1.3-1.2 2.05-2.97 2.05-5.28z" fill="#4285F4" />
+                    <path d="M11 18c1.8 0 3.3-.6 4.4-1.64l-2.24-1.74c-.62.42-1.42.68-2.16.68-1.66 0-3.07-1.12-3.58-2.64H5.1v1.8A7 7 0 0 0 11 18z" fill="#34A853" />
+                    <path d="M7.42 12.66A4.2 4.2 0 0 1 7.1 11c0-.58.1-1.14.32-1.66V7.54H5.1A7 7 0 0 0 4 11c0 1.1.26 2.14.72 3.06l2.7-1.4z" fill="#FBBC05" />
+                    <path d="M11 6.44c.98 0 1.86.34 2.56 1.02l1.92-1.92C14.3 4.6 12.8 4 11 4A7 7 0 0 0 5.1 7.54l2.7 2.1C7.93 8.56 9.32 7.44 11 7.44z" fill="#EA4335" />
+                  </g>
+                </svg>
+              </div>
+              <div
+                className={`rounded-full bg-white/10 backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center border border-white/10 cursor-pointer transition-opacity duration-200 ${loadingProvider === 'facebook' ? 'opacity-60' : ''}`}
+                title="Sign in with Facebook"
+                tabIndex={0}
+                onClick={() => handleSocialSignIn('facebook')}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleSocialSignIn('facebook'); }}
+                aria-disabled={!!loadingProvider}
+                style={{ pointerEvents: loadingProvider ? 'none' : 'auto' }}
+              >
+                {/* Facebook SVG */}
+                <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
+                  <circle cx="11" cy="11" r="11" fill="#fff" />
+                  <path d="M14.5 11H12v5H9.5v-5H8v-2h1.5V7.5A2.5 2.5 0 0 1 12 5h2.5v2H12a.5.5 0 0 0-.5.5V9H14.5v2z" fill="#1877F3" />
+                </svg>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              onMouseEnter={() => { document.getElementById('icons-signin').style.opacity = '1'; }}
+              onMouseLeave={() => { document.getElementById('icons-signin').style.opacity = '0'; }}
+              onFocus={() => { document.getElementById('icons-signin').style.opacity = '1'; }}
+              onBlur={() => { document.getElementById('icons-signin').style.opacity = '0'; }}
+              onClick={() => setMode('signin')}
+              disabled={!!loadingProvider}
+            >
+              {loadingProvider === 'google' && <span className="mr-2 animate-spin">🔄</span>}
+              {loadingProvider === 'facebook' && <span className="mr-2 animate-spin">🔄</span>}
+              Sign In
+            </button>
+          </div>
+          <div className="relative w-full flex flex-col items-center mt-2">
+            {/* Google and Facebook icon pop-ups on hover for Sign Up */}
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-all duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 z-10" id="icons-signup">
+              <div
+                className={`rounded-full bg-white/10 backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center border border-white/10 cursor-pointer transition-opacity duration-200 ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
+                title="Sign up with Google"
+                tabIndex={0}
+                onClick={() => handleSocialSignIn('google')}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleSocialSignIn('google'); }}
+                aria-disabled={!!loadingProvider}
+                style={{ pointerEvents: loadingProvider ? 'none' : 'auto' }}
+              >
+                {/* Google SVG */}
+                <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
+                  <g>
+                    <circle cx="11" cy="11" r="11" fill="#fff" />
+                    <path d="M17.64 11.2c0-.56-.05-1.1-.14-1.6H11v3.04h3.74a3.2 3.2 0 0 1-1.39 2.1v1.74h2.24c1.3-1.2 2.05-2.97 2.05-5.28z" fill="#4285F4" />
+                    <path d="M11 18c1.8 0 3.3-.6 4.4-1.64l-2.24-1.74c-.62.42-1.42.68-2.16.68-1.66 0-3.07-1.12-3.58-2.64H5.1v1.8A7 7 0 0 0 11 18z" fill="#34A853" />
+                    <path d="M7.42 12.66A4.2 4.2 0 0 1 7.1 11c0-.58.1-1.14.32-1.66V7.54H5.1A7 7 0 0 0 4 11c0 1.1.26 2.14.72 3.06l2.7-1.4z" fill="#FBBC05" />
+                    <path d="M11 6.44c.98 0 1.86.34 2.56 1.02l1.92-1.92C14.3 4.6 12.8 4 11 4A7 7 0 0 0 5.1 7.54l2.7 2.1C7.93 8.56 9.32 7.44 11 7.44z" fill="#EA4335" />
+                  </g>
+                </svg>
+              </div>
+              <div
+                className={`rounded-full bg-white/10 backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center border border-white/10 cursor-pointer transition-opacity duration-200 ${loadingProvider === 'facebook' ? 'opacity-60' : ''}`}
+                title="Sign up with Facebook"
+                tabIndex={0}
+                onClick={() => handleSocialSignIn('facebook')}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleSocialSignIn('facebook'); }}
+                aria-disabled={!!loadingProvider}
+                style={{ pointerEvents: loadingProvider ? 'none' : 'auto' }}
+              >
+                {/* Facebook SVG */}
+                <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
+                  <circle cx="11" cy="11" r="11" fill="#fff" />
+                  <path d="M14.5 11H12v5H9.5v-5H8v-2h1.5V7.5A2.5 2.5 0 0 1 12 5h2.5v2H12a.5.5 0 0 0-.5.5V9H14.5v2z" fill="#1877F3" />
+                </svg>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              onMouseEnter={() => { document.getElementById('icons-signup').style.opacity = '1'; }}
+              onMouseLeave={() => { document.getElementById('icons-signup').style.opacity = '0'; }}
+              onFocus={() => { document.getElementById('icons-signup').style.opacity = '1'; }}
+              onBlur={() => { document.getElementById('icons-signup').style.opacity = '0'; }}
+              onClick={() => setMode('signup')}
+              disabled={!!loadingProvider}
+            >
+              {loadingProvider === 'google' && <span className="mr-2 animate-spin">🔄</span>}
+              {loadingProvider === 'facebook' && <span className="mr-2 animate-spin">🔄</span>}
+              Sign Up
+            </button>
+          </div>
+        </div>
+        {error && <div className="mt-4 text-red-400 text-sm text-center">{error}</div>}
+      </div>
+      <style>{`.force-nunito { font-family: 'Nunito', system-ui, sans-serif !important; }`}</style>
+      {/* Keyframes for star animation */}
+      <style>{`
+        @keyframes starTravel1 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(60vw, 40vh); }
+        }
+        @keyframes starTravel2 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(-50vw, 30vh); }
+        }
+        @keyframes starTravel3 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(30vw, -50vh); }
+        }
+        @keyframes starTravel4 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(-40vw, -30vh); }
+        }
+        @keyframes starTravel5 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(20vw, 60vh); }
+        }
+      `}</style>
     </div>
   );
 }

@@ -79,7 +79,7 @@ export function MatchesPage({ onNavigate }: MatchesPageProps) {
 
         <div className="grid grid-cols-1 gap-4">
           {mockMatches.map((match) => (
-            <Card key={match.id} className="p-4 bg-card border-border hover:bg-card/80 transition-colors duration-300">
+            <Card key={match.id} className="p-4 border-border transition-colors duration-300">
               <div className="flex items-center gap-4">
                 {/* Profile Image */}
                 <div className="relative">

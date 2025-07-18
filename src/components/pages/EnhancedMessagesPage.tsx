@@ -350,7 +350,7 @@ export function EnhancedMessagesPage({ onNavigate }: EnhancedMessagesPageProps) 
           filteredMatches.map((match) => (
             <Card 
               key={match.id} 
-              className="bg-muted/10 backdrop-blur-sm border-border/20 hover:bg-muted/20 hover:border-border/40 transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-glow"
+              className="backdrop-blur-sm border-border/20 transition-all duration-300 cursor-pointer group hover:shadow-glow"
               onClick={() => setSelectedMatch(match.id)}
               onMouseEnter={() => setHoveredVideo(match.id)}
               onMouseLeave={() => setHoveredVideo(null)}

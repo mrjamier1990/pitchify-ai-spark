@@ -1,0 +1,6 @@
+.pop-on-hover {
+  transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pop-on-hover:hover, .pop-on-hover:focus-visible {
+  transform: scale(1.06);
+} 

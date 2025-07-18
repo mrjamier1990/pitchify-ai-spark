@@ -340,7 +340,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="text-center space-y-6 animate-fade-in">
             <div className="space-y-2">
-              <h1 className="text-4xl font-bold text-foreground bg-gradient-to-r from-[#FF5A5F] to-[#FF8E53] bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-5xl font-bold text-primary" style={{ fontFamily: 'Inter, sans-serif' }}>
                 Welcome to Pitchify
               </h1>
               <p className="text-lg text-muted-foreground">Let's personalize your experience</p>
@@ -837,7 +837,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         </div>
 
         {/* Main content */}
-        <Card className="border-2 border-border/50 shadow-2xl backdrop-blur-sm bg-card/95">
+        <Card className="border-2 border-border/50 shadow-2xl backdrop-blur-sm">
           <CardContent className="p-8 md:p-12">
             {renderSlide()}
           </CardContent>
