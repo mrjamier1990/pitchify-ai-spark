@@ -62,25 +62,7 @@ export function AuthPage() {
           <div className="flex items-center justify-center mb-4">
             <h1
               className="text-6xl font-extrabold text-white tracking-tight transition-transform duration-300"
-              style={{ 
-                letterSpacing: '-0.02em', 
-                willChange: 'transform, color', 
-                fontFamily: 'Inter, system-ui, sans-serif',
-                textShadow: `
-                  0 1px 0 #0a0a0c,
-                  0 2px 0 #080808,
-                  0 3px 0 #060606,
-                  0 4px 0 #040404,
-                  0 5px 0 #020202,
-                  0 6px 1px rgba(0,0,0,.3),
-                  0 0 5px rgba(0,0,0,.3),
-                  0 1px 3px rgba(0,0,0,.5),
-                  0 3px 5px rgba(0,0,0,.4),
-                  0 5px 10px rgba(0,0,0,.35),
-                  0 10px 10px rgba(0,0,0,.3),
-                  0 20px 20px rgba(0,0,0,.25)
-                `
-              }}
+              style={{ letterSpacing: '-0.02em', willChange: 'transform, color', fontFamily: 'Inter, system-ui, sans-serif' }}
             >
               PitchFlic
             </h1>
