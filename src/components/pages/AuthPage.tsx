@@ -116,8 +116,8 @@ export function AuthPage() {
             </h1>
           </div>
         </div>
-        <div className="mb-6 text-sm font-light text-gray-400 tracking-wide text-center">
-          Flic <span className="mx-1" style={{ color: '#FF5E5B' }}>|</span> Pitch <span className="mx-1" style={{ color: '#FF5E5B' }}>|</span> Invest
+        <div className="mb-6 text-sm font-light text-gray-500 tracking-wide text-center">
+          Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
         </div>
         <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8">
           <div className="relative w-full flex flex-col items-center">
