@@ -1,9 +1,57 @@
 import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
+import { User } from 'lucide-react';
+
+// NativeLoginForm component (to be implemented below main component)
+function NativeLoginForm({ setError, setLoadingProvider }: { setError: (e: string | null) => void, setLoadingProvider: (p: string | null) => void }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function handleNativeSignIn(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setLoadingProvider('native');
+    setError(null);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) setError(error.message);
+    } catch (err: any) {
+      setError('Sign in failed. Please try again.');
+    } finally {
+      setLoading(false);
+      setLoadingProvider(null);
+    }
+  }
+
+  return (
+    <form onSubmit={handleNativeSignIn} className="w-full flex flex-col gap-3 mt-4 animate-fade-in">
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        className="w-full rounded-md px-4 py-2 bg-background/80 border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        className="w-full rounded-md px-4 py-2 bg-background/80 border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+        required
+      />
+      <Button type="submit" className="w-full" disabled={loading}>
+        {loading ? 'Signing in...' : 'Sign In'}
+      </Button>
+    </form>
+  );
+}
 
 export function AuthPage() {
-  const [mode, setMode] = useState<'none' | 'signin' | 'signup'>('none');
+  const [mode, setMode] = useState<'none' | 'signin' | 'signup' | 'native'>('none');
   const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showIcons, setShowIcons] = useState(false);
@@ -69,12 +117,13 @@ export function AuthPage() {
           </div>
         </div>
         <div className="mb-6 text-sm font-light text-gray-400 tracking-wide text-center">
-          Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
+          Flic <span className="mx-1" style={{ color: '#FF5E5B' }}>|</span> Pitch <span className="mx-1" style={{ color: '#FF5E5B' }}>|</span> Invest
         </div>
         <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8">
           <div className="relative w-full flex flex-col items-center">
-            {/* Google and Facebook icon pop-ups on hover for Sign In */}
+            {/* Google, Facebook, and Native icon pop-ups on hover for Sign In */}
             <div className={`absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none transition-all duration-500 z-10 ${showIcons ? 'opacity-100 pointer-events-auto' : 'opacity-0'}`} id="icons-signin">
+              {/* Google Icon */}
               <div
                 className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
                 title="Sign in with Google"
@@ -95,6 +144,7 @@ export function AuthPage() {
                   </g>
                 </svg>
               </div>
+              {/* Facebook Icon */}
               <div
                 className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'facebook' ? 'opacity-60' : ''}`}
                 title="Sign in with Facebook"
@@ -109,6 +159,18 @@ export function AuthPage() {
                   <circle cx="11" cy="11" r="11" fill="transparent" />
                   <path d="M14.5 11H12v5H9.5v-5H8v-2h1.5V7.5A2.5 2.5 0 0 1 12 5h2.5v2H12a.5.5 0 0 0-.5.5V9H14.5v2z" fill="#1877F3" />
                 </svg>
+              </div>
+              {/* Native (Email/Password) Icon */}
+              <div
+                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'native' ? 'opacity-60' : ''}`}
+                title="Sign in with Email"
+                tabIndex={0}
+                onClick={() => { setMode('native'); setShowIcons(false); }}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { setMode('native'); setShowIcons(false); } }}
+                aria-disabled={!!loadingProvider}
+                style={{ pointerEvents: loadingProvider ? 'none' : 'auto' }}
+              >
+                <User width={28} height={28} />
               </div>
             </div>
             <button
@@ -128,6 +190,10 @@ export function AuthPage() {
               Sign In
             </button>
           </div>
+          {/* Native login form below icons if mode==='native' */}
+          {mode === 'native' && (
+            <NativeLoginForm setError={setError} setLoadingProvider={setLoadingProvider} />
+          )}
         </div>
         {error && <div className="mt-4 text-red-400 text-sm text-center">{error}</div>}
       </div>

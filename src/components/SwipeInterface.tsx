@@ -127,9 +127,9 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
       {/* Header */}
       <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-sm">
         <Button 
-          variant="ghost" 
-          size="icon" 
-          className="w-10 h-10 rounded-full"
+          variant="glass"
+          size="icon"
+          className="w-10 h-10 rounded-full transition-all duration-300 shadow-[0_0_24px_0_#1ABC9C22] hover:bg-[#1ABC9C22] hover:shadow-[0_0_32px_8px_rgba(26,188,156,0.25)] hover:border-primary/40 focus:bg-[#1ABC9C22] focus:shadow-[0_0_32px_8px_rgba(26,188,156,0.25)]"
           onClick={() => onNavigate?.("profile")}
         >
           <User className="w-5 h-5" />
@@ -141,9 +141,9 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         </div>
         
         <Button 
-          variant="ghost" 
-          size="icon" 
-          className="relative w-10 h-10 rounded-full"
+          variant="glass"
+          size="icon"
+          className="relative w-10 h-10 rounded-full transition-all duration-300 shadow-[0_0_24px_0_#1ABC9C22] hover:bg-[#1ABC9C22] hover:shadow-[0_0_32px_8px_rgba(26,188,156,0.25)] hover:border-primary/40 focus:bg-[#1ABC9C22] focus:shadow-[0_0_32px_8px_rgba(26,188,156,0.25)]"
           onClick={() => onNavigate?.("messages")}
         >
           <MessageCircle className="w-5 h-5" />
