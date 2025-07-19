@@ -175,8 +175,8 @@ export function AuthPage() {
             </div>
             <button
               type="button"
-              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22] sign-in-coral-btn"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif', border: '0.5px solid rgba(255, 111, 97, 0.18)' }}
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
               onMouseEnter={handleShowIcons}
               onFocus={handleShowIcons}
               onClick={() => {
@@ -219,22 +219,11 @@ export function AuthPage() {
           100% { transform: scale(1); }
         }
         .social-pop {
-          transition: transform 0.2s, box-shadow 0.2s;
+          transition: transform 0.2s;
         }
         .social-pop:hover, .social-pop:focus {
           animation: bounce-pop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
-          box-shadow: 0 2px 16px 0 #ff6f6133;
           z-index: 2;
-        }
-        .sign-in-coral-btn {
-          border: 0.5px solid rgba(255, 111, 97, 0.18);
-          box-shadow: none;
-          position: relative;
-        }
-        .sign-in-coral-btn:hover, .sign-in-coral-btn:focus {
-          background: rgba(255, 111, 97, 0.01);
-          box-shadow: inset 0 0 8px 2px #ff6f6112;
-          backdrop-filter: blur(4px);
         }
         @keyframes starTravel1 {
           0% { transform: translate(0, 0); }
