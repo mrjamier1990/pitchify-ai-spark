@@ -13,7 +13,7 @@ import { BottomNavigation } from "./BottomNavigation";
 export type PageType = "swipe" | "matches" | "messages" | "profile" | "filters" | "settings" | "pitch-coach";
 
 export function MainApp() {
-  const [currentPage, setCurrentPage] = useState<PageType>("profile");
+  const [currentPage, setCurrentPage] = useState<PageType>("swipe");
 
   const renderCurrentPage = () => {
     switch (currentPage) {

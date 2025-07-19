@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 @tailwind base;
 @tailwind components;
@@ -9,40 +8,19 @@ Deep charcoal backgrounds, champagne gold accents, soft sky blue highlights
 */
 
 @layer base {
-  :root {
-    /* Light Mode Colors */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+  :root, .dark {
+    /* Core Colors (Dark Theme) */
+    --background: 240 3% 11%; /* #1c1c1e */
+    --foreground: 210 40% 98%; /* light */
+    --secondary: 217.2 32.6% 17.5%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
 
     /* Brand Colors */
     --subscriptly-dark: 210 15% 11%; /* #1B1B1B */
     --subscriptly-teal: 168 76% 42%; /* #1ABC9C */
     --subscriptly-gray: 0 0% 92%; /* #ECECEC */
     --subscriptly-light: 0 0% 100%; /* #FFFFFF */
-    
-    /* Warm Accent Colors */
-    --warm-amber: 37 92% 62%; /* #F59E0B - Golden amber */
-    --warm-orange: 24 95% 53%; /* #EA580C - Sunset orange */
-    --warm-peach: 25 95% 75%; /* #FDBA74 - Soft peach */
-    --warm-gold: 45 93% 47%; /* #D97706 - Rich gold */
-    --warm-coral: 14 91% 62%; /* #FB7185 - Coral pink */
 
     /* Typography */
     --font-sans: 'Inter', 'Nunito', system-ui, sans-serif;
@@ -56,59 +34,6 @@ Deep charcoal backgrounds, champagne gold accents, soft sky blue highlights
     --fade-in: 0.6s ease-out;
     --ripple-animation: 0.3s ease-out;
     --pulse-glow: 1.5s infinite;
-  }
-
-  .dark {
-    /* Dark Mode Colors (Default) */
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    
-    /* Warm Accent Colors - Darker variants for dark mode */
-    --warm-amber: 37 92% 50%; /* Slightly darker amber */
-    --warm-orange: 24 95% 45%; /* Slightly darker orange */
-    --warm-peach: 25 85% 65%; /* Muted peach */
-    --warm-gold: 45 93% 40%; /* Deeper gold */
-    --warm-coral: 14 81% 55%; /* Softer coral */
-  }
-
-  .light {
-    /* Light Mode Colors */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
   }
 }
 
@@ -152,16 +77,6 @@ body {
   box-shadow: 0 0 8px 0 hsl(var(--subscriptly-teal) / 0.5);
 }
 
-/* Warm accent button variants */
-.button-warm, .Button-warm {
-  background: hsl(var(--warm-amber));
-  color: hsl(var(--subscriptly-dark));
-}
-.button-warm:hover, .Button-warm:hover {
-  background: hsl(var(--warm-gold));
-  box-shadow: 0 0 8px 0 hsl(var(--warm-amber) / 0.5);
-}
-
 input, textarea, select {
   background: hsl(var(--input));
   color: hsl(var(--foreground));
@@ -173,12 +88,6 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   border-color: hsl(var(--subscriptly-teal));
   outline: none;
-}
-
-/* Warm accent focus states */
-input:focus-visible, textarea:focus-visible, select:focus-visible {
-  border-color: hsl(var(--warm-amber));
-  box-shadow: 0 0 0 2px hsl(var(--warm-amber) / 0.2);
 }
 
 /* Animations */
@@ -201,12 +110,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 0 0 hsl(var(--subscriptly-teal) / 0.5); }
   50% { box-shadow: 0 0 16px 4px hsl(var(--subscriptly-teal) / 0.7); }
-}
-
-/* Warm glow animation */
-@keyframes warm-glow {
-  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--warm-amber) / 0.4); }
-  50% { box-shadow: 0 0 16px 4px hsl(var(--warm-amber) / 0.6); }
 }
 
 /* Force system-ui font for specific buttons */

@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,34 +62,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				// Brand colors
-				'subscriptly-dark': 'hsl(var(--subscriptly-dark))',
-				'subscriptly-teal': 'hsl(var(--subscriptly-teal))',
-				'subscriptly-gray': 'hsl(var(--subscriptly-gray))',
-				'subscriptly-light': 'hsl(var(--subscriptly-light))',
-				// Warm accent colors
-				'warm-amber': 'hsl(var(--warm-amber))',
-				'warm-orange': 'hsl(var(--warm-orange))',
-				'warm-peach': 'hsl(var(--warm-peach))',
-				'warm-gold': 'hsl(var(--warm-gold))',
-				'warm-coral': 'hsl(var(--warm-coral))'
+				}
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-hero': 'var(--gradient-hero)',
 				'gradient-card': 'var(--gradient-card)',
-				'gradient-warm': 'linear-gradient(135deg, hsl(var(--warm-amber)) 0%, hsl(var(--warm-gold)) 100%)',
-				'gradient-sunset': 'linear-gradient(135deg, hsl(var(--warm-orange)) 0%, hsl(var(--warm-coral)) 100%)',
-				'gradient-warm-subtle': 'linear-gradient(135deg, hsl(var(--warm-peach) / 0.1) 0%, hsl(var(--warm-amber) / 0.1) 100%)'
 			},
 			boxShadow: {
 				'premium': 'var(--shadow-premium)',
 				'card': 'var(--shadow-card)',
 				'glow': 'var(--shadow-glow)',
 				'3d': 'var(--shadow-3d)',
-				'warm-glow': '0 0 20px hsl(var(--warm-amber) / 0.3)',
-				'warm-subtle': '0 2px 8px hsl(var(--warm-amber) / 0.1)'
 			},
 			transitionTimingFunction: {
 				'smooth': 'var(--transition-smooth)',
@@ -121,16 +104,11 @@ export default {
 					to: {
 						height: '0'
 					}
-				},
-				'warm-glow': {
-					'0%, 100%': { boxShadow: '0 0 0 0 hsl(var(--warm-amber) / 0.4)' },
-					'50%': { boxShadow: '0 0 16px 4px hsl(var(--warm-amber) / 0.6)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'warm-glow': 'warm-glow 1.5s infinite'
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
