@@ -13,10 +13,19 @@ export function AuthPage() {
     setLoadingProvider(provider);
     setError(null);
     try {
-      const { error } = await supabase.auth.signInWithOAuth({ provider });
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
+        },
+      });
       if (error) setError(error.message);
     } catch (err) {
-      setError('Social sign-in failed.');
+      setError('Social sign-in failed. Please try again.');
     } finally {
       setLoadingProvider(null);
     }
