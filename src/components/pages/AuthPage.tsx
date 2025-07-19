@@ -42,7 +42,7 @@ export function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#232326] via-[#18181a] to-[#101012] relative overflow-hidden" style={{ fontFamily: 'Inter, Nunito, system-ui, sans-serif' }}>
+    <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c] relative overflow-hidden" style={{ fontFamily: 'Inter, Nunito, system-ui, sans-serif' }}>
       {/* Subtle travelling star animation background */}
       <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
         {/* Star 1 */}
