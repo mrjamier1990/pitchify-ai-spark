@@ -32,13 +32,6 @@ export function AuthPage() {
     }, 3000);
   };
 
-  const handleHideIcons = () => {
-    if (fadeTimeout.current) {
-      clearTimeout(fadeTimeout.current);
-    }
-    setShowIcons(false);
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#232326] via-[#18181a] to-[#101012] relative overflow-hidden" style={{ fontFamily: 'Inter, Nunito, system-ui, sans-serif' }}>
       {/* Subtle travelling star animation background */}
@@ -114,10 +107,11 @@ export function AuthPage() {
               className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
               style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
               onMouseEnter={handleShowIcons}
-              onMouseLeave={handleHideIcons}
               onFocus={handleShowIcons}
-              onBlur={handleHideIcons}
-              onClick={() => setMode('signin')}
+              onClick={() => {
+                handleShowIcons();
+                setMode('signin');
+              }}
               disabled={!!loadingProvider}
             >
               {loadingProvider === 'google' && <span className="mr-2 animate-spin">🔄</span>}
