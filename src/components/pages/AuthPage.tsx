@@ -116,7 +116,7 @@ export function AuthPage() {
             </h1>
           </div>
         </div>
-        <div className="mb-6 text-sm font-light text-gray-500 tracking-wide text-center">
+        <div className="mb-6 text-sm font-light tracking-wide text-center shimmer-once" style={{ color: '#555555' }}>
           Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
         </div>
         <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8">
@@ -125,7 +125,7 @@ export function AuthPage() {
             <div className={`absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none transition-all duration-500 z-10 ${showIcons ? 'opacity-100 pointer-events-auto' : 'opacity-0'}`} id="icons-signin">
               {/* Google Icon */}
               <div
-                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
+                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 social-pop ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
                 title="Sign in with Google"
                 tabIndex={0}
                 onClick={() => handleSocialSignIn('google')}
@@ -146,7 +146,7 @@ export function AuthPage() {
               </div>
               {/* Facebook Icon */}
               <div
-                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'facebook' ? 'opacity-60' : ''}`}
+                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 social-pop ${loadingProvider === 'facebook' ? 'opacity-60' : ''}`}
                 title="Sign in with Facebook"
                 tabIndex={0}
                 onClick={() => handleSocialSignIn('facebook')}
@@ -162,7 +162,7 @@ export function AuthPage() {
               </div>
               {/* Native (Email/Password) Icon */}
               <div
-                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'native' ? 'opacity-60' : ''}`}
+                className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 social-pop ${loadingProvider === 'native' ? 'opacity-60' : ''}`}
                 title="Sign in with Email"
                 tabIndex={0}
                 onClick={() => { setMode('native'); setShowIcons(false); }}
@@ -175,8 +175,8 @@ export function AuthPage() {
             </div>
             <button
               type="button"
-              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22] sign-in-coral-btn"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif', border: '0.5px solid rgba(255, 111, 97, 0.18)' }}
               onMouseEnter={handleShowIcons}
               onFocus={handleShowIcons}
               onClick={() => {
@@ -198,8 +198,44 @@ export function AuthPage() {
         {error && <div className="mt-4 text-red-400 text-sm text-center">{error}</div>}
       </div>
       <style>{`.force-nunito { font-family: 'Nunito', system-ui, sans-serif !important; }`}</style>
-      {/* Keyframes for star animation */}
+      {/* Keyframes for star animation and shimmer */}
       <style>{`
+        @keyframes shimmer {
+          0% { background-position: -200px 0; }
+          100% { background-position: 200px 0; }
+        }
+        .shimmer-once {
+          display: inline-block;
+          background: linear-gradient(90deg, #555555 0%, #bbbbbb 50%, #555555 100%);
+          background-size: 400px 100%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shimmer 5s linear infinite;
+          background-position: 0px 0;
+        }
+        @keyframes bounce-pop {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.18); }
+          100% { transform: scale(1); }
+        }
+        .social-pop {
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .social-pop:hover, .social-pop:focus {
+          animation: bounce-pop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+          box-shadow: 0 2px 16px 0 #ff6f6133;
+          z-index: 2;
+        }
+        .sign-in-coral-btn {
+          border: 0.5px solid rgba(255, 111, 97, 0.18);
+          box-shadow: none;
+          position: relative;
+        }
+        .sign-in-coral-btn:hover, .sign-in-coral-btn:focus {
+          background: rgba(255, 111, 97, 0.01);
+          box-shadow: inset 0 0 8px 2px #ff6f6112;
+          backdrop-filter: blur(4px);
+        }
         @keyframes starTravel1 {
           0% { transform: translate(0, 0); }
           100% { transform: translate(60vw, 40vh); }
