@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -6,6 +6,8 @@ export function AuthPage() {
   const [mode, setMode] = useState<'none' | 'signin' | 'signup'>('none');
   const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showIcons, setShowIcons] = useState(false);
+  const fadeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   async function handleSocialSignIn(provider: 'google' | 'facebook') {
     setLoadingProvider(provider);
@@ -19,6 +21,23 @@ export function AuthPage() {
       setLoadingProvider(null);
     }
   }
+
+  const handleShowIcons = () => {
+    setShowIcons(true);
+    if (fadeTimeout.current) {
+      clearTimeout(fadeTimeout.current);
+    }
+    fadeTimeout.current = setTimeout(() => {
+      setShowIcons(false);
+    }, 3000);
+  };
+
+  const handleHideIcons = () => {
+    if (fadeTimeout.current) {
+      clearTimeout(fadeTimeout.current);
+    }
+    setShowIcons(false);
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#232326] via-[#18181a] to-[#101012] relative overflow-hidden" style={{ fontFamily: 'Inter, Nunito, system-ui, sans-serif' }}>
@@ -53,7 +72,7 @@ export function AuthPage() {
         <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8">
           <div className="relative w-full flex flex-col items-center">
             {/* Google and Facebook icon pop-ups on hover for Sign In */}
-            <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-all duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 z-10" id="icons-signin">
+            <div className={`absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none transition-all duration-500 z-10 ${showIcons ? 'opacity-100 pointer-events-auto' : 'opacity-0'}`} id="icons-signin">
               <div
                 className={`rounded-full backdrop-blur-md shadow-[0_2px_16px_0_#1ABC9C33] p-2 flex items-center justify-center cursor-pointer transition-opacity duration-200 ${loadingProvider === 'google' ? 'opacity-60' : ''}`}
                 title="Sign in with Google"
@@ -94,10 +113,10 @@ export function AuthPage() {
               type="button"
               className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
               style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-              onMouseEnter={() => { document.getElementById('icons-signin').style.opacity = '1'; }}
-              onMouseLeave={() => { document.getElementById('icons-signin').style.opacity = '0'; }}
-              onFocus={() => { document.getElementById('icons-signin').style.opacity = '1'; }}
-              onBlur={() => { document.getElementById('icons-signin').style.opacity = '0'; }}
+              onMouseEnter={handleShowIcons}
+              onMouseLeave={handleHideIcons}
+              onFocus={handleShowIcons}
+              onBlur={handleHideIcons}
               onClick={() => setMode('signin')}
               disabled={!!loadingProvider}
             >
