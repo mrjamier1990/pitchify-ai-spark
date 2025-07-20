@@ -13,7 +13,7 @@ export function PitchCoachPage({ onNavigate }: PitchCoachPageProps) {
   const [currentTab, setCurrentTab] = useState<"coach" | "score" | "templates">("coach");
 
   return (
-    <div className="h-full bg-background flex flex-col">
+    <div className="h-full bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c] flex flex-col">
       {/* Header */}
       <header className="flex items-center justify-between p-4 border-b border-border bg-background/95 backdrop-blur-sm">
         <Button 

@@ -50,6 +50,53 @@ function NativeLoginForm({ setError, setLoadingProvider }: { setError: (e: strin
   );
 }
 
+// Add NativeSignUpForm below NativeLoginForm
+function NativeSignUpForm({ setError, setLoadingProvider }: { setError: (e: string | null) => void, setLoadingProvider: (p: string | null) => void }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function handleNativeSignUp(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setLoadingProvider('native');
+    setError(null);
+    try {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) setError(error.message);
+    } catch (err: any) {
+      setError('Sign up failed. Please try again.');
+    } finally {
+      setLoading(false);
+      setLoadingProvider(null);
+    }
+  }
+
+  return (
+    <form onSubmit={handleNativeSignUp} className="w-full flex flex-col gap-3 mt-4 animate-fade-in">
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        className="w-full rounded-md px-4 py-2 bg-background/80 border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        className="w-full rounded-md px-4 py-2 bg-background/80 border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+        required
+      />
+      <Button type="submit" className="w-full" disabled={loading}>
+        {loading ? 'Signing up...' : 'Sign Up'}
+      </Button>
+    </form>
+  );
+}
+
 export function AuthPage() {
   const [mode, setMode] = useState<'none' | 'signin' | 'signup' | 'native'>('none');
   const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
@@ -196,10 +243,36 @@ export function AuthPage() {
               {loadingProvider === 'facebook' && <span className="mr-2 animate-spin">🔄</span>}
               Sign In
             </button>
+            <button
+              type="button"
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-primary bg-transparent border border-primary mt-2 transition-all duration-300 hover:bg-primary/10 focus:bg-primary/10"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              onClick={() => setMode('signup')}
+              disabled={!!loadingProvider}
+            >
+              Sign Up
+            </button>
           </div>
           {/* Native login form below icons if mode==='native' */}
           {mode === 'native' && (
             <NativeLoginForm setError={setError} setLoadingProvider={setLoadingProvider} />
+          )}
+          {/* Native sign up form if mode==='signup' */}
+          {mode === 'signup' && (
+            <NativeSignUpForm setError={setError} setLoadingProvider={setLoadingProvider} />
+          )}
+          {/* Toggle between sign in and sign up */}
+          {mode === 'signup' && (
+            <div className="mt-2 text-sm text-center">
+              Already have an account?{' '}
+              <button type="button" className="text-primary underline" onClick={() => setMode('signin')}>Sign In</button>
+            </div>
+          )}
+          {mode === 'signin' && (
+            <div className="mt-2 text-sm text-center">
+              New here?{' '}
+              <button type="button" className="text-primary underline" onClick={() => setMode('signup')}>Sign Up</button>
+            </div>
           )}
         </div>
         {error && <div className="mt-4 text-red-400 text-sm text-center">{error}</div>}

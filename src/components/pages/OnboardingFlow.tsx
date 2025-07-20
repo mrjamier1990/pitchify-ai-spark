@@ -341,13 +341,13 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
           <div className="text-center space-y-6 animate-fade-in">
             <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl font-bold text-primary" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Welcome to Pitchify
+                Welcome to PitchFlic
               </h1>
               <p className="text-lg text-muted-foreground">Let's personalize your experience</p>
             </div>
             <div className="flex justify-center">
-              <div className="p-6 rounded-full bg-primary/10">
-                <Rocket className="h-16 w-16 text-primary" />
+              <div className="p-6 rounded-full bg-primary/10 flex items-center justify-center">
+                <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
               </div>
             </div>
           </div>
@@ -357,13 +357,13 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What's your full name?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What's your full name?</h2>
             </div>
             <Input
               placeholder="Enter your full name"
               value={formData.full_name}
               onChange={(e) => setFormData(prev => ({ ...prev, full_name: e.target.value }))}
-              className="text-lg p-6 border-2 focus:border-primary transition-colors"
+              className="text-lg p-6 border-2 focus:border-primary transition-colors rounded-full"
             />
           </div>
         );
@@ -372,7 +372,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What's your LinkedIn profile?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What's your LinkedIn profile?</h2>
               <p className="text-muted-foreground">(Optional)</p>
             </div>
             <div className="relative">
@@ -380,7 +380,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 placeholder="https://linkedin.com/in/yourname"
                 value={formData.linkedin_url}
                 onChange={(e) => setFormData(prev => ({ ...prev, linkedin_url: e.target.value }))}
-                className="text-lg p-6 border-2 focus:border-primary transition-colors pl-12"
+                className="text-lg p-6 border-2 focus:border-primary transition-colors pl-12 rounded-full"
               />
               <Building className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             </div>
@@ -391,19 +391,23 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">Where are you currently based?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Where are you currently based?</h2>
             </div>
             <div className="relative">
               <Select
                 value={formData.country}
                 onValueChange={(value) => setFormData(prev => ({ ...prev, country: value }))}
               >
-                <SelectTrigger className="text-lg p-6 border-2 focus:border-primary transition-colors pl-12">
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-12 rounded-full" style={{ background: 'transparent !important' }}>
                   <SelectValue placeholder="Select your country" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
                   {countries.map((country) => (
-                    <SelectItem key={country} value={country}>
+                    <SelectItem
+                      key={country}
+                      value={country}
+                      className="text-white focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors"
+                    >
                       {country}
                     </SelectItem>
                   ))}
@@ -418,13 +422,14 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">Which best describes you?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Which best describes you?</h2>
             </div>
             <div className="grid gap-4">
               <Card 
-                className={`cursor-pointer border-2 transition-all hover-scale ${
-                  formData.role === 'entrepreneur' ? 'border-primary bg-primary/10 shadow-lg' : 'border-border hover:border-primary/50 hover:shadow-md'
+                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.role === 'entrepreneur' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
                 }`}
+                style={formData.role === 'entrepreneur' ? { borderColor: '#fff' } : {}}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'entrepreneur' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
@@ -432,16 +437,17 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                     <Rocket className="h-8 w-8 text-primary" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-semibold text-xl">🚀 I'm a Founder</h3>
+                    <h3 className="font-semibold text-xl" style={{ fontFamily: 'Inter, sans-serif' }}>I'm a Founder</h3>
                     <p className="text-muted-foreground">Looking for investment and strategic partners</p>
                   </div>
                 </CardContent>
               </Card>
               
               <Card 
-                className={`cursor-pointer border-2 transition-all hover-scale ${
-                  formData.role === 'investor' ? 'border-primary bg-primary/10 shadow-lg' : 'border-border hover:border-primary/50 hover:shadow-md'
+                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.role === 'investor' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
                 }`}
+                style={formData.role === 'investor' ? { borderColor: '#fff' } : {}}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'investor' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
@@ -449,16 +455,17 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                     <DollarSign className="h-8 w-8 text-primary" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-semibold text-xl">💰 I'm an Investor</h3>
+                    <h3 className="font-semibold text-xl" style={{ fontFamily: 'Inter, sans-serif' }}>I'm an Investor</h3>
                     <p className="text-muted-foreground">Looking for promising startups to invest in</p>
                   </div>
                 </CardContent>
               </Card>
               
               <Card 
-                className={`cursor-pointer border-2 transition-all hover-scale ${
-                  formData.role === 'both' ? 'border-primary bg-primary/10 shadow-lg' : 'border-border hover:border-primary/50 hover:shadow-md'
+                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.role === 'both' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
                 }`}
+                style={formData.role === 'both' ? { borderColor: '#fff' } : {}}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'both' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
@@ -466,7 +473,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                     <Users className="h-8 w-8 text-primary" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-semibold text-xl">🤝 I'm Both</h3>
+                    <h3 className="font-semibold text-xl" style={{ fontFamily: 'Inter, sans-serif' }}>I'm Both</h3>
                     <p className="text-muted-foreground">I'm both building and investing</p>
                   </div>
                 </CardContent>
@@ -479,13 +486,13 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What's the name of your startup?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What's the name of your startup?</h2>
             </div>
             <Input
               placeholder="Enter your startup name"
               value={formData.startup_name}
               onChange={(e) => setFormData(prev => ({ ...prev, startup_name: e.target.value }))}
-              className="text-lg p-6 border-2 focus:border-primary transition-colors"
+              className="text-lg p-6 border-2 focus:border-primary transition-colors rounded-full"
             />
           </div>
         );
@@ -494,15 +501,39 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What industry or category best fits your startup?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What industry or category best fits your startup?</h2>
             </div>
-            <MultiSelect
-              variant="cards"
-              options={industries}
-              selected={formData.industry ? [formData.industry] : []}
-              onChange={(selected) => setFormData(prev => ({ ...prev, industry: selected[0] || '' }))}
-              className="max-h-96 overflow-y-auto"
-            />
+            <div className="relative">
+              <Select
+                value={formData.industry}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, industry: value }))}
+              >
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors rounded-full flex items-center justify-start gap-2" style={{ background: 'transparent !important', paddingLeft: 0 }}>
+                  {formData.industry && (
+                    <span className="inline-block align-middle ml-4">
+                      {industries.find(i => i.value === formData.industry)?.icon}
+                    </span>
+                  )}
+                  <span className="align-middle text-left">
+                    {formData.industry
+                      ? industries.find(i => i.value === formData.industry)?.label
+                      : <span className="text-muted-foreground">Select your industry</span>}
+                  </span>
+                </SelectTrigger>
+                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
+                  {industries.map((industry) => (
+                    <SelectItem
+                      key={industry.value}
+                      value={industry.value}
+                      className="text-white focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors flex items-center gap-2"
+                    >
+                      <span className="inline-block align-middle mr-2">{industry.icon}</span>
+                      <span className="align-middle">{industry.label}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         );
 
@@ -510,25 +541,39 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What stage are you currently at?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What stage are you currently at?</h2>
             </div>
-            <div className="grid gap-3">
-              {startupStages.map((stage) => (
-                <Card
-                  key={stage.value}
-                  className={`cursor-pointer border-2 transition-all hover-scale ${
-                    formData.funding_stage === stage.value ? 'border-primary bg-primary/10 shadow-lg' : 'border-border hover:border-primary/50 hover:shadow-md'
-                  }`}
-                  onClick={() => setFormData(prev => ({ ...prev, funding_stage: stage.value }))}
-                >
-                  <CardContent className="flex items-center space-x-4 p-6">
-                    <div className="p-2 rounded-full bg-primary/20">
-                      {stage.icon}
-                    </div>
-                    <p className="font-medium text-lg">{stage.label}</p>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="relative">
+              <Select
+                value={formData.funding_stage}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, funding_stage: value }))}
+              >
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors rounded-full flex items-center justify-start gap-2" style={{ background: 'transparent !important', paddingLeft: 0 }}>
+                  {formData.funding_stage && (
+                    <span className="inline-block align-middle ml-4">
+                      {startupStages.find(i => i.value === formData.funding_stage)?.icon}
+                    </span>
+                  )}
+                  <span className="align-middle text-left">
+                    {formData.funding_stage
+                      ? startupStages.find(i => i.value === formData.funding_stage)?.label
+                      : <span className="text-muted-foreground">Select your stage</span>}
+                  </span>
+                </SelectTrigger>
+                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]" position="popper" side="top">
+                  {startupStages.map((stage) => (
+                    <SelectItem
+                      key={stage.value}
+                      value={stage.value}
+                      className="text-white focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors flex items-center gap-2"
+                    >
+                      <span className="inline-block align-middle mr-2">{stage.icon}</span>
+                      <span className="align-middle">{stage.label}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+                {/* No left icon in SelectTrigger, just like step 7 */}
+              </Select>
             </div>
           </div>
         );
@@ -537,7 +582,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">How much are you looking to raise?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>How much are you looking to raise?</h2>
             </div>
             <div className="space-y-6">
               <div className="px-4">
@@ -565,17 +610,43 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         );
 
       case 'investor_preference':
+        const allInvestorTypePreferences = [
+          { value: 'angel', label: 'Angel Investor' },
+          { value: 'strategic', label: 'Strategic Partner' },
+          { value: 'vc', label: 'VC / Fund' },
+          { value: 'private_equity', label: 'Private Equity' },
+          { value: 'corporate_vc', label: 'Corporate VC' },
+          { value: 'incubator', label: 'Incubator/Accelerator' },
+          { value: 'crowdfunding', label: 'Crowdfunding' },
+          { value: 'government_grant', label: 'Government Grant' },
+          { value: 'open', label: 'Open to all' },
+        ];
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What type of investor are you looking for?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What type of investor are you looking for?</h2>
             </div>
-            <MultiSelect
-              variant="chips"
-              options={investorTypePreferences}
-              selected={formData.investor_type_preference}
-              onChange={(selected) => setFormData(prev => ({ ...prev, investor_type_preference: selected }))}
-            />
+            <div className="relative">
+              <Select
+                value={formData.investor_type_preference[0] || ''}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, investor_type_preference: [value] }))}
+              >
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-12 rounded-full" style={{ background: 'transparent !important' }}>
+                  <SelectValue placeholder="Select investor type" />
+                </SelectTrigger>
+                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]" position="popper" side="top">
+                  {allInvestorTypePreferences.map((option) => (
+                    <SelectItem
+                      key={option.value}
+                      value={option.value}
+                      className="text-white focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors"
+                    >
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         );
 
@@ -583,7 +654,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">Do you have a pitch deck ready?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Do you have a pitch deck ready?</h2>
               <p className="text-muted-foreground">Upload your pitch deck or skip for now</p>
             </div>
             <FileUpload
@@ -594,9 +665,9 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
               maxSize={25}
             />
             {!formData.pitch_deck_url && (
-              <Button 
-                variant="outline" 
-                className="w-full"
+              <Button
+                className="group w-full font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
                 onClick={() => setFormData(prev => ({ ...prev, pitch_deck_url: 'not_ready' }))}
               >
                 Not ready yet
@@ -609,7 +680,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What's your startup website or landing page?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What's your startup website or landing page?</h2>
               <p className="text-muted-foreground">(Optional)</p>
             </div>
             <div className="relative">
@@ -617,7 +688,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 placeholder="https://yourstartup.com"
                 value={formData.startup_website}
                 onChange={(e) => setFormData(prev => ({ ...prev, startup_website: e.target.value }))}
-                className="text-lg p-6 border-2 focus:border-primary transition-colors pl-12"
+                className="text-lg p-6 border-2 focus:border-primary transition-colors pl-12 rounded-full"
               />
               <Globe className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             </div>
@@ -628,7 +699,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">Upload a short video pitch</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Upload a short video pitch</h2>
               <p className="text-muted-foreground">30–60s, optional but boosts visibility</p>
             </div>
             <FileUpload
@@ -645,7 +716,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What kind of investor are you?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What kind of investor are you?</h2>
             </div>
             <MultiSelect
               variant="cards"
@@ -660,7 +731,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">Are you currently looking to invest?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Are you currently looking to invest?</h2>
             </div>
             <div className="grid gap-4">
               <Card
@@ -693,7 +764,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What's your typical check size?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What's your typical check size?</h2>
             </div>
             <div className="space-y-6">
               <div className="px-4">
@@ -724,7 +795,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What sectors are you most interested in?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What sectors are you most interested in?</h2>
             </div>
             <MultiSelect
               variant="chips"
@@ -739,7 +810,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">What stage do you prefer to invest in?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What stage do you prefer to invest in?</h2>
             </div>
             <MultiSelect
               variant="chips"
@@ -754,7 +825,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">Which regions do you focus on?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Which regions do you focus on?</h2>
             </div>
             <MultiSelect
               variant="chips"
@@ -769,13 +840,13 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground">In one sentence, why are you a good fit for Pitchify?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>In one sentence, why are you a good fit for Pitchify?</h2>
             </div>
             <Textarea
               placeholder="Tell us what makes you unique and valuable to the Pitchify community..."
               value={formData.why_good_fit}
               onChange={(e) => setFormData(prev => ({ ...prev, why_good_fit: e.target.value }))}
-              className="min-h-32 text-lg p-6 border-2 focus:border-primary transition-colors"
+              className="min-h-32 text-lg p-6 border focus:border-primary transition-colors rounded-xl"
               maxLength={200}
             />
             <p className="text-sm text-muted-foreground text-right">
@@ -788,19 +859,13 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="text-center space-y-6 animate-fade-in">
             <div className="space-y-4">
-              <div className="text-6xl">🎉</div>
-              <h1 className="text-4xl font-bold text-foreground bg-gradient-to-r from-[#FF5A5F] to-[#FF8E53] bg-clip-text text-transparent">
+              <div className="flex justify-center">
+                <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
+              </div>
+              <h1 className="text-4xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
                 That's it — Your profile is being created!
               </h1>
-              <p className="text-xl text-muted-foreground">We're curating the best matches for you.</p>
-            </div>
-            <div className="flex justify-center">
-              <div className="relative">
-                <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Rocket className="h-6 w-6 text-primary" />
-                </div>
-              </div>
+              <p className="text-xl text-white">We're curating the best matches for you.</p>
             </div>
           </div>
         );
@@ -811,7 +876,15 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c] relative overflow-hidden">
+      {/* Subtle travelling star animation foreground */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-30">
+        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-20 blur-[2px]" style={{ width: '18px', height: '18px', left: '10%', top: '20%', animation: 'starTravel1 22s linear infinite' }} />
+        <span className="absolute block rounded-full bg-white opacity-10 blur-[1.5px]" style={{ width: '10px', height: '10px', left: '70%', top: '30%', animation: 'starTravel2 28s linear infinite' }} />
+        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-14 blur-[2.5px]" style={{ width: '14px', height: '14px', left: '40%', top: '70%', animation: 'starTravel3 32s linear infinite' }} />
+        <span className="absolute block rounded-full bg-white opacity-8 blur-[2px]" style={{ width: '8px', height: '8px', left: '80%', top: '60%', animation: 'starTravel4 26s linear infinite' }} />
+        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-10 blur-[3px]" style={{ width: '22px', height: '22px', left: '55%', top: '10%', animation: 'starTravel5 36s linear infinite' }} />
+      </div>
       <div className="w-full max-w-3xl mx-auto">
         {/* Progress indicator */}
         <div className="mb-8">
@@ -824,20 +897,19 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             </span>
           </div>
           <div className="w-full bg-secondary/50 rounded-full h-3 overflow-hidden">
-            <div 
-              className="bg-gradient-to-r from-[#FF5A5F] to-[#FF8E53] h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
-              style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+            <div
+              className="h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
+              style={{
+                width: `${((currentStep + 1) / steps.length) * 100}%`,
+                background: 'linear-gradient(90deg, #ff5757 0%, #ff7979 100%)'
+              }}
             />
           </div>
-          <div className="mt-2 text-center">
-            <span className="text-xs text-muted-foreground font-medium tracking-wide">
-              {steps[currentStep]?.title || 'Unknown'}
-            </span>
-          </div>
+          <div className="mt-2" style={{ height: '20px' }} />
         </div>
 
         {/* Main content */}
-        <Card className="border-2 border-border/50 shadow-2xl backdrop-blur-sm">
+        <Card className="border-2 border-border/50 shadow-2xl bg-transparent text-white rounded-xl transition-all duration-300 relative z-10 overflow-hidden">
           <CardContent className="p-8 md:p-12">
             {renderSlide()}
           </CardContent>
@@ -846,28 +918,29 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         {/* Navigation */}
         <div className="flex justify-between items-center mt-8">
           <Button
-            variant="outline"
             onClick={prevStep}
             disabled={currentStep === 0}
-            className="flex items-center gap-2 px-6 py-3 border-2 hover:border-primary/50 transition-all"
+            className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           >
             <ArrowLeft className="h-4 w-4" />
             Back
           </Button>
 
           {currentStep === steps.length - 1 ? (
-            <Button 
+            <Button
               onClick={handleComplete}
-              className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#FF5A5F] to-[#FF8E53] hover:from-[#FF4A4F] hover:to-[#FF7E43] transition-all shadow-lg"
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
             >
-              Launch Pitchify
-              <Trophy className="h-4 w-4" />
+              Launch <Rocket className="h-4 w-4 inline ml-2" />
             </Button>
           ) : (
             <Button
               onClick={nextStep}
               disabled={!canContinue()}
-              className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#FF5A5F] to-[#FF8E53] hover:from-[#FF4A4F] hover:to-[#FF7E43] disabled:from-muted disabled:to-muted transition-all shadow-lg"
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
             >
               Continue
               <ArrowRight className="h-4 w-4" />
@@ -875,6 +948,28 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
           )}
         </div>
       </div>
+      <style>{`
+        @keyframes starTravel1 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(60vw, 40vh); }
+        }
+        @keyframes starTravel2 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(-50vw, 30vh); }
+        }
+        @keyframes starTravel3 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(30vw, -50vh); }
+        }
+        @keyframes starTravel4 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(-40vw, -30vh); }
+        }
+        @keyframes starTravel5 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(20vw, 60vh); }
+        }
+      `}</style>
     </div>
   );
 };

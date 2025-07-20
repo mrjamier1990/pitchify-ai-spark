@@ -301,7 +301,7 @@ export function EnhancedMessagesPage({ onNavigate }: EnhancedMessagesPageProps) 
   }
 
   return (
-    <div className="h-full bg-gradient-to-br from-background via-background/98 to-background/95">
+    <div className="h-full bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c]">
       {/* Frosted Glass Header */}
       <div className="bg-background/70 backdrop-blur-xl border-b border-border/20 p-4 shadow-lg">
         <div className="flex items-center justify-between mb-6">

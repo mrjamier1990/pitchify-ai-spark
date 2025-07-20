@@ -37,7 +37,7 @@ export function MainApp() {
   };
 
   return (
-    <div className="h-screen bg-background">
+    <div className="h-screen bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c]">
       <div className="h-full overflow-hidden">
         {renderCurrentPage()}
       </div>

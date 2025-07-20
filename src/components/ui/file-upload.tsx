@@ -94,7 +94,10 @@ export function FileUpload({
         {description && (
           <p className="text-xs text-muted-foreground mb-4">{description}</p>
         )}
-        <Button variant="outline" size="sm">
+        <Button
+          className="group font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm"
+          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+        >
           Choose File{multiple ? 's' : ''}
         </Button>
         <p className="text-xs text-muted-foreground mt-2">

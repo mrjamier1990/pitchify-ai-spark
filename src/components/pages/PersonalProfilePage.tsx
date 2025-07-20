@@ -296,7 +296,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
   }
 
   return (
-    <div className="h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 flex flex-col">
+    <div className="h-screen bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c] flex flex-col">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-lg border-b border-border/50 flex-shrink-0">
         <div className="flex items-center justify-between p-4">

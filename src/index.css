@@ -45,7 +45,7 @@ body {
 }
 
 .card, .Card, .bg-card {
-  background-color: hsl(240 3% 16%); /* #2a2a2d */
+  background-color: #18181b;
   color: hsl(var(--foreground));
   border-radius: 1rem; /* Softer corners */
   border: 1px solid hsl(var(--border));
@@ -53,10 +53,11 @@ body {
   transition: box-shadow 0.25s cubic-bezier(0.4,0,0.2,1), border-color 0.2s, transform 0.18s cubic-bezier(0.4,0,0.2,1);
 }
 .card:hover, .Card:hover, .bg-card:hover {
-  box-shadow: 0 4px 24px rgba(0,0,0,0.25), 0 1.5px 0 rgba(255,255,255,0.04) inset, 0 0 40px 0 hsl(var(--subscriptly-teal) / 0.7);
-  /* Remove border-color change */
-  transform: scale(1.035);
+  transform: scale(1.04);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+  transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
 }
+/* Removed card hover effect for onboarding flow transparency */
 
 .button, .Button, .btn, button {
   font-family: var(--font-sans);
