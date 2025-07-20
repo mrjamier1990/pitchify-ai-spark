@@ -126,7 +126,7 @@ export function AuthPage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8" style={{ marginTop: '2.5rem' }}>
+        <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8" style={{ marginTop: '3.5rem' }}>
           <div className="relative w-full flex flex-col items-center">
             {/* Google, Facebook, and Native icon pop-ups on hover for Sign In */}
             <div className={`absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none transition-all duration-500 z-10 ${showIcons ? 'opacity-100 pointer-events-auto' : 'opacity-0'}`} id="icons-signin">
