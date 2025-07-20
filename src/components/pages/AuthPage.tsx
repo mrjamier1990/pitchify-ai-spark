@@ -106,20 +106,27 @@ export function AuthPage() {
       </div>
       {/* Logo and Title centered vertically */}
       <div className="flex flex-col items-center w-full max-w-lg px-4 justify-center min-h-screen">
-        <div className="flex flex-col items-center group transition-all duration-300">
-          <div className="flex items-center justify-center mb-4">
+        <div className="flex flex-col items-center group transition-all duration-300 gap-y-5">
+          <img
+            src="/pitchflic-logo.png"
+            alt="PitchFlic Logo"
+            width={160}
+            height={72}
+            style={{ display: 'block', margin: '0 auto', maxWidth: '160px', maxHeight: '72px', objectFit: 'contain', marginTop: '-16px' }}
+          />
+          <div className="flex flex-col items-center gap-y-3">
             <h1
-              className="text-6xl font-extrabold text-white tracking-tight transition-transform duration-300"
-              style={{ letterSpacing: '-0.02em', willChange: 'transform, color', fontFamily: 'Inter, system-ui, sans-serif' }}
+              className="text-6xl font-extrabold text-white tracking-tight transition-transform duration-300 mt-0"
+              style={{ letterSpacing: '-0.02em', willChange: 'transform, color', fontFamily: 'Inter, system-ui, sans-serif', marginTop: 0 }}
             >
               PitchFlic
             </h1>
+            <div className="text-sm font-light tracking-wide text-center shimmer-once" style={{ color: '#555555' }}>
+              Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
+            </div>
           </div>
         </div>
-        <div className="mb-6 text-sm font-light tracking-wide text-center shimmer-once" style={{ color: '#555555' }}>
-          Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
-        </div>
-        <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8">
+        <div className="flex flex-col gap-3 w-full max-w-xs mx-auto items-center mt-8 mb-8" style={{ marginTop: '2.5rem' }}>
           <div className="relative w-full flex flex-col items-center">
             {/* Google, Facebook, and Native icon pop-ups on hover for Sign In */}
             <div className={`absolute -top-10 left-1/2 -translate-x-1/2 flex flex-row gap-2 items-center justify-center pointer-events-none transition-all duration-500 z-10 ${showIcons ? 'opacity-100 pointer-events-auto' : 'opacity-0'}`} id="icons-signin">
