@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -181,6 +181,10 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
     why_good_fit: '',
   });
 
+  const [toastOpen, setToastOpen] = useState(false);
+  const toastIdRef = useRef<string | null>(null);
+  const [lastToastStep, setLastToastStep] = useState<number | null>(null);
+
   const getSteps = (): OnboardingStep[] => {
     const universalSteps = [
       { id: 'welcome', title: 'Welcome', required: false }, // step 1
@@ -241,6 +245,34 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
   };
 
   const steps = getSteps();
+
+  useEffect(() => {
+    // Show the toast only for step 13 (video_pitch) and role 'entrepreneur', and only once per visit to the step
+    if (
+      steps[currentStep]?.id === 'video_pitch' &&
+      formData.role === 'entrepreneur' &&
+      lastToastStep !== currentStep &&
+      !toastOpen
+    ) {
+      setToastOpen(true);
+      setLastToastStep(currentStep);
+      const { id } = toast({
+        title: '',
+        description: "This is the first thing investors or founders will see on your PitchFlic swipe card. You’ve got 60 seconds to shine, so make it clear, confident, and give a strong glimpse of who you are and what you’re building or looking for.",
+        className: "fixed left-1/2 top-1/3 z-[200] -translate-x-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-8 flex flex-col items-center text-white animate-fade-in max-w-md w-full text-center text-lg",
+        duration: 1000000,
+      });
+      toastIdRef.current = id;
+      // Listen for manual close
+      const interval = setInterval(() => {
+        const toastEl = document.querySelector(`[data-radix-toast-id='${id}']`);
+        if (!toastEl) {
+          setToastOpen(false);
+          clearInterval(interval);
+        }
+      }, 500);
+    }
+  }, [steps, currentStep, formData.role, toastOpen, lastToastStep]);
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -731,29 +763,29 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         );
 
       case 'video_pitch':
-        return (
-          <div className="space-y-6 animate-slide-in-right">
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Upload a short video pitch</h2>
-              <p className="text-muted-foreground">30–60s, optional but boosts visibility</p>
+        if (formData.role === 'entrepreneur') {
+          return (
+            <div className="space-y-6 animate-slide-in-right">
+              <div className="text-center space-y-2">
+                <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Upload a short video pitch</h2>
+                <p className="text-muted-foreground">30–60s, optional but boosts visibility</p>
+              </div>
+              <FileUpload
+                accept=".mp4,.mov,.avi"
+                onUpload={(files) => {
+                  if (!toastOpen && files.length > 0) {
+                    handleFileUpload(files, 'video_pitch_url');
+                  }
+                }}
+                placeholder="Upload video pitch"
+                description="MP4, MOV, or AVI formats, max 60 seconds"
+                maxSize={100}
+                disabled={toastOpen}
+              />
             </div>
-            <FileUpload
-              accept=".mp4,.mov,.avi"
-              onUpload={(files) => {
-                if (files.length > 0) {
-                  handleFileUpload(files, 'video_pitch_url');
-                } else {
-                  // Remove from formData and (optionally) delete from storage
-                  setFormData(prev => ({ ...prev, video_pitch_url: '' }));
-                  // TODO: Add API/storage deletion logic here if needed
-                }
-              }}
-              placeholder="Upload video pitch"
-              description="MP4, MOV, or AVI formats, max 60 seconds"
-              maxSize={100}
-            />
-          </div>
-        );
+          );
+        }
+        // ...existing code for other roles...
 
       case 'investor_type':
         return (

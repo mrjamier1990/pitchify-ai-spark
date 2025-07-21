@@ -12,6 +12,8 @@ interface FileUploadProps {
   className?: string
   placeholder?: string
   description?: string
+  onChooseFile?: () => void
+  disabled?: boolean // new prop
 }
 
 export function FileUpload({
@@ -21,7 +23,9 @@ export function FileUpload({
   maxSize = 10,
   className,
   placeholder = "Upload file",
-  description
+  description,
+  onChooseFile,
+  disabled = false // new prop
 }: FileUploadProps) {
   const [isDragging, setIsDragging] = React.useState(false)
   const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([])
@@ -85,6 +89,8 @@ export function FileUpload({
   }
 
   const openFileDialog = () => {
+    if (disabled) return;
+    if (onChooseFile) onChooseFile();
     if (fileInputRef.current) fileInputRef.current.value = "";
     fileInputRef.current?.click()
   }
@@ -95,14 +101,16 @@ export function FileUpload({
         className={cn(
           "border-2 border-dashed rounded-lg p-6 text-center transition-colors cursor-pointer",
           isDragging ? "border-primary bg-primary/5" : "border-border hover:border-primary/50",
-          "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+          disabled ? "opacity-50 pointer-events-none" : ""
         )}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        onClick={openFileDialog}
+        onDragOver={disabled ? undefined : handleDragOver}
+        onDragLeave={disabled ? undefined : handleDragLeave}
+        onDrop={disabled ? undefined : handleDrop}
+        onClick={disabled ? undefined : openFileDialog}
         role="button"
         tabIndex={0}
+        aria-disabled={disabled}
       >
         <Upload className="mx-auto h-8 w-8 text-muted-foreground mb-4" />
         <p className="text-sm font-medium mb-2">{placeholder}</p>
@@ -112,6 +120,8 @@ export function FileUpload({
         <Button
           className="group font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm"
           style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+          onClick={e => { if (disabled) return; e.stopPropagation(); openFileDialog(); }}
+          disabled={disabled}
         >
           Choose File{multiple ? 's' : ''}
         </Button>
