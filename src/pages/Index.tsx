@@ -22,7 +22,8 @@ const Index = () => {
     return <AuthPage />;
   }
 
-  if (needsOnboarding) {
+  // Temporarily show onboarding flow for testing
+  if (needsOnboarding || true) {
     return (
       <OnboardingFlow
         onComplete={() => setNeedsOnboarding(false)}
