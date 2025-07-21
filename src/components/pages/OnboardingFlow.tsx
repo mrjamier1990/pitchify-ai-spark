@@ -10,6 +10,7 @@ import { FileUpload } from '@/components/ui/file-upload';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { ArrowRight, ArrowLeft, Rocket, DollarSign, Users, Building, Brain, Wrench, TrendingUp, Banknote, Scale, Heart, Globe, MapPin, Lightbulb, Cpu, Zap, Smartphone, Shield, Leaf, ShoppingBag, Gamepad2, Music, GraduationCap, Home, Car, Plane, Camera, Palette, Book, Coffee, Trophy, Target, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface OnboardingFlowProps {
   onComplete: () => void;
@@ -184,6 +185,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
   const [toastOpen, setToastOpen] = useState(false);
   const toastIdRef = useRef<string | null>(null);
   const [lastToastStep, setLastToastStep] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const getSteps = (): OnboardingStep[] => {
     const universalSteps = [
@@ -354,7 +356,8 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         description: "Welcome to Pitchify. Let's find your perfect matches.",
       });
 
-      onComplete();
+      // Instead of onComplete(), navigate to launch animation
+      navigate('/launch-animation');
     } catch (error) {
       console.error('Error creating profile:', error);
       toast({
