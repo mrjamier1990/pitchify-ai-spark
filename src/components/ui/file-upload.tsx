@@ -2,6 +2,7 @@ import * as React from "react"
 import { Upload, File, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { toast } from '@/hooks/use-toast';
 
 interface FileUploadProps {
   accept?: string
@@ -55,6 +56,16 @@ export function FileUpload({
       return sizeMB <= maxSize
     })
 
+    if (validFiles.length < files.length) {
+      toast({
+        title: 'Upload failed',
+        description: `Some files were too large or invalid. Max size: ${maxSize}MB.`,
+        className: "fixed left-1/2 top-1/2 z-[200] -translate-x-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-8 flex flex-col items-center text-white animate-fade-in max-w-sm w-full",
+        duration: 4000,
+        variant: 'destructive',
+      });
+    }
+
     if (multiple) {
       setUploadedFiles(prev => [...prev, ...validFiles])
       onUpload([...uploadedFiles, ...validFiles])
@@ -68,9 +79,13 @@ export function FileUpload({
     const newFiles = uploadedFiles.filter((_, i) => i !== index)
     setUploadedFiles(newFiles)
     onUpload(newFiles)
+    if (newFiles.length === 0 && fileInputRef.current) {
+      fileInputRef.current.value = ""
+    }
   }
 
   const openFileDialog = () => {
+    if (fileInputRef.current) fileInputRef.current.value = "";
     fileInputRef.current?.click()
   }
 
@@ -131,8 +146,9 @@ export function FileUpload({
                 </div>
               </div>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
+                className="rounded-full border-white text-white hover:bg-[#ff5757cc] hover:text-white transition-all duration-300"
                 onClick={() => removeFile(index)}
               >
                 <X className="h-4 w-4" />

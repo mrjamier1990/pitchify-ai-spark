@@ -50,8 +50,37 @@ const industries = [
   { value: 'saas', label: 'SaaS', icon: <Cpu className="h-4 w-4" /> },
   { value: 'ai', label: 'AI/ML', icon: <Brain className="h-4 w-4" /> },
   { value: 'healthtech', label: 'HealthTech', icon: <Heart className="h-4 w-4" /> },
+  { value: 'biotech', label: 'Biotech', icon: <Heart className="h-4 w-4" /> },
   { value: 'fintech', label: 'FinTech', icon: <DollarSign className="h-4 w-4" /> },
-  { value: 'edtech', label: 'EdTech', icon: <GraduationCap className="h-4 w-4" /> },
+  { value: 'proptech', label: 'PropTech', icon: <Building className="h-4 w-4" /> },
+  { value: 'agritech', label: 'AgriTech', icon: <Leaf className="h-4 w-4" /> },
+  { value: 'insurtech', label: 'InsurTech', icon: <Shield className="h-4 w-4" /> },
+  { value: 'legaltech', label: 'LegalTech', icon: <Scale className="h-4 w-4" /> },
+  { value: 'logistics', label: 'Logistics', icon: <Car className="h-4 w-4" /> },
+  { value: 'robotics', label: 'Robotics', icon: <Wrench className="h-4 w-4" /> },
+  { value: 'spacetech', label: 'SpaceTech', icon: <Rocket className="h-4 w-4" /> },
+  { value: 'sportstech', label: 'SportsTech', icon: <Trophy className="h-4 w-4" /> },
+  { value: 'fashion', label: 'Fashion', icon: <Palette className="h-4 w-4" /> },
+  { value: 'art', label: 'Art', icon: <Palette className="h-4 w-4" /> },
+  { value: 'social_impact', label: 'Social Impact', icon: <Heart className="h-4 w-4" /> },
+  { value: 'nonprofit', label: 'Nonprofit', icon: <Heart className="h-4 w-4" /> },
+  { value: 'automotive', label: 'Automotive', icon: <Car className="h-4 w-4" /> },
+  { value: 'construction', label: 'Construction', icon: <Building className="h-4 w-4" /> },
+  { value: 'real_estate', label: 'Real Estate', icon: <Building className="h-4 w-4" /> },
+  { value: 'retail', label: 'Retail', icon: <ShoppingBag className="h-4 w-4" /> },
+  { value: 'telecom', label: 'Telecommunications', icon: <Smartphone className="h-4 w-4" /> },
+  { value: 'utilities', label: 'Utilities', icon: <Leaf className="h-4 w-4" /> },
+  { value: 'energy', label: 'Energy', icon: <Zap className="h-4 w-4" /> },
+  { value: 'mining', label: 'Mining', icon: <Banknote className="h-4 w-4" /> },
+  { value: 'materials', label: 'Materials', icon: <Wrench className="h-4 w-4" /> },
+  { value: 'aerospace', label: 'Aerospace', icon: <Rocket className="h-4 w-4" /> },
+  { value: 'maritime', label: 'Maritime', icon: <Plane className="h-4 w-4" /> },
+  { value: 'education', label: 'Education', icon: <GraduationCap className="h-4 w-4" /> },
+  { value: 'hospitality', label: 'Hospitality', icon: <Coffee className="h-4 w-4" /> },
+  { value: 'tourism', label: 'Tourism', icon: <Plane className="h-4 w-4" /> },
+  { value: 'publishing', label: 'Publishing', icon: <Book className="h-4 w-4" /> },
+  { value: 'advertising', label: 'Advertising', icon: <Book className="h-4 w-4" /> },
+  { value: 'hrtech', label: 'HRTech', icon: <Users className="h-4 w-4" /> },
   { value: 'ecommerce', label: 'E-commerce', icon: <ShoppingBag className="h-4 w-4" /> },
   { value: 'web3', label: 'Web3/Crypto', icon: <Zap className="h-4 w-4" /> },
   { value: 'mobile', label: 'Mobile Apps', icon: <Smartphone className="h-4 w-4" /> },
@@ -66,18 +95,32 @@ const industries = [
 
 const startupStages = [
   { value: 'idea', label: 'Just an Idea', icon: <Lightbulb className="h-4 w-4" /> },
+  { value: 'prototype', label: 'Prototype', icon: <Wrench className="h-4 w-4" /> },
+  { value: 'pre_product', label: 'Pre-Product', icon: <Wrench className="h-4 w-4" /> },
   { value: 'mvp', label: 'MVP / Beta', icon: <Wrench className="h-4 w-4" /> },
+  { value: 'product_market_fit', label: 'Product-Market Fit', icon: <TrendingUp className="h-4 w-4" /> },
   { value: 'launched', label: 'Launched with some traction', icon: <Rocket className="h-4 w-4" /> },
   { value: 'revenue', label: 'Generating revenue', icon: <Banknote className="h-4 w-4" /> },
-  { value: 'scaling', label: 'Scaling', icon: <TrendingUp className="h-4 w-4" /> }
+  { value: 'scaling', label: 'Scaling', icon: <TrendingUp className="h-4 w-4" /> },
+  { value: 'expansion', label: 'Expansion', icon: <TrendingUp className="h-4 w-4" /> },
+  { value: 'ipo', label: 'IPO', icon: <Trophy className="h-4 w-4" /> },
+  { value: 'exit', label: 'Exit', icon: <Trophy className="h-4 w-4" /> },
+  { value: 'turnaround', label: 'Turnaround', icon: <Wrench className="h-4 w-4" /> },
 ];
 
 const investorTypes = [
-  { value: 'angel', label: 'Angel Investor', icon: <Users className="h-4 w-4" /> },
-  { value: 'vc', label: 'VC', icon: <Building className="h-4 w-4" /> },
-  { value: 'syndicate', label: 'Syndicate', icon: <Users className="h-4 w-4" /> },
-  { value: 'family_office', label: 'Family Office', icon: <Home className="h-4 w-4" /> },
-  { value: 'other', label: 'Other', icon: <Building className="h-4 w-4" /> }
+  { value: 'angel', label: 'Angel Investor' },
+  { value: 'vc', label: 'VC' },
+  { value: 'syndicate', label: 'Syndicate' },
+  { value: 'family_office', label: 'Family Office' },
+  { value: 'private_equity', label: 'Private Equity' },
+  { value: 'corporate_vc', label: 'Corporate VC' },
+  { value: 'incubator', label: 'Incubator/Accelerator' },
+  { value: 'crowdfunding', label: 'Crowdfunding' },
+  { value: 'government_grant', label: 'Government Grant' },
+  { value: 'sovereign_wealth', label: 'Sovereign Wealth Fund' },
+  { value: 'strategic_partner', label: 'Strategic Partner' },
+  { value: 'other', label: 'Other' },
 ];
 
 const investorTypePreferences = [
@@ -89,9 +132,16 @@ const investorTypePreferences = [
 
 const investmentStages = [
   { value: 'idea', label: 'Idea / Early' },
+  { value: 'prototype', label: 'Prototype' },
+  { value: 'pre_product', label: 'Pre-Product' },
   { value: 'mvp', label: 'MVP' },
+  { value: 'product_market_fit', label: 'Product-Market Fit' },
   { value: 'seed', label: 'Pre-seed / Seed' },
-  { value: 'growth', label: 'Growth Stage' }
+  { value: 'growth', label: 'Growth Stage' },
+  { value: 'expansion', label: 'Expansion' },
+  { value: 'ipo', label: 'IPO' },
+  { value: 'exit', label: 'Exit' },
+  { value: 'turnaround', label: 'Turnaround' },
 ];
 
 const regions = [
@@ -103,17 +153,7 @@ const regions = [
 ];
 
 const countries = [
-  'United States',
-  'Canada',
-  'United Kingdom',
-  'Germany',
-  'France',
-  'Australia',
-  'Singapore',
-  'UAE',
-  'India',
-  'Brazil',
-  'Other'
+  'United States', 'Canada', 'United Kingdom', 'Germany', 'France', 'Italy', 'Spain', 'Netherlands', 'Sweden', 'Norway', 'Denmark', 'Finland', 'Switzerland', 'Austria', 'Belgium', 'Ireland', 'Portugal', 'Poland', 'Czech Republic', 'Hungary', 'Greece', 'Turkey', 'Russia', 'China', 'Japan', 'South Korea', 'India', 'Singapore', 'Hong Kong', 'Australia', 'New Zealand', 'Brazil', 'Mexico', 'Argentina', 'Chile', 'Colombia', 'South Africa', 'Nigeria', 'Egypt', 'UAE', 'Saudi Arabia', 'Israel', 'Indonesia', 'Malaysia', 'Thailand', 'Vietnam', 'Philippines', 'Pakistan', 'Bangladesh', 'Ukraine', 'Romania', 'Slovakia', 'Slovenia', 'Croatia', 'Bulgaria', 'Estonia', 'Latvia', 'Lithuania', 'Luxembourg', 'Iceland', 'Qatar', 'Kuwait', 'Morocco', 'Kenya', 'Ghana', 'Peru', 'Venezuela', 'Uruguay', 'Ecuador', 'Costa Rica', 'Panama', 'Dominican Republic', 'Other'
 ];
 
 export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlowProps) => {
@@ -143,9 +183,9 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
 
   const getSteps = (): OnboardingStep[] => {
     const universalSteps = [
-      { id: 'welcome', title: 'Welcome', required: false },
+      { id: 'welcome', title: 'Welcome', required: false }, // step 1
       { id: 'name', title: 'Full Name', required: true },
-      { id: 'linkedin', title: 'LinkedIn', required: false },
+      { id: 'linkedin', title: 'LinkedIn', required: false }, // step 3
       { id: 'location', title: 'Location', required: true },
       { id: 'role', title: 'Role', required: true },
     ];
@@ -158,11 +198,11 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         { id: 'stage', title: 'Stage', required: true },
         { id: 'funding_amount', title: 'Funding Amount', required: true },
         { id: 'investor_preference', title: 'Investor Type', required: true },
-        { id: 'pitch_deck', title: 'Pitch Deck', required: false },
-        { id: 'startup_website', title: 'Website', required: false },
-        { id: 'video_pitch', title: 'Video Pitch', required: false },
+        { id: 'pitch_deck', title: 'Pitch Deck', required: false }, // step 11
+        { id: 'startup_website', title: 'Website', required: false }, // step 12
+        { id: 'video_pitch', title: 'Video Pitch', required: true }, // step 13 always required
         { id: 'why_good_fit', title: 'Why Good Fit', required: true },
-        { id: 'complete', title: 'Complete', required: false },
+        { id: 'complete', title: 'Complete', required: true },
       ];
     } else if (formData.role === 'investor') {
       return [
@@ -173,8 +213,9 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         { id: 'sector_preference', title: 'Sector Preference', required: true },
         { id: 'stage_preference', title: 'Stage Preference', required: true },
         { id: 'regional_focus', title: 'Regional Focus', required: true },
+        { id: 'video_pitch', title: 'Video Pitch', required: true }, // step 13 always required
         { id: 'why_good_fit', title: 'Why Good Fit', required: true },
-        { id: 'complete', title: 'Complete', required: false },
+        { id: 'complete', title: 'Complete', required: true },
       ];
     } else {
       return [
@@ -186,7 +227,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         { id: 'investor_preference', title: 'Investor Type', required: true },
         { id: 'pitch_deck', title: 'Pitch Deck', required: false },
         { id: 'startup_website', title: 'Website', required: false },
-        { id: 'video_pitch', title: 'Video Pitch', required: false },
+        { id: 'video_pitch', title: 'Video Pitch', required: true }, // step 13 always required
         { id: 'investor_type', title: 'Investor Type', required: true },
         { id: 'investment_status', title: 'Investment Status', required: true },
         { id: 'check_size', title: 'Check Size', required: true },
@@ -194,7 +235,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         { id: 'stage_preference', title: 'Stage Preference', required: true },
         { id: 'regional_focus', title: 'Regional Focus', required: true },
         { id: 'why_good_fit', title: 'Why Good Fit', required: true },
-        { id: 'complete', title: 'Complete', required: false },
+        { id: 'complete', title: 'Complete', required: true },
       ];
     }
   };
@@ -219,8 +260,10 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
       const file = files[0];
       setFormData(prev => ({ ...prev, [field]: `uploaded_${file.name}` }));
       toast({
-        title: "File uploaded",
+        title: "Video uploaded",
         description: `${file.name} has been uploaded successfully.`,
+        className: "fixed left-1/2 top-1/2 z-[200] -translate-x-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-8 flex flex-col items-center text-white animate-fade-in max-w-sm w-full",
+        duration: 3000,
       });
     }
   };
@@ -324,9 +367,14 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
       case 'regional_focus':
         return formData.regional_focus.length > 0;
       case 'why_good_fit':
-        return formData.why_good_fit.trim() !== '';
+        // Require at least 25 words
+        return formData.why_good_fit.trim().split(/\s+/).filter(Boolean).length >= 25;
       case 'bio':
         return formData.bio.trim() !== '';
+      case 'video_pitch':
+        return formData.video_pitch_url && formData.video_pitch_url.trim() !== '';
+      case 'pitch_deck':
+        return formData.pitch_deck_url && formData.pitch_deck_url.trim() !== '';
       default:
         return true;
     }
@@ -339,16 +387,16 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
       case 'welcome':
         return (
           <div className="text-center space-y-6 animate-fade-in">
+            <div className="flex justify-center">
+              <div className="p-6 rounded-full bg-primary/10 flex items-center justify-center">
+                <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
+              </div>
+            </div>
             <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl font-bold text-primary" style={{ fontFamily: 'Inter, sans-serif' }}>
                 Welcome to PitchFlic
               </h1>
               <p className="text-lg text-muted-foreground">Let's personalize your experience</p>
-            </div>
-            <div className="flex justify-center">
-              <div className="p-6 rounded-full bg-primary/10 flex items-center justify-center">
-                <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
-              </div>
             </div>
           </div>
         );
@@ -398,7 +446,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 value={formData.country}
                 onValueChange={(value) => setFormData(prev => ({ ...prev, country: value }))}
               >
-                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-12 rounded-full" style={{ background: 'transparent !important' }}>
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-12 rounded-full text-left" style={{ background: 'transparent !important' }}>
                   <SelectValue placeholder="Select your country" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
@@ -508,17 +556,8 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 value={formData.industry}
                 onValueChange={(value) => setFormData(prev => ({ ...prev, industry: value }))}
               >
-                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors rounded-full flex items-center justify-start gap-2" style={{ background: 'transparent !important', paddingLeft: 0 }}>
-                  {formData.industry && (
-                    <span className="inline-block align-middle ml-4">
-                      {industries.find(i => i.value === formData.industry)?.icon}
-                    </span>
-                  )}
-                  <span className="align-middle text-left">
-                    {formData.industry
-                      ? industries.find(i => i.value === formData.industry)?.label
-                      : <span className="text-muted-foreground">Select your industry</span>}
-                  </span>
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
+                  <SelectValue placeholder="Select your industry" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
                   {industries.map((industry) => (
@@ -548,17 +587,8 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 value={formData.funding_stage}
                 onValueChange={(value) => setFormData(prev => ({ ...prev, funding_stage: value }))}
               >
-                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors rounded-full flex items-center justify-start gap-2" style={{ background: 'transparent !important', paddingLeft: 0 }}>
-                  {formData.funding_stage && (
-                    <span className="inline-block align-middle ml-4">
-                      {startupStages.find(i => i.value === formData.funding_stage)?.icon}
-                    </span>
-                  )}
-                  <span className="align-middle text-left">
-                    {formData.funding_stage
-                      ? startupStages.find(i => i.value === formData.funding_stage)?.label
-                      : <span className="text-muted-foreground">Select your stage</span>}
-                  </span>
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
+                  <SelectValue placeholder="Select your stage" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]" position="popper" side="top">
                   {startupStages.map((stage) => (
@@ -590,7 +620,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                   value={[parseInt(formData.funding_amount_seeking) || 100000]}
                   onValueChange={(value) => setFormData(prev => ({ ...prev, funding_amount_seeking: value[0].toString() }))}
                   max={5000000}
-                  min={10000}
+                  min={5000}
                   step={10000}
                   className="w-full"
                 />
@@ -602,7 +632,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 <p className="text-muted-foreground">Funding goal</p>
               </div>
               <div className="flex justify-between text-sm text-muted-foreground px-4">
-                <span>$10K</span>
+                <span>$5K</span>
                 <span>$5M+</span>
               </div>
             </div>
@@ -631,7 +661,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 value={formData.investor_type_preference[0] || ''}
                 onValueChange={(value) => setFormData(prev => ({ ...prev, investor_type_preference: [value] }))}
               >
-                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-12 rounded-full" style={{ background: 'transparent !important' }}>
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
                   <SelectValue placeholder="Select investor type" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]" position="popper" side="top">
@@ -659,20 +689,25 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             </div>
             <FileUpload
               accept=".pdf,.ppt,.pptx"
-              onUpload={(files) => handleFileUpload(files, 'pitch_deck_url')}
+              onUpload={(files) => {
+                if (files.length > 0) {
+                  const file = files[0];
+                  setFormData(prev => ({ ...prev, pitch_deck_url: `uploaded_${file.name}` }));
+                  toast({
+                    title: "Pitch Deck uploaded",
+                    description: `${file.name} has been uploaded successfully.`,
+                    className: "fixed left-1/2 top-1/2 z-[200] -translate-x-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-8 flex flex-col items-center text-white animate-fade-in max-w-sm w-full",
+                    duration: 3000,
+                  });
+                } else {
+                  setFormData(prev => ({ ...prev, pitch_deck_url: '' }));
+                  // TODO: Add API/storage deletion logic here if needed
+                }
+              }}
               placeholder="Upload pitch deck"
               description="PDF, PPT, or PPTX formats supported"
               maxSize={25}
             />
-            {!formData.pitch_deck_url && (
-              <Button
-                className="group w-full font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
-                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-                onClick={() => setFormData(prev => ({ ...prev, pitch_deck_url: 'not_ready' }))}
-              >
-                Not ready yet
-              </Button>
-            )}
           </div>
         );
 
@@ -704,7 +739,15 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             </div>
             <FileUpload
               accept=".mp4,.mov,.avi"
-              onUpload={(files) => handleFileUpload(files, 'video_pitch_url')}
+              onUpload={(files) => {
+                if (files.length > 0) {
+                  handleFileUpload(files, 'video_pitch_url');
+                } else {
+                  // Remove from formData and (optionally) delete from storage
+                  setFormData(prev => ({ ...prev, video_pitch_url: '' }));
+                  // TODO: Add API/storage deletion logic here if needed
+                }
+              }}
               placeholder="Upload video pitch"
               description="MP4, MOV, or AVI formats, max 60 seconds"
               maxSize={100}
@@ -718,12 +761,27 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             <div className="text-center space-y-2">
               <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What kind of investor are you?</h2>
             </div>
-            <MultiSelect
-              variant="cards"
-              options={investorTypes}
-              selected={formData.investor_type ? [formData.investor_type] : []}
-              onChange={(selected) => setFormData(prev => ({ ...prev, investor_type: selected[0] || '' }))}
-            />
+            <div className="relative">
+              <Select
+                value={formData.investor_type}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, investor_type: value }))}
+              >
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
+                  <SelectValue placeholder="Select investor type" />
+                </SelectTrigger>
+                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
+                  {investorTypes.map((type) => (
+                    <SelectItem
+                      key={type.value}
+                      value={type.value}
+                      className="text-white focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors"
+                    >
+                      {type.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         );
 
@@ -735,9 +793,10 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             </div>
             <div className="grid gap-4">
               <Card
-                className={`cursor-pointer border-2 transition-all hover-scale ${
-                  formData.investment_status === 'actively_investing' ? 'border-primary bg-primary/10 shadow-lg' : 'border-border hover:border-primary/50 hover:shadow-md'
+                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.investment_status === 'actively_investing' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
                 }`}
+                style={formData.investment_status === 'actively_investing' ? { borderColor: '#fff' } : {}}
                 onClick={() => setFormData(prev => ({ ...prev, investment_status: 'actively_investing' }))}
               >
                 <CardContent className="p-6 text-center">
@@ -746,9 +805,10 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 </CardContent>
               </Card>
               <Card
-                className={`cursor-pointer border-2 transition-all hover-scale ${
-                  formData.investment_status === 'just_exploring' ? 'border-primary bg-primary/10 shadow-lg' : 'border-border hover:border-primary/50 hover:shadow-md'
+                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.investment_status === 'just_exploring' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
                 }`}
+                style={formData.investment_status === 'just_exploring' ? { borderColor: '#fff' } : {}}
                 onClick={() => setFormData(prev => ({ ...prev, investment_status: 'just_exploring' }))}
               >
                 <CardContent className="p-6 text-center">
@@ -764,7 +824,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What's your typical check size?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What is your typical investment amount?</h2>
             </div>
             <div className="space-y-6">
               <div className="px-4">
@@ -781,7 +841,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 <div className="text-3xl font-bold text-primary">
                   {formatFundingAmount(parseInt(formData.investor_check_size) || 50000)}
                 </div>
-                <p className="text-muted-foreground">Typical check size</p>
+                <p className="text-muted-foreground">Typical investment amount</p>
               </div>
               <div className="flex justify-between text-sm text-muted-foreground px-4">
                 <span>$5K</span>
@@ -797,12 +857,58 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             <div className="text-center space-y-2">
               <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What sectors are you most interested in?</h2>
             </div>
-            <MultiSelect
-              variant="chips"
-              options={industries}
-              selected={formData.preferred_sectors}
-              onChange={(selected) => setFormData(prev => ({ ...prev, preferred_sectors: selected }))}
-            />
+            <div className="relative">
+              <Select
+                open={undefined}
+                onOpenChange={undefined}
+                value=""
+                onValueChange={() => {}}
+                // Dummy props to keep Select API, but we'll use custom dropdown below
+              >
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left cursor-pointer" style={{ background: 'transparent !important' }}>
+                  <span className="text-muted-foreground">
+                    {formData.preferred_sectors.length > 0
+                      ? `${formData.preferred_sectors.length} sector${formData.preferred_sectors.length > 1 ? 's' : ''} selected`
+                      : 'Select your sectors'}
+                  </span>
+                </SelectTrigger>
+                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto">
+                  {industries.map((industry) => (
+                    <div
+                      key={industry.value}
+                      className={`flex items-center px-4 py-2 cursor-pointer rounded-full transition-colors ${formData.preferred_sectors.includes(industry.value) ? 'bg-[#ff5757] text-white' : 'hover:bg-[#ff5757] hover:text-white'}`}
+                      onClick={() => {
+                        setFormData((prev) => {
+                          const already = prev.preferred_sectors.includes(industry.value);
+                          return {
+                            ...prev,
+                            preferred_sectors: already
+                              ? prev.preferred_sectors.filter((v) => v !== industry.value)
+                              : [...prev.preferred_sectors, industry.value],
+                          };
+                        });
+                      }}
+                    >
+                      <span className="inline-block align-middle mr-2">{industry.icon}</span>
+                      <span className="align-middle">{industry.label}</span>
+                    </div>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {formData.preferred_sectors.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2 justify-center">
+                {formData.preferred_sectors.map((sector) => {
+                  const ind = industries.find((i) => i.value === sector);
+                  return (
+                    <span key={sector} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium">
+                      {ind?.icon}
+                      <span className="ml-1">{ind?.label}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
           </div>
         );
 
@@ -810,14 +916,58 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What stage do you prefer to invest in?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What stages do you prefer to invest in?</h2>
             </div>
-            <MultiSelect
-              variant="chips"
-              options={investmentStages}
-              selected={formData.preferred_stages}
-              onChange={(selected) => setFormData(prev => ({ ...prev, preferred_stages: selected }))}
-            />
+            <div className="relative">
+              <Select
+                open={undefined}
+                onOpenChange={undefined}
+                value=""
+                onValueChange={() => {}}
+                // Dummy props to keep Select API, but we'll use custom dropdown below
+              >
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left cursor-pointer" style={{ background: 'transparent !important' }}>
+                  <span className="text-muted-foreground">
+                    {formData.preferred_stages.length > 0
+                      ? `${formData.preferred_stages.length} stage${formData.preferred_stages.length > 1 ? 's' : ''} selected`
+                      : 'Select your stages'}
+                  </span>
+                </SelectTrigger>
+                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto">
+                  {investmentStages.map((stage) => (
+                    <div
+                      key={stage.value}
+                      className={`flex items-center px-4 py-2 cursor-pointer rounded-full transition-colors ${formData.preferred_stages.includes(stage.value) ? 'bg-[#ff5757] text-white' : 'hover:bg-[#ff5757] hover:text-white'}`}
+                      onClick={() => {
+                        setFormData((prev) => {
+                          const already = prev.preferred_stages.includes(stage.value);
+                          return {
+                            ...prev,
+                            preferred_stages: already
+                              ? prev.preferred_stages.filter((v) => v !== stage.value)
+                              : [...prev.preferred_stages, stage.value],
+                          };
+                        });
+                      }}
+                    >
+                      <span className="align-middle">{stage.label}</span>
+                    </div>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {formData.preferred_stages.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2 justify-center">
+                {formData.preferred_stages.map((stage) => {
+                  const st = investmentStages.find((i) => i.value === stage);
+                  return (
+                    <span key={stage} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium">
+                      <span className="ml-1">{st?.label}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
           </div>
         );
 
@@ -825,14 +975,55 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Which regions do you focus on?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>Which countries do you focus on?</h2>
             </div>
-            <MultiSelect
-              variant="chips"
-              options={regions}
-              selected={formData.regional_focus}
-              onChange={(selected) => setFormData(prev => ({ ...prev, regional_focus: selected }))}
-            />
+            <div className="relative">
+              <Select
+                open={undefined}
+                onOpenChange={undefined}
+                value=""
+                onValueChange={() => {}}
+                // Dummy props to keep Select API, but we'll use custom dropdown below
+              >
+                <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left cursor-pointer" style={{ background: 'transparent !important' }}>
+                  <span className="text-muted-foreground">
+                    {formData.regional_focus.length > 0
+                      ? `${formData.regional_focus.length} countr${formData.regional_focus.length > 1 ? 'ies' : 'y'} selected`
+                      : 'Select your countries'}
+                  </span>
+                </SelectTrigger>
+                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto">
+                  {countries.map((country) => (
+                    <div
+                      key={country}
+                      className={`flex items-center px-4 py-2 cursor-pointer rounded-full transition-colors ${formData.regional_focus.includes(country) ? 'bg-[#ff5757] text-white' : 'hover:bg-[#ff5757] hover:text-white'}`}
+                      onClick={() => {
+                        setFormData((prev) => {
+                          const already = prev.regional_focus.includes(country);
+                          return {
+                            ...prev,
+                            regional_focus: already
+                              ? prev.regional_focus.filter((v) => v !== country)
+                              : [...prev.regional_focus, country],
+                          };
+                        });
+                      }}
+                    >
+                      <span className="align-middle">{country}</span>
+                    </div>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {formData.regional_focus.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2 justify-center">
+                {formData.regional_focus.map((country) => (
+                  <span key={country} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium">
+                    {country}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         );
 
@@ -840,17 +1031,16 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="space-y-6 animate-slide-in-right">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>In one sentence, why are you a good fit for Pitchify?</h2>
+              <h2 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'Inter, sans-serif' }}>What key problems are you hoping PitchFlic can help solve for you?</h2>
             </div>
             <Textarea
-              placeholder="Tell us what makes you unique and valuable to the Pitchify community..."
+              placeholder="Describe the main challenges or problems you want to address with PitchFlic..."
               value={formData.why_good_fit}
               onChange={(e) => setFormData(prev => ({ ...prev, why_good_fit: e.target.value }))}
-              className="min-h-32 text-lg p-6 border focus:border-primary transition-colors rounded-xl"
-              maxLength={200}
+              className="text-lg p-6 border-2 focus:border-primary transition-colors rounded-2xl min-h-[120px]"
             />
             <p className="text-sm text-muted-foreground text-right">
-              {formData.why_good_fit.length}/200 characters
+              Please use a minimum of 25 words. Current word count: {formData.why_good_fit.trim().split(/\s+/).filter(Boolean).length}
             </p>
           </div>
         );
@@ -865,7 +1055,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
               <h1 className="text-4xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
                 That's it — Your profile is being created!
               </h1>
-              <p className="text-xl text-white">We're curating the best matches for you.</p>
+              <p className="text-xl text-white">Preparing for launch</p>
             </div>
           </div>
         );
