@@ -111,21 +111,22 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
       }}
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      dragElastic={0.2}
-      dragMomentum={false}
+      dragElastic={0.35}
+      dragMomentum={true}
       onDragStart={handleDragStart}
       onDrag={handleDrag}
       onDragEnd={handleDragEnd}
       whileHover={{ 
-        scale: 1.02,
-        boxShadow: "0_0_60px_rgba(0,0,0,0.4),0_12px_48px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15)",
-        borderColor: "hsl(var(--primary) / 0.3)"
+        scale: 1.03,
+        boxShadow: "0_0_80px_rgba(0,0,0,0.5),0_16px_64px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.18)",
+        borderColor: "hsl(var(--primary) / 0.4)"
       }}
-      whileTap={{ scale: 0.98 }}
+      whileTap={{ scale: 0.97 }}
+      animate={isDragging ? { scale: 1.04 } : { scale: 1 }}
       transition={{ 
         type: "spring", 
-        stiffness: 600, 
-        damping: 15 
+        stiffness: 900, 
+        damping: 12 
       }}
     >
       {/* Profile Image */}
@@ -277,28 +278,28 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
 
       {/* Swipe Indicators with smooth animations */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-400/30 to-green-500/30 pointer-events-none backdrop-blur-sm"
+        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1ABC9C]/80 to-[#10B981]/80 pointer-events-none backdrop-blur-md shadow-[0_0_80px_20px_#1ABC9C99]"
         style={{ opacity: likeOpacity }}
       >
         <motion.div 
-          className="bg-gradient-to-r from-emerald-500 to-green-500 text-white px-8 py-4 rounded-2xl font-black text-2xl transform rotate-12 backdrop-blur-lg shadow-[0_0_40px_rgba(16,185,129,0.6)]"
+          className="bg-gradient-to-r from-[#1ABC9C] via-[#10B981] to-[#5FFFD7] text-white px-12 py-5 rounded-2xl font-extrabold text-3xl sm:text-4xl transform rotate-12 backdrop-blur-xl shadow-[0_0_60px_10px_#1ABC9C99,0_0_80px_10px_#5FFFD799] border-4 border-[#10B981]/60"
           initial={{ scale: 0.7 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 600, damping: 15 }}
+          animate={{ scale: 1.08 }}
+          transition={{ type: "spring", stiffness: 700, damping: 14 }}
         >
           I'M IN
         </motion.div>
       </motion.div>
 
       <motion.div
-        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-400/30 to-rose-600/30 pointer-events-none backdrop-blur-sm"
+        className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#FF3B3B]/80 to-[#FF5757]/80 pointer-events-none backdrop-blur-md shadow-[0_0_80px_20px_#FF3B3B99]"
         style={{ opacity: passOpacity }}
       >
         <motion.div 
-          className="bg-gradient-to-r from-red-500 to-rose-600 text-white px-8 py-4 rounded-2xl font-black text-2xl transform -rotate-12 backdrop-blur-lg shadow-[0_0_40px_rgba(239,68,68,0.6)]"
+          className="bg-gradient-to-r from-[#FF3B3B] via-[#FF5757] to-[#FFBABA] text-white px-12 py-5 rounded-2xl font-extrabold text-3xl sm:text-4xl transform -rotate-12 backdrop-blur-xl shadow-[0_0_60px_10px_#FF3B3B99,0_0_80px_10px_#FFBABA99] border-4 border-[#FF5757]/60"
           initial={{ scale: 0.7 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 600, damping: 15 }}
+          animate={{ scale: 1.08 }}
+          transition={{ type: "spring", stiffness: 700, damping: 14 }}
         >
           I'M OUT
         </motion.div>

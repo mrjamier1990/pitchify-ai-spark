@@ -123,9 +123,9 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
   }
 
   return (
-    <div className="h-screen bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c] flex flex-col overflow-hidden">
+    <div className="h-screen bg-[#18181b] flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-sm">
+      <header className="flex items-center justify-between px-4 py-3 bg-[#18181b] border border-[#232326] rounded-xl mx-2 mt-2 shadow-lg">
         <Button 
           variant="glass"
           size="icon"
@@ -136,8 +136,8 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         </Button>
         
         <div className="flex items-center gap-3">
-          <img src={investifySymbol} alt="INVESTIFY" className="w-9 h-9" />
-          <span className="text-xl font-montserrat font-bold text-foreground tracking-wide">INVESTIFY</span>
+          <img src="/pitchflic-logo.png" alt="PitchFlic Logo" className="w-10 h-10" style={{ objectFit: 'contain', display: 'block' }} />
+          <span className="text-2xl md:text-3xl font-bold text-primary" style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '-0.02em' }}>PitchFlic</span>
         </div>
         
         <Button 
@@ -179,33 +179,36 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
       </div>
 
       {/* Enhanced Action Buttons with Smooth Animations */}
-      <div className="flex items-center justify-center gap-8 px-6 py-5 bg-background/90 backdrop-blur-md">
-        <Button
-          variant="glass"
-          size="lg" 
-          className="w-14 h-14 rounded-full bg-red-500/20 backdrop-blur-md border border-red-400/30 text-red-300 hover:bg-red-500/30 hover:border-red-400/50 hover:text-red-100 hover:shadow-[0_0_25px_rgba(239,68,68,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-500 group relative overflow-hidden"
-          onClick={() => handleButtonAction("pass")}
-        >
-          <X className="w-7 h-7 group-hover:rotate-90 transition-transform duration-300 relative z-10 stroke-2" />
-        </Button>
-        
-        <Button
-          variant="premium"
-          size="xl"
-          className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-600/30 backdrop-blur-md border border-blue-400/40 text-blue-200 hover:from-blue-500/50 hover:to-purple-600/50 hover:border-blue-400/60 hover:text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transform hover:scale-125 hover:translate-y-[-6px] transition-all duration-500 group relative overflow-hidden"
-          onClick={() => handleButtonAction("superlike")}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <Star className="w-8 h-8 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 relative z-10 fill-current" />
-        </Button>
-        
+      <div className="flex items-center justify-center gap-8 px-6 py-5 bg-[#18181b] border border-[#232326] rounded-xl mx-2 mb-2 shadow-lg">
+        {/* I'm Out (Pass) Button */}
         <Button
           variant="glass"
           size="lg"
-          className="w-14 h-14 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 text-emerald-300 hover:bg-emerald-500/30 hover:border-emerald-400/50 hover:text-emerald-100 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-500 group relative overflow-hidden"
+          className="w-14 h-14 rounded-full bg-gradient-to-r from-red-500/70 via-rose-600/80 to-pink-500/80 backdrop-blur-md border border-rose-400/60 text-red-100 hover:from-red-600/90 hover:to-pink-500/90 hover:border-pink-400/80 hover:text-white hover:shadow-[0_0_40px_rgba(244,63,94,0.5)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-500 group relative overflow-hidden"
+          onClick={() => handleButtonAction("pass")}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-rose-400/30 to-pink-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <X className="w-7 h-7 group-hover:rotate-90 transition-transform duration-300 relative z-10" strokeWidth={4} />
+        </Button>
+        {/* Super Like Button (Purple Star) */}
+        <Button
+          variant="glass"
+          size="lg"
+          className="w-24 h-14 rounded-full bg-gradient-to-r from-purple-500/80 via-fuchsia-600/80 to-fuchsia-500/90 backdrop-blur-md border border-fuchsia-500/70 text-fuchsia-100 hover:from-purple-600/90 hover:to-fuchsia-500/100 hover:border-fuchsia-400/80 hover:text-white hover:shadow-[0_0_40px_rgba(168,85,247,0.5)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-500 group relative overflow-hidden"
+          onClick={() => handleButtonAction("superlike")}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-400/30 to-fuchsia-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <Star className="w-7 h-7 group-hover:scale-110 transition-transform duration-300 relative z-10 stroke-2 fill-current" style={{ color: '#FFFFF0' }} />
+        </Button>
+        {/* I'm In (Like) Button (Green Heart) */}
+        <Button
+          variant="glass"
+          size="lg"
+          className="w-14 h-14 rounded-full bg-gradient-to-r from-[#1ABC9C]/80 via-[#10B981]/80 to-[#1ABC9C]/90 backdrop-blur-md border border-[#1ABC9C]/70 text-[#10B981] hover:from-[#10B981]/90 hover:to-[#1ABC9C]/100 hover:border-[#10B981]/80 hover:text-white hover:shadow-[0_0_40px_rgba(26,188,156,0.5)] transform hover:scale-110 hover:translate-y-[-4px] transition-all duration-500 group relative overflow-hidden"
           onClick={() => handleButtonAction("like")}
         >
-          <Heart className="w-7 h-7 group-hover:scale-110 transition-transform duration-300 relative z-10 stroke-2 fill-current" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1ABC9C]/40 to-[#10B981]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <Heart className="w-7 h-7 group-hover:scale-110 transition-transform duration-300 relative z-10 stroke-2 fill-current" style={{ color: '#FFFFF0' }} />
         </Button>
       </div>
     </div>

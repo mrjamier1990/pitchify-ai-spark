@@ -357,7 +357,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
       });
 
       // Instead of onComplete(), navigate to launch animation
-      navigate('/launch-animation');
+      navigate('/');
     } catch (error) {
       console.error('Error creating profile:', error);
       toast({
