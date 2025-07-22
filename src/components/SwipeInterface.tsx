@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { SwipeCard } from "./SwipeCard";
 import { Button } from "@/components/ui/button";
 import { Heart, X, Star, MessageCircle, User, Play, Filter, Settings } from "lucide-react";
@@ -81,7 +81,37 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
     setCurrentIndex(prev => prev + 1);
   };
 
+  const swipeCardRef = useRef<any>(null);
   const handleButtonAction = (action: "pass" | "like" | "superlike") => {
+    if (action === "like") {
+      if (swipeCardRef.current && swipeCardRef.current.swipeRight) {
+        swipeCardRef.current.swipeRight();
+        setTimeout(() => {
+          setMatches(prev => prev + 1);
+          setCurrentIndex(prev => prev + 1);
+        }, 320);
+        return;
+      }
+    }
+    if (action === "pass") {
+      if (swipeCardRef.current && swipeCardRef.current.swipeLeft) {
+        swipeCardRef.current.swipeLeft();
+        setTimeout(() => {
+          setCurrentIndex(prev => prev + 1);
+        }, 320);
+        return;
+      }
+    }
+    if (action === "superlike") {
+      if (swipeCardRef.current && swipeCardRef.current.swipeUp) {
+        swipeCardRef.current.swipeUp();
+        setTimeout(() => {
+          setMatches(prev => prev + 1);
+          setCurrentIndex(prev => prev + 1);
+        }, 320);
+        return;
+      }
+    }
     if (action === "like" || action === "superlike") {
       setMatches(prev => prev + 1);
     }
@@ -171,6 +201,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         {/* Current card (front) */}
         <SwipeCard
           key={`current-${currentIndex}`}
+          ref={swipeCardRef}
           profile={currentProfile}
           onSwipe={handleSwipe}
           onProfileClick={() => setSelectedProfile(currentProfile.id)}

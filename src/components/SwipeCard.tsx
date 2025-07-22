@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useImperativeHandle, forwardRef } from "react";
 import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
 import { Heart, X, Star, Play, MapPin, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,7 @@ interface SwipeCardProps {
   style?: React.CSSProperties;
 }
 
-export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCardProps) {
+export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCardProps, ref) {
   const [isDragging, setIsDragging] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   
@@ -97,6 +97,37 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
       triggerHaptics('light');
     }
   }, [onSwipe, x, y, triggerHaptics]);
+
+  // Expose swipeRight method to parent
+  useImperativeHandle(ref, () => ({
+    swipeRight: () => {
+      x.set(0);
+      y.set(0);
+      // Animate card off-screen to the right
+      x.set(400);
+      setTimeout(() => {
+        onSwipe("right");
+      }, 300);
+    },
+    swipeLeft: () => {
+      x.set(0);
+      y.set(0);
+      // Animate card off-screen to the left
+      x.set(-400);
+      setTimeout(() => {
+        onSwipe("left");
+      }, 300);
+    },
+    swipeUp: () => {
+      x.set(0);
+      y.set(0);
+      // Animate card off-screen up
+      y.set(-400);
+      setTimeout(() => {
+        onSwipe("up");
+      }, 300);
+    }
+  }));
 
   return (
     <motion.div
@@ -320,4 +351,4 @@ export function SwipeCard({ profile, onSwipe, onProfileClick, style }: SwipeCard
       </motion.div>
     </motion.div>
   );
-}
+});
