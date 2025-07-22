@@ -351,13 +351,8 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
 
       if (error) throw error;
 
-      toast({
-        title: "Profile created successfully!",
-        description: "Welcome to Pitchify. Let's find your perfect matches.",
-      });
-
-      // Instead of onComplete(), navigate to launch animation
-      navigate('/');
+      // Instead of onComplete(), navigate to personal profile page
+      navigate('/profile/personal');
     } catch (error) {
       console.error('Error creating profile:', error);
       toast({

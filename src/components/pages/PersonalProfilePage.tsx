@@ -234,7 +234,11 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
     { 
       key: 'tiktok_url', 
       name: 'TikTok', 
-      icon: Video, 
+      icon: (props: any) => (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" {...props}>
+          <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z" />
+        </svg>
+      ),
       placeholder: 'https://tiktok.com/@...',
       color: 'text-black dark:text-white'
     },
@@ -301,23 +305,23 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
       <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-lg border-b border-border/50 flex-shrink-0">
         <div className="flex items-center justify-between p-4">
           <Button 
-            variant="ghost" 
-            size="icon" 
             onClick={() => onNavigate("swipe")}
-            className="hover:bg-primary/10"
+            className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="h-4 w-4" />
+            Back
           </Button>
           
           <h1 className="text-xl font-semibold">Profile</h1>
           
           <Button 
-            variant="ghost" 
-            size="icon" 
             onClick={handleSignOut}
-            className="hover:bg-destructive/10 text-destructive"
+            className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           >
-            <LogOut className="w-5 h-5" />
+            <LogOut className="h-4 w-4" />
+            Logout
           </Button>
         </div>
       </div>
@@ -325,11 +329,11 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
         <div className="p-4 space-y-6 max-w-4xl mx-auto pb-8 w-full min-w-0">
           <Tabs defaultValue="profile" className="w-full min-w-0">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="profile" className="truncate px-2 sm:px-4">Profile</TabsTrigger>
-              <TabsTrigger value="filters" className="truncate px-2 sm:px-4">Filters</TabsTrigger>
-              <TabsTrigger value="subscription" className="truncate px-1 sm:px-4">Premium</TabsTrigger>
-              <TabsTrigger value="settings" className="truncate px-2 sm:px-4">Settings</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 gap-2 bg-transparent p-2 mb-4">
+              <TabsTrigger value="profile" className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Profile</TabsTrigger>
+              <TabsTrigger value="filters" className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Filters</TabsTrigger>
+              <TabsTrigger value="subscription" className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Premium</TabsTrigger>
+              <TabsTrigger value="settings" className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Settings</TabsTrigger>
             </TabsList>
 
             <TabsContent value="profile" className="space-y-6 w-full min-w-0">
@@ -379,11 +383,10 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     </div>
                     
                     <Button 
-                      size="sm" 
-                      variant={editMode ? "default" : "outline"}
                       onClick={() => editMode ? handleSaveProfile() : setEditMode(true)}
                       disabled={loading}
-                      className="flex-shrink-0"
+                      className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none flex-shrink-0"
+                      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
                     >
                       {editMode ? (
                         <>
@@ -409,21 +412,10 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                             value={formData.full_name}
                             onChange={(e) => setFormData({...formData, full_name: e.target.value})}
                             placeholder="Enter your full name"
+                            className="text-lg p-6 border border-white focus:border-primary transition-colors rounded-full placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground"
                           />
                         </div>
                         
-                        <div className="space-y-2">
-                          <Label htmlFor="role">Role</Label>
-                          <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value})}>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select your role" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="entrepreneur">Entrepreneur</SelectItem>
-                              <SelectItem value="investor">Investor</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
                       </div>
 
                       <div className="space-y-2">
@@ -433,6 +425,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                           value={formData.bio}
                           onChange={(e) => setFormData({...formData, bio: e.target.value})}
                           placeholder="Tell others about yourself..."
+                          className="text-lg p-6 border border-white focus:border-primary transition-colors rounded-2xl min-h-[120px] placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground"
                           rows={3}
                         />
                       </div>
@@ -441,12 +434,12 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <div className="space-y-2">
                           <Label htmlFor="country">Country</Label>
                           <Select value={formData.country} onValueChange={(value) => setFormData({...formData, country: value})}>
-                            <SelectTrigger>
+                            <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                               <SelectValue placeholder="Select your country" />
                             </SelectTrigger>
-                            <SelectContent className="max-h-60">
+                            <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
                               {majorCountries.map((country) => (
-                                <SelectItem key={country} value={country}>{country}</SelectItem>
+                                <SelectItem key={country} value={country} className="focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">{country}</SelectItem>
                               ))}
                             </SelectContent>
                           </Select>
@@ -455,12 +448,12 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <div className="space-y-2">
                           <Label htmlFor="industry">Industry Focus</Label>
                           <Select value={formData.industry} onValueChange={(value) => setFormData({...formData, industry: value})}>
-                            <SelectTrigger>
+                            <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                               <SelectValue placeholder="Select your industry" />
                             </SelectTrigger>
-                            <SelectContent className="max-h-60">
+                            <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
                               {industryOptions.map((industry) => (
-                                <SelectItem key={industry} value={industry}>{industry}</SelectItem>
+                                <SelectItem key={industry} value={industry} className="focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">{industry}</SelectItem>
                               ))}
                             </SelectContent>
                           </Select>
@@ -475,6 +468,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                             value={formData.investment_range}
                             onChange={(e) => setFormData({...formData, investment_range: e.target.value})}
                             placeholder="e.g., $10K - $100K"
+                            className="text-lg p-6 border border-white/20 focus:border-primary transition-colors rounded-full"
                           />
                         </div>
                       )}
@@ -483,15 +477,15 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <div className="space-y-2">
                           <Label htmlFor="funding_stage">Funding Stage</Label>
                           <Select value={formData.funding_stage} onValueChange={(value) => setFormData({...formData, funding_stage: value})}>
-                            <SelectTrigger>
+                            <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                               <SelectValue placeholder="Select funding stage" />
                             </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="pre-seed">Pre-seed</SelectItem>
-                              <SelectItem value="seed">Seed</SelectItem>
-                              <SelectItem value="series-a">Series A</SelectItem>
-                              <SelectItem value="series-b">Series B</SelectItem>
-                              <SelectItem value="series-c">Series C+</SelectItem>
+                            <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
+                              <SelectItem value="pre-seed" className="focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Pre-seed</SelectItem>
+                              <SelectItem value="seed" className="focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Seed</SelectItem>
+                              <SelectItem value="series-a" className="focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series A</SelectItem>
+                              <SelectItem value="series-b" className="focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series B</SelectItem>
+                              <SelectItem value="series-c" className="focus:bg-[#ff5757] focus:text-white data-[state=checked]:bg-[#ff5757] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series C+</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -500,32 +494,19 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       <div className="space-y-4">
                         <div className="space-y-2">
                           <Label>Social Media & Calendar</Label>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="outline" className="w-full justify-between min-w-0 max-w-full">
-                                <span className="flex items-center gap-2">
-                                  <Link2 className="w-4 h-4" />
-                                  Add Social Media Link
-                                </span>
-                                <ChevronDown className="w-4 h-4" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56 bg-background border border-border shadow-lg z-50">
-                              {socialPlatforms.map((platform) => (
-                                <DropdownMenuItem 
-                                  key={platform.key}
-                                  onClick={() => setEditingSocial(platform.key)}
-                                  className="flex items-center gap-3 cursor-pointer hover:bg-muted"
-                                >
-                                  <platform.icon className={`w-4 h-4 ${platform.color}`} />
-                                  <span>{platform.name}</span>
-                                  {formData[platform.key as keyof typeof formData] && (
-                                    <Badge variant="secondary" className="ml-auto">Added</Badge>
-                                  )}
-                                </DropdownMenuItem>
-                              ))}
-                            </DropdownMenuContent>
-                          </DropdownMenu>
+                          <div className="flex flex-row gap-3 items-center w-full justify-between">
+                            {socialPlatforms.map((platform) => (
+                              <button
+                                key={platform.key}
+                                type="button"
+                                onClick={() => setEditingSocial(platform.key)}
+                                className={`w-12 h-12 flex items-center justify-center rounded-full border border-white/20 bg-[#18181bdd] backdrop-blur-xl transition-colors hover:bg-[#1ABC9C11] hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:shadow-[0_0_24px_0_#1ABC9C22] ${formData[platform.key as keyof typeof formData] ? 'ring-2 ring-[#1ABC9C] shadow-[0_0_24px_0_#1ABC9C22]' : ''}`}
+                                title={platform.name}
+                              >
+                                <platform.icon className={`w-5 h-5 ${platform.color}`} />
+                              </button>
+                            ))}
+                          </div>
                         </div>
 
                         {editingSocial && (
@@ -556,6 +537,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                               value={formData[editingSocial as keyof typeof formData] as string || ''}
                               onChange={(e) => setFormData({...formData, [editingSocial]: e.target.value})}
                               placeholder={socialPlatforms.find(p => p.key === editingSocial)?.placeholder}
+                              className="text-lg p-6 border border-white/20 focus:border-primary transition-colors rounded-full bg-[#18181bdd] text-white placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground"
                             />
                           </div>
                         )}
@@ -592,15 +574,6 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                             ))}
                         </div>
                       </div>
-
-                      <div className="flex items-center space-x-2">
-                        <Switch
-                          id="open_to_connect"
-                          checked={formData.open_to_connect}
-                          onCheckedChange={(checked) => setFormData({...formData, open_to_connect: checked})}
-                        />
-                        <Label htmlFor="open_to_connect">Open to new connections</Label>
-                      </div>
                     </div>
                   )}
                 </CardContent>
@@ -610,31 +583,31 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               <Card className="border-border/50 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full overflow-hidden">
-                    <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-purple-600/20 rounded-lg border border-purple-500/20">
-                      <div className="text-xl md:text-2xl font-bold text-purple-600">247</div>
-                      <div className="text-xs md:text-sm text-purple-600/80 flex items-center justify-center gap-1">
-                        <Eye className="w-3 h-3" />
+                    <div className="text-center p-3 bg-gradient-to-br from-purple-600/60 to-purple-400/40 backdrop-blur-xl rounded-lg border border-purple-300/30">
+                      <div className="text-xl md:text-2xl font-bold text-white">247</div>
+                      <div className="text-xs md:text-sm text-white flex items-center justify-center gap-1">
+                        <Eye className="w-3 h-3 text-white" />
                         Profile Views
                       </div>
                     </div>
-                    <div className="text-center p-3 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-lg border border-emerald-500/20">
-                      <div className="text-xl md:text-2xl font-bold text-emerald-600">89</div>
-                      <div className="text-xs md:text-sm text-emerald-600/80 flex items-center justify-center gap-1">
-                        <Users className="w-3 h-3" />
+                    <div className="text-center p-3 bg-gradient-to-br from-emerald-600/60 to-emerald-400/40 backdrop-blur-xl rounded-lg border border-emerald-300/30">
+                      <div className="text-xl md:text-2xl font-bold text-white">89</div>
+                      <div className="text-xs md:text-sm text-white flex items-center justify-center gap-1">
+                        <Users className="w-3 h-3 text-white" />
                         Connections
                       </div>
                     </div>
-                    <div className="text-center p-3 bg-gradient-to-br from-blue-500/10 to-blue-600/20 rounded-lg border border-blue-500/20">
-                      <div className="text-xl md:text-2xl font-bold text-blue-600">156</div>
-                      <div className="text-xs md:text-sm text-blue-600/80 flex items-center justify-center gap-1">
-                        <MessageSquare className="w-3 h-3" />
+                    <div className="text-center p-3 bg-gradient-to-br from-blue-600/60 to-blue-400/40 backdrop-blur-xl rounded-lg border border-blue-300/30">
+                      <div className="text-xl md:text-2xl font-bold text-white">156</div>
+                      <div className="text-xs md:text-sm text-white flex items-center justify-center gap-1">
+                        <MessageSquare className="w-3 h-3 text-white" />
                         Messages
                       </div>
                     </div>
-                    <div className="text-center p-3 bg-gradient-to-br from-amber-500/10 to-amber-600/20 rounded-lg border border-amber-500/20">
-                      <div className="text-xl md:text-2xl font-bold text-amber-600">23</div>
-                      <div className="text-xs md:text-sm text-amber-600/80 flex items-center justify-center gap-1">
-                        <Star className="w-3 h-3" />
+                    <div className="text-center p-3 bg-gradient-to-br from-[#ff5757]/80 to-[#ffb199]/60 backdrop-blur-xl rounded-lg border border-[#ff5757]/30">
+                      <div className="text-xl md:text-2xl font-bold text-white">23</div>
+                      <div className="text-xs md:text-sm flex items-center justify-center gap-1 text-white">
+                        <Star className="w-3 h-3 text-white" />
                         SuperLikes Left
                       </div>
                     </div>
