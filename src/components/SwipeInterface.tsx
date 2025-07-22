@@ -153,7 +153,10 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
   }
 
   return (
-    <div className="h-screen max-w-screen-sm mx-auto bg-[#18181b] flex flex-col overflow-hidden">
+    <div
+      className="max-w-screen-sm mx-auto bg-[#18181b] flex flex-col overflow-hidden"
+      style={{ minHeight: '100dvh', paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
+    >
       {/* Header */}
       <header className="flex items-center justify-between px-4 py-3 bg-[#18181b] border border-[#232326] rounded-xl mx-2 mt-2 shadow-lg">
         <Button 
