@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useImperativeHandle, forwardRef } from "react";
-import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
+import { motion, useMotionValue, useTransform, PanInfo, animate as fmAnimate } from "framer-motion";
 import { Heart, X, Star, Play, MapPin, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
@@ -103,29 +103,35 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
     swipeRight: () => {
       x.set(0);
       y.set(0);
-      // Animate card off-screen to the right
-      x.set(400);
+      // Animate card off-screen to the right (smooth and slower)
+      x.stop();
+      y.stop();
+      fmAnimate(x, 400, { type: 'tween', duration: 0.5 });
       setTimeout(() => {
         onSwipe("right");
-      }, 300);
+      }, 600);
     },
     swipeLeft: () => {
       x.set(0);
       y.set(0);
-      // Animate card off-screen to the left
-      x.set(-400);
+      // Animate card off-screen to the left (smooth and slower)
+      x.stop();
+      y.stop();
+      fmAnimate(x, -400, { type: 'tween', duration: 0.5 });
       setTimeout(() => {
         onSwipe("left");
-      }, 300);
+      }, 600);
     },
     swipeUp: () => {
       x.set(0);
       y.set(0);
-      // Animate card off-screen up
-      y.set(-400);
+      // Animate card off-screen up (smooth and slower)
+      x.stop();
+      y.stop();
+      fmAnimate(y, -400, { type: 'tween', duration: 0.5 });
       setTimeout(() => {
         onSwipe("up");
-      }, 300);
+      }, 600);
     }
   }));
 
