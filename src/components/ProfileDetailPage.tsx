@@ -27,14 +27,14 @@ export function ProfileDetailPage({ profile, onBack }: ProfileDetailPageProps) {
     <div className="h-screen bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c] flex flex-col overflow-hidden">
       {/* Header */}
       <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-sm relative z-10">
-        <Button 
-          variant="ghost" 
-          size="icon"
-          className="w-10 h-10 rounded-full"
+        <button
+          type="button"
+          className="font-light text-base rounded-full px-4 py-2 text-primary bg-transparent border border-primary transition-all duration-300 hover:bg-primary/10 focus:bg-primary/10"
+          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           onClick={onBack}
         >
-          <ArrowLeft className="w-5 h-5" />
-        </Button>
+          Back
+        </button>
         <h1 className="text-xl font-bold text-foreground">{profile.name}</h1>
         <div className="w-10"></div>
       </header>
@@ -172,14 +172,20 @@ export function ProfileDetailPage({ profile, onBack }: ProfileDetailPageProps) {
         {/* Action Buttons */}
         <div className="sticky bottom-0 px-6 py-4 bg-background/95 backdrop-blur-md border-t border-border">
           <div className="flex gap-3">
-            <Button variant="glass" className="flex-1 h-12" size="lg">
-              <MessageCircle className="w-5 h-5 mr-2" />
+            <button
+              type="button"
+              className="flex-1 font-light text-base rounded-full px-4 py-2 text-primary bg-transparent border border-primary transition-all duration-300 hover:bg-primary/10 focus:bg-primary/10"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+            >
               Message
-            </Button>
-            <Button variant="premium" className="flex-1 h-12" size="lg">
-              <Calendar className="w-5 h-5 mr-2" />
+            </button>
+            <button
+              type="button"
+              className="flex-1 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+            >
               Schedule Call
-            </Button>
+            </button>
           </div>
         </div>
       </div>

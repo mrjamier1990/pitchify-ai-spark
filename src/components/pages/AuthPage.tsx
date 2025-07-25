@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { User } from 'lucide-react';
+import AuroraBackground from '../ui/aurora-background';
 
 // NativeLoginForm component (to be implemented below main component)
 function NativeLoginForm({ setError, setLoadingProvider }: { setError: (e: string | null) => void, setLoadingProvider: (p: string | null) => void }) {
@@ -137,28 +138,13 @@ export function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c] relative overflow-hidden" style={{ fontFamily: 'Inter, Nunito, system-ui, sans-serif' }}>
-      {/* Subtle travelling star animation background */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
-        {/* Star 1 */}
-        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-20 blur-[2px]" style={{ width: '18px', height: '18px', left: '10%', top: '20%', animation: 'starTravel1 22s linear infinite' }} />
-        {/* Star 2 */}
-        <span className="absolute block rounded-full bg-white opacity-10 blur-[1.5px]" style={{ width: '10px', height: '10px', left: '70%', top: '30%', animation: 'starTravel2 28s linear infinite' }} />
-        {/* Star 3 */}
-        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-14 blur-[2.5px]" style={{ width: '14px', height: '14px', left: '40%', top: '70%', animation: 'starTravel3 32s linear infinite' }} />
-        {/* Star 4 */}
-        <span className="absolute block rounded-full bg-white opacity-8 blur-[2px]" style={{ width: '8px', height: '8px', left: '80%', top: '60%', animation: 'starTravel4 26s linear infinite' }} />
-        {/* Star 5 */}
-        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-10 blur-[3px]" style={{ width: '22px', height: '22px', left: '55%', top: '10%', animation: 'starTravel5 36s linear infinite' }} />
-      </div>
-      {/* Logo and Title centered vertically */}
+    <AuroraBackground>
       <div className="flex flex-col items-center w-full max-w-lg px-4 justify-center min-h-screen">
         <div className="flex flex-col items-center group transition-all duration-300 gap-y-5">
           <img
             src="/pitchflic-logo.png"
             alt="PitchFlic Logo"
             width={160}
-            height={72}
             style={{ display: 'block', margin: '0 auto', maxWidth: '160px', maxHeight: '72px', objectFit: 'contain', marginTop: '-16px' }}
           />
           <div className="flex flex-col items-center gap-y-3">
@@ -168,7 +154,7 @@ export function AuthPage() {
             >
               PitchFlic
             </h1>
-            <div className="text-sm font-light tracking-wide text-center shimmer-once" style={{ color: '#555555' }}>
+            <div className="text-sm font-light tracking-wide text-center shimmer-once" style={{ color: '#232323' }}>
               Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
             </div>
           </div>
@@ -278,7 +264,7 @@ export function AuthPage() {
         {error && <div className="mt-4 text-red-400 text-sm text-center">{error}</div>}
       </div>
       <style>{`.force-nunito { font-family: 'Nunito', system-ui, sans-serif !important; }`}</style>
-      {/* Keyframes for star animation and shimmer */}
+      {/* Keyframes for shimmer */}
       <style>{`
         @keyframes shimmer {
           0% { background-position: -200px 0; }
@@ -286,46 +272,13 @@ export function AuthPage() {
         }
         .shimmer-once {
           display: inline-block;
-          background: linear-gradient(90deg, #555555 0%, #bbbbbb 50%, #555555 100%);
+          background: linear-gradient(90deg, #232323 0%, #bbbbbb 50%, #232323 100%);
           background-size: 400px 100%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          animation: shimmer 5s linear infinite;
-          background-position: 0px 0;
-        }
-        @keyframes bounce-pop {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.18); }
-          100% { transform: scale(1); }
-        }
-        .social-pop {
-          transition: transform 0.2s;
-        }
-        .social-pop:hover, .social-pop:focus {
-          animation: bounce-pop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
-          z-index: 2;
-        }
-        @keyframes starTravel1 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(60vw, 40vh); }
-        }
-        @keyframes starTravel2 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(-50vw, 30vh); }
-        }
-        @keyframes starTravel3 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(30vw, -50vh); }
-        }
-        @keyframes starTravel4 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(-40vw, -30vh); }
-        }
-        @keyframes starTravel5 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(20vw, 60vh); }
+          animation: shimmer 2s linear 1;
         }
       `}</style>
-    </div>
+    </AuroraBackground>
   );
 }

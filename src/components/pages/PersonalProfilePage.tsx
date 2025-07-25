@@ -206,7 +206,13 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
     { 
       key: 'linkedin_url', 
       name: 'LinkedIn', 
-      icon: Link2, 
+      icon: (props: any) => (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 8a6 6 0 0 1 6 6v5h-4v-5a2 2 0 0 0-4 0v5h-4v-9h4v1.5" />
+          <circle cx="8" cy="11" r="1" />
+        </svg>
+      ),
       placeholder: 'https://linkedin.com/in/...',
       color: 'text-blue-600'
     },
@@ -494,7 +500,8 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       <div className="space-y-4">
                         <div className="space-y-2">
                           <Label>Social Media & Calendar</Label>
-                          <div className="flex flex-row gap-3 items-center w-full justify-between">
+                          <div style={{height: '24px'}} />
+                          <div className="flex flex-row gap-3 items-center w-full justify-between mt-10">
                             {socialPlatforms.map((platform) => (
                               <button
                                 key={platform.key}
