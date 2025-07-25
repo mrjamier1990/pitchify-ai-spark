@@ -149,3 +149,51 @@ input:focus, textarea:focus, select:focus {
     background-position: 0% 100%, 100% 0%, 40% 60%, 20% 80%, 80% 20%;
   }
 }
+
+.aurora-signin-btn {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.12);
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+.aurora-signin-btn .aurora-signin-btn-border {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: 1;
+  border-radius: 2rem;
+  pointer-events: none;
+  background: linear-gradient(120deg, #ff7300, #ff477e, #017ed5, #b53dff, #8d00c4, #ff7300);
+  background-size: 200% 200%;
+  filter: blur(2px) brightness(1.2);
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+.aurora-signin-btn:hover, .aurora-signin-btn:focus {
+  background: rgba(40, 30, 60, 0.65);
+  color: #fff;
+  box-shadow: 0 6px 36px 0 rgba(0,0,0,0.18);
+}
+.aurora-signin-btn:hover .aurora-signin-btn-border,
+.aurora-signin-btn:focus .aurora-signin-btn-border {
+  opacity: 1;
+  filter: blur(3px) brightness(1.4);
+}
+@keyframes aurora-btn-border-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.social-pop {
+  transition: transform 0.18s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.18s;
+}
+.social-pop:hover, .social-pop:focus {
+  transform: scale(1.18);
+  box-shadow: 0 4px 24px 0 #1ABC9C33;
+  z-index: 2;
+}

@@ -154,7 +154,7 @@ export function AuthPage() {
             >
               PitchFlic
             </h1>
-            <div className="text-sm font-light tracking-wide text-center shimmer-once" style={{ color: '#232323' }}>
+            <div className="text-sm font-light tracking-wide text-center shimmer-once" style={{ color: '#fff' }}>
               Flic <span className="mx-1">|</span> Pitch <span className="mx-1">|</span> Invest
             </div>
           </div>
@@ -215,8 +215,24 @@ export function AuthPage() {
             </div>
             <button
               type="button"
-              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#1ABC9C11] hover:backdrop-blur-sm hover:shadow-[0_0_24px_0_#1ABC9C22] focus:bg-[#1ABC9C11] focus:backdrop-blur-sm focus:shadow-[0_0_24px_0_#1ABC9C22]"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              className="aurora-signin-btn"
+              style={{
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontWeight: 400,
+                fontSize: '1rem',
+                letterSpacing: '0.02em',
+                padding: '0.5rem 1.75rem',
+                borderRadius: '2rem',
+                background: 'rgba(20, 20, 40, 0.18)',
+                border: '2px solid transparent',
+                color: '#fff',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                position: 'relative',
+                zIndex: 2,
+                transition: 'background 0.3s, border 0.3s, box-shadow 0.3s, color 0.3s',
+                overflow: 'hidden',
+              }}
               onMouseEnter={handleShowIcons}
               onFocus={handleShowIcons}
               onClick={() => {
@@ -225,40 +241,16 @@ export function AuthPage() {
               }}
               disabled={!!loadingProvider}
             >
-              {loadingProvider === 'google' && <span className="mr-2 animate-spin">🔄</span>}
-              {loadingProvider === 'facebook' && <span className="mr-2 animate-spin">🔄</span>}
-              Sign In
-            </button>
-            <button
-              type="button"
-              className="group w-32 font-light text-base rounded-full px-4 py-2 text-primary bg-transparent border border-primary mt-2 transition-all duration-300 hover:bg-primary/10 focus:bg-primary/10"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-              onClick={() => setMode('signup')}
-              disabled={!!loadingProvider}
-            >
-              Sign Up
+              <span style={{ position: 'relative', zIndex: 2 }}>
+                {loadingProvider === 'google' && <span className="mr-2 animate-spin">🔄</span>}
+                {loadingProvider === 'facebook' && <span className="mr-2 animate-spin">🔄</span>}
+                Sign In
+              </span>
             </button>
           </div>
           {/* Native login form below icons if mode==='native' */}
           {mode === 'native' && (
             <NativeLoginForm setError={setError} setLoadingProvider={setLoadingProvider} />
-          )}
-          {/* Native sign up form if mode==='signup' */}
-          {mode === 'signup' && (
-            <NativeSignUpForm setError={setError} setLoadingProvider={setLoadingProvider} />
-          )}
-          {/* Toggle between sign in and sign up */}
-          {mode === 'signup' && (
-            <div className="mt-2 text-sm text-center">
-              Already have an account?{' '}
-              <button type="button" className="text-primary underline" onClick={() => setMode('signin')}>Sign In</button>
-            </div>
-          )}
-          {mode === 'signin' && (
-            <div className="mt-2 text-sm text-center">
-              New here?{' '}
-              <button type="button" className="text-primary underline" onClick={() => setMode('signup')}>Sign Up</button>
-            </div>
           )}
         </div>
         {error && <div className="mt-4 text-red-400 text-sm text-center">{error}</div>}
@@ -272,7 +264,7 @@ export function AuthPage() {
         }
         .shimmer-once {
           display: inline-block;
-          background: linear-gradient(90deg, #232323 0%, #bbbbbb 50%, #232323 100%);
+          background: linear-gradient(90deg, #fff 0%, #ff477e 50%, #fff 100%);
           background-size: 400px 100%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;

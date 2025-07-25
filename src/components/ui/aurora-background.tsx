@@ -15,22 +15,22 @@ const AuroraBackground: React.FC<{ children?: React.ReactNode }> = ({ children }
         overflow: "hidden"
       }}
     >
-      {/* Diagonal lines overlay */}
+      {/* Diagonal lines overlay - now behind the content */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
-          zIndex: 1,
+          zIndex: 0,
           background:
-            "repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 6px)"
+            "repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)"
         }}
       />
       {/* Content goes above the overlay */}
       <div
         style={{
           position: "relative",
-          zIndex: 2,
+          zIndex: 1,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
