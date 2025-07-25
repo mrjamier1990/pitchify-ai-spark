@@ -64,7 +64,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import AuroraBackground from '../ui/aurora-background';
 
 interface PersonalProfilePageProps {
   onNavigate: (page: PageType) => void;
@@ -295,117 +294,76 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
   if (!user) {
     return (
-      <AuroraBackground>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Please sign in to view your profile</h2>
-            <button
-              type="button"
-              className="aurora-signin-btn"
-              style={{
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 400,
-                fontSize: '1rem',
-                letterSpacing: '0.02em',
-                padding: '0.5rem 1.75rem',
-                borderRadius: '2rem',
-                background: 'rgba(20, 20, 40, 0.18)',
-                border: '2px solid transparent',
-                color: '#fff',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                position: 'relative',
-                zIndex: 2,
-                transition: 'background 0.3s, border 0.3s, box-shadow 0.3s, color 0.3s',
-                overflow: 'hidden',
-              }}
-              onClick={() => onNavigate('swipe')}
-            >
-              Go to Home
-            </button>
-          </div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Please sign in to view your profile</h2>
+          <Button onClick={() => onNavigate('swipe')}>
+            Go to Home
+          </Button>
         </div>
-      </AuroraBackground>
+      </div>
     );
   }
 
   return (
-    <AuroraBackground>
+    <div className="h-screen flex flex-col" style={{
+      background: `#181924`,
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      {/* Aurora color splashes */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: 'none',
+        background: `
+          radial-gradient(ellipse 60% 40% at 20% 30%, #ff730022 0%, transparent 80%),
+          radial-gradient(ellipse 50% 30% at 80% 60%, #ff477e22 0%, transparent 80%),
+          radial-gradient(ellipse 70% 50% at 60% 40%, #017ed522 0%, transparent 80%),
+          radial-gradient(ellipse 60% 40% at 70% 20%, #b53dff22 0%, transparent 80%),
+          radial-gradient(ellipse 60% 50% at 30% 80%, #8d00c422 0%, transparent 80%)
+        `,
+        filter: 'blur(2px)'
+      }} />
       {/* Header */}
       <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-lg border-b border-border/50 flex-shrink-0">
         <div className="flex items-center justify-between p-4">
-          <button
-            type="button"
-            className="aurora-signin-btn"
-            style={{
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 400,
-              fontSize: '1rem',
-              letterSpacing: '0.02em',
-              padding: '0.5rem 1.75rem',
-              borderRadius: '2rem',
-              background: 'rgba(20, 20, 40, 0.18)',
-              border: '2px solid transparent',
-              color: '#fff',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              position: 'relative',
-              zIndex: 2,
-              transition: 'background 0.3s, border 0.3s, box-shadow 0.3s, color 0.3s',
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-            }}
+          <Button 
             onClick={() => onNavigate("swipe")}
+            className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           >
             <ArrowLeft className="h-4 w-4" />
             Back
-          </button>
+          </Button>
+          
           <h1 className="text-xl font-semibold">Profile</h1>
-          <button
-            type="button"
-            className="aurora-signin-btn"
-            style={{
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 400,
-              fontSize: '1rem',
-              letterSpacing: '0.02em',
-              padding: '0.5rem 1.75rem',
-              borderRadius: '2rem',
-              background: 'rgba(20, 20, 40, 0.18)',
-              border: '2px solid transparent',
-              color: '#fff',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              position: 'relative',
-              zIndex: 2,
-              transition: 'background 0.3s, border 0.3s, box-shadow 0.3s, color 0.3s',
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-            }}
+          
+          <Button 
             onClick={handleSignOut}
+            className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           >
             <LogOut className="h-4 w-4" />
             Logout
-          </button>
+          </Button>
         </div>
       </div>
+
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
         <div className="p-4 space-y-6 max-w-4xl mx-auto pb-8 w-full min-w-0">
           <Tabs defaultValue="profile" className="w-full min-w-0">
             <TabsList className="grid w-full grid-cols-4 gap-2 bg-transparent p-2 mb-4">
-              <TabsTrigger value="profile" className="aurora-signin-btn" style={{ fontWeight: 400, fontSize: '1rem', letterSpacing: '0.02em', padding: '0.5rem 1.75rem', background: 'rgba(20, 20, 40, 0.18)', color: '#fff', border: '2px solid transparent', borderRadius: '2rem', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', transition: 'background 0.3s, color 0.3s' }}>Profile</TabsTrigger>
-              <TabsTrigger value="filters" className="aurora-signin-btn" style={{ fontWeight: 400, fontSize: '1rem', letterSpacing: '0.02em', padding: '0.5rem 1.75rem', background: 'rgba(20, 20, 40, 0.18)', color: '#fff', border: '2px solid transparent', borderRadius: '2rem', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', transition: 'background 0.3s, color 0.3s' }}>Filters</TabsTrigger>
-              <TabsTrigger value="subscription" className="aurora-signin-btn" style={{ fontWeight: 400, fontSize: '1rem', letterSpacing: '0.02em', padding: '0.5rem 1.75rem', background: 'rgba(20, 20, 40, 0.18)', color: '#fff', border: '2px solid transparent', borderRadius: '2rem', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', transition: 'background 0.3s, color 0.3s' }}>Premium</TabsTrigger>
-              <TabsTrigger value="settings" className="aurora-signin-btn" style={{ fontWeight: 400, fontSize: '1rem', letterSpacing: '0.02em', padding: '0.5rem 1.75rem', background: 'rgba(20, 20, 40, 0.18)', color: '#fff', border: '2px solid transparent', borderRadius: '2rem', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', transition: 'background 0.3s, color 0.3s' }}>Settings</TabsTrigger>
+              <TabsTrigger value="profile" className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Profile</TabsTrigger>
+              <TabsTrigger value="filters" className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Filters</TabsTrigger>
+              <TabsTrigger value="subscription" className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Premium</TabsTrigger>
+              <TabsTrigger value="settings" className="font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Settings</TabsTrigger>
             </TabsList>
 
             <TabsContent value="profile" className="space-y-6 w-full min-w-0">
               {/* Profile Header */}
-              <Card className="border-border/50 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.32)', backdropFilter: 'blur(12px)' }}>
                 <CardContent className="p-4 md:p-6">
                   <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div className="flex items-start space-x-4 flex-1 min-w-0">
@@ -648,7 +606,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Profile Stats */}
-              <Card className="border-border/50 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardContent className="p-6">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full overflow-hidden">
                     <div className="text-center p-3 bg-gradient-to-br from-purple-600/60 to-purple-400/40 backdrop-blur-xl rounded-lg border border-purple-300/30">
@@ -684,7 +642,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Videos Section */}
-              <Card className="border-border/50 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Video className="w-5 h-5 mr-2 text-primary" />
@@ -725,7 +683,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Stats */}
-              <Card className="border-border/50 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <TrendingUp className="w-5 h-5 mr-2 text-primary" />
@@ -773,7 +731,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             </TabsContent>
 
             <TabsContent value="filters" className="space-y-6">
-              <Card className="border-border/50 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Filter className="w-5 h-5 mr-2 text-primary" />
@@ -888,7 +846,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
             <TabsContent value="subscription" className="space-y-6">
               {/* Subscription Tiers */}
-              <Card className="border-border/50 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Crown className="w-5 h-5 mr-2 text-primary" />
@@ -945,7 +903,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* AI Tools */}
-              <Card className="border-border/50 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Target className="w-5 h-5 mr-2 text-primary" />
@@ -996,7 +954,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-6">
-              <Card className="border-border/50 backdrop-blur-sm">
+              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Settings className="w-5 h-5 mr-2 text-primary" />
@@ -1075,6 +1033,6 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
           </Tabs>
         </div>
       </div>
-    </AuroraBackground>
+    </div>
   );
 }
