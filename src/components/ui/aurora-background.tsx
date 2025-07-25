@@ -23,7 +23,7 @@ const AuroraBackground: React.FC<{ children?: React.ReactNode }> = ({ children }
           pointerEvents: "none",
           zIndex: 1,
           background:
-            "repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 10px)"
+            "repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 6px)"
         }}
       />
       {/* Content goes above the overlay */}
