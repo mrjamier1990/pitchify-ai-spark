@@ -156,7 +156,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
   return (
     <AuroraBackground>
       <div
-        className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto flex flex-col overflow-hidden"
+        className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto flex flex-col overflow-hidden px-4 sm:px-6 md:px-8"
         style={{ minHeight: '100dvh', paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
       {/* Header */}
