@@ -11,6 +11,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { ArrowRight, ArrowLeft, Rocket, DollarSign, Users, Building, Brain, Wrench, TrendingUp, Banknote, Scale, Heart, Globe, MapPin, Lightbulb, Cpu, Zap, Smartphone, Shield, Leaf, ShoppingBag, Gamepad2, Music, GraduationCap, Home, Car, Plane, Camera, Palette, Book, Coffee, Trophy, Target, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import AuroraBackground from '../ui/aurora-background';
 
 interface OnboardingFlowProps {
   onComplete: () => void;
@@ -441,7 +442,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
               placeholder="Enter your full name"
               value={formData.full_name}
               onChange={(e) => setFormData(prev => ({ ...prev, full_name: e.target.value }))}
-              className="text-lg p-6 border-2 focus:border-primary transition-colors rounded-full"
+              className="text-lg p-6 border-2 focus:border-[#ff7300] transition-colors rounded-full bg-white/10 backdrop-blur-xl border-white/20 text-white placeholder:text-white/60"
             />
           </div>
         );
@@ -504,55 +505,55 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             </div>
             <div className="grid gap-4">
               <Card 
-                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
-                  formData.role === 'entrepreneur' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
+                className={`cursor-pointer border-2 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.role === 'entrepreneur' ? 'border-[#ff7300] shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
                 }`}
-                style={formData.role === 'entrepreneur' ? { borderColor: '#fff' } : {}}
+                style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'entrepreneur' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
-                  <div className="p-3 rounded-full bg-primary/20">
-                    <Rocket className="h-8 w-8 text-primary" />
+                  <div className="p-3 rounded-full bg-[#ff7300]/20">
+                    <Rocket className="h-8 w-8 text-[#ff7300]" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-semibold text-xl" style={{ fontFamily: 'Inter, sans-serif' }}>I'm a Founder</h3>
-                    <p className="text-muted-foreground">Looking for investment and strategic partners</p>
+                    <h3 className="font-semibold text-xl text-white" style={{ fontFamily: 'Inter, sans-serif' }}>I'm a Founder</h3>
+                    <p className="text-white/80">Looking for investment and strategic partners</p>
                   </div>
                 </CardContent>
               </Card>
               
               <Card 
-                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
-                  formData.role === 'investor' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
+                className={`cursor-pointer border-2 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.role === 'investor' ? 'border-[#ff7300] shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
                 }`}
-                style={formData.role === 'investor' ? { borderColor: '#fff' } : {}}
+                style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'investor' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
-                  <div className="p-3 rounded-full bg-primary/20">
-                    <DollarSign className="h-8 w-8 text-primary" />
+                  <div className="p-3 rounded-full bg-[#ff7300]/20">
+                    <DollarSign className="h-8 w-8 text-[#ff7300]" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-semibold text-xl" style={{ fontFamily: 'Inter, sans-serif' }}>I'm an Investor</h3>
-                    <p className="text-muted-foreground">Looking for promising startups to invest in</p>
+                    <h3 className="font-semibold text-xl text-white" style={{ fontFamily: 'Inter, sans-serif' }}>I'm an Investor</h3>
+                    <p className="text-white/80">Looking for promising startups to invest in</p>
                   </div>
                 </CardContent>
               </Card>
               
               <Card 
-                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
-                  formData.role === 'both' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
+                className={`cursor-pointer border-2 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.role === 'both' ? 'border-[#ff7300] shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
                 }`}
-                style={formData.role === 'both' ? { borderColor: '#fff' } : {}}
+                style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'both' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
-                  <div className="p-3 rounded-full bg-primary/20">
-                    <Users className="h-8 w-8 text-primary" />
+                  <div className="p-3 rounded-full bg-[#ff7300]/20">
+                    <Users className="h-8 w-8 text-[#ff7300]" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-semibold text-xl" style={{ fontFamily: 'Inter, sans-serif' }}>I'm Both</h3>
-                    <p className="text-muted-foreground">I'm both building and investing</p>
+                    <h3 className="font-semibold text-xl text-white" style={{ fontFamily: 'Inter, sans-serif' }}>I'm Both</h3>
+                    <p className="text-white/80">I'm both building and investing</p>
                   </div>
                 </CardContent>
               </Card>
@@ -656,12 +657,12 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 />
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary">
+                <div className="text-3xl font-bold text-[#ff7300]">
                   {formatFundingAmount(parseInt(formData.funding_amount_seeking) || 100000)}
                 </div>
-                <p className="text-muted-foreground">Funding goal</p>
+                <p className="text-white/80">Funding goal</p>
               </div>
-              <div className="flex justify-between text-sm text-muted-foreground px-4">
+              <div className="flex justify-between text-sm text-white/80 px-4">
                 <span>$5K</span>
                 <span>$5M+</span>
               </div>
@@ -823,27 +824,27 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             </div>
             <div className="grid gap-4">
               <Card
-                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
-                  formData.investment_status === 'actively_investing' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
+                className={`cursor-pointer border-2 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.investment_status === 'actively_investing' ? 'border-[#ff7300] shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
                 }`}
-                style={formData.investment_status === 'actively_investing' ? { borderColor: '#fff' } : {}}
+                style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}
                 onClick={() => setFormData(prev => ({ ...prev, investment_status: 'actively_investing' }))}
               >
                 <CardContent className="p-6 text-center">
-                  <CheckCircle className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <p className="font-medium text-lg">Yes, actively investing</p>
+                  <CheckCircle className="h-8 w-8 text-[#ff7300] mx-auto mb-2" />
+                  <p className="font-medium text-lg text-white">Yes, actively investing</p>
                 </CardContent>
               </Card>
               <Card
-                className={`cursor-pointer border-4 transition-all hover-scale focus:ring-0 focus:outline-none ${
-                  formData.investment_status === 'just_exploring' ? 'border-white !border-white bg-primary/10 shadow-lg' : 'border-border hover:border-white hover:shadow-md'
+                className={`cursor-pointer border-2 transition-all hover-scale focus:ring-0 focus:outline-none ${
+                  formData.investment_status === 'just_exploring' ? 'border-[#ff7300] shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
                 }`}
-                style={formData.investment_status === 'just_exploring' ? { borderColor: '#fff' } : {}}
+                style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}
                 onClick={() => setFormData(prev => ({ ...prev, investment_status: 'just_exploring' }))}
               >
                 <CardContent className="p-6 text-center">
-                  <Target className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <p className="font-medium text-lg">Just exploring</p>
+                  <Target className="h-8 w-8 text-[#ff7300] mx-auto mb-2" />
+                  <p className="font-medium text-lg text-white">Just exploring</p>
                 </CardContent>
               </Card>
             </div>
@@ -868,12 +869,12 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 />
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary">
+                <div className="text-3xl font-bold text-[#ff7300]">
                   {formatFundingAmount(parseInt(formData.investor_check_size) || 50000)}
                 </div>
-                <p className="text-muted-foreground">Typical investment amount</p>
+                <p className="text-white/80">Typical investment amount</p>
               </div>
-              <div className="flex justify-between text-sm text-muted-foreground px-4">
+              <div className="flex justify-between text-sm text-white/80 px-4">
                 <span>$5K</span>
                 <span>$1M+</span>
               </div>
@@ -1096,32 +1097,25 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#1a1a1d] via-[#131315] to-[#0a0a0c] relative overflow-hidden">
-      {/* Subtle travelling star animation foreground */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 z-30">
-        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-20 blur-[2px]" style={{ width: '18px', height: '18px', left: '10%', top: '20%', animation: 'starTravel1 22s linear infinite' }} />
-        <span className="absolute block rounded-full bg-white opacity-10 blur-[1.5px]" style={{ width: '10px', height: '10px', left: '70%', top: '30%', animation: 'starTravel2 28s linear infinite' }} />
-        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-14 blur-[2.5px]" style={{ width: '14px', height: '14px', left: '40%', top: '70%', animation: 'starTravel3 32s linear infinite' }} />
-        <span className="absolute block rounded-full bg-white opacity-8 blur-[2px]" style={{ width: '8px', height: '8px', left: '80%', top: '60%', animation: 'starTravel4 26s linear infinite' }} />
-        <span className="absolute block rounded-full bg-[#1ABC9C] opacity-10 blur-[3px]" style={{ width: '22px', height: '22px', left: '55%', top: '10%', animation: 'starTravel5 36s linear infinite' }} />
-      </div>
-      <div className="w-full max-w-3xl mx-auto">
+    <AuroraBackground>
+      <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="w-full max-w-3xl mx-auto">
         {/* Progress indicator */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-3">
-            <span className="text-sm font-medium text-muted-foreground">
+            <span className="text-sm font-medium text-white/80">
               Step {currentStep + 1} of {steps.length}
             </span>
-            <span className="text-sm font-medium text-primary">
+            <span className="text-sm font-medium text-white">
               {Math.round(((currentStep + 1) / steps.length) * 100)}%
             </span>
           </div>
-          <div className="w-full bg-secondary/50 rounded-full h-3 overflow-hidden">
+          <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
             <div
               className="h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
               style={{
                 width: `${((currentStep + 1) / steps.length) * 100}%`,
-                background: 'linear-gradient(90deg, #ff5757 0%, #ff7979 100%)'
+                background: 'linear-gradient(90deg, #ff7300 0%, #ff477e 50%, #017ed5 100%)'
               }}
             />
           </div>
@@ -1129,7 +1123,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         </div>
 
         {/* Main content */}
-        <Card className="border-2 border-border/50 shadow-2xl bg-transparent text-white rounded-xl transition-all duration-300 relative z-10 overflow-hidden">
+        <Card className="border-2 border-white/20 shadow-2xl bg-white/10 backdrop-blur-xl text-white rounded-xl transition-all duration-300 relative z-10 overflow-hidden">
           <CardContent className="p-8 md:p-12">
             {renderSlide()}
           </CardContent>
@@ -1140,8 +1134,8 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
           <Button
             onClick={prevStep}
             disabled={currentStep === 0}
-            className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
-            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+            className="group w-32 font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
           >
             <ArrowLeft className="h-4 w-4" />
             Back
@@ -1150,8 +1144,8 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
           {currentStep === steps.length - 1 ? (
             <Button
               onClick={handleComplete}
-              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
             >
               Launch <Rocket className="h-4 w-4 inline ml-2" />
             </Button>
@@ -1159,8 +1153,8 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             <Button
               onClick={nextStep}
               disabled={!canContinue()}
-              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              className="group w-32 font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+              style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
             >
               Continue
               <ArrowRight className="h-4 w-4" />
@@ -1190,6 +1184,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
           100% { transform: translate(20vw, 60vh); }
         }
       `}</style>
-    </div>
+      </div>
+    </AuroraBackground>
   );
 };

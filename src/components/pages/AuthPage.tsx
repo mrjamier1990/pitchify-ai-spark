@@ -252,6 +252,44 @@ export function AuthPage() {
           {mode === 'native' && (
             <NativeLoginForm setError={setError} setLoadingProvider={setLoadingProvider} />
           )}
+          
+          {/* Sign Up button */}
+          <div className="relative w-full flex flex-col items-center mt-4">
+            <button
+              type="button"
+              className="aurora-signin-btn"
+              style={{
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontWeight: 400,
+                fontSize: '1rem',
+                letterSpacing: '0.02em',
+                padding: '0.5rem 1.75rem',
+                borderRadius: '2rem',
+                background: 'rgba(20, 20, 40, 0.18)',
+                border: '2px solid transparent',
+                color: '#fff',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                position: 'relative',
+                zIndex: 2,
+                transition: 'background 0.3s, border 0.3s, box-shadow 0.3s, color 0.3s',
+                overflow: 'hidden',
+              }}
+              onClick={() => {
+                setMode('signup');
+              }}
+              disabled={!!loadingProvider}
+            >
+              <span style={{ position: 'relative', zIndex: 2 }}>
+                Sign Up
+              </span>
+            </button>
+          </div>
+          
+          {/* Native signup form below signup button if mode==='signup' */}
+          {mode === 'signup' && (
+            <NativeSignUpForm setError={setError} setLoadingProvider={setLoadingProvider} />
+          )}
         </div>
         {error && <div className="mt-4 text-red-400 text-sm text-center">{error}</div>}
       </div>

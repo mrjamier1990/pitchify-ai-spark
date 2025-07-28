@@ -1016,7 +1016,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
           </Tabs>
         </div>
       </div>
-      </div>
+    </div>
     </AuroraBackground>
   );
 }

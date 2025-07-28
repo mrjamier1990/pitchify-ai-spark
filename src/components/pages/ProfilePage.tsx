@@ -13,27 +13,27 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
   return (
     <AuroraBackground>
       <div className="h-full flex flex-col">
-        {/* Header */}
+      {/* Header */}
         <header className="flex items-center justify-between p-4">
-          <Button 
-            onClick={() => onNavigate("swipe")}
+        <Button 
+          onClick={() => onNavigate("swipe")}
             className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
             style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
-          >
+        >
             <ArrowLeft className="w-4 h-4" />
             Back
-          </Button>
+        </Button>
           <h1 className="text-xl font-semibold text-white" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>My Profile</h1>
-          <Button 
-            onClick={() => onNavigate("settings")}
+        <Button 
+          onClick={() => onNavigate("settings")}
             className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
             style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
-          >
+        >
             <Settings className="w-4 h-4" />
-          </Button>
-        </header>
+        </Button>
+      </header>
 
-        {/* Profile Content */}
+      {/* Profile Content */}
         <div className="flex-1 overflow-y-auto p-4 pt-8 space-y-8 max-w-4xl mx-auto pb-8 w-full min-w-0">
         {/* Profile Header */}
         <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
@@ -166,8 +166,8 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
             </div>
           </div>
         </Card>
-        </div>
       </div>
+    </div>
     </AuroraBackground>
   );
 }
