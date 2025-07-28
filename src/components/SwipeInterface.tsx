@@ -160,7 +160,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         style={{ minHeight: '100dvh', paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
       {/* Header */}
-      <header className="flex items-center justify-between px-3 sm:px-4 py-3 mx-2 mt-2">
+      <header className="flex items-center justify-between px-3 sm:px-4 py-3 mx-2 mt-2 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto">
         <Button 
           onClick={() => onNavigate?.("profile")}
           className="w-10 h-10 rounded-full transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
@@ -189,7 +189,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
       </header>
 
       {/* Card Stack */}
-      <div className="flex-1 min-h-0 flex flex-col justify-center items-center relative overflow-hidden px-1 sm:px-2 md:px-4 pt-8 sm:pt-12 pb-8 sm:pb-12">
+      <div className="flex-1 min-h-0 flex flex-col justify-center items-center relative overflow-hidden px-1 sm:px-2 md:px-4 pt-4 sm:pt-6 pb-4 sm:pb-6">
         {/* Next card (behind) */}
         <SwipeCard
           key={`next-${currentIndex}`}
@@ -213,7 +213,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
       </div>
 
       {/* Enhanced Action Buttons with Smooth Animations */}
-      <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-2 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5 mx-2 mb-2 flex-shrink-0">
+      <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 mx-2 mb-2 flex-shrink-0">
         {/* I'm Out (Pass) Button */}
         <Button
           variant="glass"

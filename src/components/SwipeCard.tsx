@@ -145,7 +145,7 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
         y,
         rotate,
         opacity,
-        background: 'rgba(255,255,255,0.06)',
+        background: 'rgba(255,255,255,0.18)',
         backdropFilter: 'blur(12px)',
       }}
       drag
