@@ -138,7 +138,7 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
   return (
     <motion.div
       ref={cardRef}
-      className="absolute inset-2 sm:inset-4 rounded-xl sm:rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing select-none border-2 border-white/20 shadow-[0_0_40px_rgba(255,115,0,0.15),0_8px_32px_rgba(255,71,126,0.1),0_0_60px_rgba(1,126,213,0.08),0_0_80px_rgba(181,61,255,0.06),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-sm"
+      className="absolute inset-1 sm:inset-4 rounded-xl sm:rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing select-none border-2 border-white/20 backdrop-blur-sm"
       style={{
         ...style,
         x,
@@ -156,9 +156,6 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
       onDrag={handleDrag}
       onDragEnd={handleDragEnd}
       whileHover={{ 
-        scale: 1.03,
-        boxShadow: "0_0_80px_rgba(255,115,0,0.25),0_16px_64px_rgba(255,71,126,0.15),0_0_100px_rgba(1,126,213,0.12),0_0_120px_rgba(181,61,255,0.08),inset_0_1px_0_rgba(255,255,255,0.18)",
-        borderColor: "rgba(255, 115, 0, 0.4)"
       }}
       whileTap={{ scale: 0.97 }}
       animate={isDragging ? { scale: 1.04 } : { scale: 1 }}
@@ -223,64 +220,64 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
         </motion.div>
 
         {/* Gradient Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-28 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
       </div>
 
       {/* Profile Info - Clickable */}
       <motion.div 
-        className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 text-white cursor-pointer"
+        className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white cursor-pointer"
         onClick={onProfileClick}
         whileHover={{ y: -2 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
       >
         <motion.div 
-          className="mb-2"
+          className="mb-1.5"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h2 className="text-lg sm:text-2xl font-bold leading-tight tracking-wide">
+          <h2 className="text-base sm:text-xl font-semibold leading-tight tracking-wide mb-0.5">
             {profile.name}, {profile.age}
           </h2>
-          <p className="text-sm sm:text-lg opacity-90 leading-tight font-medium">{profile.title}</p>
+          <p className="text-sm sm:text-base opacity-90 leading-tight font-normal mb-0.5">{profile.title}</p>
           <p className="text-xs sm:text-sm opacity-75 font-light">{profile.company}</p>
         </motion.div>
 
         <motion.div 
-          className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm opacity-75 mb-2 sm:mb-3"
+          className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm opacity-75 mb-1.5"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
           <div className="flex items-center gap-1">
-            <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="truncate font-medium">{profile.location}</span>
+            <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <span className="truncate font-normal">{profile.location}</span>
           </div>
           <div className="flex items-center gap-1">
-            <Briefcase className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="truncate font-medium">{profile.industry}</span>
+            <Briefcase className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <span className="truncate font-normal">{profile.industry}</span>
           </div>
         </motion.div>
 
         {profile.type === "entrepreneur" && profile.fundingStage && (
           <motion.p 
-            className="text-xs sm:text-sm opacity-90 mb-1 sm:mb-2 font-medium"
+            className="text-xs sm:text-sm opacity-90 mb-1 font-normal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <span className="font-semibold">Funding Stage:</span> {profile.fundingStage}
+            <span className="font-medium">Funding Stage:</span> {profile.fundingStage}
           </motion.p>
         )}
 
         {profile.type === "investor" && profile.investmentRange && (
           <motion.p 
-            className="text-xs sm:text-sm opacity-90 mb-1 sm:mb-2 font-medium"
+            className="text-xs sm:text-sm opacity-90 mb-1 font-normal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <span className="font-semibold">Investment Range:</span> {profile.investmentRange}
+            <span className="font-medium">Investment Range:</span> {profile.investmentRange}
           </motion.p>
         )}
 
