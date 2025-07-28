@@ -26,11 +26,21 @@ const AuroraBackground: React.FC<{ children?: React.ReactNode }> = ({ children }
             "repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)"
         }}
       />
+      {/* Dark overlay to make background slightly darker */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          zIndex: 1,
+          background: "rgba(10,16,32,0.45)"
+        }}
+      />
       {/* Content goes above the overlay */}
       <div
         style={{
           position: "relative",
-          zIndex: 1,
+          zIndex: 2,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
