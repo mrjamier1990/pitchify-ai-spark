@@ -160,7 +160,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         style={{ minHeight: '100dvh', paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
       {/* Header */}
-      <header className="flex items-center justify-between px-3 sm:px-4 py-3 mx-2 mt-2 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto">
+      <header className="flex items-center justify-between px-3 sm:px-4 py-3 mt-2 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto">
         <Button 
           onClick={() => onNavigate?.("profile")}
           className="w-10 h-10 rounded-full transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
