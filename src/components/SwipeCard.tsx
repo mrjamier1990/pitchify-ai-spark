@@ -235,15 +235,15 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h2 className="text-base sm:text-xl font-semibold leading-tight tracking-wide mb-0.5">
+          <h2 className="text-lg sm:text-2xl font-semibold leading-tight tracking-wide mb-0.5">
             {profile.name}, {profile.age}
           </h2>
-          <p className="text-sm sm:text-base opacity-90 leading-tight font-normal mb-0.5">{profile.title}</p>
-          <p className="text-xs sm:text-sm opacity-75 font-light">{profile.company}</p>
+          <p className="text-base sm:text-lg opacity-90 leading-tight font-normal mb-0.5">{profile.title}</p>
+          <p className="text-sm sm:text-base opacity-75 font-light">{profile.company}</p>
         </motion.div>
 
         <motion.div 
-          className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm opacity-75 mb-1.5"
+          className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base opacity-75 mb-1.5"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -260,7 +260,7 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
 
         {profile.type === "entrepreneur" && profile.fundingStage && (
           <motion.p 
-            className="text-xs sm:text-sm opacity-90 mb-1 font-normal"
+            className="text-sm sm:text-base opacity-90 mb-1 font-normal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -271,7 +271,7 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
 
         {profile.type === "investor" && profile.investmentRange && (
           <motion.p 
-            className="text-xs sm:text-sm opacity-90 mb-1 font-normal"
+            className="text-sm sm:text-base opacity-90 mb-1 font-normal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -283,7 +283,7 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
         {/* Enhanced Bio with Hover Bubble */}
         <div className="relative group">
           <motion.p 
-            className="text-xs sm:text-sm opacity-90 line-clamp-2 leading-relaxed font-light cursor-pointer"
+            className="text-sm sm:text-base opacity-90 line-clamp-2 leading-relaxed font-light cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}

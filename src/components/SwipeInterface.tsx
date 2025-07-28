@@ -189,7 +189,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
       </header>
 
       {/* Card Stack */}
-      <div className="flex-1 min-h-0 flex flex-col justify-center items-center relative overflow-hidden px-1 sm:px-2 md:px-4 pt-4 sm:pt-6 pb-4 sm:pb-6">
+      <div className="flex-1 min-h-0 flex flex-col justify-center items-center relative overflow-hidden px-1 sm:px-2 md:px-4 pt-4 sm:pt-6 pb-8 sm:pb-12">
         {/* Next card (behind) */}
         <SwipeCard
           key={`next-${currentIndex}`}
