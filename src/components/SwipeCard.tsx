@@ -155,8 +155,7 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
       onDragStart={handleDragStart}
       onDrag={handleDrag}
       onDragEnd={handleDragEnd}
-      whileHover={{ 
-      }}
+
       whileTap={{ scale: 0.97 }}
       animate={isDragging ? { scale: 1.04 } : { scale: 1 }}
       transition={{ 
