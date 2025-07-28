@@ -592,31 +592,31 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardContent className="p-6">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full overflow-hidden">
-                    <div className="text-center p-3 bg-gradient-to-br from-[#ff7300]/60 via-[#ff477e]/40 to-[#017ed5]/30 backdrop-blur-xl rounded-lg border border-[#ff7300]/30">
+                    <div className="text-center p-3 bg-gradient-to-br from-[#ff7300]/20 via-[#ff477e]/15 to-[#017ed5]/10 backdrop-blur-xl rounded-lg border border-[#ff7300]/20">
                       <div className="text-xl md:text-2xl font-bold text-white">247</div>
-                      <div className="text-xs md:text-sm text-white flex items-center justify-center gap-1">
-                        <Eye className="w-3 h-3 text-white" />
+                      <div className="text-xs md:text-sm text-white/80 flex items-center justify-center gap-1">
+                        <Eye className="w-3 h-3 text-white/80" />
                         Profile Views
                       </div>
                     </div>
-                    <div className="text-center p-3 bg-gradient-to-br from-[#017ed5]/60 via-[#b53dff]/40 to-[#8d00c4]/30 backdrop-blur-xl rounded-lg border border-[#017ed5]/30">
+                    <div className="text-center p-3 bg-gradient-to-br from-[#017ed5]/20 via-[#b53dff]/15 to-[#8d00c4]/10 backdrop-blur-xl rounded-lg border border-[#017ed5]/20">
                       <div className="text-xl md:text-2xl font-bold text-white">89</div>
-                      <div className="text-xs md:text-sm text-white flex items-center justify-center gap-1">
-                        <Users className="w-3 h-3 text-white" />
+                      <div className="text-xs md:text-sm text-white/80 flex items-center justify-center gap-1">
+                        <Users className="w-3 h-3 text-white/80" />
                         Connections
                       </div>
                     </div>
-                    <div className="text-center p-3 bg-gradient-to-br from-[#b53dff]/60 via-[#8d00c4]/40 to-[#ff7300]/30 backdrop-blur-xl rounded-lg border border-[#b53dff]/30">
+                    <div className="text-center p-3 bg-gradient-to-br from-[#b53dff]/20 via-[#8d00c4]/15 to-[#ff7300]/10 backdrop-blur-xl rounded-lg border border-[#b53dff]/20">
                       <div className="text-xl md:text-2xl font-bold text-white">156</div>
-                      <div className="text-xs md:text-sm text-white flex items-center justify-center gap-1">
-                        <MessageSquare className="w-3 h-3 text-white" />
+                      <div className="text-xs md:text-sm text-white/80 flex items-center justify-center gap-1">
+                        <MessageSquare className="w-3 h-3 text-white/80" />
                         Messages
                       </div>
                     </div>
-                    <div className="text-center p-3 bg-gradient-to-br from-[#8d00c4]/60 via-[#ff7300]/40 to-[#ff477e]/30 backdrop-blur-xl rounded-lg border border-[#8d00c4]/30">
+                    <div className="text-center p-3 bg-gradient-to-br from-[#8d00c4]/20 via-[#ff7300]/15 to-[#ff477e]/10 backdrop-blur-xl rounded-lg border border-[#8d00c4]/20">
                       <div className="text-xl md:text-2xl font-bold text-white">23</div>
-                      <div className="text-xs md:text-sm flex items-center justify-center gap-1 text-white">
-                        <Star className="w-3 h-3 text-white" />
+                      <div className="text-xs md:text-sm flex items-center justify-center gap-1 text-white/80">
+                        <Star className="w-3 h-3 text-white/80" />
                         SuperLikes Left
                       </div>
                     </div>

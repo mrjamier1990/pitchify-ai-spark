@@ -9,6 +9,7 @@ import profile1 from "@/assets/profile1.jpg";
 import profile2 from "@/assets/profile2.jpg";
 import profile3 from "@/assets/profile3.jpg";
 import profile4 from "@/assets/profile4.jpg";
+import AuroraBackground from './ui/aurora-background';
 
 interface SwipeInterfaceProps {
   onNavigate?: (page: PageType) => void;
@@ -153,35 +154,34 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
   }
 
   return (
-    <div
-      className="max-w-screen-sm mx-auto bg-[#18181b] flex flex-col overflow-hidden"
-      style={{ minHeight: '100dvh', paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
-    >
+    <AuroraBackground>
+      <div
+        className="max-w-screen-sm mx-auto flex flex-col overflow-hidden"
+        style={{ minHeight: '100dvh', paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
+      >
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-3 bg-[#18181b] border border-[#232326] rounded-xl mx-2 mt-2 shadow-lg">
+      <header className="flex items-center justify-between px-4 py-3 mx-2 mt-2" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '1rem' }}>
         <Button 
-          variant="glass"
-          size="icon"
-          className="w-10 h-10 rounded-full transition-all duration-300 shadow-[0_0_24px_0_#1ABC9C22] hover:bg-[#1ABC9C22] hover:shadow-[0_0_32px_8px_rgba(26,188,156,0.25)] hover:border-primary/40 focus:bg-[#1ABC9C22] focus:shadow-[0_0_32px_8px_rgba(26,188,156,0.25)]"
           onClick={() => onNavigate?.("profile")}
+          className="w-10 h-10 rounded-full transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+          style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
         >
-          <User className="w-5 h-5" />
+          <User className="w-5 h-5 text-white" />
         </Button>
         
         <div className="flex items-center gap-3">
           <img src="/pitchflic-logo.png" alt="PitchFlic Logo" className="w-10 h-10" style={{ objectFit: 'contain', display: 'block' }} />
-          <span className="text-2xl md:text-3xl font-bold text-primary" style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '-0.02em' }}>PitchFlic</span>
+          <span className="text-2xl md:text-3xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '-0.02em' }}>PitchFlic</span>
         </div>
         
         <Button 
-          variant="glass"
-          size="icon"
-          className="relative w-10 h-10 rounded-full transition-all duration-300 shadow-[0_0_24px_0_#1ABC9C22] hover:bg-[#1ABC9C22] hover:shadow-[0_0_32px_8px_rgba(26,188,156,0.25)] hover:border-primary/40 focus:bg-[#1ABC9C22] focus:shadow-[0_0_32px_8px_rgba(26,188,156,0.25)]"
           onClick={() => onNavigate?.("messages")}
+          className="relative w-10 h-10 rounded-full transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+          style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
         >
-          <MessageCircle className="w-5 h-5" />
+          <MessageCircle className="w-5 h-5 text-white" />
           {matches > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 w-6 h-6 bg-gradient-to-br from-[#1ABC9C] to-[#14575c] text-white text-sm rounded-full flex items-center justify-center font-extrabold border-2 border-white">
+            <span className="absolute -top-1.5 -right-1.5 w-6 h-6 bg-gradient-to-br from-[#ff7300] to-[#ff477e] text-white text-sm rounded-full flex items-center justify-center font-extrabold border-2 border-white">
               {matches}
             </span>
           )}
@@ -213,7 +213,7 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
       </div>
 
       {/* Enhanced Action Buttons with Smooth Animations */}
-      <div className="flex items-center justify-center gap-4 sm:gap-8 px-2 sm:px-6 py-3 sm:py-5 bg-[#18181b] border border-[#232326] rounded-xl mx-2 mb-2 shadow-lg flex-shrink-0">
+      <div className="flex items-center justify-center gap-4 sm:gap-8 px-2 sm:px-6 py-3 sm:py-5 mx-2 mb-2 flex-shrink-0" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '1rem' }}>
         {/* I'm Out (Pass) Button */}
         <Button
           variant="glass"
@@ -246,5 +246,6 @@ export function SwipeInterface({ onNavigate }: SwipeInterfaceProps = {}) {
         </Button>
       </div>
     </div>
+    </AuroraBackground>
   );
 }

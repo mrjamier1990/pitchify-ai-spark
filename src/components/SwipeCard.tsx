@@ -138,13 +138,15 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
   return (
     <motion.div
       ref={cardRef}
-      className="absolute inset-2 sm:inset-4 bg-card rounded-xl sm:rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing select-none border-2 border-primary/20 shadow-[0_0_40px_rgba(0,0,0,0.3),0_8px_32px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-sm"
+      className="absolute inset-2 sm:inset-4 rounded-xl sm:rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing select-none border-2 border-white/20 shadow-[0_0_40px_rgba(255,115,0,0.15),0_8px_32px_rgba(255,71,126,0.1),0_0_60px_rgba(1,126,213,0.08),0_0_80px_rgba(181,61,255,0.06),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-sm"
       style={{
         ...style,
         x,
         y,
         rotate,
         opacity,
+        background: 'rgba(255,255,255,0.06)',
+        backdropFilter: 'blur(12px)',
       }}
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -155,8 +157,8 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
       onDragEnd={handleDragEnd}
       whileHover={{ 
         scale: 1.03,
-        boxShadow: "0_0_80px_rgba(0,0,0,0.5),0_16px_64px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.18)",
-        borderColor: "hsl(var(--primary) / 0.4)"
+        boxShadow: "0_0_80px_rgba(255,115,0,0.25),0_16px_64px_rgba(255,71,126,0.15),0_0_100px_rgba(1,126,213,0.12),0_0_120px_rgba(181,61,255,0.08),inset_0_1px_0_rgba(255,255,255,0.18)",
+        borderColor: "rgba(255, 115, 0, 0.4)"
       }}
       whileTap={{ scale: 0.97 }}
       animate={isDragging ? { scale: 1.04 } : { scale: 1 }}
@@ -213,8 +215,8 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
         >
           <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium backdrop-blur-md ${
             profile.type === "entrepreneur" 
-              ? "bg-primary/90 text-primary-foreground"
-              : "bg-accent/90 text-accent-foreground"
+              ? "bg-gradient-to-r from-[#ff7300]/90 to-[#ff477e]/90 text-white"
+              : "bg-gradient-to-r from-[#017ed5]/90 to-[#b53dff]/90 text-white"
           }`}>
             {profile.type === "entrepreneur" ? "Entrepreneur" : "Investor"}
           </span>
@@ -300,14 +302,14 @@ export const SwipeCard = forwardRef(function SwipeCard({ profile, onSwipe, onPro
             whileHover={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            <div className="bg-gradient-to-br from-card via-background to-card/90 backdrop-blur-xl rounded-2xl p-5 border border-primary/30 shadow-[0_0_50px_rgba(0,0,0,0.5),0_0_100px_hsl(var(--primary)/0.3),inset_0_1px_0_rgba(255,255,255,0.1)] relative mx-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl"></div>
-              <p className="text-sm text-foreground leading-relaxed font-medium relative z-10">
+            <div className="bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-xl rounded-2xl p-5 border border-white/30 shadow-[0_0_50px_rgba(0,0,0,0.5),0_0_100px_rgba(255,115,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] relative mx-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#ff7300]/5 to-transparent rounded-2xl"></div>
+              <p className="text-sm text-white leading-relaxed font-medium relative z-10">
                 {profile.bio}
               </p>
               {/* Premium Triangle Pointer */}
-              <div className="absolute top-full left-6 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-card drop-shadow-lg"></div>
-              <div className="absolute top-full left-7 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[10px] border-l-transparent border-r-transparent border-t-primary/20"></div>
+              <div className="absolute top-full left-6 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-white/10 drop-shadow-lg"></div>
+              <div className="absolute top-full left-7 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[10px] border-l-transparent border-r-transparent border-t-[#ff7300]/20"></div>
             </div>
           </motion.div>
         </div>
