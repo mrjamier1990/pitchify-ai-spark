@@ -33,7 +33,7 @@ const AuroraBackground: React.FC<{ children?: React.ReactNode }> = ({ children }
           inset: 0,
           pointerEvents: "none",
           zIndex: 1,
-          background: "rgba(10,16,32,0.45)"
+          background: "rgba(10,16,32,0.65)"
         }}
       />
       {/* Content goes above the overlay */}
