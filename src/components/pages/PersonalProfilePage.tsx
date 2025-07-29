@@ -364,7 +364,6 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
           >
             <ArrowLeft className="h-4 w-4" />
-            Back
           </Button>
           
           <h1 className="text-xl font-semibold text-white" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>My Profile</h1>
@@ -375,7 +374,6 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
           >
             <LogOut className="h-4 w-4" />
-            Logout
           </Button>
         </div>
       </div>
@@ -392,34 +390,46 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
             <TabsContent value="profile" className="space-y-6 w-full min-w-0">
               {/* Profile Header */}
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm relative" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+                <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+                  <span className="capitalize bg-white/20 px-2 py-1 rounded-full text-white border border-white/30 text-sm">
+                    {profile?.role || 'entrepreneur'}
+                  </span>
+                  <Button 
+                    onClick={() => editMode ? handleSaveProfile() : setEditMode(true)}
+                    disabled={loading}
+                    className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+                    style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
+                  >
+                    {editMode ? (
+                      <Save className="w-4 h-4" />
+                    ) : (
+                      <Edit3 className="w-4 h-4" />
+                    )}
+                  </Button>
+                </div>
                 <CardContent className="p-4 md:p-6">
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-start space-x-4 flex-1 min-w-0">
-                      <div className="relative flex-shrink-0">
-                        <Avatar className="w-16 h-16 md:w-20 md:h-20 border-2 border-primary/20">
-                          <AvatarImage src={profile?.profile_image_url || "/placeholder.svg"} alt="Profile" />
-                          <AvatarFallback>
-                            {profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]).join('') : user?.email?.[0].toUpperCase()}
-                          </AvatarFallback>
-                        </Avatar>
-                        <Badge 
-                          variant="secondary" 
-                          className="absolute -bottom-1 -right-1 bg-gradient-to-r from-[#ff7300] via-[#ff477e] to-[#017ed5] text-white px-2 py-1 text-xs"
-                        >
-                          <Crown className="w-3 h-3 mr-1" />
-                          {profile?.subscription_tier || 'Free'}
-                        </Badge>
-                      </div>
-                      
-                      <div className="flex-1 min-w-0 space-y-2">
-                        <div>
-                          <h2 className="text-xl md:text-2xl font-bold truncate">{profile?.full_name || 'Complete your profile'}</h2>
-                          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                            <span className="capitalize bg-gradient-to-r from-[#ff7300]/20 to-[#ff477e]/20 px-2 py-1 rounded-full text-[#ff7300] border border-[#ff7300]/30">
-                              {profile?.role || 'entrepreneur'}
-                            </span>
-                            <span>•</span>
+                  <div className="flex items-start space-x-4 flex-1 min-w-0">
+                    <div className="relative flex-shrink-0">
+                      <Avatar className="w-16 h-16 md:w-20 md:h-20 border-2 border-primary/20">
+                        <AvatarImage src={profile?.profile_image_url || "/placeholder.svg"} alt="Profile" />
+                        <AvatarFallback>
+                          {profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]).join('') : user?.email?.[0].toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <Badge 
+                        variant="secondary" 
+                        className="absolute -bottom-1 -right-1 bg-gradient-to-r from-[#ff7300] via-[#ff477e] to-[#017ed5] text-white px-2 py-1 text-xs"
+                      >
+                        <Crown className="w-3 h-3 mr-1" />
+                        {profile?.subscription_tier || 'Free'}
+                      </Badge>
+                    </div>
+                    
+                    <div className="flex-1 min-w-0 space-y-2">
+                      <div>
+                        <h2 className="text-xl md:text-2xl font-bold truncate">{profile?.full_name || 'Complete your profile'}</h2>
+                                                  <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                             <span className="flex items-center gap-1">
                               <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -427,33 +437,13 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                               {profile?.country || 'Location not set'}
                             </span>
                           </div>
-                        </div>
-                        <div className="bg-muted/30 rounded-lg p-3">
-                          <p className="text-sm text-foreground/80 leading-relaxed">
-                            {profile?.bio || 'Add a bio to tell others about yourself and what you\'re looking for. This helps potential matches understand your goals and interests.'}
-                          </p>
-                        </div>
+                      </div>
+                      <div className="bg-muted/30 rounded-lg p-3">
+                        <p className="text-sm text-foreground/80 leading-relaxed">
+                          {profile?.bio || 'Add a bio to tell others about yourself and what you\'re looking for. This helps potential matches understand your goals and interests.'}
+                        </p>
                       </div>
                     </div>
-                    
-                    <Button 
-                      onClick={() => editMode ? handleSaveProfile() : setEditMode(true)}
-                      disabled={loading}
-                      className="aurora-signin-btn font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none flex-shrink-0"
-                      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-                    >
-                      {editMode ? (
-                        <>
-                          <Save className="w-4 h-4 mr-2" />
-                          Save Profile
-                        </>
-                      ) : (
-                        <>
-                          <Edit3 className="w-4 h-4 mr-2" />
-                          Edit Profile
-                        </>
-                      )}
-                    </Button>
                   </div>
 
                   {editMode && (
@@ -686,7 +676,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <div className="text-center">
                           <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                           <p className="text-sm text-muted-foreground">No video uploaded</p>
-                          <Button size="sm" variant="outline" className="mt-2 hover:bg-[#ff7300] hover:text-white">
+                          <Button size="sm" variant="outline" className="mt-2 font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}>
                             <Camera className="w-4 h-4 mr-2" />
                             Record/Upload
                           </Button>
@@ -700,7 +690,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <div className="text-center">
                           <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                           <p className="text-sm text-muted-foreground">No video uploaded</p>
-                          <Button size="sm" variant="outline" className="mt-2 hover:bg-[#ff7300] hover:text-white">
+                          <Button size="sm" variant="outline" className="mt-2 font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}>
                             <Camera className="w-4 h-4 mr-2" />
                             Record/Upload
                           </Button>
@@ -722,43 +712,29 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="text-center p-4 bg-gradient-to-br from-[#ff7300]/10 via-[#ff477e]/15 to-[#017ed5]/10 rounded-lg border border-[#ff7300]/20">
-                      <div className="text-2xl font-bold text-[#ff7300]">4.8</div>
-                      <div className="text-sm text-[#ff7300]/80 flex items-center justify-center gap-1">
+                      <div className="text-2xl font-bold text-white">4.8</div>
+                      <div className="text-sm text-white/80 flex items-center justify-center gap-1">
                         <Star className="w-3 h-3" />
                         Profile Rating
                       </div>
                     </div>
                     <div className="text-center p-4 bg-gradient-to-br from-[#017ed5]/10 via-[#b53dff]/15 to-[#8d00c4]/10 rounded-lg border border-[#017ed5]/20">
-                      <div className="text-2xl font-bold text-[#017ed5]">73%</div>
-                      <div className="text-sm text-[#017ed5]/80 flex items-center justify-center gap-1">
+                      <div className="text-2xl font-bold text-white">73%</div>
+                      <div className="text-sm text-white/80 flex items-center justify-center gap-1">
                         <TrendingUp className="w-3 h-3" />
                         Match Rate
                       </div>
                     </div>
                   </div>
                   
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span>Profile Completeness</span>
-                      <span className="font-medium">{calculateProfileCompleteness()}%</span>
-                    </div>
-                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
-                      <div
-                        className="h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
-                        style={{
-                          width: `${calculateProfileCompleteness()}%`,
-                          background: 'linear-gradient(90deg, #ff7300 0%, #ff477e 50%, #017ed5 100%)'
-                        }}
-                      />
-                    </div>
-                  </div>
+
                   
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2 w-full">
-                    <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto hover:bg-[#ff7300] hover:text-white">
+                    <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}>
                       <Download className="w-4 h-4" />
                       Export Data
                     </Button>
-                    <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto hover:bg-[#ff7300] hover:text-white">
+                    <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}>
                       <Share2 className="w-4 h-4" />
                       Share Profile
                     </Button>
@@ -916,7 +892,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         
                         <div className="text-right">
                           {!tier.current && (
-                            <Button variant="outline" size="sm" className="hover:bg-[#ff7300] hover:text-white">
+                            <Button variant="outline" size="sm" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}>
                               <Zap className="w-4 h-4 mr-2" />
                               Upgrade
                             </Button>
@@ -1031,7 +1007,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     <h4 className="font-medium">Danger Zone</h4>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
-                        <Button variant="destructive" className="w-full">
+                        <Button variant="destructive" className="w-full font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-red-600/80 hover:backdrop-blur-sm focus:bg-red-600/80 focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(239, 68, 68, 0.8)', backdropFilter: 'blur(12px)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
                           <Trash2 className="w-4 h-4 mr-2" />
                           Delete Account
                         </Button>
