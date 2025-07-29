@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { User } from 'lucide-react';
-import AuroraBackground from '../ui/aurora-background';
+import AuroraBackground, { AuroraBackgroundAuth } from '../ui/aurora-background';
 
 // NativeLoginForm component (to be implemented below main component)
 function NativeLoginForm({ setError, setLoadingProvider }: { setError: (e: string | null) => void, setLoadingProvider: (p: string | null) => void }) {
@@ -138,7 +138,7 @@ export function AuthPage() {
   };
 
   return (
-    <AuroraBackground>
+    <AuroraBackgroundAuth>
       <div className="flex flex-col items-center w-full max-w-lg px-4 justify-center min-h-screen">
         <div className="flex flex-col items-center group transition-all duration-300 gap-y-5">
           <img
@@ -309,6 +309,6 @@ export function AuthPage() {
           animation: shimmer 2s linear 1;
         }
       `}</style>
-    </AuroraBackground>
+    </AuroraBackgroundAuth>
   );
 }
