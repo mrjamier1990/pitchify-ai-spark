@@ -114,11 +114,49 @@ select option:checked, select option:active, select option:hover {
 }
 
 /* Additional override for any remaining blue highlights in dropdowns */
-[data-radix-popper-content-wrapper] [role="option"]:hover, 
-[data-radix-popper-content-wrapper] [role="option"]:focus, 
+[data-radix-popper-content-wrapper] [role="option"]:hover,
+[data-radix-popper-content-wrapper] [role="option"]:focus,
 [data-radix-popper-content-wrapper] [role="option"][data-highlighted] {
   background: linear-gradient(90deg, #ff7300 0%, #ff477e 100%) !important;
   color: #fff !important;
+}
+
+/* Custom funding slider styling */
+.funding-slider [data-radix-slider-track] {
+  background: rgba(255,255,255,0.2) !important;
+  height: 12px !important;
+}
+
+.funding-slider [data-radix-slider-range] {
+  background: linear-gradient(90deg, #ff7300, #ff477e, #017ed5) !important;
+  height: 12px !important;
+}
+
+.funding-slider [data-radix-slider-thumb] {
+  background: white !important;
+  border: 2px solid #ff7300 !important;
+  height: 24px !important;
+  width: 24px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Alternative selectors for slider styling */
+.funding-slider .bg-secondary {
+  background: rgba(255,255,255,0.2) !important;
+  height: 12px !important;
+}
+
+.funding-slider .bg-primary {
+  background: linear-gradient(90deg, #ff7300, #ff477e, #017ed5) !important;
+  height: 12px !important;
+}
+
+.funding-slider .bg-background {
+  background: white !important;
+  border: 2px solid #ff7300 !important;
+  height: 24px !important;
+  width: 24px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
 }
 
 @keyframes accordion-down {

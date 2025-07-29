@@ -419,7 +419,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         return (
           <div className="text-center space-y-6 animate-fade-in">
             <div className="flex justify-center">
-              <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
+                <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
             </div>
             <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
@@ -672,11 +672,11 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                   max={5000000}
                   min={5000}
                   step={10000}
-                  className="w-full"
+                  className="w-full funding-slider"
                 />
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-[#ff7300]">
+                <div className="text-3xl font-bold text-white">
                   {formatFundingAmount(parseInt(formData.funding_amount_seeking) || 100000)}
                 </div>
                 <p className="text-white/80">Funding goal</p>
@@ -781,26 +781,26 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         );
 
       case 'video_pitch':
-        return (
-          <div className="space-y-6 animate-slide-in-right">
-            <div className="text-center space-y-2">
+          return (
+            <div className="space-y-6 animate-slide-in-right">
+              <div className="text-center space-y-2">
               <h2 className="text-3xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>Upload a short video pitch</h2>
               <p className="text-white/60">30–60s, optional but boosts visibility</p>
+              </div>
+              <FileUpload
+                accept=".mp4,.mov,.avi"
+                onUpload={(files) => {
+                  if (!toastOpen && files.length > 0) {
+                    handleFileUpload(files, 'video_pitch_url');
+                  }
+                }}
+                placeholder="Upload video pitch"
+                description="MP4, MOV, or AVI formats, max 60 seconds"
+                maxSize={100}
+                disabled={toastOpen}
+              />
             </div>
-            <FileUpload
-              accept=".mp4,.mov,.avi"
-              onUpload={(files) => {
-                if (!toastOpen && files.length > 0) {
-                  handleFileUpload(files, 'video_pitch_url');
-                }
-              }}
-              placeholder="Upload video pitch"
-              description="MP4, MOV, or AVI formats, max 60 seconds"
-              maxSize={100}
-              disabled={toastOpen}
-            />
-          </div>
-        );
+          );
 
       case 'investor_type':
         return (
@@ -841,25 +841,39 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             <div className="grid gap-4">
               <Card
                 className={`cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none ${
-                  formData.investment_status === 'actively_investing' ? 'border-[#ff7300] shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
+                  formData.investment_status === 'actively_investing' ? 'shadow-lg' : 'border-white/20 hover:border-white/40 hover:shadow-md'
                 }`}
-                style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}
+                style={{ 
+                  background: formData.investment_status === 'actively_investing' ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.10)', 
+                  backdropFilter: formData.investment_status === 'actively_investing' ? 'blur(20px)' : 'blur(12px)',
+                  border: formData.investment_status === 'actively_investing' ? '2px solid transparent' : '2px solid rgba(255,255,255,0.2)',
+                  backgroundImage: formData.investment_status === 'actively_investing' ? 'linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), linear-gradient(90deg, #ff7300, #ff477e)' : 'none',
+                  backgroundOrigin: formData.investment_status === 'actively_investing' ? 'border-box' : 'initial',
+                  backgroundClip: formData.investment_status === 'actively_investing' ? 'padding-box, border-box' : 'initial'
+                }}
                 onClick={() => setFormData(prev => ({ ...prev, investment_status: 'actively_investing' }))}
               >
                 <CardContent className="p-6 text-center">
-                  <CheckCircle className="h-8 w-8 text-[#ff7300] mx-auto mb-2" />
+                  <CheckCircle className="h-8 w-8 text-white mx-auto mb-2" />
                   <p className="font-medium text-lg text-white">Yes, actively investing</p>
                 </CardContent>
               </Card>
               <Card
                 className={`cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none ${
-                  formData.investment_status === 'just_exploring' ? 'border-[#ff7300] shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
+                  formData.investment_status === 'just_exploring' ? 'shadow-lg' : 'border-white/20 hover:border-white/40 hover:shadow-md'
                 }`}
-                style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}
+                style={{ 
+                  background: formData.investment_status === 'just_exploring' ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.10)', 
+                  backdropFilter: formData.investment_status === 'just_exploring' ? 'blur(20px)' : 'blur(12px)',
+                  border: formData.investment_status === 'just_exploring' ? '2px solid transparent' : '2px solid rgba(255,255,255,0.2)',
+                  backgroundImage: formData.investment_status === 'just_exploring' ? 'linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), linear-gradient(90deg, #ff7300, #ff477e)' : 'none',
+                  backgroundOrigin: formData.investment_status === 'just_exploring' ? 'border-box' : 'initial',
+                  backgroundClip: formData.investment_status === 'just_exploring' ? 'padding-box, border-box' : 'initial'
+                }}
                 onClick={() => setFormData(prev => ({ ...prev, investment_status: 'just_exploring' }))}
               >
                 <CardContent className="p-6 text-center">
-                  <Target className="h-8 w-8 text-[#ff7300] mx-auto mb-2" />
+                  <Target className="h-8 w-8 text-white mx-auto mb-2" />
                   <p className="font-medium text-lg text-white">Just exploring</p>
                 </CardContent>
               </Card>
@@ -878,21 +892,21 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 <Slider
                   value={[parseInt(formData.investor_check_size) || 50000]}
                   onValueChange={(value) => setFormData(prev => ({ ...prev, investor_check_size: value[0].toString() }))}
-                  max={1000000}
+                  max={5000000}
                   min={5000}
                   step={5000}
-                  className="w-full"
+                  className="w-full funding-slider"
                 />
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-[#ff7300]">
+                <div className="text-3xl font-bold text-white">
                   {formatFundingAmount(parseInt(formData.investor_check_size) || 50000)}
                 </div>
                 <p className="text-white/80">Typical investment amount</p>
               </div>
               <div className="flex justify-between text-sm text-white/80 px-4">
                 <span>$5K</span>
-                <span>$1M+</span>
+                <span>$5M+</span>
               </div>
             </div>
           </div>
@@ -948,7 +962,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 {formData.preferred_sectors.map((sector) => {
                   const ind = industries.find((i) => i.value === sector);
                   return (
-                    <span key={sector} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium">
+                    <span key={sector} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-white text-sm font-medium">
                       {ind?.icon}
                       <span className="ml-1">{ind?.label}</span>
                     </span>
@@ -1008,7 +1022,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 {formData.preferred_stages.map((stage) => {
                   const st = investmentStages.find((i) => i.value === stage);
                   return (
-                    <span key={stage} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium">
+                    <span key={stage} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-white text-sm font-medium">
                       <span className="ml-1">{st?.label}</span>
                     </span>
                   );
@@ -1065,7 +1079,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             {formData.regional_focus.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-2 justify-center">
                 {formData.regional_focus.map((country) => (
-                  <span key={country} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium">
+                  <span key={country} className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-white text-sm font-medium">
                     {country}
                   </span>
                 ))}
@@ -1080,50 +1094,31 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             <div className="text-center space-y-2">
               <h2 className="text-3xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>What key problems are you hoping PitchFlic can help solve for you?</h2>
             </div>
-            <Card 
-              className="cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none border-white shadow-lg"
-              style={{ 
-                background: 'rgba(255,255,255,0.25)', 
-                backdropFilter: 'blur(20px)' 
-              }}
-            >
-              <CardContent className="p-6">
-                <Textarea
-                  placeholder="Describe the main challenges or problems you want to address with PitchFlic..."
-                  value={formData.why_good_fit}
-                  onChange={(e) => setFormData(prev => ({ ...prev, why_good_fit: e.target.value }))}
-                  className="text-lg p-6 border focus:border-white transition-colors rounded-2xl min-h-[120px] bg-transparent border-transparent text-white placeholder:text-white/60"
-                />
-                <p className="text-sm text-white/60 text-right mt-2">
-                  Please use a minimum of 25 words. Current word count: {formData.why_good_fit.trim().split(/\s+/).filter(Boolean).length}
-                </p>
-              </CardContent>
-            </Card>
+            <Textarea
+              placeholder="Describe the main challenges or problems you want to address with PitchFlic..."
+              value={formData.why_good_fit}
+              onChange={(e) => setFormData(prev => ({ ...prev, why_good_fit: e.target.value }))}
+              className="text-lg p-6 border focus:border-white transition-colors rounded-2xl min-h-[120px] border-white/20 text-white placeholder:text-white/60"
+              style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}
+            />
+            <p className="text-sm text-white/60 text-right mt-2">
+              Please use a minimum of 25 words. Current word count: {formData.why_good_fit.trim().split(/\s+/).filter(Boolean).length}
+            </p>
           </div>
         );
 
       case 'complete':
         return (
-          <div className="space-y-6 animate-fade-in">
-            <Card 
-              className="cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none border-white shadow-lg"
-              style={{ 
-                background: 'rgba(255,255,255,0.25)', 
-                backdropFilter: 'blur(20px)' 
-              }}
-            >
-              <CardContent className="text-center space-y-6 p-8">
-                <div className="space-y-4">
-                  <div className="flex justify-center">
-                    <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
-                  </div>
-                  <h1 className="text-4xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    That's it — Your profile is being created!
-                  </h1>
-                  <p className="text-xl text-white">Preparing for launch</p>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="text-center space-y-6 animate-fade-in">
+            <div className="flex justify-center">
+                <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
+            </div>
+            <div className="space-y-2">
+              <h1 className="text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
+                That's it — Your profile is being created!
+              </h1>
+              <p className="text-lg text-white/80">Preparing for launch</p>
+            </div>
           </div>
         );
 
@@ -1149,10 +1144,10 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
           <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
             <div
               className="h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
-                              style={{
-                  width: `${((currentStep + 1) / steps.length) * 100}%`,
-                  background: 'linear-gradient(90deg, #ff7300 0%, #ff477e 50%, #017ed5 100%)'
-                }}
+              style={{
+                width: `${((currentStep + 1) / steps.length) * 100}%`,
+                background: 'linear-gradient(90deg, #ff7300 0%, #ff477e 50%, #017ed5 100%)'
+              }}
             />
           </div>
           <div className="mt-2" style={{ height: '20px' }} />

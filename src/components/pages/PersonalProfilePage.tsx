@@ -258,6 +258,52 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
     }
   ];
 
+  const calculateProfileCompleteness = () => {
+    if (!profile) return 0;
+    
+    const requiredFields = [
+      'full_name',
+      'bio',
+      'role',
+      'country',
+      'industry'
+    ];
+    
+    const optionalFields = [
+      'linkedin_url',
+      'calendly_url',
+      'twitter_url',
+      'instagram_url',
+      'facebook_url',
+      'tiktok_url',
+      'investment_range',
+      'funding_stage'
+    ];
+    
+    let completedRequired = 0;
+    let completedOptional = 0;
+    
+    // Check required fields (weighted more heavily)
+    requiredFields.forEach(field => {
+      if (profile[field as keyof typeof profile] && profile[field as keyof typeof profile] !== '') {
+        completedRequired++;
+      }
+    });
+    
+    // Check optional fields
+    optionalFields.forEach(field => {
+      if (profile[field as keyof typeof profile] && profile[field as keyof typeof profile] !== '') {
+        completedOptional++;
+      }
+    });
+    
+    // Calculate percentage: 70% weight for required fields, 30% for optional
+    const requiredPercentage = (completedRequired / requiredFields.length) * 70;
+    const optionalPercentage = (completedOptional / optionalFields.length) * 30;
+    
+    return Math.round(requiredPercentage + optionalPercentage);
+  };
+
   const handleSignOut = async () => {
     await signOut();
   };
@@ -694,9 +740,17 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Profile Completeness</span>
-                      <span className="font-medium">85%</span>
+                      <span className="font-medium">{calculateProfileCompleteness()}%</span>
                     </div>
-                    <Progress value={85} className="h-2" />
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+                      <div
+                        className="h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
+                        style={{
+                          width: `${calculateProfileCompleteness()}%`,
+                          background: 'linear-gradient(90deg, #ff7300 0%, #ff477e 50%, #017ed5 100%)'
+                        }}
+                      />
+                    </div>
                   </div>
                   
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2 w-full">
