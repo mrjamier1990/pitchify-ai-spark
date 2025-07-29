@@ -62,9 +62,8 @@ body {
   transition: box-shadow 0.25s cubic-bezier(0.4,0,0.2,1), border-color 0.2s, transform 0.18s cubic-bezier(0.4,0,0.2,1);
 }
 .card:hover, .Card:hover, .bg-card:hover {
-  transform: scale(1.04);
   box-shadow: 0 8px 32px 0 rgba(10,26,47,0.18);
-  transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
+  transition: box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
 }
 
 .button, .Button, .btn, button {
@@ -98,6 +97,24 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   border-color: hsl(var(--primary));
   outline: none;
+}
+
+/* Remove blue highlight from Radix UI/Headless UI/Select dropdowns */
+[data-highlighted], [data-state="active"], [aria-selected="true"] {
+  background: linear-gradient(90deg, #ff7300 0%, #ff477e 100%) !important;
+  color: #fff !important;
+}
+
+/* Remove blue highlight from native option elements */
+option:checked, option:active, option:hover {
+  background: linear-gradient(90deg, #ff7300 0%, #ff477e 100%) !important;
+  color: #fff !important;
+}
+
+/* Additional override for any remaining blue highlights in dropdowns */
+[role="option"]:hover, [role="option"]:focus, [role="option"][data-highlighted] {
+  background: linear-gradient(90deg, #ff7300 0%, #ff477e 100%) !important;
+  color: #fff !important;
 }
 
 @keyframes accordion-down {

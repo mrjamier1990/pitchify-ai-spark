@@ -118,7 +118,7 @@ export function FileUpload({
           <p className="text-xs text-muted-foreground mb-4">{description}</p>
         )}
         <Button
-          className="group font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff5757cc] hover:backdrop-blur-sm focus:bg-[#ff5757cc] focus:backdrop-blur-sm"
+          className="group font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm"
           style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           onClick={e => { if (disabled) return; e.stopPropagation(); openFileDialog(); }}
           disabled={disabled}
@@ -158,7 +158,7 @@ export function FileUpload({
               <Button
                 variant="outline"
                 size="sm"
-                className="rounded-full border-white text-white hover:bg-[#ff5757cc] hover:text-white transition-all duration-300"
+                className="rounded-full border-white text-white hover:bg-[#ff7300cc] hover:text-white transition-all duration-300"
                 onClick={() => removeFile(index)}
               >
                 <X className="h-4 w-4" />
