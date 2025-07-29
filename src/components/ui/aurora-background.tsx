@@ -62,7 +62,7 @@ const AuroraBackground: React.FC<{ children?: React.ReactNode }> = ({ children }
 const AuroraBackgroundAuth: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
     <div
-      className="aurora-bg"
+      className="aurora-bg-auth"
       style={{
         minHeight: "100vh",
         minWidth: "100vw",
