@@ -504,17 +504,21 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             <div className="grid gap-4">
               <Card 
                 className={`cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none ${
-                  formData.role === 'entrepreneur' ? 'border-white shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
+                  formData.role === 'entrepreneur' ? 'shadow-lg' : 'border-white/20 hover:border-white/40 hover:shadow-md'
                 }`}
                 style={{ 
                   background: formData.role === 'entrepreneur' ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.10)', 
-                  backdropFilter: formData.role === 'entrepreneur' ? 'blur(20px)' : 'blur(12px)' 
+                  backdropFilter: formData.role === 'entrepreneur' ? 'blur(20px)' : 'blur(12px)',
+                  border: formData.role === 'entrepreneur' ? '2px solid transparent' : '2px solid rgba(255,255,255,0.2)',
+                  backgroundImage: formData.role === 'entrepreneur' ? 'linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), linear-gradient(90deg, #ff7300, #ff477e)' : 'none',
+                  backgroundOrigin: formData.role === 'entrepreneur' ? 'border-box' : 'initial',
+                  backgroundClip: formData.role === 'entrepreneur' ? 'padding-box, border-box' : 'initial'
                 }}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'entrepreneur' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
-                  <div className={`p-3 rounded-full ${formData.role === 'entrepreneur' ? 'bg-[#ff7300]/20' : 'bg-white/20'}`}>
-                    <Rocket className={`h-8 w-8 ${formData.role === 'entrepreneur' ? 'text-[#ff7300]' : 'text-white'}`} />
+                  <div className="p-3">
+                    <Rocket className="h-8 w-8 text-white" />
                   </div>
                   <div className="text-left">
                     <h3 className="font-semibold text-xl text-white" style={{ fontFamily: 'Inter, sans-serif' }}>I'm a Founder</h3>
@@ -525,17 +529,21 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
               
               <Card 
                 className={`cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none ${
-                  formData.role === 'investor' ? 'border-white shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
+                  formData.role === 'investor' ? 'shadow-lg' : 'border-white/20 hover:border-white/40 hover:shadow-md'
                 }`}
                 style={{ 
                   background: formData.role === 'investor' ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.10)', 
-                  backdropFilter: formData.role === 'investor' ? 'blur(20px)' : 'blur(12px)' 
+                  backdropFilter: formData.role === 'investor' ? 'blur(20px)' : 'blur(12px)',
+                  border: formData.role === 'investor' ? '2px solid transparent' : '2px solid rgba(255,255,255,0.2)',
+                  backgroundImage: formData.role === 'investor' ? 'linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), linear-gradient(90deg, #ff7300, #ff477e)' : 'none',
+                  backgroundOrigin: formData.role === 'investor' ? 'border-box' : 'initial',
+                  backgroundClip: formData.role === 'investor' ? 'padding-box, border-box' : 'initial'
                 }}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'investor' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
-                  <div className={`p-3 rounded-full ${formData.role === 'investor' ? 'bg-[#ff7300]/20' : 'bg-white/20'}`}>
-                    <DollarSign className={`h-8 w-8 ${formData.role === 'investor' ? 'text-[#ff7300]' : 'text-white'}`} />
+                  <div className="p-3">
+                    <DollarSign className="h-8 w-8 text-white" />
                   </div>
                   <div className="text-left">
                     <h3 className="font-semibold text-xl text-white" style={{ fontFamily: 'Inter, sans-serif' }}>I'm an Investor</h3>
@@ -546,17 +554,21 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
               
               <Card 
                 className={`cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none ${
-                  formData.role === 'both' ? 'border-white shadow-lg' : 'border-border/50 hover:border-white/40 hover:shadow-md'
+                  formData.role === 'both' ? 'shadow-lg' : 'border-white/20 hover:border-white/40 hover:shadow-md'
                 }`}
                 style={{ 
                   background: formData.role === 'both' ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.10)', 
-                  backdropFilter: formData.role === 'both' ? 'blur(20px)' : 'blur(12px)' 
+                  backdropFilter: formData.role === 'both' ? 'blur(20px)' : 'blur(12px)',
+                  border: formData.role === 'both' ? '2px solid transparent' : '2px solid rgba(255,255,255,0.2)',
+                  backgroundImage: formData.role === 'both' ? 'linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), linear-gradient(90deg, #ff7300, #ff477e)' : 'none',
+                  backgroundOrigin: formData.role === 'both' ? 'border-box' : 'initial',
+                  backgroundClip: formData.role === 'both' ? 'padding-box, border-box' : 'initial'
                 }}
                 onClick={() => setFormData(prev => ({ ...prev, role: 'both' }))}
               >
                 <CardContent className="flex items-center space-x-4 p-6">
-                  <div className={`p-3 rounded-full ${formData.role === 'both' ? 'bg-[#ff7300]/20' : 'bg-white/20'}`}>
-                    <Users className={`h-8 w-8 ${formData.role === 'both' ? 'text-[#ff7300]' : 'text-white'}`} />
+                  <div className="p-3">
+                    <Users className="h-8 w-8 text-white" />
                   </div>
                   <div className="text-left">
                     <h3 className="font-semibold text-xl text-white" style={{ fontFamily: 'Inter, sans-serif' }}>I'm Both</h3>
@@ -769,29 +781,26 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
         );
 
       case 'video_pitch':
-        if (formData.role === 'entrepreneur') {
-          return (
-            <div className="space-y-6 animate-slide-in-right">
-              <div className="text-center space-y-2">
-                <h2 className="text-3xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>Upload a short video pitch</h2>
-                <p className="text-white/60">30–60s, optional but boosts visibility</p>
-              </div>
-              <FileUpload
-                accept=".mp4,.mov,.avi"
-                onUpload={(files) => {
-                  if (!toastOpen && files.length > 0) {
-                    handleFileUpload(files, 'video_pitch_url');
-                  }
-                }}
-                placeholder="Upload video pitch"
-                description="MP4, MOV, or AVI formats, max 60 seconds"
-                maxSize={100}
-                disabled={toastOpen}
-              />
+        return (
+          <div className="space-y-6 animate-slide-in-right">
+            <div className="text-center space-y-2">
+              <h2 className="text-3xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>Upload a short video pitch</h2>
+              <p className="text-white/60">30–60s, optional but boosts visibility</p>
             </div>
-          );
-        }
-        // ...existing code for other roles...
+            <FileUpload
+              accept=".mp4,.mov,.avi"
+              onUpload={(files) => {
+                if (!toastOpen && files.length > 0) {
+                  handleFileUpload(files, 'video_pitch_url');
+                }
+              }}
+              placeholder="Upload video pitch"
+              description="MP4, MOV, or AVI formats, max 60 seconds"
+              maxSize={100}
+              disabled={toastOpen}
+            />
+          </div>
+        );
 
       case 'investor_type':
         return (
@@ -1071,30 +1080,50 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
             <div className="text-center space-y-2">
               <h2 className="text-3xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>What key problems are you hoping PitchFlic can help solve for you?</h2>
             </div>
-            <Textarea
-              placeholder="Describe the main challenges or problems you want to address with PitchFlic..."
-              value={formData.why_good_fit}
-              onChange={(e) => setFormData(prev => ({ ...prev, why_good_fit: e.target.value }))}
-              className="text-lg p-6 border focus:border-white transition-colors rounded-2xl min-h-[120px] bg-white/10 backdrop-blur-xl border-white/20 text-white placeholder:text-white/60"
-            />
-            <p className="text-sm text-white/60 text-right">
-              Please use a minimum of 25 words. Current word count: {formData.why_good_fit.trim().split(/\s+/).filter(Boolean).length}
-            </p>
+            <Card 
+              className="cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none border-white shadow-lg"
+              style={{ 
+                background: 'rgba(255,255,255,0.25)', 
+                backdropFilter: 'blur(20px)' 
+              }}
+            >
+              <CardContent className="p-6">
+                <Textarea
+                  placeholder="Describe the main challenges or problems you want to address with PitchFlic..."
+                  value={formData.why_good_fit}
+                  onChange={(e) => setFormData(prev => ({ ...prev, why_good_fit: e.target.value }))}
+                  className="text-lg p-6 border focus:border-white transition-colors rounded-2xl min-h-[120px] bg-transparent border-transparent text-white placeholder:text-white/60"
+                />
+                <p className="text-sm text-white/60 text-right mt-2">
+                  Please use a minimum of 25 words. Current word count: {formData.why_good_fit.trim().split(/\s+/).filter(Boolean).length}
+                </p>
+              </CardContent>
+            </Card>
           </div>
         );
 
       case 'complete':
         return (
-          <div className="text-center space-y-6 animate-fade-in">
-            <div className="space-y-4">
-              <div className="flex justify-center">
-                <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
-              </div>
-              <h1 className="text-4xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
-                That's it — Your profile is being created!
-              </h1>
-              <p className="text-xl text-white">Preparing for launch</p>
-            </div>
+          <div className="space-y-6 animate-fade-in">
+            <Card 
+              className="cursor-pointer border-2 transition-all focus:ring-0 focus:outline-none border-white shadow-lg"
+              style={{ 
+                background: 'rgba(255,255,255,0.25)', 
+                backdropFilter: 'blur(20px)' 
+              }}
+            >
+              <CardContent className="text-center space-y-6 p-8">
+                <div className="space-y-4">
+                  <div className="flex justify-center">
+                    <img src="/pitchflic-logo.png" alt="PitchFlic Logo" width={64} height={64} style={{ display: 'block', objectFit: 'contain' }} />
+                  </div>
+                  <h1 className="text-4xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    That's it — Your profile is being created!
+                  </h1>
+                  <p className="text-xl text-white">Preparing for launch</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         );
 

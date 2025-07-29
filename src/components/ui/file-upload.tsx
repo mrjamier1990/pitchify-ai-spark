@@ -118,8 +118,8 @@ export function FileUpload({
           <p className="text-xs text-muted-foreground mb-4">{description}</p>
         )}
         <Button
-          className="group font-light text-base rounded-full px-4 py-2 text-white bg-transparent transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm"
-          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+          className="group font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+          style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
           onClick={e => { if (disabled) return; e.stopPropagation(); openFileDialog(); }}
           disabled={disabled}
         >
@@ -144,7 +144,8 @@ export function FileUpload({
           {uploadedFiles.map((file, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-3 bg-muted rounded-lg"
+              className="flex items-center justify-between p-3 rounded-lg"
+              style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
             >
               <div className="flex items-center gap-3">
                 <File className="h-4 w-4 text-muted-foreground" />
@@ -158,7 +159,8 @@ export function FileUpload({
               <Button
                 variant="outline"
                 size="sm"
-                className="rounded-full border-white text-white hover:bg-[#ff7300cc] hover:text-white transition-all duration-300"
+                className="rounded-full text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
+                style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}
                 onClick={() => removeFile(index)}
               >
                 <X className="h-4 w-4" />
