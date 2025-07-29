@@ -36,7 +36,7 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
       {/* Profile Content */}
         <div className="flex-1 overflow-y-auto p-4 pt-8 space-y-8 max-w-4xl mx-auto pb-8 w-full min-w-0">
         {/* Profile Header */}
-        <Card className="glass-card">
+        <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
           <div className="text-center">
             <div className="relative w-24 h-24 mx-auto mb-4">
               <div className="w-full h-full rounded-full bg-muted overflow-hidden">
@@ -70,7 +70,7 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
         </Card>
 
         {/* Videos Section */}
-        <Card className="glass-card">
+        <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
           <h3 className="text-lg font-semibold text-white mb-4">My Videos</h3>
           
           <div className="space-y-4">
@@ -112,7 +112,7 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
         </Card>
 
         {/* Links & Documents */}
-        <Card className="glass-card">
+        <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
           <h3 className="text-lg font-semibold text-white mb-4">Links & Documents</h3>
           
           <div className="space-y-3">
@@ -148,7 +148,7 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
         </Card>
 
         {/* Stats */}
-        <Card className="glass-card">
+        <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
           <h3 className="text-lg font-semibold text-white mb-4">Profile Stats</h3>
           
           <div className="grid grid-cols-3 gap-4 text-center">
