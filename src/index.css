@@ -188,22 +188,23 @@ select option:checked, select option:active, select option:hover {
   background:
     radial-gradient(ellipse 80% 60% at 20% 30%, #ff7300aa 0%, transparent 80%), /* vibrant orange */
     radial-gradient(ellipse 90% 70% at 60% 40%, #017ed566 0%, transparent 80%), /* blue */
-    radial-gradient(ellipse 70% 50% at 40% 70%, #ff4444aa 0%, transparent 80%); /* aurora red */
+    radial-gradient(ellipse 70% 50% at 40% 70%, #ff4444aa 0%, transparent 80%), /* aurora red */
+    radial-gradient(ellipse 65% 45% at 80% 20%, #ff0066aa 0%, transparent 80%); /* electric red */
   background-size: 200% 200%;
-  background-position: 0% 0%, 50% 50%, 40% 70%;
+  background-position: 0% 0%, 50% 50%, 40% 70%, 80% 20%;
   animation: auroraMove 16s linear infinite alternate;
   transition: background 0.5s;
 }
 
 @keyframes auroraMove {
   0% {
-    background-position: 0% 0%, 50% 50%, 40% 70%;
+    background-position: 0% 0%, 50% 50%, 40% 70%, 80% 20%;
   }
   50% {
-    background-position: 100% 50%, 60% 40%, 60% 30%;
+    background-position: 100% 50%, 60% 40%, 60% 30%, 20% 80%;
   }
   100% {
-    background-position: 0% 100%, 40% 60%, 20% 80%;
+    background-position: 0% 100%, 40% 60%, 20% 80%, 60% 40%;
   }
 }
 
