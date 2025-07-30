@@ -935,7 +935,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                               </Badge>
                             )}
                           </div>
-                          <p className="text-2xl font-bold text-[#ff7300] mt-1">{tier.price}</p>
+                          <p className="text-2xl font-bold text-white mt-1">{tier.price}</p>
                           <p className="text-sm text-muted-foreground">{tier.superlikes} SuperLikes/month</p>
                         </div>
                         
