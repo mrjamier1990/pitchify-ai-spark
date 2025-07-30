@@ -380,21 +380,19 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
         <div className="p-4 pt-8 space-y-8 max-w-4xl mx-auto pb-8 w-full min-w-0">
-          <Tabs defaultValue="profile" className="w-full min-w-0">
+          <Tabs defaultValue="profile" className="w-full md:w-[800px] md:mx-auto">
             <TabsList className="grid w-full grid-cols-4 gap-2 bg-transparent p-0 mb-8">
-              <TabsTrigger value="profile" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Profile</TabsTrigger>
+                            <TabsTrigger value="profile" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Profile</TabsTrigger>
               <TabsTrigger value="filters" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Filters</TabsTrigger>
-              <TabsTrigger value="subscription" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Premium</TabsTrigger>
+              <TabsTrigger value="subscription" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Plans</TabsTrigger>
               <TabsTrigger value="settings" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Settings</TabsTrigger>
             </TabsList>
 
             <TabsContent value="profile" className="space-y-6 w-full min-w-0">
-              {/* Profile Header */}
-              <Card className="border-border/50 backdrop-blur-sm relative" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <div className="w-full">
+                {/* Profile Header */}
+                <Card className="border-border/50 backdrop-blur-sm relative w-full" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', width: '100%', maxWidth: '100%' }}>
                 <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
-                  <span className="capitalize bg-white/20 px-2 py-1 rounded-full text-white border border-white/30 text-sm">
-                    {profile?.role || 'entrepreneur'}
-                  </span>
                   <Button 
                     onClick={() => editMode ? handleSaveProfile() : setEditMode(true)}
                     disabled={loading}
@@ -408,37 +406,70 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     )}
                   </Button>
                 </div>
-                <CardContent className="p-4 md:p-6">
-                  <div className="flex items-start space-x-4 flex-1 min-w-0">
-                    <div className="relative flex-shrink-0">
-                      <Avatar className="w-16 h-16 md:w-20 md:h-20 border-2 border-primary/20">
-                        <AvatarImage src={profile?.profile_image_url || "/placeholder.svg"} alt="Profile" />
-                        <AvatarFallback>
-                          {profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]).join('') : user?.email?.[0].toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <Badge 
-                        variant="secondary" 
-                        className="absolute -bottom-1 -right-1 bg-gradient-to-r from-[#ff7300] via-[#ff477e] to-[#017ed5] text-white px-2 py-1 text-xs"
-                      >
-                        <Crown className="w-3 h-3 mr-1" />
-                        {profile?.subscription_tier || 'Free'}
-                      </Badge>
+                <CardContent className="p-3">
+                  <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-4 flex-1 min-w-0 w-full">
+                    {/* Profile info card - full width on mobile, left side on desktop */}
+                    <div 
+                      className="w-full md:w-36 bg-gradient-to-b from-white/10 to-white/5 rounded-lg p-3 border border-white/20 backdrop-blur-sm relative flex-shrink-0"
+                      style={{
+                        background: `
+                          linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.05)),
+                          repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)
+                        `
+                      }}
+                    >
+                      {/* Profile picture - positioned half in/out on mobile */}
+                      <div className="relative flex justify-center">
+                        <div className="relative -mt-10 md:mt-0">
+                          <Avatar className="w-24 h-24 md:w-20 md:h-20 border border-transparent bg-gradient-to-r from-[#ff7300] via-[#ff477e] to-[#017ed5] p-[1px] rounded-full">
+                            <div className="w-full h-full rounded-full overflow-hidden">
+                              <AvatarImage src={profile?.profile_image_url || "/placeholder.svg"} alt="Profile" />
+                              <AvatarFallback className="bg-background">
+                                {profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]).join('') : user?.email?.[0].toUpperCase()}
+                              </AvatarFallback>
+                            </div>
+                          </Avatar>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col space-y-2 mt-4 md:mt-0 w-full">
+                        {/* Name */}
+                        <div className="w-full">
+                          <h2 className="text-lg md:text-base font-bold text-white break-words w-full text-center">
+                            {profile?.full_name || 'Complete your profile'}
+                          </h2>
+                        </div>
+                        
+                        {/* Entrepreneur badge */}
+                        <div className="flex justify-center">
+                          <span className="capitalize bg-white/20 px-2 py-0.5 rounded-full text-white border border-white/30 text-xs">
+                            {profile?.role || 'entrepreneur'}
+                          </span>
+                        </div>
+                        
+                        {/* Location */}
+                        <div className="flex justify-center">
+                          <div className="flex items-center gap-1 text-xs text-white/80">
+                            <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <span className="text-xs">{profile?.country || 'Location not set'}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className="flex-1 min-w-0 space-y-2">
-                      <div>
-                        <h2 className="text-xl md:text-2xl font-bold truncate">{profile?.full_name || 'Complete your profile'}</h2>
-                                                  <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                            <span className="flex items-center gap-1">
-                              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                              </svg>
-                              {profile?.country || 'Location not set'}
-                            </span>
-                          </div>
-                      </div>
-                      <div className="bg-muted/30 rounded-lg p-3">
+                    {/* Bio content - full width on mobile, right side on desktop */}
+                    <div className="w-full md:flex-1 min-w-0 space-y-3 flex-1">
+                      <div 
+                        className="rounded-lg p-3 border border-white/20 backdrop-blur-sm"
+                        style={{
+                          background: `
+                            linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.05)),
+                            repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)
+                          `
+                        }}
+                      >
                         <p className="text-sm text-foreground/80 leading-relaxed">
                           {profile?.bio || 'Add a bio to tell others about yourself and what you\'re looking for. This helps potential matches understand your goals and interests.'}
                         </p>
@@ -625,7 +656,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Profile Stats */}
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm w-full" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardContent className="p-6">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full overflow-hidden">
                     <div className="text-center p-3 bg-gradient-to-br from-[#ff7300]/20 via-[#ff477e]/15 to-[#017ed5]/10 backdrop-blur-xl rounded-lg border border-[#ff7300]/20">
@@ -661,7 +692,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Videos Section */}
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm w-full" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Video className="w-5 h-5 mr-2 text-primary" />
@@ -672,7 +703,15 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label>About Me Video</Label>
-                      <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-dashed border-border">
+                      <div 
+                        className="aspect-video rounded-lg flex items-center justify-center border border-white/20 backdrop-blur-sm"
+                        style={{
+                          background: `
+                            linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.05)),
+                            repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)
+                          `
+                        }}
+                      >
                         <div className="text-center">
                           <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                           <p className="text-sm text-muted-foreground">No video uploaded</p>
@@ -686,7 +725,15 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     
                     <div className="space-y-2">
                       <Label>Pitch Video</Label>
-                      <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-dashed border-border">
+                      <div 
+                        className="aspect-video rounded-lg flex items-center justify-center border border-white/20 backdrop-blur-sm"
+                        style={{
+                          background: `
+                            linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.05)),
+                            repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)
+                          `
+                        }}
+                      >
                         <div className="text-center">
                           <Play className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                           <p className="text-sm text-muted-foreground">No video uploaded</p>
@@ -702,7 +749,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* Stats */}
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm w-full" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <TrendingUp className="w-5 h-5 mr-2 text-primary" />
@@ -741,10 +788,16 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                   </div>
                 </CardContent>
               </Card>
+              </div>
             </TabsContent>
 
-            <TabsContent value="filters" className="space-y-6">
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+            <TabsContent value="filters" className="space-y-6 w-full min-w-0">
+                              <Card className="border-border/50 backdrop-blur-sm relative w-full" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', width: '100%', maxWidth: '100%' }}>
+                <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+                  <Button className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}>
+                    <Save className="w-4 h-4" />
+                  </Button>
+                </div>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Filter className="w-5 h-5 mr-2 text-primary" />
@@ -781,16 +834,16 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                     <div className="space-y-2">
                       <Label>Industry Focus</Label>
                       <Select defaultValue="all">
-                        <SelectTrigger>
-                          <SelectValue />
+                        <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
+                          <SelectValue placeholder="Select industry focus" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0">
                           {industryOptions.map((industry) => (
-                            <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
+                            <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')} className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">
                               {industry}
                             </SelectItem>
                           ))}
-                          <SelectItem value="all">All Industries</SelectItem>
+                          <SelectItem value="all" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">All Industries</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -799,18 +852,18 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                   <div className="space-y-2">
                     <Label>Geographic Preference</Label>
                     <Select defaultValue="global">
-                      <SelectTrigger>
-                        <SelectValue />
+                      <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
+                        <SelectValue placeholder="Select geographic preference" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="local">Local (Same Country)</SelectItem>
-                        <SelectItem value="regional">Regional (Same Continent)</SelectItem>
+                      <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0">
+                        <SelectItem value="local" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Local (Same Country)</SelectItem>
+                        <SelectItem value="regional" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Regional (Same Continent)</SelectItem>
                         {majorCountries.map((country) => (
-                          <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, '-')}>
+                          <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, '-')} className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">
                             {country}
                           </SelectItem>
                         ))}
-                        <SelectItem value="global">Global (All Countries)</SelectItem>
+                        <SelectItem value="global" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Global (All Countries)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -818,16 +871,16 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                   <div className="space-y-2">
                     <Label>Funding Stage (for Entrepreneurs)</Label>
                     <Select defaultValue="all">
-                      <SelectTrigger>
-                        <SelectValue />
+                      <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
+                        <SelectValue placeholder="Select funding stage" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="pre-seed">Pre-seed</SelectItem>
-                        <SelectItem value="seed">Seed</SelectItem>
-                        <SelectItem value="series-a">Series A</SelectItem>
-                        <SelectItem value="series-b">Series B</SelectItem>
-                        <SelectItem value="series-c">Series C+</SelectItem>
-                        <SelectItem value="all">All Stages</SelectItem>
+                      <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0">
+                        <SelectItem value="pre-seed" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Pre-seed</SelectItem>
+                        <SelectItem value="seed" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Seed</SelectItem>
+                        <SelectItem value="series-a" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Series A</SelectItem>
+                        <SelectItem value="series-b" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Series B</SelectItem>
+                        <SelectItem value="series-c" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Series C+</SelectItem>
+                        <SelectItem value="all" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">All Stages</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -835,31 +888,27 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                   <div className="space-y-2">
                     <Label>Investment Range (for Investors)</Label>
                     <Select defaultValue="all">
-                      <SelectTrigger>
-                        <SelectValue />
+                      <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
+                        <SelectValue placeholder="Select investment range" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-10k">Under $10K</SelectItem>
-                        <SelectItem value="10k-50k">$10K - $50K</SelectItem>
-                        <SelectItem value="50k-100k">$50K - $100K</SelectItem>
-                        <SelectItem value="100k-500k">$100K - $500K</SelectItem>
-                        <SelectItem value="500k-1m">$500K - $1M</SelectItem>
-                        <SelectItem value="1m-plus">$1M+</SelectItem>
-                        <SelectItem value="all">All Ranges</SelectItem>
+                      <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0">
+                        <SelectItem value="under-10k" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">Under $10K</SelectItem>
+                        <SelectItem value="10k-50k" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">$10K - $50K</SelectItem>
+                        <SelectItem value="50k-100k" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">$50K - $100K</SelectItem>
+                        <SelectItem value="100k-500k" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">$100K - $500K</SelectItem>
+                        <SelectItem value="500k-1m" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">$500K - $1M</SelectItem>
+                        <SelectItem value="1m-plus" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">$1M+</SelectItem>
+                        <SelectItem value="all" className="text-white focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white focus:outline-none focus:ring-0 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-[#ff7300] data-[highlighted]:to-[#ff477e] data-[highlighted]:text-white rounded-full px-4 py-2 transition-colors">All Ranges</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
-
-                  <Button className="w-full aurora-signin-btn">
-                    Save Filter Preferences
-                  </Button>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            <TabsContent value="subscription" className="space-y-6">
-              {/* Subscription Tiers */}
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+                        <TabsContent value="subscription" className="space-y-6 w-full min-w-0">
+                {/* Subscription Tiers */}
+                <Card className="border-border/50 backdrop-blur-sm w-full" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', width: '100%', maxWidth: '100%' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Crown className="w-5 h-5 mr-2 text-primary" />
@@ -894,7 +943,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                           {!tier.current && (
                             <Button variant="outline" size="sm" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}>
                               <Zap className="w-4 h-4 mr-2" />
-                              Upgrade
+                              {tier.name === "Basic" ? "Downgrade" : "Upgrade"}
                             </Button>
                           )}
                         </div>
@@ -916,7 +965,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* AI Tools */}
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm w-full" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Target className="w-5 h-5 mr-2 text-primary" />
@@ -966,8 +1015,8 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
             </TabsContent>
 
-            <TabsContent value="settings" className="space-y-6">
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+                        <TabsContent value="settings" className="space-y-6 w-full min-w-0">
+                <Card className="border-border/50 backdrop-blur-sm w-full" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', width: '100%', maxWidth: '100%' }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Settings className="w-5 h-5 mr-2 text-primary" />
