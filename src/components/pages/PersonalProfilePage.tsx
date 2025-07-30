@@ -886,8 +886,8 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                               </Badge>
                             )}
                           </div>
-                          <p className="text-2xl font-bold text-[#ff7300] mt-1">{tier.price}</p>
-                          <p className="text-sm text-muted-foreground">{tier.superlikes} SuperLikes/month</p>
+                          <p className="text-2xl font-bold text-white mt-1">{tier.price}</p>
+                          <p className="text-sm text-white">{tier.superlikes} SuperLikes/month</p>
                         </div>
                         
                         <div className="text-right">
@@ -903,7 +903,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       <div className="mt-3">
                         <div className="grid grid-cols-1 gap-1">
                           {tier.features.map((feature, index) => (
-                            <div key={index} className="flex items-center text-sm text-muted-foreground">
+                            <div key={index} className="flex items-center text-sm text-white">
                               <div className="w-1 h-1 bg-gradient-to-r from-[#ff7300] to-[#ff477e] rounded-full mr-2" />
                               {feature}
                             </div>
