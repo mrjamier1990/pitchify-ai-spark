@@ -1,0 +1,28 @@
+[33ma4dd1d0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m update all changes
+[33m4b1223b[m update all changes
+[33ma9b349e[m update all changes
+[33m412f5a8[m update all chnages
+[33mb947dc6[m update all changes
+[33ma1b008e[m update all changes
+[33m9d78d04[m update all changes
+[33mf29de7f[m update all changes
+[33ma93b264[m upade all changes
+[33m0d91b3d[m update all changes
+[33md77c885[m update all changes
+[33m9b4d635[m update all changes
+[33m91961b7[m update changes
+[33m24db845[m Fix: Account deletion not working
+[33m1f45241[m Run SQL migration for account deletion.
+[33m6bc9267[m Fix profile layout
+[33mc59d0bd[m Revert profile views color change
+[33m4ebb931[m Change profile views button color
+[33m3b4239f[m Change profile stats colors
+[33medd0768[m Improve profile page aesthetics
+[33m1b338d0[m Refactor profile page UI
+[33m2445488[m Add social media link options
+[33m0d05e59[m Update SuperLike counts
+[33mb08f1a5[m Prevent same role matches
+[33mc73acfd[m Fix profile page and preferences
+[33me2e6683[m Run SQL migration
+[33md7b52b9[m Fix: Improve button and profile display
+[33m0acd7dc[m Refine profile page and messaging features
