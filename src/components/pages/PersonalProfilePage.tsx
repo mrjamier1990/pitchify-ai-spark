@@ -936,7 +936,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                             )}
                           </div>
                           <p className="text-2xl font-bold text-white mt-1">{tier.price}</p>
-                          <p className="text-sm text-muted-foreground">{tier.superlikes} SuperLikes/month</p>
+                          <p className="text-sm text-white">{tier.superlikes} SuperLikes/month</p>
                         </div>
                         
                         <div className="text-right">
