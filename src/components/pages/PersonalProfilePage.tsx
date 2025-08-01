@@ -50,6 +50,7 @@ import {
   Instagram,
   Facebook,
   Twitter,
+  Linkedin,
   Trash2
 } from "lucide-react";
 import {
@@ -207,13 +208,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
     { 
       key: 'linkedin_url', 
       name: 'LinkedIn', 
-      icon: (props: any) => (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-          <rect x="2" y="2" width="20" height="20" rx="5" />
-          <path d="M16 8a6 6 0 0 1 6 6v5h-4v-5a2 2 0 0 0-4 0v5h-4v-9h4v1.5" />
-          <circle cx="8" cy="11" r="1" />
-        </svg>
-      ),
+      icon: Linkedin,
       placeholder: 'https://linkedin.com/in/...',
       color: 'text-blue-600'
     },
@@ -381,7 +376,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
         <div className="p-4 pt-8 space-y-8 max-w-4xl mx-auto pb-8 w-full min-w-0">
           <Tabs defaultValue="profile" className="w-full md:w-[800px] md:mx-auto">
-            <TabsList className="grid w-full grid-cols-4 gap-2 bg-transparent p-0 mb-8">
+            <TabsList className="grid w-full grid-cols-4 gap-2 bg-transparent p-0 mb-8 md:mb-8 mb-12">
               <TabsTrigger value="profile" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Profile</TabsTrigger>
               <TabsTrigger value="filters" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Filters</TabsTrigger>
               <TabsTrigger value="subscription" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none data-[state=active]:border data-[state=active]:border-white/80" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)' }}>Plans</TabsTrigger>
@@ -456,7 +451,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
                   {editMode && (
                     <div className="mt-6 space-y-4 pt-6 border-t border-border/50">
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      <div className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor="full_name">Full Name</Label>
                           <Input
@@ -464,7 +459,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                             value={formData.full_name}
                             onChange={(e) => setFormData({...formData, full_name: e.target.value})}
                             placeholder="Enter your full name"
-                            className="text-lg p-6 border border-white focus:border-[#ff7300] transition-colors rounded-full placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground"
+                            className="text-base font-normal p-4 md:p-6 border border-white/20 rounded-full bg-white/10 backdrop-blur-xl text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-white/60"
                           />
                         </div>
                         
@@ -477,21 +472,21 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                           value={formData.bio}
                           onChange={(e) => setFormData({...formData, bio: e.target.value})}
                           placeholder="Tell others about yourself..."
-                          className="text-lg p-6 border border-white focus:border-[#ff7300] transition-colors rounded-2xl min-h-[120px] placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground"
+                          className="text-base font-normal p-4 md:p-6 border border-white/20 rounded-2xl min-h-[100px] md:min-h-[120px] bg-white/10 backdrop-blur-xl text-white focus:border-white transition-colors pl-4 text-left placeholder:text-sm placeholder:font-light placeholder:text-white/60"
                           rows={3}
                         />
                       </div>
 
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      <div className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor="country">Country</Label>
                           <Select value={formData.country} onValueChange={(value) => setFormData({...formData, country: value})}>
-                            <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
+                            <SelectTrigger className="text-base font-normal p-4 md:p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                               <SelectValue placeholder="Select your country" />
                             </SelectTrigger>
-                            <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
+                            <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
                               {majorCountries.map((country) => (
-                                <SelectItem key={country} value={country} className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">{country}</SelectItem>
+                                <SelectItem key={country} value={country} className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">{country}</SelectItem>
                               ))}
                             </SelectContent>
                           </Select>
@@ -500,12 +495,12 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <div className="space-y-2">
                           <Label htmlFor="industry">Industry Focus</Label>
                           <Select value={formData.industry} onValueChange={(value) => setFormData({...formData, industry: value})}>
-                            <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
+                            <SelectTrigger className="text-base font-normal p-4 md:p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                               <SelectValue placeholder="Select your industry" />
                             </SelectTrigger>
-                            <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
+                            <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
                               {industryOptions.map((industry) => (
-                                <SelectItem key={industry} value={industry} className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">{industry}</SelectItem>
+                                <SelectItem key={industry} value={industry} className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">{industry}</SelectItem>
                               ))}
                             </SelectContent>
                           </Select>
@@ -520,7 +515,7 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                             value={formData.investment_range}
                             onChange={(e) => setFormData({...formData, investment_range: e.target.value})}
                             placeholder="e.g., $10K - $100K"
-                            className="text-lg p-6 border border-white/20 focus:border-[#ff7300] transition-colors rounded-full"
+                            className="text-base font-normal p-4 md:p-6 border border-white/20 focus:border-[#ff7300] transition-colors rounded-full bg-white/10 backdrop-blur-xl text-white placeholder:text-sm placeholder:font-light placeholder:text-white/60"
                           />
                         </div>
                       )}
@@ -529,15 +524,15 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <div className="space-y-2">
                           <Label htmlFor="funding_stage">Funding Stage</Label>
                           <Select value={formData.funding_stage} onValueChange={(value) => setFormData({...formData, funding_stage: value})}>
-                            <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
+                            <SelectTrigger className="text-base font-normal p-4 md:p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                               <SelectValue placeholder="Select funding stage" />
                             </SelectTrigger>
-                            <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
-                              <SelectItem value="pre-seed" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Pre-seed</SelectItem>
-                              <SelectItem value="seed" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Seed</SelectItem>
-                              <SelectItem value="series-a" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series A</SelectItem>
-                              <SelectItem value="series-b" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series B</SelectItem>
-                              <SelectItem value="series-c" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series C+</SelectItem>
+                            <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
+                              <SelectItem value="pre-seed" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Pre-seed</SelectItem>
+                              <SelectItem value="seed" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Seed</SelectItem>
+                              <SelectItem value="series-a" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series A</SelectItem>
+                              <SelectItem value="series-b" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series B</SelectItem>
+                              <SelectItem value="series-c" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series C+</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -547,18 +542,23 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <div className="space-y-2">
                           <Label>Social Media & Calendar</Label>
                           <div style={{height: '24px'}} />
-                          <div className="flex flex-row gap-3 items-center w-full justify-between mt-10">
-                            {socialPlatforms.map((platform) => (
-                              <button
-                                key={platform.key}
-                                type="button"
-                                onClick={() => setEditingSocial(platform.key)}
-                                className={`w-12 h-12 flex items-center justify-center rounded-full border border-white/20 bg-[#18181bdd] backdrop-blur-xl transition-colors hover:bg-gradient-to-r hover:from-[#ff730011] hover:to-[#ff477e11] hover:shadow-[0_0_24px_0_#ff730022] focus:bg-gradient-to-r focus:from-[#ff730011] focus:to-[#ff477e11] focus:shadow-[0_0_24px_0_#ff730022] ${formData[platform.key as keyof typeof formData] ? 'ring-2 ring-[#ff7300] shadow-[0_0_24px_0_#ff730022]' : ''}`}
-                                title={platform.name}
-                              >
-                                <platform.icon className={`w-5 h-5 ${platform.color}`} />
-                              </button>
-                            ))}
+                                                     <div className="flex flex-row gap-2 md:gap-4 items-center w-full justify-between mt-6 md:mt-10">
+                             {socialPlatforms.map((platform) => (
+                               <button
+                                 key={platform.key}
+                                 type="button"
+                                 onClick={() => setEditingSocial(platform.key)}
+                                 className={`w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-full border border-white/20 transition-colors hover:bg-gradient-to-r hover:from-[#ff730011] hover:to-[#ff477e11] hover:shadow-[0_0_24px_0_#ff730022] focus:bg-gradient-to-r focus:from-[#ff730011] focus:to-[#ff477e11] focus:shadow-[0_0_24px_0_#ff730022] ${formData[platform.key as keyof typeof formData] ? 'ring-2 ring-[#ff7300] shadow-[0_0_24px_0_#ff730022]' : ''}`}
+                                 style={{
+                                   background: 'rgba(255,255,255,0.05)',
+                                   backdropFilter: 'blur(12px)',
+                                   backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%), repeating-linear-gradient(120deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 0.5px, transparent 1px, transparent 5px)'
+                                 }}
+                                 title={platform.name}
+                               >
+                                 <platform.icon className={`w-5 h-5 md:w-7 md:h-7 ${platform.color}`} />
+                               </button>
+                             ))}
                           </div>
                         </div>
 
@@ -586,12 +586,12 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                                 ✕
                               </Button>
                             </div>
-                            <Input
-                              value={formData[editingSocial as keyof typeof formData] as string || ''}
-                              onChange={(e) => setFormData({...formData, [editingSocial]: e.target.value})}
-                              placeholder={socialPlatforms.find(p => p.key === editingSocial)?.placeholder}
-                              className="text-lg p-6 border border-white/20 focus:border-primary transition-colors rounded-full bg-[#18181bdd] text-white placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground"
-                            />
+                                                         <Input
+                               value={formData[editingSocial as keyof typeof formData] as string || ''}
+                               onChange={(e) => setFormData({...formData, [editingSocial]: e.target.value})}
+                               placeholder={socialPlatforms.find(p => p.key === editingSocial)?.placeholder}
+                               className="text-base font-normal p-4 md:p-6 border border-white/20 focus:border-primary transition-colors rounded-full bg-white/10 backdrop-blur-xl text-white placeholder:text-sm placeholder:font-light placeholder:text-white/60"
+                             />
                           </div>
                         )}
 
@@ -764,7 +764,11 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
             </TabsContent>
 
             <TabsContent value="filters" className="space-y-6">
-              <Card className="border-border/50 backdrop-blur-sm relative" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm relative" style={{
+                background: 'rgba(255,255,255,0.10)',
+                backdropFilter: 'blur(12px)',
+                backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%), repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)'
+              }}>
                 <div className="absolute top-4 right-4 z-10">
                   <Button 
                     className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none"
@@ -795,17 +799,21 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label>You can only match with</Label>
-                      <div className="p-3 bg-muted/50 rounded-lg border">
-                        <p className="text-sm font-medium">
-                          {profile?.role === 'investor' ? 'Entrepreneurs Only' : 'Investors Only'}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          This restriction protects intellectual property and prevents idea theft
-                        </p>
-                      </div>
-                    </div>
+                                           <div className="space-y-2">
+                         <Label>You can only match with</Label>
+                                                 <div className="p-3 rounded-lg border" style={{
+                          background: 'linear-gradient(135deg, rgba(1, 126, 213, 0.9) 0%, rgba(1, 126, 213, 0.7) 50%, rgba(1, 126, 213, 0.5) 100%)',
+                          backdropFilter: 'blur(12px)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)'
+                        }}>
+                           <p className="text-sm font-medium text-white">
+                             {profile?.role === 'investor' ? 'Entrepreneurs Only' : 'Investors Only'}
+                           </p>
+                           <p className="text-xs text-white/80 mt-1">
+                             This restriction protects intellectual property and prevents idea theft
+                           </p>
+                         </div>
+                       </div>
                     
                     <div className="space-y-2">
                       <Label>Industry Focus</Label>
@@ -813,13 +821,13 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                         <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                           <SelectValue />
                         </SelectTrigger>
-                        <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
+                        <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
                           {industryOptions.map((industry) => (
-                            <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')} className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">
+                            <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')} className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">
                               {industry}
                             </SelectItem>
                           ))}
-                          <SelectItem value="all" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">All Industries</SelectItem>
+                          <SelectItem value="all" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">All Industries</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -831,15 +839,15 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
-                        <SelectItem value="local" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Local (Same Country)</SelectItem>
-                        <SelectItem value="regional" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Regional (Same Continent)</SelectItem>
-                        {majorCountries.map((country) => (
-                          <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, '-')} className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">
-                            {country}
-                          </SelectItem>
-                        ))}
-                        <SelectItem value="global" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Global (All Countries)</SelectItem>
+                      <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-60">
+                        <SelectItem value="local" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Local (Same Country)</SelectItem>
+                        <SelectItem value="regional" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Regional (Same Continent)</SelectItem>
+                                                  {majorCountries.map((country) => (
+                            <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, '-')} className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">
+                              {country}
+                            </SelectItem>
+                          ))}
+                        <SelectItem value="global" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Global (All Countries)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -850,13 +858,13 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
-                        <SelectItem value="pre-seed" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Pre-seed</SelectItem>
-                        <SelectItem value="seed" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Seed</SelectItem>
-                        <SelectItem value="series-a" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series A</SelectItem>
-                        <SelectItem value="series-b" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series B</SelectItem>
-                        <SelectItem value="series-c" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series C+</SelectItem>
-                        <SelectItem value="all" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">All Stages</SelectItem>
+                      <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
+                        <SelectItem value="pre-seed" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Pre-seed</SelectItem>
+                        <SelectItem value="seed" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Seed</SelectItem>
+                        <SelectItem value="series-a" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series A</SelectItem>
+                        <SelectItem value="series-b" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series B</SelectItem>
+                        <SelectItem value="series-c" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Series C+</SelectItem>
+                        <SelectItem value="all" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">All Stages</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -867,14 +875,14 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       <SelectTrigger className="text-base font-normal p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left placeholder:text-sm placeholder:font-light placeholder:text-muted-foreground" style={{ background: 'transparent !important' }}>
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
-                        <SelectItem value="under-10k" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Under $10K</SelectItem>
-                        <SelectItem value="10k-50k" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$10K - $50K</SelectItem>
-                        <SelectItem value="50k-100k" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$50K - $100K</SelectItem>
-                        <SelectItem value="100k-500k" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$100K - $500K</SelectItem>
-                        <SelectItem value="500k-1m" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$500K - $1M</SelectItem>
-                        <SelectItem value="1m-plus" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$1M+</SelectItem>
-                        <SelectItem value="all" className="focus:bg-[#ff7300] focus:text-white data-[state=checked]:bg-[#ff7300] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">All Ranges</SelectItem>
+                      <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326]">
+                        <SelectItem value="under-10k" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">Under $10K</SelectItem>
+                        <SelectItem value="10k-50k" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$10K - $50K</SelectItem>
+                        <SelectItem value="50k-100k" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$50K - $100K</SelectItem>
+                        <SelectItem value="100k-500k" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$100K - $500K</SelectItem>
+                        <SelectItem value="500k-1m" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$500K - $1M</SelectItem>
+                        <SelectItem value="1m-plus" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">$1M+</SelectItem>
+                        <SelectItem value="all" className="focus:bg-gradient-to-r focus:from-[#ff7300] focus:to-[#ff477e] focus:text-white data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#ff7300] data-[state=checked]:to-[#ff477e] data-[state=checked]:text-white rounded-full px-4 py-2 transition-colors">All Ranges</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -884,56 +892,93 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
 
             <TabsContent value="subscription" className="space-y-6">
               {/* Subscription Tiers */}
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm" style={{ 
+                background: 'rgba(255,255,255,0.10)', 
+                backdropFilter: 'blur(12px)',
+                backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%), repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)'
+              }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Crown className="w-5 h-5 mr-2 text-primary" />
                     Subscription Plans
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {subscriptionTiers.map((tier) => (
                     <div
                       key={tier.name}
-                      className={`p-4 rounded-lg border transition-all duration-200 ${
+                      className={`p-6 rounded-lg border transition-all duration-200 flex flex-col h-full ${
                         tier.current
-                          ? "border-[#ff7300] bg-[#ff7300]/5 ring-1 ring-[#ff7300]/20"
+                          ? "border-[#ff7300] ring-1 ring-[#ff7300]/20"
                           : "border-border/50 hover:border-border"
                       }`}
+                      style={{
+                        background: 'rgba(255,255,255,0.02)',
+                        backdropFilter: 'blur(12px)',
+                        backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.005) 100%), repeating-linear-gradient(120deg, rgba(255,255,255,0.008) 0px, rgba(255,255,255,0.008) 0.5px, transparent 1px, transparent 5px)'
+                      }}
                     >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <h3 className="font-semibold">{tier.name}</h3>
-                            {tier.current && (
-                              <Badge variant="default" className="bg-gradient-to-r from-[#ff7300] via-[#ff477e] to-[#017ed5] text-white">
-                                Current Plan
-                              </Badge>
-                            )}
+                      {/* Header Section */}
+                      <div className="text-center mb-6">
+                        <div className="px-4 py-2 rounded-t-lg mb-4 -mx-6 -mt-6" style={{
+                          background: 'rgba(255,255,255,0.15)',
+                          backdropFilter: 'blur(12px)',
+                          border: '1px solid rgba(255,255,255,0.2)'
+                        }}>
+                          <div className="flex items-center justify-center">
+                            <h3 className="text-xl font-semibold bg-gradient-to-r from-[#ff7300] via-[#ff477e] to-[#017ed5] bg-clip-text text-transparent drop-shadow-sm" style={{
+                              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+                              WebkitTextStroke: '0.5px rgba(255, 255, 255, 0.3)'
+                            }}>{tier.name}</h3>
                           </div>
-                          <p className="text-2xl font-bold text-white mt-1">{tier.price}</p>
-                          <p className="text-sm text-white">{tier.superlikes} SuperLikes/month</p>
                         </div>
-                        
-                        <div className="text-right">
-                          {!tier.current && (
-                            <Button variant="outline" size="sm" className="font-light text-base rounded-full px-4 py-2 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                              <Zap className="w-4 h-4 mr-2" />
-                              {tier.name === "Basic" ? "Downgrade" : "Upgrade"}
-                            </Button>
-                          )}
-                        </div>
+                        <p className="text-3xl font-bold text-white">{tier.price}</p>
                       </div>
                       
-                      <div className="mt-3">
-                        <div className="grid grid-cols-1 gap-1">
+                      {/* Features Section */}
+                      <div className="flex-1 mb-6">
+                        <div className="space-y-3">
                           {tier.features.map((feature, index) => (
-                            <div key={index} className="flex items-center text-sm text-white">
-                              <div className="w-1 h-1 bg-gradient-to-r from-[#ff7300] to-[#ff477e] rounded-full mr-2" />
-                              {feature}
+                            <div key={index} className="flex items-start text-sm text-white/90">
+                              <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#ff7300] to-[#ff477e] rounded-full mr-3 mt-2 flex-shrink-0" />
+                              <span className="leading-relaxed">{feature}</span>
                             </div>
                           ))}
                         </div>
+                      </div>
+                      
+                      {/* Action Button */}
+                      <div className="mt-auto">
+                        {!tier.current ? (
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="w-full font-light text-base rounded-full py-3 text-white transition-all duration-300 shadow-none hover:bg-[#ff7300cc] hover:backdrop-blur-sm focus:bg-[#ff7300cc] focus:backdrop-blur-sm focus:ring-0 focus:outline-none" 
+                            style={{ 
+                              fontFamily: 'Inter, system-ui, sans-serif', 
+                              background: 'rgba(255,255,255,0.05)', 
+                              backdropFilter: 'blur(12px)', 
+                              border: '1px solid rgba(255,255,255,0.15)' 
+                            }}
+                          >
+                            <Zap className="w-4 h-4 mr-2" />
+                            {tier.name === "Basic" ? "Downgrade" : "Upgrade"}
+                          </Button>
+                        ) : (
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="w-full font-light text-base rounded-full py-3 text-white transition-all duration-300 shadow-none" 
+                            style={{ 
+                              fontFamily: 'Inter, system-ui, sans-serif', 
+                              background: 'linear-gradient(135deg, rgba(255, 115, 0, 0.9) 0%, rgba(255, 71, 126, 0.9) 50%, rgba(1, 126, 213, 0.9) 100%)',
+                              backdropFilter: 'blur(12px)', 
+                              border: '1px solid rgba(255, 255, 255, 0.2)'
+                            }}
+                          >
+                            Current Plan
+                          </Button>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -941,7 +986,11 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
               </Card>
 
               {/* AI Tools */}
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm" style={{ 
+                background: 'rgba(255,255,255,0.10)', 
+                backdropFilter: 'blur(12px)',
+                backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%), repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)'
+              }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Target className="w-5 h-5 mr-2 text-primary" />
@@ -956,10 +1005,10 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       </div>
                       <div>
                         <p className="font-medium">PitchGPT</p>
-                        <p className="text-sm text-muted-foreground">Generate perfect pitch scripts</p>
+                        <p className="text-xs font-medium">Generate perfect pitch scripts</p>
                       </div>
                     </div>
-                    <Badge variant="secondary">Premium</Badge>
+                    <Badge variant="secondary" className="bg-gradient-to-br from-[#ff7300] via-[#ff477e] to-[#017ed5] text-white w-16 h-6 flex items-center justify-center">Premium</Badge>
                   </div>
                   
                   <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
@@ -969,10 +1018,10 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       </div>
                       <div>
                         <p className="font-medium">AI Pitch Coach</p>
-                        <p className="font-medium">Get feedback on your videos</p>
+                        <p className="text-xs font-medium">Get feedback on your videos</p>
                       </div>
                     </div>
-                    <Badge variant="secondary">Premium</Badge>
+                    <Badge variant="secondary" className="bg-gradient-to-br from-[#017ed5] via-[#b53dff] to-[#8d00c4] text-white w-16 h-6 flex items-center justify-center">Premium</Badge>
                   </div>
                   
                   <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
@@ -982,17 +1031,21 @@ export function PersonalProfilePage({ onNavigate }: PersonalProfilePageProps) {
                       </div>
                       <div>
                         <p className="font-medium">Smart Intro Assistant</p>
-                        <p className="text-sm text-muted-foreground">AI-generated conversation starters</p>
+                        <p className="text-xs font-medium">AI-generated conversation starters</p>
                       </div>
                     </div>
-                    <Badge variant="secondary">Elite</Badge>
+                    <Badge variant="secondary" className="bg-gradient-to-br from-[#b53dff] via-[#8d00c4] to-[#ff7300] text-white w-16 h-6 flex items-center justify-center">Elite</Badge>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-6">
-              <Card className="border-border/50 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(12px)' }}>
+              <Card className="border-border/50 backdrop-blur-sm" style={{ 
+                background: 'rgba(255,255,255,0.10)', 
+                backdropFilter: 'blur(12px)',
+                backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%), repeating-linear-gradient(120deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 0.5px, transparent 1px, transparent 5px)'
+              }}>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Settings className="w-5 h-5 mr-2 text-primary" />

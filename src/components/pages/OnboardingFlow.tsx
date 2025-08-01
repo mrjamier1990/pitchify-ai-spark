@@ -478,7 +478,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-12 rounded-full text-left" style={{ background: 'transparent !important' }}>
                   <SelectValue placeholder="Select your country" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0">
+                <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0">
                   {countries.map((country) => (
                     <SelectItem
                       key={country}
@@ -609,7 +609,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
                   <SelectValue placeholder="Select your industry" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0">
+                <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0">
                   {industries.map((industry) => (
                     <SelectItem
                       key={industry.value}
@@ -640,7 +640,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
                   <SelectValue placeholder="Select your stage" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0" position="popper" side="top">
+                <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0" position="popper" side="top">
                   {startupStages.map((stage) => (
                     <SelectItem
                       key={stage.value}
@@ -714,7 +714,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                 <SelectTrigger className="text-lg p-6 border border-white rounded-full bg-transparent !bg-transparent text-white focus:border-white transition-colors pl-4 rounded-full text-left" style={{ background: 'transparent !important' }}>
                   <SelectValue placeholder="Select investor type" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0" position="popper" side="top">
+                <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70 [&_*]:focus:outline-none [&_*]:focus:ring-0" position="popper" side="top">
                   {allInvestorTypePreferences.map((option) => (
                     <SelectItem
                       key={option.value}
@@ -933,7 +933,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                       : 'Select your sectors'}
                   </span>
                 </SelectTrigger>
-                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70">
+                <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70">
                   {industries.map((industry) => (
                     <div
                       key={industry.value}
@@ -994,7 +994,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                       : 'Select your stages'}
                   </span>
                 </SelectTrigger>
-                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70">
+                <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70">
                   {investmentStages.map((stage) => (
                     <div
                       key={stage.value}
@@ -1053,7 +1053,7 @@ export const OnboardingFlow = ({ onComplete, userEmail, userId }: OnboardingFlow
                       : 'Select your countries'}
                   </span>
                 </SelectTrigger>
-                <SelectContent className="bg-[#18181b55] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70">
+                <SelectContent className="bg-[#18181b30] backdrop-blur-2xl text-white rounded-xl border border-[#232326] max-h-96 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#ff7300]/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-[#ff7300]/70">
                   {countries.map((country) => (
                     <div
                       key={country}
